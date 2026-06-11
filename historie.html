@@ -1,8 +1,21 @@
 <!DOCTYPE html>
+<!--
+  Premium-laag · 2026-06-11 · Historiepagina — St. Hubert Horse & Country Club (EWVO)
+  · Zelfde premium-behandeling als de homepage: preloader met zelftekenend zegel (1× per sessie),
+    hero-choreografie met regel-maskering, Ken Burns + filmkorrel, nav verbergt/compacteert bij scroll,
+    messing menu-underline, magnetische knoppen, gordijn-reveals + zelftekenende kaders op tijdlijnfoto's
+  · Taalwissel NL/FR/EN werkend gemaakt (nav + paginahero), keuze bewaard over pagina's (localStorage)
+  · Typografie: text-wrap:balance, échte aanhalingstekens, font-features · ::selection, scrollbar,
+    :focus-visible, scroll-margin, lazy loading · reduced motion volledig gerespecteerd
+  · Tijdlijn, naam-evolutie en eigenaars-tabel inhoudelijk onaangetast (clientfeiten)
+-->
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1c2b22">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%231c2b22'/%3E%3Cg stroke='%23b9985f' fill='none'%3E%3Ccircle cx='60' cy='60' r='50' stroke-width='3'/%3E%3Cpath d='M44 78 C44 60 50 52 50 40 M50 40 C46 36 43 30 43 24 M50 40 C53 34 53 28 52 22 M50 40 C56 36 58 31 59 26' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M76 78 C76 60 70 52 70 40 M70 40 C74 36 77 30 77 24 M70 40 C67 34 67 28 68 22 M70 40 C64 36 62 31 61 26' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M60 38 V52 M54 43.5 H66' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M46 78 C46 88 52 93 60 93 C68 93 74 88 74 78' stroke-width='4' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sh-pl'))document.documentElement.classList.add('pl-skip')}catch(e){}</script>
 <title>Onze historie — St. Hubert Horse &amp; Country Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -19,15 +32,16 @@ a{color:inherit;text-decoration:none}
 h1,h2,h3{font-family:'Marcellus',serif;font-weight:400;line-height:1.15}
 .lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400}
 .wrap{max-width:1240px;margin:0 auto;padding:0 6vw}
-.eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;color:var(--messing);display:flex;align-items:center;gap:14px}
+.eyebrow{font-size:12px;letter-spacing:.34em;text-transform:uppercase;font-weight:500;color:var(--messing);display:flex;align-items:center;gap:14px}
 .eyebrow::before{content:'';width:34px;height:1px;background:var(--messing)}
-.btn{display:inline-block;font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:16px 34px;border:1px solid var(--messing);color:var(--ivoor);transition:background .35s,color .35s}
+.btn{display:inline-block;font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:16px 34px;border:1px solid var(--messing);color:var(--ivoor);transition:background .35s,color .35s,border-color .35s,transform .3s cubic-bezier(.16,1,.3,1)}
 .btn:hover{background:var(--messing);color:var(--groen-diep)}
 .btn.solid{background:var(--messing);color:var(--groen-diep)}
 .btn.solid:hover{background:var(--ivoor);border-color:var(--ivoor)}
-.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* reveal (alleen met JS verborgen; zonder JS direct zichtbaar) */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.js .rv.in{opacity:1;transform:none}
 
 /* topbar + nav (gedeeld met homepage) */
 .topbar{background:var(--groen-diep);color:rgba(244,241,233,.75);font-size:12px;letter-spacing:.14em}
@@ -37,25 +51,56 @@ h1,h2,h3{font-family:'Marcellus',serif;font-weight:400;line-height:1.15}
 .lang button:last-child{border-right:0}
 .lang button.act{color:var(--messing)}
 .topbar .info{display:flex;gap:26px}
-nav{position:sticky;top:0;z-index:50;background:rgba(28,43,34,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(185,152,95,.28)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px}
+nav{position:sticky;top:0;z-index:50;background:rgba(28,43,34,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(185,152,95,.28);transition:background .45s,box-shadow .45s,transform .5s cubic-bezier(.45,0,.2,1)}
+nav.hide{transform:translateY(-102%)}
+nav.compact{background:rgba(17,27,21,.97);box-shadow:0 12px 44px rgba(15,23,18,.38)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;transition:padding .4s cubic-bezier(.45,0,.2,1)}
+nav.compact .wrap{padding-top:9px;padding-bottom:9px}
 .brand{display:flex;align-items:center;gap:14px;color:var(--ivoor)}
-.brand .seal{width:46px;height:46px;flex:none}
+.brand .seal{width:46px;height:46px;flex:none;transition:width .4s cubic-bezier(.45,0,.2,1),height .4s cubic-bezier(.45,0,.2,1)}
+nav.compact .brand .seal{width:38px;height:38px}
 .brand .name{font-family:'Marcellus',serif;font-size:19px;letter-spacing:.08em;line-height:1.2}
 .brand .name small{display:block;font-family:'Jost';font-size:9.5px;letter-spacing:.34em;color:var(--messing);text-transform:uppercase;margin-top:2px}
 .menu{display:flex;gap:34px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;color:rgba(244,241,233,.85)}
-.menu a{padding:4px 0;border-bottom:1px solid transparent;transition:border-color .3s,color .3s}
-.menu a:hover,.menu a.hier{color:var(--messing);border-color:var(--messing)}
-.nav-cta{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:12px 24px;font-weight:500;transition:background .3s}
+.menu a{padding:4px 0;position:relative;transition:color .3s}
+.menu a::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--messing);transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s cubic-bezier(.45,0,.2,1)}
+.menu a:hover,.menu a.hier{color:var(--messing)}
+.menu a:hover::after,.menu a:focus-visible::after,.menu a.hier::after{transform:scaleX(1);transform-origin:0 50%}
+.nav-cta{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:12px 24px;font-weight:500;transition:background .3s,transform .3s cubic-bezier(.16,1,.3,1)}
 .nav-cta:hover{background:var(--ivoor)}
 .burger{display:none;background:none;border:0;color:var(--ivoor);font-size:26px;cursor:pointer}
 
-/* page hero */
-.phero{position:relative;min-height:62vh;display:flex;align-items:flex-end;background:var(--groen) url('img/strip-bos.jpg') center/cover;color:var(--ivoor)}
-.phero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,33,25,.6) 0%,rgba(21,33,25,.35) 45%,rgba(21,33,25,.9) 100%)}
-.phero .wrap{position:relative;padding-bottom:8vh;width:100%}
+/* preloader met zegel (1× per sessie) */
+#preloader{
+  position:fixed;inset:0;z-index:200;background:var(--groen-diep);
+  display:flex;align-items:center;justify-content:center;
+  animation:plOut .55s ease 1.2s forwards;
+}
+#preloader svg{width:clamp(104px,13vw,148px);color:var(--messing);overflow:visible}
+#preloader .pl-p{fill:none;stroke:currentColor;stroke-dasharray:1;stroke-dashoffset:1;animation:plDraw 1s cubic-bezier(.45,0,.2,1) var(--d,0s) both}
+#preloader .pl-dot{opacity:0;animation:plFade .45s ease .85s both}
+@keyframes plDraw{to{stroke-dashoffset:0}}
+@keyframes plFade{to{opacity:1}}
+@keyframes plOut{to{opacity:0;visibility:hidden}}
+.pl-skip #preloader{display:none}
+.pl-skip.js .phero .eyebrow{animation-delay:.45s}
+.pl-skip.js .phero .sub{animation-delay:.57s}
+
+/* page hero — choreografie zoals de homepage */
+.phero{position:relative;min-height:62vh;display:flex;align-items:flex-end;background:var(--groen);overflow:hidden;color:var(--ivoor)}
+.phero-bg{position:absolute;inset:0;z-index:0;background:var(--groen) url('img/strip-bos.jpg') center/cover;animation:kenburns 14s cubic-bezier(.25,.46,.45,.94) both}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.06)}}
+.phero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(21,33,25,.6) 0%,rgba(21,33,25,.35) 45%,rgba(21,33,25,.9) 100%)}
+.phero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='gr'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23gr)'/%3E%3C/svg%3E")}
+.phero .wrap{position:relative;z-index:2;padding-bottom:8vh;width:100%}
 .phero h1{font-size:clamp(38px,5vw,68px);margin:24px 0 16px;max-width:15em}
 .phero .sub{max-width:560px;color:rgba(244,241,233,.85);font-size:18px}
+.phero h1 .line{display:block;overflow:hidden;padding-block:.08em;margin-block:-.08em}
+.phero h1 .line-inner{display:block;transform:translateY(112%);animation:lineUp 1.05s cubic-bezier(.16,1,.3,1) var(--d,1.15s) forwards}
+@keyframes lineUp{to{transform:none}}
+.js .phero .eyebrow{animation:heroUp .9s cubic-bezier(.16,1,.3,1) 1.5s both}
+.js .phero .sub{animation:heroUp .9s cubic-bezier(.16,1,.3,1) 1.62s both}
+@keyframes heroUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 
 /* intro */
 .h-intro{padding:100px 0 30px;text-align:center}
@@ -74,24 +119,29 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-
 .tl-item:nth-child(odd) .tl-content .eyebrow{justify-content:flex-end}
 .tl-item:nth-child(odd) .tl-content .eyebrow::before{order:2}
 .tl-item:nth-child(even) .tl-content{grid-column:3;justify-self:start;text-align:left}
-.tl-year{font-family:'Marcellus',serif;font-size:clamp(38px,3.6vw,54px);color:var(--groen);line-height:1;margin:14px 0 10px}
+.tl-year{font-family:'Marcellus',serif;font-size:clamp(38px,3.6vw,54px);color:var(--groen);line-height:1;margin:14px 0 10px;font-variant-numeric:lining-nums}
 .tl-content h3{font-size:21px;color:var(--cognac);margin-bottom:12px;letter-spacing:.02em}
 .tl-content p{font-size:15.5px;color:#454c43}
 .tl-content p+p{margin-top:12px}
 .tl-content .feiten{display:inline-block;margin-top:14px;font-size:13px;color:var(--inkt);border-top:1px solid rgba(185,152,95,.45);padding-top:12px;line-height:1.9}
-.tl-item.hoogtepunt .tl-year{color:var(--messing)}
+.tl-item.hoogtepunt .tl-year{color:var(--messing);text-shadow:0 0 24px rgba(185,152,95,.3)}
 .tl-item.hoogtepunt .tl-dot{width:17px;height:17px;margin-top:12px}
 
-/* parallax beelden in de tijdlijn (EWVO extra) */
+/* parallax beelden in de tijdlijn (EWVO extra) — met gordijn-reveal + tekenend kader */
 .tl-foto{position:relative;display:grid;grid-template-columns:1fr 90px 1fr;margin:0 0 96px;align-items:center}
 .tl-foto .ph{position:relative;overflow:hidden;grid-row:1}
 .tl-foto .ph{grid-column:1}
 .tl-foto.rechts .ph{grid-column:3}
 .tl-foto .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;transform:scale(1.16);will-change:transform}
-.tl-foto .ph::after{content:'';position:absolute;inset:0;outline:1px solid var(--messing);outline-offset:-12px;pointer-events:none}
+.tl-foto .ph::after{content:'';position:absolute;inset:12px;border:1px solid var(--messing);pointer-events:none;z-index:5}
 .tl-foto figcaption{grid-row:2;margin-top:14px;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--cognac);font-weight:400}
 .tl-foto figcaption{grid-column:1}
 .tl-foto.rechts figcaption{grid-column:3}
+.crt{position:relative;overflow:hidden}
+.js .crt::before{content:'';position:absolute;inset:-1px;z-index:4;background:var(--ivoor);clip-path:inset(0 0 0 0);transition:clip-path 1s cubic-bezier(.76,0,.24,1)}
+.js .crt.in::before{clip-path:inset(0 0 100% 0)}
+.js .tl-foto .ph::after{clip-path:inset(0 100% 0 0);transition:clip-path 1.1s cubic-bezier(.45,0,.2,1) .7s}
+.js .tl-foto .ph.in::after{clip-path:inset(0 0 0 0)}
 
 /* naam-evolutie */
 .namen{background:var(--groen);color:var(--ivoor);padding:110px 0}
@@ -101,7 +151,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-
 .naam-stap:last-child{border-right:0}
 .naam-stap::before{content:'';position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--messing);transition:width 1.2s cubic-bezier(.16,1,.3,1)}
 .naam-stap.in::before{width:100%}
-.naam-stap .nr{font-family:'Marcellus',serif;color:var(--messing);font-size:15px;letter-spacing:.3em}
+.naam-stap .nr{font-family:'Marcellus',serif;color:var(--messing);font-size:15px;letter-spacing:.3em;text-shadow:0 0 14px rgba(185,152,95,.5)}
 .naam-stap .naam{font-family:'Marcellus',serif;font-size:20px;margin:14px 0 8px;line-height:1.3}
 .naam-stap .tijd{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:rgba(244,241,233,.55)}
 
@@ -109,8 +159,9 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-
 .eigenaars{padding:110px 0 80px}
 .eigenaars h2{font-size:clamp(28px,3vw,42px);color:var(--groen);margin-top:22px}
 .eig-tabel{margin-top:50px;border-top:1px solid var(--messing)}
-.eig-rij{display:grid;grid-template-columns:240px 1fr auto;gap:30px;align-items:baseline;padding:26px 0;border-bottom:1px solid rgba(185,152,95,.35)}
-.eig-rij .periode{font-family:'Marcellus',serif;font-size:21px;color:var(--groen)}
+.eig-rij{display:grid;grid-template-columns:240px 1fr auto;gap:30px;align-items:baseline;padding:26px 0;border-bottom:1px solid rgba(185,152,95,.35);transition:background .3s}
+.eig-rij:hover{background:rgba(185,152,95,.07)}
+.eig-rij .periode{font-family:'Marcellus',serif;font-size:21px;color:var(--groen);font-variant-numeric:lining-nums}
 .eig-rij .wie{font-size:16.5px}
 .eig-rij .rol{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cognac);font-weight:500}
 .hist-note{margin-top:60px;background:var(--ivoor-warm);border-left:3px solid var(--messing);padding:26px 30px;max-width:760px}
@@ -139,12 +190,26 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 .concept-badge{position:fixed;left:18px;bottom:18px;z-index:60;background:var(--ivoor);color:var(--groen);border:1px solid var(--messing);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;padding:9px 16px;box-shadow:0 6px 24px rgba(21,33,25,.25)}
 .concept-badge b{color:var(--cognac)}
 
+/* typografische polish + afwerking */
+body{font-kerning:normal;font-feature-settings:"kern" 1,"liga" 1;text-rendering:optimizeLegibility}
+h1,h2,h3{text-wrap:balance}
+.lede{text-wrap:balance}
+.h-intro .lede,.slot .lede{hanging-punctuation:first}
+::selection{background:var(--groen);color:var(--ivoor)}
+html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:var(--ivoor)}
+::-webkit-scrollbar-thumb{background:var(--messing);border:2px solid var(--ivoor);border-radius:99px}
+:focus-visible{outline:2px solid var(--messing);outline-offset:3px}
+[id]{scroll-margin-top:96px}
+
 /* mobiel */
 @media (max-width:980px){
   .menu{display:none}
   .burger{display:block}
   nav.open .menu{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;background:var(--groen-diep);padding:10px 6vw 26px;border-bottom:1px solid rgba(185,152,95,.3)}
   nav.open .menu a{padding:13px 0;border-bottom:1px solid rgba(244,241,233,.08)}
+  nav.open .menu a::after{display:none}
   .nav-cta{display:none}
   .tl-rail,.tl-fill{left:24px}
   .tl-item,.tl-foto{grid-template-columns:48px 1fr;margin-bottom:70px}
@@ -159,11 +224,40 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
   .eig-rij{grid-template-columns:1fr;gap:6px}
   .foot-grid{grid-template-columns:1fr 1fr}
   .topbar .info span:last-child{display:none}
+  #preloader svg{width:96px}
 }
 @media (max-width:560px){.foot-grid{grid-template-columns:1fr}.topbar .info{display:none}}
+
+/* reduced motion: álles uit, content direct zichtbaar */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  #preloader{display:none}
+  .js .rv{opacity:1;transform:none}
+  .js .crt::before{display:none}
+  .js .tl-foto .ph::after{clip-path:none}
+  .tl-foto .ph img{transform:none}
+  .phero h1 .line-inner{transform:none}
+  nav.hide{transform:none}
+}
 </style>
 </head>
 <body>
+
+<!-- ===== preloader: het zegel tekent zichzelf (1× per sessie) ===== -->
+<div id="preloader" aria-hidden="true">
+  <svg viewBox="0 0 120 120">
+    <circle class="pl-p" cx="60" cy="60" r="58" stroke-width="1.4" pathLength="1"/>
+    <circle class="pl-p" cx="60" cy="60" r="46" stroke-width=".8" pathLength="1" style="--d:.12s"/>
+    <path class="pl-p" d="M44 78 C44 60 50 52 50 40 M50 40 C46 36 43 30 43 24 M50 40 C53 34 53 28 52 22 M50 40 C56 36 58 31 59 26" stroke-width="2" stroke-linecap="round" pathLength="1" style="--d:.25s"/>
+    <path class="pl-p" d="M76 78 C76 60 70 52 70 40 M70 40 C74 36 77 30 77 24 M70 40 C67 34 67 28 68 22 M70 40 C64 36 62 31 61 26" stroke-width="2" stroke-linecap="round" pathLength="1" style="--d:.25s"/>
+    <path class="pl-p" d="M60 38 V52 M54 43.5 H66" stroke-width="2" stroke-linecap="round" pathLength="1" style="--d:.45s"/>
+    <path class="pl-p" d="M46 78 C46 88 52 93 60 93 C68 93 74 88 74 78" stroke-width="2" stroke-linecap="round" pathLength="1" style="--d:.55s"/>
+    <circle class="pl-dot" cx="60" cy="105" r="1.6" fill="currentColor"/>
+    <circle class="pl-dot" cx="42" cy="100" r="1.2" fill="currentColor"/>
+    <circle class="pl-dot" cx="78" cy="100" r="1.2" fill="currentColor"/>
+  </svg>
+</div>
 
 <svg width="0" height="0" style="position:absolute">
   <defs>
@@ -181,7 +275,11 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 
 <div class="topbar">
   <div class="wrap">
-    <div class="lang"><button class="act">NL</button><button>FR</button><button>EN</button></div>
+    <div class="lang">
+      <button class="act" data-lang="nl">NL</button>
+      <button data-lang="fr">FR</button>
+      <button data-lang="en">EN</button>
+    </div>
     <div class="info"><span>Bosdreef 50 · Hoogboom — Kapellen</span><span>+32 3 605 87 90</span></div>
   </div>
 </div>
@@ -193,29 +291,30 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
       <span class="name">St. Hubert<small>Horse &amp; Country Club</small></span>
     </a>
     <div class="menu">
-      <a href="index.html#club">De club</a>
-      <a href="index.html#members">Members</a>
-      <a href="index.html#veilingen">Veilingen</a>
-      <a href="historie.html" class="hier">Historie</a>
-      <a href="index.html#agenda">Agenda</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="index.html#club" data-i18n="m1">De club</a>
+      <a href="index.html#members" data-i18n="m2">Members</a>
+      <a href="index.html#veilingen" data-i18n="m3">Veilingen</a>
+      <a href="historie.html" class="hier" data-i18n="m4">Historie</a>
+      <a href="index.html#agenda" data-i18n="m5">Agenda</a>
+      <a href="index.html#contact" data-i18n="m6">Contact</a>
     </div>
-    <a href="index.html#word-member" class="nav-cta">Word member</a>
-    <button class="burger" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <a href="index.html#word-member" class="nav-cta" data-i18n="cta">Word member</a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
   </div>
 </nav>
 
 <header class="phero">
+  <div class="phero-bg" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="eyebrow rv">Onze historie</div>
-    <h1 class="rv">Een eeuw hippische geschiedenis in Hoogboom.</h1>
-    <p class="sub rv">Van de olympische bossen van 1920 tot het St. Hubert van vandaag — één doorlopend verhaal van paarden, families en vakmanschap.</p>
+    <div class="eyebrow" data-i18n="hh-eye">Onze historie</div>
+    <h1 data-i18n="hh-title">Een eeuw hippische geschiedenis in Hoogboom.</h1>
+    <p class="sub" data-i18n="hh-sub">Van de olympische bossen van 1920 tot het St. Hubert van vandaag — één doorlopend verhaal van paarden, families en vakmanschap.</p>
   </div>
 </header>
 
 <section class="h-intro">
   <div class="wrap rv">
-    <p class="lede">"Meer dan vijftig jaar nadat de eerste paarden hun intrek namen op het domein, blijft St. Hubert een plaats waar traditie en toekomst elkaar ontmoeten."</p>
+    <p class="lede">“Meer dan vijftig jaar nadat de eerste paarden hun intrek namen op het domein, blijft St. Hubert een plaats waar traditie en toekomst elkaar ontmoeten.”</p>
     <div class="rule"></div>
   </div>
 </section>
@@ -267,7 +366,7 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
     </div>
 
     <figure class="tl-foto rv">
-      <div class="ph"><img src="img/fac-pistes.jpg" alt="De gouden jaren" data-parallax></div>
+      <div class="ph crt"><img src="img/fac-pistes.jpg" alt="De gouden jaren" data-parallax loading="lazy" decoding="async"></div>
       <figcaption>De gouden periode van Sint Hubert</figcaption>
     </figure>
 
@@ -323,7 +422,7 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
     </div>
 
     <figure class="tl-foto rechts rv">
-      <div class="ph"><img src="img/gate-veiling.jpg" alt="Paardenwelzijn" data-parallax></div>
+      <div class="ph crt"><img src="img/gate-veiling.jpg" alt="Paardenwelzijn" data-parallax loading="lazy" decoding="async"></div>
       <figcaption>Paardenwelzijn als erezaak</figcaption>
     </figure>
 
@@ -394,7 +493,7 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 <section class="slot">
   <div class="wrap rv">
     <div class="eyebrow">Een levende geschiedenis</div>
-    <p class="lede">"Met respect voor het verleden en een duidelijke blik op de toekomst wordt verder gebouwd aan een geschiedenis die al meer dan een eeuw teruggaat."</p>
+    <p class="lede">“Met respect voor het verleden en een duidelijke blik op de toekomst wordt verder gebouwd aan een geschiedenis die al meer dan een eeuw teruggaat.”</p>
     <p class="txt">Vandaag blijft St. Hubert trouw aan zijn oorspronkelijke missie: een plek waar paardenwelzijn, sport, opleiding en gastvrijheid centraal staan.</p>
     <div class="cta-row">
       <a href="index.html#word-member" class="btn solid">Word member</a>
@@ -428,15 +527,84 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 <script>
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* reveal */
-const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
-document.querySelectorAll('.rv,.naam-stap').forEach(el=>io.observe(el));
+/* preloader: puur CSS-gedreven; JS ruimt op en onthoudt de sessie */
+const plSkip = document.documentElement.classList.contains('pl-skip');
+const pl = document.getElementById('preloader');
+if(pl){
+  if(reduced || plSkip){ pl.remove(); }
+  else setTimeout(()=>pl.remove(), 2000);
+  try{ sessionStorage.setItem('sh-pl','1'); }catch(e){}
+}
+
+/* reveal on scroll — .rv (content) en .crt (gordijn-reveals) */
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.rv,.crt').forEach(el=>io.observe(el));
+
+/* page hero: H1 per regel maskeren (na font-load, achter de preloader) */
+const h1 = document.querySelector('.phero h1');
+if(h1 && !reduced){
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(()=>{
+    if(!h1.isConnected || h1.querySelector('.line')) return;
+    const woorden = h1.textContent.trim().split(/\s+/);
+    h1.textContent = '';
+    const spans = woorden.map(w=>{
+      const s = document.createElement('span');
+      s.textContent = w; s.style.display = 'inline-block';
+      h1.appendChild(s); h1.appendChild(document.createTextNode(' '));
+      return s;
+    });
+    const regels = []; let top = null;
+    spans.forEach(s=>{
+      if(s.offsetTop !== top){ regels.push([]); top = s.offsetTop; }
+      regels[regels.length-1].push(s.textContent);
+    });
+    h1.textContent = '';
+    const basis = plSkip ? .1 : Math.max(.05, 1.15 - performance.now()/1000);
+    regels.forEach((ws,i)=>{
+      const line = document.createElement('span'); line.className = 'line';
+      const inner = document.createElement('span'); inner.className = 'line-inner';
+      inner.textContent = ws.join(' ');
+      inner.style.setProperty('--d', (basis + i*.12).toFixed(2)+'s');
+      line.appendChild(inner); h1.appendChild(line);
+    });
+    /* na de intro terug naar platte tekst: robuust voor i18n en resize */
+    setTimeout(()=>{
+      const inners = h1.querySelectorAll('.line-inner');
+      if(inners.length) h1.textContent = [...inners].map(x=>x.textContent).join(' ');
+    }, 3600);
+  });
+}
+
+/* nav: compact na 80px, verbergen bij scroll-down, tonen bij scroll-up */
+const nav = document.getElementById('nav');
+let lastY = scrollY, navBezig = false;
+addEventListener('scroll', ()=>{
+  if(navBezig) return; navBezig = true;
+  requestAnimationFrame(()=>{
+    const y = scrollY, dy = y - lastY;
+    nav.classList.toggle('compact', y > 80);
+    /* drempel van 4px voorkomt jitter bij events met (vrijwel) gelijke positie */
+    if(Math.abs(dy) > 4){
+      if(!reduced && !nav.classList.contains('open')){
+        if(dy > 0 && y > 320) nav.classList.add('hide');
+        else nav.classList.remove('hide');
+      }
+      lastY = y;
+    }
+    navBezig = false;
+  });
+},{passive:true});
+
+/* mobiel menu sluit na keuze */
+document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
 
 /* tijdlijn: messing lijn groeit mee met scroll + dots vullen */
 const tl = document.getElementById('tijdlijn');
 const fill = document.getElementById('tlfill');
 const items = [...document.querySelectorAll('.tl-item')];
-function tick(){
+function tlTick(){
   const r = tl.getBoundingClientRect();
   const vh = innerHeight;
   const prog = Math.min(1, Math.max(0, (vh*0.55 - r.top) / r.height));
@@ -453,9 +621,47 @@ function tick(){
     });
   }
 }
-if(!reduced){ addEventListener('scroll', ()=>requestAnimationFrame(tick), {passive:true}); addEventListener('resize', tick); }
-tick();
+if(!reduced){ addEventListener('scroll', ()=>requestAnimationFrame(tlTick), {passive:true}); addEventListener('resize', tlTick); }
+tlTick();
 if(reduced){ fill.style.height='100%'; items.forEach(i=>i.classList.add('passed')); }
+
+/* magnetische knoppen — alleen bij fijne pointer */
+if(matchMedia('(pointer:fine)').matches && !reduced){
+  document.querySelectorAll('.btn,.nav-cta').forEach(b=>{
+    b.addEventListener('mousemove',e=>{
+      const r = b.getBoundingClientRect();
+      const dx = ((e.clientX-r.left)/r.width-.5)*7, dy = ((e.clientY-r.top)/r.height-.5)*7;
+      b.style.transform = `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px)`;
+    });
+    b.addEventListener('mouseleave',()=>{ b.style.transform = ''; });
+  });
+}
+
+/* meertaligheid — nav + paginahero (module uit de offerte) */
+const i18n = {
+  nl:{m1:'De club',m2:'Members',m3:'Veilingen',m4:'Historie',m5:'Agenda',m6:'Contact',cta:'Word member',
+      'hh-eye':'Onze historie',
+      'hh-title':'Een eeuw hippische geschiedenis in Hoogboom.',
+      'hh-sub':'Van de olympische bossen van 1920 tot het St. Hubert van vandaag — één doorlopend verhaal van paarden, families en vakmanschap.'},
+  fr:{m1:'Le club',m2:'Membres',m3:'Ventes',m4:'Histoire',m5:'Agenda',m6:'Contact',cta:'Devenir membre',
+      'hh-eye':'Notre histoire',
+      'hh-title':"Un siècle d'histoire équestre à Hoogboom.",
+      'hh-sub':"Des bois olympiques de 1920 au St. Hubert d'aujourd'hui — une histoire continue de chevaux, de familles et de savoir-faire."},
+  en:{m1:'The club',m2:'Members',m3:'Auctions',m4:'History',m5:'Calendar',m6:'Contact',cta:'Become a member',
+      'hh-eye':'Our history',
+      'hh-title':'A century of equestrian history in Hoogboom.',
+      'hh-sub':"From the Olympic woods of 1920 to today's St. Hubert — one continuous story of horses, families and craftsmanship."}
+};
+function zetTaal(code){
+  const t = i18n[code]; if(!t) return;
+  document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('act', x.dataset.lang===code));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
+  document.documentElement.lang = code;
+  try{ localStorage.setItem('sh-lang', code); }catch(e){}
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>zetTaal(b.dataset.lang)));
+/* taalkeuze blijft bewaard over pagina's heen */
+try{ const bewaard = localStorage.getItem('sh-lang'); if(bewaard && bewaard !== 'nl') zetTaal(bewaard); }catch(e){}
 </script>
 </body>
 </html>
