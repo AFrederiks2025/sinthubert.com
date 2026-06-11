@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St. Hubert Horse &amp; Country Club — Kapellen | Concept 01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --groen:#1c2b22;        /* dennengroen */
+  --groen-diep:#152119;
+  --ivoor:#f4f1e9;        /* krijt-ivoor */
+  --ivoor-warm:#ece7da;
+  --messing:#b9985f;      /* brass */
+  --cognac:#8a5a33;       /* zadelleer */
+  --heide:#9a8aa0;        /* kalmthoutse heide */
+  --inkt:#20251f;
+  --wit:#fbfaf6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Jost',sans-serif;font-weight:300;
+  color:var(--inkt);background:var(--ivoor);
+  font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.display{font-family:'Marcellus',serif;font-weight:400;line-height:1.15}
+.lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 6vw}
+.eyebrow{
+  font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;
+  color:var(--messing);display:flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:'';width:34px;height:1px;background:var(--messing)}
+.btn{
+  display:inline-block;font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  padding:16px 34px;border:1px solid var(--messing);color:var(--ivoor);
+  transition:background .35s,color .35s;
+}
+.btn:hover{background:var(--messing);color:var(--groen-diep)}
+.btn.solid{background:var(--messing);color:var(--groen-diep)}
+.btn.solid:hover{background:var(--ivoor);border-color:var(--ivoor)}
+.btn.dark{color:var(--groen);border-color:var(--groen)}
+.btn.dark:hover{background:var(--groen);color:var(--ivoor)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ---------- topbar + nav ---------- */
+.topbar{
+  background:var(--groen-diep);color:rgba(244,241,233,.75);
+  font-size:12px;letter-spacing:.14em;
+}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:9px;padding-bottom:9px}
+.lang{display:flex;gap:2px}
+.lang button{
+  background:none;border:0;color:rgba(244,241,233,.55);font:inherit;letter-spacing:inherit;
+  padding:2px 9px;cursor:pointer;border-right:1px solid rgba(244,241,233,.18);
+}
+.lang button:last-child{border-right:0}
+.lang button.act{color:var(--messing)}
+.topbar .info{display:flex;gap:26px}
+nav{
+  position:sticky;top:0;z-index:50;background:rgba(28,43,34,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(185,152,95,.28);transition:background .4s;
+}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:14px;color:var(--ivoor)}
+.brand .seal{width:46px;height:46px;flex:none}
+.brand .name{font-family:'Marcellus',serif;font-size:19px;letter-spacing:.08em;line-height:1.2}
+.brand .name small{display:block;font-family:'Jost';font-size:9.5px;letter-spacing:.34em;color:var(--messing);text-transform:uppercase;margin-top:2px}
+.menu{display:flex;gap:34px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;color:rgba(244,241,233,.85)}
+.menu a{padding:4px 0;border-bottom:1px solid transparent;transition:border-color .3s,color .3s}
+.menu a:hover{color:var(--messing);border-color:var(--messing)}
+.nav-cta{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:12px 24px;font-weight:500;transition:background .3s}
+.nav-cta:hover{background:var(--ivoor)}
+.burger{display:none;background:none;border:0;color:var(--ivoor);font-size:26px;cursor:pointer}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:92vh;display:flex;align-items:flex-end;
+  background:var(--groen) url('img/hero-bos.jpg') center/cover;
+  color:var(--ivoor);
+}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,33,25,.55) 0%,rgba(21,33,25,.18) 40%,rgba(21,33,25,.86) 100%)}
+.hero .wrap{position:relative;padding-bottom:9vh;width:100%}
+.hero h1{font-size:clamp(42px,5.6vw,82px);max-width:14em;margin:26px 0 22px;text-wrap:balance}
+.hero .sub{max-width:560px;font-size:18px;font-weight:300;color:rgba(244,241,233,.88)}
+.hero .cta-row{display:flex;gap:18px;margin-top:40px;flex-wrap:wrap}
+.hero .scroll{
+  position:absolute;right:6vw;bottom:9vh;writing-mode:vertical-rl;
+  font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:rgba(244,241,233,.6);
+  display:flex;align-items:center;gap:14px;
+}
+.hero .scroll::after{content:'';width:1px;height:64px;background:linear-gradient(var(--messing),transparent)}
+
+/* ---------- intro ---------- */
+.intro{position:relative;padding:110px 0 90px;overflow:hidden}
+.intro .seal-bg{position:absolute;right:-90px;top:60px;width:420px;opacity:.07;pointer-events:none}
+.intro .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:7vw;align-items:start}
+.intro h2{font-size:clamp(30px,3.2vw,46px);margin:22px 0 0;color:var(--groen)}
+.intro .lede{font-size:clamp(22px,2vw,27px);color:var(--cognac);margin-bottom:26px}
+.intro p+p{margin-top:18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:84px;border-top:1px solid var(--messing);border-bottom:1px solid var(--messing)}
+.stat{padding:34px 28px;border-right:1px solid rgba(185,152,95,.4);text-align:center}
+.stat:last-child{border-right:0}
+.stat .n{font-family:'Marcellus',serif;font-size:46px;color:var(--groen);line-height:1}
+.stat .l{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--cognac);margin-top:12px;font-weight:400}
+
+/* ---------- doelgroepen (signatuur: stalbogen) ---------- */
+.gates{background:var(--groen);color:var(--ivoor);padding:110px 0 130px;position:relative}
+.gates .head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:74px;flex-wrap:wrap}
+.gates h2{font-size:clamp(30px,3.2vw,46px);margin-top:22px;max-width:13em}
+.gates .head p{max-width:380px;color:rgba(244,241,233,.7);font-size:15.5px}
+.gate-row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,44px)}
+.gate{position:relative;text-align:center}
+.gate .arch{
+  position:relative;border-radius:999px 999px 0 0;overflow:hidden;
+  aspect-ratio:3/4.1;background:var(--groen-diep);
+  outline:1px solid rgba(185,152,95,.55);outline-offset:10px;
+  transition:outline-offset .4s,transform .5s cubic-bezier(.16,1,.3,1);
+}
+.gate:hover .arch{outline-offset:5px;transform:translateY(-6px)}
+.gate .arch img{width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.gate:hover .arch img{transform:scale(1.05)}
+.gate .arch::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,33,25,0) 45%,rgba(21,33,25,.62) 100%)}
+.gate .num{
+  position:absolute;top:26px;left:50%;transform:translateX(-50%);z-index:2;
+  font-family:'Marcellus',serif;font-size:15px;color:var(--messing);letter-spacing:.3em;
+}
+.gate h3{font-size:25px;margin:30px 0 10px;letter-spacing:.04em}
+.gate p{font-size:15px;color:rgba(244,241,233,.72);max-width:300px;margin:0 auto}
+.gate .link{
+  display:inline-flex;align-items:center;gap:10px;margin-top:20px;
+  font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--messing);font-weight:500;
+  border-bottom:1px solid transparent;transition:border-color .3s;
+}
+.gate .link:hover{border-color:var(--messing)}
+.gate .link::after{content:'→'}
+
+/* ---------- historie ---------- */
+.historie{padding:130px 0;text-align:center;background:var(--ivoor)}
+.historie .lede{font-size:clamp(26px,3.4vw,44px);color:var(--groen);max-width:21em;margin:30px auto 0;line-height:1.35}
+.historie .rule{width:1px;height:70px;background:var(--messing);margin:44px auto 0}
+.historie .btn{margin-top:44px}
+.historie .eyebrow{justify-content:center}
+.historie .eyebrow::after{content:'';width:34px;height:1px;background:var(--messing)}
+
+/* ---------- faciliteiten ---------- */
+.fac{padding:30px 0 110px}
+.fac-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,80px);align-items:center;padding:60px 0}
+.fac-row+.fac-row{border-top:1px solid rgba(138,90,51,.22)}
+.fac-row .img{position:relative}
+.fac-row .img img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.fac-row .img::after{content:'';position:absolute;inset:0;outline:1px solid var(--messing);outline-offset:-14px;pointer-events:none}
+.fac-row.flip .img{order:2}
+.fac-row h3{font-size:clamp(26px,2.6vw,36px);color:var(--groen);margin:20px 0 16px}
+.fac-row p{color:#454c43;max-width:480px}
+.fac-row .tag{display:inline-block;margin-top:22px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--cognac);font-weight:500;border-bottom:1px solid var(--cognac);padding-bottom:3px}
+.fac-row.heide .eyebrow,.fac-row.heide .tag{color:var(--heide);border-color:var(--heide)}
+.fac-row.heide .eyebrow::before{background:var(--heide)}
+
+/* ---------- quote ---------- */
+.quote{background:var(--groen-diep);color:var(--ivoor);padding:120px 0;text-align:center;position:relative;overflow:hidden}
+.quote .seal-bg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:520px;opacity:.05}
+.quote .lede{font-size:clamp(26px,3.2vw,42px);max-width:20em;margin:0 auto;position:relative}
+.quote .who{margin-top:30px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--messing);position:relative}
+
+/* ---------- agenda ---------- */
+.agenda{padding:110px 0}
+.agenda .head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:54px;flex-wrap:wrap;gap:24px}
+.agenda h2{font-size:clamp(30px,3.2vw,44px);color:var(--groen);margin-top:22px}
+.ag-item{
+  display:grid;grid-template-columns:120px 1fr auto;gap:30px;align-items:center;
+  padding:30px 0;border-top:1px solid rgba(138,90,51,.25);transition:background .3s;
+}
+.ag-item:last-of-type{border-bottom:1px solid rgba(138,90,51,.25)}
+.ag-item:hover{background:rgba(185,152,95,.07)}
+.ag-item .d{font-family:'Marcellus',serif;color:var(--groen);font-size:15px;letter-spacing:.12em;text-transform:uppercase;line-height:1.5}
+.ag-item .d b{display:block;font-size:30px;letter-spacing:0;font-weight:400}
+.ag-item h4{font-size:21px;font-family:'Marcellus',serif;font-weight:400;color:var(--inkt)}
+.ag-item p{font-size:14.5px;color:#5a6157;margin-top:4px}
+.ag-item .pill{font-size:11px;letter-spacing:.24em;text-transform:uppercase;border:1px solid var(--messing);color:var(--cognac);padding:9px 18px;white-space:nowrap;font-weight:500}
+
+/* ---------- cta band ---------- */
+.band{
+  background:var(--groen) url('img/band-bos.jpg') center/cover fixed;
+  position:relative;color:var(--ivoor);text-align:center;padding:130px 0;
+}
+.band::before{content:'';position:absolute;inset:0;background:rgba(21,33,25,.82)}
+.band .wrap{position:relative}
+.band h2{font-size:clamp(32px,4vw,56px);max-width:15em;margin:24px auto 18px}
+.band p{max-width:520px;margin:0 auto;color:rgba(244,241,233,.8)}
+.band .cta-row{display:flex;gap:18px;justify-content:center;margin-top:44px;flex-wrap:wrap}
+.band .eyebrow{justify-content:center}
+.band .eyebrow::after{content:'';width:34px;height:1px;background:var(--messing)}
+
+/* ---------- footer ---------- */
+footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;font-size:14.5px}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:50px;padding-bottom:70px}
+.foot-grid .seal{width:74px;margin-bottom:22px}
+.foot-grid h5{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--messing);font-weight:500;margin-bottom:20px}
+.foot-grid a{display:block;padding:4px 0;transition:color .3s}
+.foot-grid a:hover{color:var(--messing)}
+.foot-grid .brandname{font-family:'Marcellus',serif;font-size:20px;color:var(--ivoor);letter-spacing:.06em;line-height:1.4}
+.foot-bottom{border-top:1px solid rgba(185,152,95,.25);padding:24px 0;display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.1em;color:rgba(244,241,233,.45);flex-wrap:wrap}
+
+/* ---------- concept badge ---------- */
+.concept-badge{
+  position:fixed;left:18px;bottom:18px;z-index:60;
+  background:var(--ivoor);color:var(--groen);border:1px solid var(--messing);
+  font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;
+  padding:9px 16px;box-shadow:0 6px 24px rgba(21,33,25,.25);
+}
+.concept-badge b{color:var(--cognac)}
+
+
+/* ---------- fotostrook ---------- */
+.strip{padding:10px 0 90px;background:var(--ivoor)}
+.strip-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(16px,2.4vw,34px)}
+.strip .ph{position:relative;overflow:hidden}
+.strip .ph img{width:100%;aspect-ratio:1/1.02;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+.strip figure:hover .ph img{transform:scale(1.04)}
+.strip .ph::after{content:'';position:absolute;inset:0;outline:1px solid var(--messing);outline-offset:-12px;pointer-events:none}
+.strip figcaption{margin-top:14px;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--cognac);text-align:center;font-weight:400}
+
+/* ---------- mobiel ---------- */
+@media (max-width:980px){
+  .menu{display:none}
+  .burger{display:block}
+  nav.open .menu{
+    display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;
+    background:var(--groen-diep);padding:10px 6vw 26px;border-bottom:1px solid rgba(185,152,95,.3);
+  }
+  nav.open .menu a{padding:13px 0;border-bottom:1px solid rgba(244,241,233,.08)}
+  .nav-cta{display:none}
+  .intro .grid{grid-template-columns:1fr;gap:34px}
+  .gate-row{grid-template-columns:1fr;max-width:420px;margin:0 auto;gap:64px}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:0;border-bottom:1px solid rgba(185,152,95,.4)}
+  .stat:last-child{border-bottom:0}
+  .fac-row{grid-template-columns:1fr}
+  .strip-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+  .fac-row.flip .img{order:0}
+  .ag-item{grid-template-columns:84px 1fr;gap:18px}
+  .ag-item .pill{grid-column:2;justify-self:start}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .topbar .info span:last-child{display:none}
+  .band{background-attachment:scroll}
+  .hero .scroll{display:none}
+}
+@media (max-width:560px){
+  .foot-grid{grid-template-columns:1fr}
+  .topbar .info{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== seal (SVG, hergebruikt) ===== -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="hubertus">
+      <circle cx="60" cy="60" r="58" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="60" cy="60" r="46" fill="none" stroke="currentColor" stroke-width=".8"/>
+      <!-- gewei -->
+      <path d="M44 78 C44 60 50 52 50 40 M50 40 C46 36 43 30 43 24 M50 40 C53 34 53 28 52 22 M50 40 C56 36 58 31 59 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M76 78 C76 60 70 52 70 40 M70 40 C74 36 77 30 77 24 M70 40 C67 34 67 28 68 22 M70 40 C64 36 62 31 61 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <!-- kruis van hubertus -->
+      <path d="M60 38 V52 M54 43.5 H66" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <!-- hoefijzer-basis -->
+      <path d="M46 78 C46 88 52 93 60 93 C68 93 74 88 74 78" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="60" cy="105" r="1.6" fill="currentColor"/>
+      <circle cx="42" cy="100" r="1.2" fill="currentColor"/>
+      <circle cx="78" cy="100" r="1.2" fill="currentColor"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ===== topbar ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="lang">
+      <button class="act" data-lang="nl">NL</button>
+      <button data-lang="fr">FR</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <div class="info">
+      <span>Bosdreef 50 · Hoogboom — Kapellen</span>
+      <span>+32 3 605 87 90</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== nav ===== -->
+<nav id="nav">
+  <div class="wrap">
+    <a href="#" class="brand">
+      <svg class="seal" viewBox="0 0 120 120" style="color:var(--messing)"><use href="#hubertus"/></svg>
+      <span class="name">St. Hubert<small>Horse &amp; Country Club</small></span>
+    </a>
+    <div class="menu">
+      <a href="#club" data-i18n="m1">De club</a>
+      <a href="#members" data-i18n="m2">Members</a>
+      <a href="#veilingen" data-i18n="m3">Veilingen</a>
+      <a href="historie.html" data-i18n="m4">Historie</a>
+      <a href="#agenda" data-i18n="m5">Agenda</a>
+      <a href="#contact" data-i18n="m6">Contact</a>
+    </div>
+    <a href="#word-member" class="nav-cta" data-i18n="cta">Word member</a>
+    <button class="burger" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<!-- ===== hero ===== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow rv" data-i18n="h-eye">Luxestalling in het groene hart van Antwerpen</div>
+    <h1 class="rv" data-i18n="h-title">Een oase van rust, voor paard én ruiter.</h1>
+    <p class="sub rv" data-i18n="h-sub">St. Hubert is een horse &amp; country club aan de rand van de Kalmthoutse heide — waar rustieke uitstraling en hedendaags comfort samenkomen.</p>
+    <div class="cta-row rv">
+      <a href="#club" class="btn solid" data-i18n="h-cta1">Ontdek de club</a>
+      <a href="#veilingen" class="btn" data-i18n="h-cta2">Bekijk de veilingen</a>
+    </div>
+  </div>
+  <div class="scroll" data-i18n="h-scroll">Scroll</div>
+</header>
+
+<!-- ===== intro ===== -->
+<section class="intro" id="club">
+  <svg class="seal-bg" viewBox="0 0 120 120" style="color:var(--groen)"><use href="#hubertus"/></svg>
+  <div class="wrap">
+    <div class="grid">
+      <div class="rv">
+        <div class="eyebrow">Welkom op het domein</div>
+        <h2>Rustieke uitstraling,<br>hedendaags comfort.</h2>
+      </div>
+      <div class="rv">
+        <p class="lede">Aan de Bosdreef in Hoogboom, midden in het groen, ligt een domein waar tijd trager lijkt te gaan.</p>
+        <p>St. Hubert verenigt een indrukwekkende infrastructuur met de rust van bos en heide. Ruime boxen en weides, binnen- en buitenpistes, en een team dat instaat voor persoonlijke begeleiding — voor elke leeftijd, op elk niveau.</p>
+        <p>Van vol pension voor paard en pony tot training voor wedstrijdruiters: hier vindt elke liefhebber zijn plek.</p>
+      </div>
+    </div>
+    <div class="stats rv">
+      <div class="stat"><div class="n">85</div><div class="l">Ruime boxen</div></div>
+      <div class="stat"><div class="n">2 + 2</div><div class="l">Binnen- &amp; buitenpistes</div></div>
+      <div class="stat"><div class="n">∞</div><div class="l">Ruiterpaden in bos &amp; heide</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== doelgroepen / stalbogen ===== -->
+<section class="gates" id="members">
+  <div class="wrap">
+    <div class="head">
+      <div class="rv">
+        <div class="eyebrow">Voor wie wij er zijn</div>
+        <h2>Drie deuren, één domein.</h2>
+      </div>
+      <p class="rv">Elke bezoeker volgt zijn eigen pad door St. Hubert. Kies uw ingang en ontdek wat de club voor u betekent.</p>
+    </div>
+    <div class="gate-row">
+      <div class="gate rv">
+        <div class="arch">
+          <span class="num">I</span>
+          <img src="img/gate-members.jpg" alt="Private members">
+        </div>
+        <h3>Private members</h3>
+        <p>Vol pension in alle rust, ruime buitenstallingen en persoonlijke begeleiding voor u en uw paard.</p>
+        <a class="link" href="#">Ontdek het membership</a>
+      </div>
+      <div class="gate rv">
+        <div class="arch">
+          <span class="num">II</span>
+          <img src="img/gate-ruiters.jpg" alt="Professionele ruiters">
+        </div>
+        <h3>Professionele ruiters</h3>
+        <p>Training, wedstrijdbegeleiding en faciliteiten op niveau — voor wie de sport ernstig neemt.</p>
+        <a class="link" href="#">Voor professionals</a>
+      </div>
+      <div class="gate rv" id="veilingen">
+        <div class="arch">
+          <span class="num">III</span>
+          <img src="img/gate-veiling.jpg" alt="Veilingen">
+        </div>
+        <h3>Veilingen</h3>
+        <p>Exclusieve paardenveilingen in een uniek kader, met internationale allure en Kempense gastvrijheid.</p>
+        <a class="link" href="#">Bekijk de veilingen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== historie ===== -->
+<section class="historie" id="historie">
+  <div class="wrap rv">
+    <div class="eyebrow">Onze historie</div>
+    <p class="lede">"Een rijke geschiedenis, geworteld in de bossen van Hoogboom — van familiemanege tot horse &amp; country club."</p>
+    <div class="rule"></div><br>
+    <a href="historie.html" class="btn dark">Ontdek de historie</a>
+  </div>
+</section>
+
+
+<!-- ===== het domein in beeld ===== -->
+<section class="strip">
+  <div class="wrap">
+    <div class="strip-grid">
+      <figure class="rv"><div class="ph"><img src="img/strip-bos.jpg" alt="Het bos van Hoogboom"></div><figcaption>Het bos van Hoogboom</figcaption></figure>
+      <figure class="rv"><div class="ph"><img src="img/strip-hoofdstel.jpg" alt="Voor de veiling"></div><figcaption>Voor de veiling</figcaption></figure>
+      <figure class="rv"><div class="ph"><img src="img/strip-piste.jpg" alt="Training in de piste"></div><figcaption>Training in de piste</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== faciliteiten ===== -->
+<section class="fac">
+  <div class="wrap">
+    <div class="fac-row rv">
+      <div class="img"><img src="img/fac-pistes.jpg" alt="Pistes"></div>
+      <div>
+        <div class="eyebrow">De faciliteiten</div>
+        <h3>Rijden in elk seizoen.</h3>
+        <p>Twee binnenpistes en twee buitenpistes, 85 ruime boxen en uitgestrekte weides — een indrukwekkend geheel waar paard en ruiter het hele jaar door terechtkunnen.</p>
+        <a href="#" class="tag">Bekijk het domein</a>
+      </div>
+    </div>
+    <div class="fac-row flip heide rv">
+      <div class="img"><img src="img/fac-heide.jpg" alt="Kalmthoutse heide"></div>
+      <div>
+        <div class="eyebrow">De heide als achtertuin</div>
+        <h3>Urenlang te paard door de natuur.</h3>
+        <p>Door de nabijheid van de Kalmthoutse heide en het militair domein maakt u vanaf de staldeur urenlange tochten door een van de mooiste natuurgebieden van Vlaanderen.</p>
+        <a href="#" class="tag">Ontdek de routes</a>
+      </div>
+    </div>
+    <div class="fac-row rv">
+      <div class="img"><img src="img/fac-bistro.jpg" alt="De bistro"></div>
+      <div>
+        <div class="eyebrow">De bistro</div>
+        <h3>Nagenieten in het groen.</h3>
+        <p>Na een les, training of tocht schuift u aan in de bistro — een warme plek om na te praten, met een hapje en een drankje, midden in de rust van het domein.</p>
+        <a href="#" class="tag">Bekijk de bistro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== quote ===== -->
+<section class="quote">
+  <svg class="seal-bg" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
+  <div class="wrap rv">
+    <p class="lede">"Hier lijkt de tijd trager te gaan. Mijn paard staat er beter dan ooit — en ik kom er zelf óók tot rust."</p>
+    <div class="who">— Een van onze members</div>
+  </div>
+</section>
+
+<!-- ===== agenda ===== -->
+<section class="agenda" id="agenda">
+  <div class="wrap">
+    <div class="head">
+      <div class="rv">
+        <div class="eyebrow">Op het domein</div>
+        <h2>Komende veilingen &amp; evenementen</h2>
+      </div>
+      <a href="#" class="btn dark rv">Volledige agenda</a>
+    </div>
+    <div class="ag-item rv">
+      <div class="d">Zat<b>04</b>Juli</div>
+      <div><h4>Zomerveiling — exclusieve collectie sportpaarden</h4><p>Internationale veiling met bezichtiging vanaf 14u, veiling vanaf 19u.</p></div>
+      <span class="pill">Veiling</span>
+    </div>
+    <div class="ag-item rv">
+      <div class="d">Woe<b>15</b>Juli</div>
+      <div><h4>Open lesdag — kennismaken met de club</h4><p>Proeflessen voor jong en oud, rondleiding over het domein.</p></div>
+      <span class="pill">Open dag</span>
+    </div>
+    <div class="ag-item rv">
+      <div class="d">Zat<b>22</b>Aug</div>
+      <div><h4>Clubwedstrijd dressuur</h4><p>Voor members en genodigden, met aansluitend receptie in de bistro.</p></div>
+      <span class="pill">Wedstrijd</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== cta band ===== -->
+<section class="band" id="word-member">
+  <div class="wrap rv">
+    <div class="eyebrow">Word lid van de club</div>
+    <h2>Uw paard verdient St. Hubert.</h2>
+    <p>Plan een bezoek aan het domein en ontdek wat een membership voor u en uw paard kan betekenen.</p>
+    <div class="cta-row">
+      <a href="#" class="btn solid">Word member</a>
+      <a href="#contact" class="btn">Plan een bezoek</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <svg class="seal" viewBox="0 0 120 120" style="color:var(--messing)"><use href="#hubertus"/></svg>
+        <div class="brandname">St. Hubert<br>Horse &amp; Country Club</div>
+        <p style="margin-top:16px;font-size:13.5px;max-width:260px">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
+      </div>
+      <div>
+        <h5>Bezoek ons</h5>
+        <p>Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</p>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <a href="tel:+3236058790">+32 3 605 87 90</a>
+        <a href="mailto:info@sinthubert.com">info@sinthubert.com</a>
+        <p style="margin-top:14px;font-size:13px">Dagelijks geopend<br>09:30 – 22:00</p>
+      </div>
+      <div>
+        <h5>De club</h5>
+        <a href="#members">Private members</a>
+        <a href="#members">Professionele ruiters</a>
+        <a href="#veilingen">Veilingen</a>
+        <a href="historie.html">Historie</a>
+        <a href="#agenda">Agenda &amp; events</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 St. Hubert Horse &amp; Country Club — Kapellen</span>
+      <span>NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy &amp; voorwaarden</span>
+      <span>Concept 01 · webdesign door EWVO</span>
+    </div>
+  </div>
+</footer>
+
+<div class="concept-badge"><b>Concept 01</b> &nbsp;·&nbsp; EWVO × St. Hubert</div>
+
+<script>
+/* reveal on scroll */
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* meertaligheid — demo van de taalwissel (module uit de offerte) */
+const i18n = {
+  nl:{m1:'De club',m2:'Members',m3:'Veilingen',m4:'Historie',m5:'Agenda',m6:'Contact',cta:'Word member',
+      'h-eye':'Luxestalling in het groene hart van Antwerpen',
+      'h-title':'Een oase van rust, voor paard én ruiter.',
+      'h-sub':'St. Hubert is een horse & country club aan de rand van de Kalmthoutse heide — waar rustieke uitstraling en hedendaags comfort samenkomen.',
+      'h-cta1':'Ontdek de club','h-cta2':'Bekijk de veilingen','h-scroll':'Scroll'},
+  fr:{m1:'Le club',m2:'Membres',m3:'Ventes',m4:'Histoire',m5:'Agenda',m6:'Contact',cta:'Devenir membre',
+      'h-eye':"Écuries de luxe au cœur vert d'Anvers",
+      'h-title':'Une oasis de calme, pour cheval et cavalier.',
+      'h-sub':"St. Hubert est un horse & country club en bordure de la lande de Kalmthout — où charme rustique et confort contemporain se rencontrent.",
+      'h-cta1':'Découvrir le club','h-cta2':'Voir les ventes','h-scroll':'Défiler'},
+  en:{m1:'The club',m2:'Members',m3:'Auctions',m4:'History',m5:'Calendar',m6:'Contact',cta:'Become a member',
+      'h-eye':'Luxury stables in the green heart of Antwerp',
+      'h-title':'An oasis of calm, for horse and rider.',
+      'h-sub':'St. Hubert is a horse & country club on the edge of the Kalmthout heath — where rustic charm meets contemporary comfort.',
+      'h-cta1':'Discover the club','h-cta2':'View the auctions','h-scroll':'Scroll'}
+};
+document.querySelectorAll('.lang button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.lang button').forEach(x=>x.classList.remove('act'));
+    b.classList.add('act');
+    const t = i18n[b.dataset.lang];
+    document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
+    document.documentElement.lang = b.dataset.lang;
+  });
+});
+</script>
+</body>
+</html>

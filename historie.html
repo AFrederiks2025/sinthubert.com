@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onze historie — St. Hubert Horse &amp; Country Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --groen:#1c2b22;--groen-diep:#152119;--ivoor:#f4f1e9;--ivoor-warm:#ece7da;
+  --messing:#b9985f;--cognac:#8a5a33;--heide:#9a8aa0;--inkt:#20251f;--wit:#fbfaf6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;font-weight:300;color:var(--inkt);background:var(--ivoor);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:'Marcellus',serif;font-weight:400;line-height:1.15}
+.lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400}
+.wrap{max-width:1240px;margin:0 auto;padding:0 6vw}
+.eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;color:var(--messing);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:'';width:34px;height:1px;background:var(--messing)}
+.btn{display:inline-block;font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:16px 34px;border:1px solid var(--messing);color:var(--ivoor);transition:background .35s,color .35s}
+.btn:hover{background:var(--messing);color:var(--groen-diep)}
+.btn.solid{background:var(--messing);color:var(--groen-diep)}
+.btn.solid:hover{background:var(--ivoor);border-color:var(--ivoor)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* topbar + nav (gedeeld met homepage) */
+.topbar{background:var(--groen-diep);color:rgba(244,241,233,.75);font-size:12px;letter-spacing:.14em}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:9px;padding-bottom:9px}
+.lang{display:flex;gap:2px}
+.lang button{background:none;border:0;color:rgba(244,241,233,.55);font:inherit;letter-spacing:inherit;padding:2px 9px;cursor:pointer;border-right:1px solid rgba(244,241,233,.18)}
+.lang button:last-child{border-right:0}
+.lang button.act{color:var(--messing)}
+.topbar .info{display:flex;gap:26px}
+nav{position:sticky;top:0;z-index:50;background:rgba(28,43,34,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(185,152,95,.28)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:14px;color:var(--ivoor)}
+.brand .seal{width:46px;height:46px;flex:none}
+.brand .name{font-family:'Marcellus',serif;font-size:19px;letter-spacing:.08em;line-height:1.2}
+.brand .name small{display:block;font-family:'Jost';font-size:9.5px;letter-spacing:.34em;color:var(--messing);text-transform:uppercase;margin-top:2px}
+.menu{display:flex;gap:34px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;color:rgba(244,241,233,.85)}
+.menu a{padding:4px 0;border-bottom:1px solid transparent;transition:border-color .3s,color .3s}
+.menu a:hover,.menu a.hier{color:var(--messing);border-color:var(--messing)}
+.nav-cta{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:12px 24px;font-weight:500;transition:background .3s}
+.nav-cta:hover{background:var(--ivoor)}
+.burger{display:none;background:none;border:0;color:var(--ivoor);font-size:26px;cursor:pointer}
+
+/* page hero */
+.phero{position:relative;min-height:62vh;display:flex;align-items:flex-end;background:var(--groen) url('img/strip-bos.jpg') center/cover;color:var(--ivoor)}
+.phero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,33,25,.6) 0%,rgba(21,33,25,.35) 45%,rgba(21,33,25,.9) 100%)}
+.phero .wrap{position:relative;padding-bottom:8vh;width:100%}
+.phero h1{font-size:clamp(38px,5vw,68px);margin:24px 0 16px;max-width:15em}
+.phero .sub{max-width:560px;color:rgba(244,241,233,.85);font-size:18px}
+
+/* intro */
+.h-intro{padding:100px 0 30px;text-align:center}
+.h-intro .lede{font-size:clamp(22px,2.4vw,30px);color:var(--cognac);max-width:30em;margin:0 auto}
+.h-intro .rule{width:1px;height:64px;background:var(--messing);margin:42px auto 0}
+
+/* tijdlijn */
+.tijdlijn{position:relative;padding:60px 0 90px}
+.tl-rail{position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(185,152,95,.28);transform:translateX(-.5px)}
+.tl-fill{position:absolute;left:50%;top:0;width:1px;background:var(--messing);height:0;transform:translateX(-.5px)}
+.tl-item{position:relative;display:grid;grid-template-columns:1fr 90px 1fr;align-items:start;margin:0 0 96px}
+.tl-dot{grid-column:2;grid-row:1;justify-self:center;width:13px;height:13px;border-radius:50%;border:1px solid var(--messing);background:var(--ivoor);margin-top:14px;transition:background .5s,box-shadow .5s}
+.tl-item.passed .tl-dot{background:var(--messing);box-shadow:0 0 0 6px rgba(185,152,95,.15)}
+.tl-content{grid-row:1;max-width:480px}
+.tl-item:nth-child(odd) .tl-content{grid-column:1;justify-self:end;text-align:right}
+.tl-item:nth-child(odd) .tl-content .eyebrow{justify-content:flex-end}
+.tl-item:nth-child(odd) .tl-content .eyebrow::before{order:2}
+.tl-item:nth-child(even) .tl-content{grid-column:3;justify-self:start;text-align:left}
+.tl-year{font-family:'Marcellus',serif;font-size:clamp(38px,3.6vw,54px);color:var(--groen);line-height:1;margin:14px 0 10px}
+.tl-content h3{font-size:21px;color:var(--cognac);margin-bottom:12px;letter-spacing:.02em}
+.tl-content p{font-size:15.5px;color:#454c43}
+.tl-content p+p{margin-top:12px}
+.tl-content .feiten{display:inline-block;margin-top:14px;font-size:13px;color:var(--inkt);border-top:1px solid rgba(185,152,95,.45);padding-top:12px;line-height:1.9}
+.tl-item.hoogtepunt .tl-year{color:var(--messing)}
+.tl-item.hoogtepunt .tl-dot{width:17px;height:17px;margin-top:12px}
+
+/* parallax beelden in de tijdlijn (EWVO extra) */
+.tl-foto{position:relative;display:grid;grid-template-columns:1fr 90px 1fr;margin:0 0 96px;align-items:center}
+.tl-foto .ph{position:relative;overflow:hidden;grid-row:1}
+.tl-foto .ph{grid-column:1}
+.tl-foto.rechts .ph{grid-column:3}
+.tl-foto .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;transform:scale(1.16);will-change:transform}
+.tl-foto .ph::after{content:'';position:absolute;inset:0;outline:1px solid var(--messing);outline-offset:-12px;pointer-events:none}
+.tl-foto figcaption{grid-row:2;margin-top:14px;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--cognac);font-weight:400}
+.tl-foto figcaption{grid-column:1}
+.tl-foto.rechts figcaption{grid-column:3}
+
+/* naam-evolutie */
+.namen{background:var(--groen);color:var(--ivoor);padding:110px 0}
+.namen h2{font-size:clamp(28px,3vw,42px);margin-top:22px}
+.naam-stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;border-top:1px solid rgba(185,152,95,.35)}
+.naam-stap{padding:34px 26px 0;border-right:1px solid rgba(185,152,95,.25);position:relative}
+.naam-stap:last-child{border-right:0}
+.naam-stap::before{content:'';position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--messing);transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+.naam-stap.in::before{width:100%}
+.naam-stap .nr{font-family:'Marcellus',serif;color:var(--messing);font-size:15px;letter-spacing:.3em}
+.naam-stap .naam{font-family:'Marcellus',serif;font-size:20px;margin:14px 0 8px;line-height:1.3}
+.naam-stap .tijd{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:rgba(244,241,233,.55)}
+
+/* eigenaars */
+.eigenaars{padding:110px 0 80px}
+.eigenaars h2{font-size:clamp(28px,3vw,42px);color:var(--groen);margin-top:22px}
+.eig-tabel{margin-top:50px;border-top:1px solid var(--messing)}
+.eig-rij{display:grid;grid-template-columns:240px 1fr auto;gap:30px;align-items:baseline;padding:26px 0;border-bottom:1px solid rgba(185,152,95,.35)}
+.eig-rij .periode{font-family:'Marcellus',serif;font-size:21px;color:var(--groen)}
+.eig-rij .wie{font-size:16.5px}
+.eig-rij .rol{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cognac);font-weight:500}
+.hist-note{margin-top:60px;background:var(--ivoor-warm);border-left:3px solid var(--messing);padding:26px 30px;max-width:760px}
+.hist-note .lbl{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--cognac);font-weight:600;display:block;margin-bottom:10px}
+.hist-note p{font-size:15px;color:#454c43}
+
+/* slot */
+.slot{background:var(--groen-diep) url('img/band-bos.jpg') center/cover;position:relative;color:var(--ivoor);text-align:center;padding:130px 0}
+.slot::before{content:'';position:absolute;inset:0;background:rgba(21,33,25,.86)}
+.slot .wrap{position:relative}
+.slot .lede{font-size:clamp(24px,3vw,38px);max-width:24em;margin:26px auto 0;line-height:1.45}
+.slot p.txt{max-width:620px;margin:26px auto 0;color:rgba(244,241,233,.8);font-size:16px}
+.slot .cta-row{display:flex;gap:18px;justify-content:center;margin-top:44px;flex-wrap:wrap}
+.slot .eyebrow{justify-content:center}
+.slot .eyebrow::after{content:'';width:34px;height:1px;background:var(--messing)}
+
+/* footer */
+footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;font-size:14.5px}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:50px;padding-bottom:70px}
+.foot-grid .seal{width:74px;margin-bottom:22px}
+.foot-grid h5{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--messing);font-weight:500;margin-bottom:20px}
+.foot-grid a{display:block;padding:4px 0;transition:color .3s}
+.foot-grid a:hover{color:var(--messing)}
+.foot-grid .brandname{font-family:'Marcellus',serif;font-size:20px;color:var(--ivoor);letter-spacing:.06em;line-height:1.4}
+.foot-bottom{border-top:1px solid rgba(185,152,95,.25);padding:24px 0;display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.1em;color:rgba(244,241,233,.45);flex-wrap:wrap}
+.concept-badge{position:fixed;left:18px;bottom:18px;z-index:60;background:var(--ivoor);color:var(--groen);border:1px solid var(--messing);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;padding:9px 16px;box-shadow:0 6px 24px rgba(21,33,25,.25)}
+.concept-badge b{color:var(--cognac)}
+
+/* mobiel */
+@media (max-width:980px){
+  .menu{display:none}
+  .burger{display:block}
+  nav.open .menu{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;background:var(--groen-diep);padding:10px 6vw 26px;border-bottom:1px solid rgba(185,152,95,.3)}
+  nav.open .menu a{padding:13px 0;border-bottom:1px solid rgba(244,241,233,.08)}
+  .nav-cta{display:none}
+  .tl-rail,.tl-fill{left:24px}
+  .tl-item,.tl-foto{grid-template-columns:48px 1fr;margin-bottom:70px}
+  .tl-dot{grid-column:1;justify-self:center}
+  .tl-item .tl-content,.tl-item:nth-child(odd) .tl-content{grid-column:2;justify-self:start;text-align:left;max-width:none}
+  .tl-item:nth-child(odd) .tl-content .eyebrow{justify-content:flex-start}
+  .tl-item:nth-child(odd) .tl-content .eyebrow::before{order:0}
+  .tl-foto .ph,.tl-foto.rechts .ph{grid-column:2}
+  .tl-foto figcaption,.tl-foto.rechts figcaption{grid-column:2}
+  .naam-stepper{grid-template-columns:1fr}
+  .naam-stap{border-right:0;border-bottom:1px solid rgba(185,152,95,.25);padding:26px 0}
+  .eig-rij{grid-template-columns:1fr;gap:6px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .topbar .info span:last-child{display:none}
+}
+@media (max-width:560px){.foot-grid{grid-template-columns:1fr}.topbar .info{display:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="hubertus">
+      <circle cx="60" cy="60" r="58" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="60" cy="60" r="46" fill="none" stroke="currentColor" stroke-width=".8"/>
+      <path d="M44 78 C44 60 50 52 50 40 M50 40 C46 36 43 30 43 24 M50 40 C53 34 53 28 52 22 M50 40 C56 36 58 31 59 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M76 78 C76 60 70 52 70 40 M70 40 C74 36 77 30 77 24 M70 40 C67 34 67 28 68 22 M70 40 C64 36 62 31 61 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M60 38 V52 M54 43.5 H66" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M46 78 C46 88 52 93 60 93 C68 93 74 88 74 78" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="60" cy="105" r="1.6" fill="currentColor"/><circle cx="42" cy="100" r="1.2" fill="currentColor"/><circle cx="78" cy="100" r="1.2" fill="currentColor"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="lang"><button class="act">NL</button><button>FR</button><button>EN</button></div>
+    <div class="info"><span>Bosdreef 50 · Hoogboom — Kapellen</span><span>+32 3 605 87 90</span></div>
+  </div>
+</div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="seal" viewBox="0 0 120 120" style="color:var(--messing)"><use href="#hubertus"/></svg>
+      <span class="name">St. Hubert<small>Horse &amp; Country Club</small></span>
+    </a>
+    <div class="menu">
+      <a href="index.html#club">De club</a>
+      <a href="index.html#members">Members</a>
+      <a href="index.html#veilingen">Veilingen</a>
+      <a href="historie.html" class="hier">Historie</a>
+      <a href="index.html#agenda">Agenda</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <a href="index.html#word-member" class="nav-cta">Word member</a>
+    <button class="burger" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<header class="phero">
+  <div class="wrap">
+    <div class="eyebrow rv">Onze historie</div>
+    <h1 class="rv">Een eeuw hippische geschiedenis in Hoogboom.</h1>
+    <p class="sub rv">Van de olympische bossen van 1920 tot het St. Hubert van vandaag — één doorlopend verhaal van paarden, families en vakmanschap.</p>
+  </div>
+</header>
+
+<section class="h-intro">
+  <div class="wrap rv">
+    <p class="lede">"Meer dan vijftig jaar nadat de eerste paarden hun intrek namen op het domein, blijft St. Hubert een plaats waar traditie en toekomst elkaar ontmoeten."</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<section class="tijdlijn" id="tijdlijn">
+  <div class="tl-rail"></div>
+  <div class="tl-fill" id="tlfill"></div>
+  <div class="wrap">
+
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">De olympische oorsprong</div>
+        <div class="tl-year">1920</div>
+        <h3>Hoogboom op het wereldtoneel</h3>
+        <p>Tijdens de Olympische Zomerspelen van Antwerpen worden de terreinen van de Hoogboom Country Club gebruikt voor olympische eventing en diverse schietdisciplines. Hoogboom verwerft een blijvende plaats in de internationale sportgeschiedenis — een traditie die later bijdraagt aan de reputatie van Kapellen als hippische gemeente.</p>
+      </div>
+    </div>
+
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Groeiende paardencultuur</div>
+        <div class="tl-year">1920–1950</div>
+        <h3>Bossen, zandwegen en paarden</h3>
+        <p>De omgeving van Hoogboom en Kapellen staat bekend om haar landelijke karakter. Paarden spelen een hoofdrol in landbouw, bosbeheer en recreatie. Na de Tweede Wereldoorlog groeit de recreatieve en sportieve paardensport sterk en ontwikkelt de regio zich tot een aantrekkelijke plek voor maneges, fokkers en liefhebbers.</p>
+      </div>
+    </div>
+
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">De fundering</div>
+        <div class="tl-year">Jaren '60</div>
+        <h3>De basis voor een hippisch centrum</h3>
+        <p>De eerste plannen ontstaan om in Hoogboom een professionele paardenaccommodatie uit te bouwen. De ligging, de rustige omgeving en de bestaande hippische traditie maken van de locatie een ideale plaats voor een manege met nationale ambities.</p>
+      </div>
+    </div>
+
+    <div class="tl-item hoogtepunt rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Het tijdperk Van Paesschen</div>
+        <div class="tl-year">Jaren '70</div>
+        <h3>De oprichting van Paardenstal Sint Hubert</h3>
+        <p>Het domein krijgt zijn bekende naam: <strong>Paardenstal Sint Hubert</strong>. Onder leiding van de familie Van Paesschen groeit de accommodatie uit tot een van de modernste hippische centra van Vlaanderen.</p>
+        <span class="feiten">Ruime stallen · binnen- en buitenpistes · springterreinen<br>trainingsfaciliteiten · accommodatie voor ruiters en paarden</span>
+      </div>
+    </div>
+
+    <figure class="tl-foto rv">
+      <div class="ph"><img src="img/fac-pistes.jpg" alt="De gouden jaren" data-parallax></div>
+      <figcaption>De gouden periode van Sint Hubert</figcaption>
+    </figure>
+
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Internationale doorbraak</div>
+        <div class="tl-year">Jaren '80</div>
+        <h3>De gouden periode</h3>
+        <p>Sint Hubert organiseert talrijke nationale en internationale springwedstrijden en wordt een vaste waarde op de Belgische hippische kalender. Ruiters uit België, Nederland, Duitsland en Frankrijk vinden hun weg naar Hoogboom.</p>
+        <p>Ook de fokkerij krijgt internationale uitstraling — onder meer door de BWP-goedgekeurde hengst <strong>Landjuweel St Hubert</strong>, die de naam wereldwijd bekend maakt.</p>
+      </div>
+    </div>
+
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Een gevestigde waarde</div>
+        <div class="tl-year">Jaren '90</div>
+        <h3>Verbreding van het aanbod</h3>
+        <p>Naast internationale springwedstrijden komen jeugdwedstrijden, opleidingsdagen, pensionstalling, recreatieve paardensport en fokkerijactiviteiten steeds nadrukkelijker op de voorgrond.</p>
+      </div>
+    </div>
+
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Nieuwe handen</div>
+        <div class="tl-year">1996</div>
+        <h3>De familie Knegevitch</h3>
+        <p>Er komt een einde aan de periode van de familie Van Paesschen. Het domein wordt overgenomen door de familie Knegevitch, die de accommodatie verder moderniseert en uitbreidt. De historische naam <strong>Sint Hubert</strong> blijft behouden.</p>
+      </div>
+    </div>
+
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Een veelzijdig centrum</div>
+        <div class="tl-year">2000–2010</div>
+        <h3>Horse &amp; Country Club St. Hubert</h3>
+        <p>De accommodatie ontwikkelt zich tot een veelzijdig hippisch centrum: naast wedstrijdsport staan ponykampen, manegeactiviteiten, dressuur, pensionstalling, bedrijfsactiviteiten en evenementen centraal. Steeds vaker klinkt de naam <strong>Horse &amp; Country Club St. Hubert</strong>.</p>
+      </div>
+    </div>
+
+    <div class="tl-item hoogtepunt rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Europees toneel</div>
+        <div class="tl-year">2014</div>
+        <h3>EK Springen voor Veteranen</h3>
+        <p>Sint Hubert organiseert het Europees Kampioenschap Springen voor Veteranen en bevestigt opnieuw haar internationale reputatie als organisator van hippische topsportevenementen.</p>
+      </div>
+    </div>
+
+    <figure class="tl-foto rechts rv">
+      <div class="ph"><img src="img/gate-veiling.jpg" alt="Paardenwelzijn" data-parallax></div>
+      <figcaption>Paardenwelzijn als erezaak</figcaption>
+    </figure>
+
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Innovatie &amp; welzijn</div>
+        <div class="tl-year">2018</div>
+        <h3>Een pensioen voor manegepaarden</h3>
+        <p>Sint Hubert krijgt bekendheid door initiatieven rond paardenwelzijn. Er wordt een pensioenfonds opgericht voor manegepaarden, zodat paarden na hun sportieve carrière kunnen genieten van een rustige oude dag.</p>
+      </div>
+    </div>
+
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Overgangsperiode</div>
+        <div class="tl-year">2021</div>
+        <h3>Stephex Group</h3>
+        <p>De accommodatie wordt overgenomen door Stephex Group. Er worden plannen ontwikkeld om de locatie verder te moderniseren en uit te bouwen. Hoewel niet alle projecten worden gerealiseerd, betekent deze periode een belangrijke overgang naar een nieuwe toekomst.</p>
+      </div>
+    </div>
+
+    <div class="tl-item hoogtepunt rv">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="eyebrow">Een nieuw hoofdstuk</div>
+        <div class="tl-year">2024</div>
+        <h3>De familie Ponzo Dieu-de Pundert</h3>
+        <p>Vanaf 1 januari 2024 komt het domein in handen van de familie Ponzo Dieu-de Pundert, die bewust kiest voor het behoud van de rijke geschiedenis en tegelijk investeert in een toekomstgerichte hippische onderneming.</p>
+        <p>St. Hubert wordt verder ontwikkeld als exclusief hippisch centrum, met een sterke focus op dressuur, opleiding, training, internationale samenwerking en kwaliteitsvolle sportpaarden.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="namen">
+  <div class="wrap">
+    <div class="eyebrow rv">De evolutie van de naam</div>
+    <h2 class="rv">Eén domein, vier namen — één verhaal.</h2>
+    <div class="naam-stepper">
+      <div class="naam-stap rv"><span class="nr">I</span><div class="naam">Paardenstal Sint Hubert</div><div class="tijd">Jaren 1970</div></div>
+      <div class="naam-stap rv"><span class="nr">II</span><div class="naam">Manege Sint Hubert</div><div class="tijd">&nbsp;</div></div>
+      <div class="naam-stap rv"><span class="nr">III</span><div class="naam">Horse &amp; Country Club St. Hubert</div><div class="tijd">2000–2023</div></div>
+      <div class="naam-stap rv"><span class="nr">IV</span><div class="naam">St. Hubert Horse &amp; Country Club</div><div class="tijd">Vanaf 2024</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="eigenaars">
+  <div class="wrap">
+    <div class="eyebrow rv">Eigenaars door de jaren</div>
+    <h2 class="rv">De families achter het domein.</h2>
+    <div class="eig-tabel rv">
+      <div class="eig-rij"><span class="periode">ca. 1970 – 1996</span><span class="wie">Familie Van Paesschen</span><span class="rol">Oprichters</span></div>
+      <div class="eig-rij"><span class="periode">1996 – 2021</span><span class="wie">Familie Knegevitch</span><span class="rol">Modernisering &amp; uitbreiding</span></div>
+      <div class="eig-rij"><span class="periode">2021 – 2023</span><span class="wie">Stephex Group</span><span class="rol">Overgangsperiode</span></div>
+      <div class="eig-rij"><span class="periode">Vanaf 2024</span><span class="wie">Familie Ponzo Dieu-de Pundert</span><span class="rol">Een nieuw hoofdstuk</span></div>
+    </div>
+    <div class="hist-note rv">
+      <span class="lbl">Historische noot</span>
+      <p>De olympische wedstrijden van 1920 vonden plaats op de Hoogboom Country Club, een aparte locatie in dezelfde omgeving. Ze maken deel uit van de bredere hippische geschiedenis van Hoogboom, maar niet van de oprichtingsgeschiedenis van Paardenstal Sint Hubert zelf.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slot">
+  <div class="wrap rv">
+    <div class="eyebrow">Een levende geschiedenis</div>
+    <p class="lede">"Met respect voor het verleden en een duidelijke blik op de toekomst wordt verder gebouwd aan een geschiedenis die al meer dan een eeuw teruggaat."</p>
+    <p class="txt">Vandaag blijft St. Hubert trouw aan zijn oorspronkelijke missie: een plek waar paardenwelzijn, sport, opleiding en gastvrijheid centraal staan.</p>
+    <div class="cta-row">
+      <a href="index.html#word-member" class="btn solid">Word member</a>
+      <a href="index.html" class="btn">Terug naar home</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <svg class="seal" viewBox="0 0 120 120" style="color:var(--messing)"><use href="#hubertus"/></svg>
+        <div class="brandname">St. Hubert<br>Horse &amp; Country Club</div>
+        <p style="margin-top:16px;font-size:13.5px;max-width:260px">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
+      </div>
+      <div><h5>Bezoek ons</h5><p>Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</p></div>
+      <div><h5>Contact</h5><a href="tel:+3236058790">+32 3 605 87 90</a><a href="mailto:info@sinthubert.com">info@sinthubert.com</a><p style="margin-top:14px;font-size:13px">Dagelijks geopend<br>09:30 – 22:00</p></div>
+      <div><h5>De club</h5><a href="index.html#members">Private members</a><a href="index.html#members">Professionele ruiters</a><a href="index.html#veilingen">Veilingen</a><a href="historie.html">Historie</a><a href="index.html#agenda">Agenda &amp; events</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 St. Hubert Horse &amp; Country Club — Kapellen</span>
+      <span>NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy &amp; voorwaarden</span>
+      <span>Concept 01 · webdesign door EWVO</span>
+    </div>
+  </div>
+</footer>
+
+<div class="concept-badge"><b>Concept 01</b> &nbsp;·&nbsp; EWVO × St. Hubert</div>
+
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* reveal */
+const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.rv,.naam-stap').forEach(el=>io.observe(el));
+
+/* tijdlijn: messing lijn groeit mee met scroll + dots vullen */
+const tl = document.getElementById('tijdlijn');
+const fill = document.getElementById('tlfill');
+const items = [...document.querySelectorAll('.tl-item')];
+function tick(){
+  const r = tl.getBoundingClientRect();
+  const vh = innerHeight;
+  const prog = Math.min(1, Math.max(0, (vh*0.55 - r.top) / r.height));
+  fill.style.height = (prog * r.height) + 'px';
+  const lijn = r.top + prog * r.height;
+  items.forEach(it=>{ it.classList.toggle('passed', it.getBoundingClientRect().top + 20 < lijn); });
+  /* parallax op tijdlijnfoto's (EWVO extra) */
+  if(!reduced){
+    document.querySelectorAll('[data-parallax]').forEach(img=>{
+      const b = img.getBoundingClientRect();
+      const c = b.top + b.height/2 - vh/2;
+      const y = Math.max(-26, Math.min(26, c * -0.045));
+      img.style.transform = 'translateY(' + y.toFixed(1) + 'px) scale(1.16)';
+    });
+  }
+}
+if(!reduced){ addEventListener('scroll', ()=>requestAnimationFrame(tick), {passive:true}); addEventListener('resize', tick); }
+tick();
+if(reduced){ fill.style.height='100%'; items.forEach(i=>i.classList.add('passed')); }
+</script>
+</body>
+</html>
