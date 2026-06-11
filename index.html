@@ -1,8 +1,23 @@
 <!DOCTYPE html>
+<!--
+  Premium-upgrade · 2026-06-11 · Concept 01 — St. Hubert Horse & Country Club
+  1. Preloader: Hubertus-zegel tekent zichzelf op dennengroen, zachte fade (≤1,8s, eenmalig, uit bij reduced motion)
+  2. Hero-choreografie: H1 maskeert per regel omhoog; eyebrow/subtitel/knoppen gestaggerd (±120ms); Ken Burns + filmkorrel
+  3. Nav: verbergt bij scroll-down, toont bij scroll-up, compact & donkerder na 80px; messing underline schuift van links in
+  4. Stats tellen op bij in beeld komen (eenmalig) · 5. Beeld-reveals: ivoren gordijn + zelftekenend messing kader
+  6. Magnetische knoppen & doorschuivende pijlen (alleen pointer:fine) · 7. Stalbogen: gladdere boog-hover, glow op nummers, fluwelen schaduw
+  8. Agenda-rijen: hover-verschuiving + messing pijl · 9. Typografie: text-wrap:balance, échte aanhalingstekens, font-features
+  10. Afwerking: ::selection, dunne scrollbar, :focus-visible in messing, scroll-margin, lazy loading + decoding=async
+  Reduced motion volledig gerespecteerd · alles inline · beelden als losse bestanden in img/
+  Update: koppeling met historie.html (nav, knop, footer) · preloader 1× per sessie · taalkeuze bewaard over pagina's (localStorage)
+-->
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1c2b22">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%231c2b22'/%3E%3Cg stroke='%23b9985f' fill='none'%3E%3Ccircle cx='60' cy='60' r='50' stroke-width='3'/%3E%3Cpath d='M44 78 C44 60 50 52 50 40 M50 40 C46 36 43 30 43 24 M50 40 C53 34 53 28 52 22 M50 40 C56 36 58 31 59 26' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M76 78 C76 60 70 52 70 40 M70 40 C74 36 77 30 77 24 M70 40 C67 34 67 28 68 22 M70 40 C64 36 62 31 61 26' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M60 38 V52 M54 43.5 H66' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M46 78 C46 88 52 93 60 93 C68 93 74 88 74 78' stroke-width='4' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sh-pl'))document.documentElement.classList.add('pl-skip')}catch(e){}</script>
 <title>St. Hubert Horse &amp; Country Club — Kapellen | Concept 01</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -47,10 +62,9 @@ h1,h2,h3,.display{font-family:'Marcellus',serif;font-weight:400;line-height:1.15
 .btn.dark{color:var(--groen);border-color:var(--groen)}
 .btn.dark:hover{background:var(--groen);color:var(--ivoor)}
 
-/* ---------- reveal ---------- */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* ---------- reveal (alleen met JS verborgen; zonder JS direct zichtbaar) ---------- */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.js .rv.in{opacity:1;transform:none}
 
 /* ---------- topbar + nav ---------- */
 .topbar{
@@ -85,16 +99,19 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-
 /* ---------- hero ---------- */
 .hero{
   position:relative;min-height:92vh;display:flex;align-items:flex-end;
-  background:var(--groen) url('img/hero-bos.jpg') center/cover;
+  background:var(--groen);overflow:hidden;
   color:var(--ivoor);
 }
-.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,33,25,.55) 0%,rgba(21,33,25,.18) 40%,rgba(21,33,25,.86) 100%)}
-.hero .wrap{position:relative;padding-bottom:9vh;width:100%}
+.hero-bg{position:absolute;inset:0;z-index:0;background:var(--groen) url('img/hero-bos.jpg') center/cover;animation:kenburns 14s cubic-bezier(.25,.46,.45,.94) both}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.06)}}
+.hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(21,33,25,.55) 0%,rgba(21,33,25,.18) 40%,rgba(21,33,25,.86) 100%)}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='gr'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23gr)'/%3E%3C/svg%3E")}
+.hero .wrap{position:relative;z-index:2;padding-bottom:9vh;width:100%}
 .hero h1{font-size:clamp(42px,5.6vw,82px);max-width:14em;margin:26px 0 22px;text-wrap:balance}
 .hero .sub{max-width:560px;font-size:18px;font-weight:300;color:rgba(244,241,233,.88)}
 .hero .cta-row{display:flex;gap:18px;margin-top:40px;flex-wrap:wrap}
 .hero .scroll{
-  position:absolute;right:6vw;bottom:9vh;writing-mode:vertical-rl;
+  position:absolute;right:6vw;bottom:9vh;z-index:2;writing-mode:vertical-rl;
   font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:rgba(244,241,233,.6);
   display:flex;align-items:center;gap:14px;
 }
@@ -158,7 +175,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-
 .fac-row+.fac-row{border-top:1px solid rgba(138,90,51,.22)}
 .fac-row .img{position:relative}
 .fac-row .img img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.fac-row .img::after{content:'';position:absolute;inset:0;outline:1px solid var(--messing);outline-offset:-14px;pointer-events:none}
+.fac-row .img::after{content:'';position:absolute;inset:14px;border:1px solid var(--messing);pointer-events:none;z-index:5}
 .fac-row.flip .img{order:2}
 .fac-row h3{font-size:clamp(26px,2.6vw,36px);color:var(--groen);margin:20px 0 16px}
 .fac-row p{color:#454c43;max-width:480px}
@@ -227,8 +244,114 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 .strip .ph{position:relative;overflow:hidden}
 .strip .ph img{width:100%;aspect-ratio:1/1.02;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
 .strip figure:hover .ph img{transform:scale(1.04)}
-.strip .ph::after{content:'';position:absolute;inset:0;outline:1px solid var(--messing);outline-offset:-12px;pointer-events:none}
+.strip .ph::after{content:'';position:absolute;inset:12px;border:1px solid var(--messing);pointer-events:none;z-index:5}
 .strip figcaption{margin-top:14px;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--cognac);text-align:center;font-weight:400}
+
+/* ============================================================
+   PREMIUM-LAAG — vakmanschap bovenop het bestaande concept
+   ============================================================ */
+
+/* ---------- 1 · preloader met zegel ---------- */
+#preloader{
+  position:fixed;inset:0;z-index:200;background:var(--groen-diep);
+  display:flex;align-items:center;justify-content:center;
+  animation:plOut .55s ease 1.2s forwards;
+}
+#preloader svg{width:clamp(104px,13vw,148px);color:var(--messing);overflow:visible}
+#preloader .pl-p{fill:none;stroke:currentColor;stroke-dasharray:1;stroke-dashoffset:1;animation:plDraw 1s cubic-bezier(.45,0,.2,1) var(--d,0s) both}
+#preloader .pl-dot{opacity:0;animation:plFade .45s ease .85s both}
+@keyframes plDraw{to{stroke-dashoffset:0}}
+@keyframes plFade{to{opacity:1}}
+@keyframes plOut{to{opacity:0;visibility:hidden}}
+/* preloader draait één keer per sessie; bij vervolgpagina's korter hero-ritme */
+.pl-skip #preloader{display:none}
+.pl-skip.js .hero .eyebrow{animation-delay:.45s}
+.pl-skip.js .hero .sub{animation-delay:.57s}
+.pl-skip.js .hero .cta-row{animation-delay:.69s}
+.pl-skip.js .hero .scroll{animation-delay:1s}
+
+/* ---------- 2 · hero-choreografie ---------- */
+.hero h1 .line{display:block;overflow:hidden;padding-block:.08em;margin-block:-.08em}
+.hero h1 .line-inner{display:block;transform:translateY(112%);animation:lineUp 1.05s cubic-bezier(.16,1,.3,1) var(--d,1.15s) forwards}
+@keyframes lineUp{to{transform:none}}
+.js .hero .eyebrow{animation:heroUp .9s cubic-bezier(.16,1,.3,1) 1.5s both}
+.js .hero .sub{animation:heroUp .9s cubic-bezier(.16,1,.3,1) 1.62s both}
+.js .hero .cta-row{animation:heroUp .9s cubic-bezier(.16,1,.3,1) 1.74s both}
+.js .hero .scroll{animation:heroFade 1.3s ease 2.05s both}
+@keyframes heroUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes heroFade{from{opacity:0}to{opacity:1}}
+
+/* ---------- 3 · navigatie-gedrag ---------- */
+nav{transition:background .45s,box-shadow .45s,transform .5s cubic-bezier(.45,0,.2,1)}
+nav.hide{transform:translateY(-102%)}
+nav.compact{background:rgba(17,27,21,.97);box-shadow:0 12px 44px rgba(15,23,18,.38)}
+nav .wrap{transition:padding .4s cubic-bezier(.45,0,.2,1)}
+nav.compact .wrap{padding-top:9px;padding-bottom:9px}
+.brand .seal{transition:width .4s cubic-bezier(.45,0,.2,1),height .4s cubic-bezier(.45,0,.2,1)}
+nav.compact .brand .seal{width:38px;height:38px}
+.menu a{border-bottom:0;position:relative}
+.menu a::after{
+  content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--messing);
+  transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s cubic-bezier(.45,0,.2,1);
+}
+.menu a:hover::after,.menu a:focus-visible::after{transform:scaleX(1);transform-origin:0 50%}
+
+/* ---------- 5 · beeld-reveals: ivoren gordijn + tekenend kader ---------- */
+.crt{position:relative;overflow:hidden}
+.js .crt::before{
+  content:'';position:absolute;inset:-1px;z-index:4;background:var(--ivoor);
+  clip-path:inset(0 0 0 0);transition:clip-path 1s cubic-bezier(.76,0,.24,1);
+}
+.js .crt.in::before{clip-path:inset(0 0 100% 0)}
+.crt img{transition:transform 1.4s cubic-bezier(.16,1,.3,1) .1s}
+.js .crt:not(.in) img{transform:scale(1.1)}
+.js .fac-row .img::after,.js .strip .ph::after{clip-path:inset(0 100% 0 0);transition:clip-path 1.1s cubic-bezier(.45,0,.2,1) .7s}
+.js .fac-row .img.in::after,.js .strip .ph.in::after{clip-path:inset(0 0 0 0)}
+
+/* ---------- 6 · magnetische knoppen & doorschuivende pijlen ---------- */
+.btn{transition:background .35s,color .35s,border-color .35s,transform .3s cubic-bezier(.16,1,.3,1)}
+.nav-cta{transition:background .3s,transform .3s cubic-bezier(.16,1,.3,1)}
+.gate .link::after{display:inline-block;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.gate .link:hover::after{transform:translateX(5px)}
+
+/* ---------- 7 · stalbogen verfijnd ---------- */
+.gate .arch{
+  box-shadow:0 26px 50px -18px rgba(15,23,18,.5);
+  transition:outline-offset .6s cubic-bezier(.22,1,.36,1),outline-color .6s ease,
+             transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1);
+}
+.gate:hover .arch{outline-color:rgba(185,152,95,.95);box-shadow:0 42px 76px -22px rgba(15,23,18,.62)}
+.gate .num{text-shadow:0 0 14px rgba(185,152,95,.65),0 0 32px rgba(185,152,95,.35)}
+
+/* ---------- 8 · agenda-rijen ---------- */
+.ag-item{position:relative;padding-right:60px}
+.js .ag-item.rv{transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.16,1,.3,1)}
+.ag-item:hover,.js .ag-item.rv.in:hover{transform:translateX(6px)}
+.ag-item::after{
+  content:'→';position:absolute;right:16px;top:50%;translate:0 -50%;
+  font-size:21px;color:var(--messing);opacity:0;transform:translateX(-10px);
+  transition:opacity .35s,transform .35s cubic-bezier(.16,1,.3,1);
+}
+.ag-item:hover::after{opacity:1;transform:none}
+.ag-item .d{font-variant-numeric:lining-nums}
+.ag-item .d b{letter-spacing:.02em}
+
+/* ---------- 9 · typografische polish ---------- */
+body{font-kerning:normal;font-feature-settings:"kern" 1,"liga" 1;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{text-wrap:balance}
+.lede{text-wrap:balance}
+.historie .lede,.quote .lede{hanging-punctuation:first}
+.stat .n{font-variant-numeric:lining-nums}
+.eyebrow{letter-spacing:.34em}
+
+/* ---------- 10 · afwerking ---------- */
+::selection{background:var(--groen);color:var(--ivoor)}
+html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:var(--ivoor)}
+::-webkit-scrollbar-thumb{background:var(--messing);border:2px solid var(--ivoor);border-radius:99px}
+:focus-visible{outline:2px solid var(--messing);outline-offset:3px}
+[id]{scroll-margin-top:96px}
 
 /* ---------- mobiel ---------- */
 @media (max-width:980px){
@@ -254,14 +377,47 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
   .topbar .info span:last-child{display:none}
   .band{background-attachment:scroll}
   .hero .scroll{display:none}
+  .ag-item{padding-right:0}
+  .ag-item::after{display:none}
+  .ag-item:hover,.js .ag-item.rv.in:hover{transform:none}
+  nav.open .menu a::after{display:none}
+  #preloader svg{width:96px}
 }
 @media (max-width:560px){
   .foot-grid{grid-template-columns:1fr}
   .topbar .info{display:none}
 }
+
+/* ---------- reduced motion: álles uit, content direct zichtbaar ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  #preloader{display:none}
+  .js .rv{opacity:1;transform:none}
+  .js .crt::before{display:none}
+  .js .crt:not(.in) img{transform:none}
+  .js .fac-row .img::after,.js .strip .ph::after{clip-path:none}
+  .hero h1 .line-inner{transform:none}
+  nav.hide{transform:none}
+}
 </style>
 </head>
 <body>
+
+<!-- ===== preloader: het zegel tekent zichzelf ===== -->
+<div id="preloader" aria-hidden="true">
+  <svg viewBox="0 0 120 120">
+    <circle class="pl-p" cx="60" cy="60" r="58" stroke-width="1.4" pathLength="1"/>
+    <circle class="pl-p" cx="60" cy="60" r="46" stroke-width=".8" pathLength="1" style="--d:.12s"/>
+    <path class="pl-p" d="M44 78 C44 60 50 52 50 40 M50 40 C46 36 43 30 43 24 M50 40 C53 34 53 28 52 22 M50 40 C56 36 58 31 59 26" stroke-width="2" stroke-linecap="round" pathLength="1" style="--d:.25s"/>
+    <path class="pl-p" d="M76 78 C76 60 70 52 70 40 M70 40 C74 36 77 30 77 24 M70 40 C67 34 67 28 68 22 M70 40 C64 36 62 31 61 26" stroke-width="2" stroke-linecap="round" pathLength="1" style="--d:.25s"/>
+    <path class="pl-p" d="M60 38 V52 M54 43.5 H66" stroke-width="2" stroke-linecap="round" pathLength="1" style="--d:.45s"/>
+    <path class="pl-p" d="M46 78 C46 88 52 93 60 93 C68 93 74 88 74 78" stroke-width="2" stroke-linecap="round" pathLength="1" style="--d:.55s"/>
+    <circle class="pl-dot" cx="60" cy="105" r="1.6" fill="currentColor"/>
+    <circle class="pl-dot" cx="42" cy="100" r="1.2" fill="currentColor"/>
+    <circle class="pl-dot" cx="78" cy="100" r="1.2" fill="currentColor"/>
+  </svg>
+</div>
 
 <!-- ===== seal (SVG, hergebruikt) ===== -->
 <svg width="0" height="0" style="position:absolute">
@@ -314,17 +470,18 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
       <a href="#contact" data-i18n="m6">Contact</a>
     </div>
     <a href="#word-member" class="nav-cta" data-i18n="cta">Word member</a>
-    <button class="burger" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
   </div>
 </nav>
 
 <!-- ===== hero ===== -->
 <header class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="eyebrow rv" data-i18n="h-eye">Luxestalling in het groene hart van Antwerpen</div>
-    <h1 class="rv" data-i18n="h-title">Een oase van rust, voor paard én ruiter.</h1>
-    <p class="sub rv" data-i18n="h-sub">St. Hubert is een horse &amp; country club aan de rand van de Kalmthoutse heide — waar rustieke uitstraling en hedendaags comfort samenkomen.</p>
-    <div class="cta-row rv">
+    <div class="eyebrow" data-i18n="h-eye">Luxestalling in het groene hart van Antwerpen</div>
+    <h1 data-i18n="h-title">Een oase van rust, voor paard én ruiter.</h1>
+    <p class="sub" data-i18n="h-sub">St. Hubert is een horse &amp; country club aan de rand van de Kalmthoutse heide — waar rustieke uitstraling en hedendaags comfort samenkomen.</p>
+    <div class="cta-row">
       <a href="#club" class="btn solid" data-i18n="h-cta1">Ontdek de club</a>
       <a href="#veilingen" class="btn" data-i18n="h-cta2">Bekijk de veilingen</a>
     </div>
@@ -367,27 +524,27 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
     </div>
     <div class="gate-row">
       <div class="gate rv">
-        <div class="arch">
+        <div class="arch crt">
           <span class="num">I</span>
-          <img src="img/gate-members.jpg" alt="Private members">
+          <img src="img/gate-members.jpg" alt="Private members" loading="lazy" decoding="async">
         </div>
         <h3>Private members</h3>
         <p>Vol pension in alle rust, ruime buitenstallingen en persoonlijke begeleiding voor u en uw paard.</p>
         <a class="link" href="#">Ontdek het membership</a>
       </div>
       <div class="gate rv">
-        <div class="arch">
+        <div class="arch crt">
           <span class="num">II</span>
-          <img src="img/gate-ruiters.jpg" alt="Professionele ruiters">
+          <img src="img/gate-ruiters.jpg" alt="Professionele ruiters" loading="lazy" decoding="async">
         </div>
         <h3>Professionele ruiters</h3>
         <p>Training, wedstrijdbegeleiding en faciliteiten op niveau — voor wie de sport ernstig neemt.</p>
         <a class="link" href="#">Voor professionals</a>
       </div>
       <div class="gate rv" id="veilingen">
-        <div class="arch">
+        <div class="arch crt">
           <span class="num">III</span>
-          <img src="img/gate-veiling.jpg" alt="Veilingen">
+          <img src="img/gate-veiling.jpg" alt="Veilingen" loading="lazy" decoding="async">
         </div>
         <h3>Veilingen</h3>
         <p>Exclusieve paardenveilingen in een uniek kader, met internationale allure en Kempense gastvrijheid.</p>
@@ -401,7 +558,7 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 <section class="historie" id="historie">
   <div class="wrap rv">
     <div class="eyebrow">Onze historie</div>
-    <p class="lede">"Een rijke geschiedenis, geworteld in de bossen van Hoogboom — van familiemanege tot horse &amp; country club."</p>
+    <p class="lede">“Een rijke geschiedenis, geworteld in de bossen van Hoogboom — van familiemanege tot horse &amp; country club.”</p>
     <div class="rule"></div><br>
     <a href="historie.html" class="btn dark">Ontdek de historie</a>
   </div>
@@ -412,9 +569,9 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 <section class="strip">
   <div class="wrap">
     <div class="strip-grid">
-      <figure class="rv"><div class="ph"><img src="img/strip-bos.jpg" alt="Het bos van Hoogboom"></div><figcaption>Het bos van Hoogboom</figcaption></figure>
-      <figure class="rv"><div class="ph"><img src="img/strip-hoofdstel.jpg" alt="Voor de veiling"></div><figcaption>Voor de veiling</figcaption></figure>
-      <figure class="rv"><div class="ph"><img src="img/strip-piste.jpg" alt="Training in de piste"></div><figcaption>Training in de piste</figcaption></figure>
+      <figure class="rv"><div class="ph crt"><img src="img/strip-bos.jpg" alt="Het bos van Hoogboom" loading="lazy" decoding="async"></div><figcaption>Het bos van Hoogboom</figcaption></figure>
+      <figure class="rv"><div class="ph crt"><img src="img/strip-hoofdstel.jpg" alt="Voor de veiling" loading="lazy" decoding="async"></div><figcaption>Voor de veiling</figcaption></figure>
+      <figure class="rv"><div class="ph crt"><img src="img/strip-piste.jpg" alt="Training in de piste" loading="lazy" decoding="async"></div><figcaption>Training in de piste</figcaption></figure>
     </div>
   </div>
 </section>
@@ -423,7 +580,7 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 <section class="fac">
   <div class="wrap">
     <div class="fac-row rv">
-      <div class="img"><img src="img/fac-pistes.jpg" alt="Pistes"></div>
+      <div class="img crt"><img src="img/fac-pistes.jpg" alt="Pistes" loading="lazy" decoding="async"></div>
       <div>
         <div class="eyebrow">De faciliteiten</div>
         <h3>Rijden in elk seizoen.</h3>
@@ -432,7 +589,7 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
       </div>
     </div>
     <div class="fac-row flip heide rv">
-      <div class="img"><img src="img/fac-heide.jpg" alt="Kalmthoutse heide"></div>
+      <div class="img crt"><img src="img/fac-heide.jpg" alt="Kalmthoutse heide" loading="lazy" decoding="async"></div>
       <div>
         <div class="eyebrow">De heide als achtertuin</div>
         <h3>Urenlang te paard door de natuur.</h3>
@@ -441,7 +598,7 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
       </div>
     </div>
     <div class="fac-row rv">
-      <div class="img"><img src="img/fac-bistro.jpg" alt="De bistro"></div>
+      <div class="img crt"><img src="img/fac-bistro.jpg" alt="De bistro" loading="lazy" decoding="async"></div>
       <div>
         <div class="eyebrow">De bistro</div>
         <h3>Nagenieten in het groen.</h3>
@@ -456,7 +613,7 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 <section class="quote">
   <svg class="seal-bg" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
   <div class="wrap rv">
-    <p class="lede">"Hier lijkt de tijd trager te gaan. Mijn paard staat er beter dan ooit — en ik kom er zelf óók tot rust."</p>
+    <p class="lede">“Hier lijkt de tijd trager te gaan. Mijn paard staat er beter dan ooit — en ik kom er zelf óók tot rust.”</p>
     <div class="who">— Een van onze members</div>
   </div>
 </section>
@@ -541,11 +698,107 @@ footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;
 <div class="concept-badge"><b>Concept 01</b> &nbsp;·&nbsp; EWVO × St. Hubert</div>
 
 <script>
-/* reveal on scroll */
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* preloader: puur CSS-gedreven; JS ruimt op en onthoudt de sessie */
+const plSkip = document.documentElement.classList.contains('pl-skip');
+const pl = document.getElementById('preloader');
+if(pl){
+  if(reduced || plSkip){ pl.remove(); }
+  else setTimeout(()=>pl.remove(), 2000);
+  try{ sessionStorage.setItem('sh-pl','1'); }catch(e){}
+}
+
+/* reveal on scroll — .rv (content) en .crt (gordijn-reveals) */
 const io = new IntersectionObserver(es=>{
   es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
 },{threshold:.12});
-document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('.rv,.crt').forEach(el=>io.observe(el));
+
+/* hero: H1 per regel maskeren (na font-load, achter de preloader) */
+const h1 = document.querySelector('.hero h1');
+if(h1 && !reduced){
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(()=>{
+    if(!h1.isConnected || h1.querySelector('.line')) return;
+    const woorden = h1.textContent.trim().split(/\s+/);
+    h1.textContent = '';
+    const spans = woorden.map(w=>{
+      const s = document.createElement('span');
+      s.textContent = w; s.style.display = 'inline-block';
+      h1.appendChild(s); h1.appendChild(document.createTextNode(' '));
+      return s;
+    });
+    const regels = []; let top = null;
+    spans.forEach(s=>{
+      if(s.offsetTop !== top){ regels.push([]); top = s.offsetTop; }
+      regels[regels.length-1].push(s.textContent);
+    });
+    h1.textContent = '';
+    const basis = plSkip ? .1 : Math.max(.05, 1.15 - performance.now()/1000);
+    regels.forEach((ws,i)=>{
+      const line = document.createElement('span'); line.className = 'line';
+      const inner = document.createElement('span'); inner.className = 'line-inner';
+      inner.textContent = ws.join(' ');
+      inner.style.setProperty('--d', (basis + i*.12).toFixed(2)+'s');
+      line.appendChild(inner); h1.appendChild(line);
+    });
+    /* na de intro terug naar platte tekst: robuust voor i18n en resize */
+    setTimeout(()=>{
+      const inners = h1.querySelectorAll('.line-inner');
+      if(inners.length) h1.textContent = [...inners].map(x=>x.textContent).join(' ');
+    }, 3600);
+  });
+}
+
+/* nav: compact na 80px, verbergen bij scroll-down, tonen bij scroll-up */
+const nav = document.getElementById('nav');
+let lastY = scrollY, tick = false;
+addEventListener('scroll', ()=>{
+  if(tick) return; tick = true;
+  requestAnimationFrame(()=>{
+    const y = scrollY, dy = y - lastY;
+    nav.classList.toggle('compact', y > 80);
+    /* drempel van 4px voorkomt jitter bij events met (vrijwel) gelijke positie */
+    if(Math.abs(dy) > 4){
+      if(!reduced && !nav.classList.contains('open')){
+        if(dy > 0 && y > 320) nav.classList.add('hide');
+        else nav.classList.remove('hide');
+      }
+      lastY = y;
+    }
+    tick = false;
+  });
+},{passive:true});
+
+/* mobiel menu sluit na keuze */
+document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+/* tellende cijfers (eenmalig, in beeld) */
+function telOp(el){
+  const delen = el.textContent.split(/(\d+)/);
+  const t0 = performance.now(), duur = 1500;
+  (function stap(nu){
+    const p = Math.min(1,(nu-t0)/duur), e = 1-Math.pow(1-p,3);
+    el.textContent = delen.map(s=>/^\d+$/.test(s)?String(Math.round(+s*e)):s).join('');
+    if(p<1) requestAnimationFrame(stap);
+  })(t0);
+}
+const statIO = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ statIO.unobserve(e.target); if(!reduced) telOp(e.target); } });
+},{threshold:.5});
+document.querySelectorAll('.stat .n').forEach(el=>{ if(/\d/.test(el.textContent)) statIO.observe(el); });
+
+/* magnetische knoppen — alleen bij fijne pointer */
+if(matchMedia('(pointer:fine)').matches && !reduced){
+  document.querySelectorAll('.btn,.nav-cta').forEach(b=>{
+    b.addEventListener('mousemove',e=>{
+      const r = b.getBoundingClientRect();
+      const dx = ((e.clientX-r.left)/r.width-.5)*7, dy = ((e.clientY-r.top)/r.height-.5)*7;
+      b.style.transform = `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px)`;
+    });
+    b.addEventListener('mouseleave',()=>{ b.style.transform = ''; });
+  });
+}
 
 /* meertaligheid — demo van de taalwissel (module uit de offerte) */
 const i18n = {
@@ -565,15 +818,16 @@ const i18n = {
       'h-sub':'St. Hubert is a horse & country club on the edge of the Kalmthout heath — where rustic charm meets contemporary comfort.',
       'h-cta1':'Discover the club','h-cta2':'View the auctions','h-scroll':'Scroll'}
 };
-document.querySelectorAll('.lang button').forEach(b=>{
-  b.addEventListener('click',()=>{
-    document.querySelectorAll('.lang button').forEach(x=>x.classList.remove('act'));
-    b.classList.add('act');
-    const t = i18n[b.dataset.lang];
-    document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
-    document.documentElement.lang = b.dataset.lang;
-  });
-});
+function zetTaal(code){
+  const t = i18n[code]; if(!t) return;
+  document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('act', x.dataset.lang===code));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
+  document.documentElement.lang = code;
+  try{ localStorage.setItem('sh-lang', code); }catch(e){}
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>zetTaal(b.dataset.lang)));
+/* taalkeuze blijft bewaard over pagina's heen */
+try{ const bewaard = localStorage.getItem('sh-lang'); if(bewaard && bewaard !== 'nl') zetTaal(bewaard); }catch(e){}
 </script>
 </body>
 </html>
