@@ -367,6 +367,28 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
   .nav-cta{display:none}
 }
 
+/* ---------- cookie-melding (subtiel) + EWVO-links ---------- */
+.cookie{
+  position:fixed;right:18px;bottom:18px;z-index:90;max-width:330px;
+  background:var(--groen-diep);color:rgba(244,241,233,.85);
+  border:1px solid rgba(185,152,95,.4);box-shadow:0 18px 50px rgba(15,23,18,.4);
+  padding:18px 20px;font-size:13px;line-height:1.6;
+  opacity:0;transform:translateY(14px);pointer-events:none;
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);
+}
+.cookie.aan{opacity:1;transform:none;pointer-events:auto}
+.cookie p{margin:0 0 12px}
+.cookie button{
+  background:none;border:1px solid var(--messing);color:var(--messing);font:inherit;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  padding:8px 18px;cursor:pointer;transition:background .3s,color .3s;
+}
+.cookie button:hover{background:var(--messing);color:var(--groen-diep)}
+.foot-bottom a{color:inherit;border-bottom:1px solid rgba(185,152,95,.45);padding-bottom:1px;transition:color .3s,border-color .3s}
+.foot-bottom a:hover{color:var(--messing);border-color:var(--messing)}
+.concept-badge a{color:var(--cognac);border-bottom:1px solid rgba(138,90,51,.4);transition:border-color .3s}
+.concept-badge a:hover{border-color:var(--cognac)}
+
 /* ---------- mobiel ---------- */
 @media (max-width:980px){
   .intro .grid{grid-template-columns:1fr;gap:34px}
@@ -391,6 +413,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 @media (max-width:560px){
   .foot-grid{grid-template-columns:1fr}
   .topbar .info{display:none}
+  .cookie{left:14px;right:14px;bottom:66px;max-width:none}
 }
 
 /* ---------- reduced motion: álles uit, content direct zichtbaar ---------- */
@@ -564,19 +587,19 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
   <div class="wrap">
     <div class="grid">
       <div class="rv">
-        <div class="eyebrow">Welkom op het domein</div>
-        <h2>Rustieke uitstraling,<br>hedendaags comfort.</h2>
+        <div class="eyebrow" data-i18n="i-eye">Welkom op het domein</div>
+        <h2 data-i18n="i-title">Rustieke uitstraling,<br>hedendaags comfort.</h2>
       </div>
       <div class="rv">
-        <p class="lede">Aan de Bosdreef in Hoogboom, midden in het groen, ligt een domein waar tijd trager lijkt te gaan.</p>
-        <p>St. Hubert verenigt een indrukwekkende infrastructuur met de rust van bos en heide. Ruime boxen en weides, binnen- en buitenpistes, en een team dat instaat voor persoonlijke begeleiding — voor elke leeftijd, op elk niveau.</p>
-        <p>Van vol pension voor paard en pony tot training voor wedstrijdruiters: hier vindt elke liefhebber zijn plek.</p>
+        <p class="lede" data-i18n="i-lede">Aan de Bosdreef in Hoogboom, midden in het groen, ligt een domein waar tijd trager lijkt te gaan.</p>
+        <p data-i18n="i-p1">St. Hubert verenigt een indrukwekkende infrastructuur met de rust van bos en heide. Ruime boxen en weides, binnen- en buitenpistes, en een team dat instaat voor persoonlijke begeleiding — voor elke leeftijd, op elk niveau.</p>
+        <p data-i18n="i-p2">Van vol pension voor paard en pony tot training voor wedstrijdruiters: hier vindt elke liefhebber zijn plek.</p>
       </div>
     </div>
     <div class="stats rv">
-      <div class="stat"><div class="n">85</div><div class="l">Ruime boxen</div></div>
-      <div class="stat"><div class="n">2 + 2</div><div class="l">Binnen- &amp; buitenpistes</div></div>
-      <div class="stat"><div class="n">∞</div><div class="l">Ruiterpaden in bos &amp; heide</div></div>
+      <div class="stat"><div class="n">85</div><div class="l" data-i18n="s1-l">Ruime boxen</div></div>
+      <div class="stat"><div class="n">2 + 2</div><div class="l" data-i18n="s2-l">Binnen- &amp; buitenpistes</div></div>
+      <div class="stat"><div class="n">∞</div><div class="l" data-i18n="s3-l">Ruiterpaden in bos &amp; heide</div></div>
     </div>
   </div>
 </section>
@@ -586,10 +609,10 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
   <div class="wrap">
     <div class="head">
       <div class="rv">
-        <div class="eyebrow">Voor wie wij er zijn</div>
-        <h2>Drie deuren, één domein.</h2>
+        <div class="eyebrow" data-i18n="g-eye">Voor wie wij er zijn</div>
+        <h2 data-i18n="g-title">Drie deuren, één domein.</h2>
       </div>
-      <p class="rv">Elke bezoeker volgt zijn eigen pad door St. Hubert. Kies uw ingang en ontdek wat de club voor u betekent.</p>
+      <p class="rv" data-i18n="g-intro">Elke bezoeker volgt zijn eigen pad door St. Hubert. Kies uw ingang en ontdek wat de club voor u betekent.</p>
     </div>
     <div class="gate-row">
       <div class="gate rv">
@@ -597,27 +620,27 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
           <span class="num">I</span>
           <img src="img/gate-members.jpg" alt="Private members" loading="lazy" decoding="async">
         </div>
-        <h3>Private members</h3>
-        <p>Vol pension in alle rust, ruime buitenstallingen en persoonlijke begeleiding voor u en uw paard.</p>
-        <a class="link" href="#">Ontdek het membership</a>
+        <h3 data-i18n="g1-t">Private members</h3>
+        <p data-i18n="g1-p">Vol pension in alle rust, ruime buitenstallingen en persoonlijke begeleiding voor u en uw paard.</p>
+        <a class="link" href="#" data-i18n="g1-l">Ontdek het membership</a>
       </div>
       <div class="gate rv">
         <div class="arch crt">
           <span class="num">II</span>
           <img src="img/gate-ruiters.jpg" alt="Professionele ruiters" loading="lazy" decoding="async">
         </div>
-        <h3>Professionele ruiters</h3>
-        <p>Training, wedstrijdbegeleiding en faciliteiten op niveau — voor wie de sport ernstig neemt.</p>
-        <a class="link" href="#">Voor professionals</a>
+        <h3 data-i18n="g2-t">Professionele ruiters</h3>
+        <p data-i18n="g2-p">Training, wedstrijdbegeleiding en faciliteiten op niveau — voor wie de sport ernstig neemt.</p>
+        <a class="link" href="#" data-i18n="g2-l">Voor professionals</a>
       </div>
       <div class="gate rv" id="veilingen">
         <div class="arch crt">
           <span class="num">III</span>
           <img src="img/gate-veiling.jpg" alt="Veilingen" loading="lazy" decoding="async">
         </div>
-        <h3>Veilingen</h3>
-        <p>Exclusieve paardenveilingen in een uniek kader, met internationale allure en Kempense gastvrijheid.</p>
-        <a class="link" href="#">Bekijk de veilingen</a>
+        <h3 data-i18n="g3-t">Veilingen</h3>
+        <p data-i18n="g3-p">Exclusieve paardenveilingen in een uniek kader, met internationale allure en Kempense gastvrijheid.</p>
+        <a class="link" href="#" data-i18n="g3-l">Bekijk de veilingen</a>
       </div>
     </div>
   </div>
@@ -626,10 +649,10 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 <!-- ===== historie ===== -->
 <section class="historie" id="historie">
   <div class="wrap rv">
-    <div class="eyebrow">Onze historie</div>
-    <p class="lede">“Een rijke geschiedenis, geworteld in de bossen van Hoogboom — van familiemanege tot horse &amp; country club.”</p>
+    <div class="eyebrow" data-i18n="ht-eye">Onze historie</div>
+    <p class="lede" data-i18n="ht-lede">“Een rijke geschiedenis, geworteld in de bossen van Hoogboom — van familiemanege tot horse &amp; country club.”</p>
     <div class="rule"></div><br>
-    <a href="historie.html" class="btn dark">Ontdek de historie</a>
+    <a href="historie.html" class="btn dark" data-i18n="ht-btn">Ontdek de historie</a>
   </div>
 </section>
 
@@ -638,9 +661,9 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 <section class="strip">
   <div class="wrap">
     <div class="strip-grid">
-      <figure class="rv"><div class="ph crt"><img src="img/strip-bos.jpg" alt="Het bos van Hoogboom" loading="lazy" decoding="async"></div><figcaption>Het bos van Hoogboom</figcaption></figure>
-      <figure class="rv"><div class="ph crt"><img src="img/strip-hoofdstel.jpg" alt="Voor de veiling" loading="lazy" decoding="async"></div><figcaption>Voor de veiling</figcaption></figure>
-      <figure class="rv"><div class="ph crt"><img src="img/strip-piste.jpg" alt="Training in de piste" loading="lazy" decoding="async"></div><figcaption>Training in de piste</figcaption></figure>
+      <figure class="rv"><div class="ph crt"><img src="img/strip-bos.jpg" alt="Het bos van Hoogboom" loading="lazy" decoding="async"></div><figcaption data-i18n="st1">Het bos van Hoogboom</figcaption></figure>
+      <figure class="rv"><div class="ph crt"><img src="img/strip-hoofdstel.jpg" alt="Voor de veiling" loading="lazy" decoding="async"></div><figcaption data-i18n="st2">Voor de veiling</figcaption></figure>
+      <figure class="rv"><div class="ph crt"><img src="img/strip-piste.jpg" alt="Training in de piste" loading="lazy" decoding="async"></div><figcaption data-i18n="st3">Training in de piste</figcaption></figure>
     </div>
   </div>
 </section>
@@ -651,28 +674,28 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
     <div class="fac-row rv">
       <div class="img crt"><img src="img/fac-pistes.jpg" alt="Pistes" loading="lazy" decoding="async"></div>
       <div>
-        <div class="eyebrow">De faciliteiten</div>
-        <h3>Rijden in elk seizoen.</h3>
-        <p>Twee binnenpistes en twee buitenpistes, 85 ruime boxen en uitgestrekte weides — een indrukwekkend geheel waar paard en ruiter het hele jaar door terechtkunnen.</p>
-        <a href="#" class="tag">Bekijk het domein</a>
+        <div class="eyebrow" data-i18n="f1-eye">De faciliteiten</div>
+        <h3 data-i18n="f1-t">Rijden in elk seizoen.</h3>
+        <p data-i18n="f1-p">Twee binnenpistes en twee buitenpistes, 85 ruime boxen en uitgestrekte weides — een indrukwekkend geheel waar paard en ruiter het hele jaar door terechtkunnen.</p>
+        <a href="#" class="tag" data-i18n="f1-l">Bekijk het domein</a>
       </div>
     </div>
     <div class="fac-row flip heide rv">
       <div class="img crt"><img src="img/fac-heide.jpg" alt="Kalmthoutse heide" loading="lazy" decoding="async"></div>
       <div>
-        <div class="eyebrow">De heide als achtertuin</div>
-        <h3>Urenlang te paard door de natuur.</h3>
-        <p>Door de nabijheid van de Kalmthoutse heide en het militair domein maakt u vanaf de staldeur urenlange tochten door een van de mooiste natuurgebieden van Vlaanderen.</p>
-        <a href="#" class="tag">Ontdek de routes</a>
+        <div class="eyebrow" data-i18n="f2-eye">De heide als achtertuin</div>
+        <h3 data-i18n="f2-t">Urenlang te paard door de natuur.</h3>
+        <p data-i18n="f2-p">Door de nabijheid van de Kalmthoutse heide en het militair domein maakt u vanaf de staldeur urenlange tochten door een van de mooiste natuurgebieden van Vlaanderen.</p>
+        <a href="#" class="tag" data-i18n="f2-l">Ontdek de routes</a>
       </div>
     </div>
     <div class="fac-row rv">
       <div class="img crt"><img src="img/fac-bistro.jpg" alt="De bistro" loading="lazy" decoding="async"></div>
       <div>
-        <div class="eyebrow">De bistro</div>
-        <h3>Nagenieten in het groen.</h3>
-        <p>Na een les, training of tocht schuift u aan in de bistro — een warme plek om na te praten, met een hapje en een drankje, midden in de rust van het domein.</p>
-        <a href="#" class="tag">Bekijk de bistro</a>
+        <div class="eyebrow" data-i18n="f3-eye">De bistro</div>
+        <h3 data-i18n="f3-t">Nagenieten in het groen.</h3>
+        <p data-i18n="f3-p">Na een les, training of tocht schuift u aan in de bistro — een warme plek om na te praten, met een hapje en een drankje, midden in de rust van het domein.</p>
+        <a href="#" class="tag" data-i18n="f3-l">Bekijk de bistro</a>
       </div>
     </div>
   </div>
@@ -682,8 +705,8 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 <section class="quote">
   <svg class="seal-bg" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
   <div class="wrap rv">
-    <p class="lede">“Hier lijkt de tijd trager te gaan. Mijn paard staat er beter dan ooit — en ik kom er zelf óók tot rust.”</p>
-    <div class="who">— Een van onze members</div>
+    <p class="lede" data-i18n="q-lede">“Hier lijkt de tijd trager te gaan. Mijn paard staat er beter dan ooit — en ik kom er zelf óók tot rust.”</p>
+    <div class="who" data-i18n="q-who">— Een van onze members</div>
   </div>
 </section>
 
@@ -692,25 +715,25 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
   <div class="wrap">
     <div class="head">
       <div class="rv">
-        <div class="eyebrow">Op het domein</div>
-        <h2>Komende veilingen &amp; evenementen</h2>
+        <div class="eyebrow" data-i18n="a-eye">Op het domein</div>
+        <h2 data-i18n="a-title">Komende veilingen &amp; evenementen</h2>
       </div>
-      <a href="#" class="btn dark rv">Volledige agenda</a>
+      <a href="#" class="btn dark rv" data-i18n="a-btn">Volledige agenda</a>
     </div>
     <div class="ag-item rv">
-      <div class="d">Zat<b>04</b>Juli</div>
-      <div><h4>Zomerveiling — exclusieve collectie sportpaarden</h4><p>Internationale veiling met bezichtiging vanaf 14u, veiling vanaf 19u.</p></div>
-      <span class="pill">Veiling</span>
+      <div class="d" data-i18n="a1-d">Zat<b>04</b>Juli</div>
+      <div><h4 data-i18n="a1-t">Zomerveiling — exclusieve collectie sportpaarden</h4><p data-i18n="a1-p">Internationale veiling met bezichtiging vanaf 14u, veiling vanaf 19u.</p></div>
+      <span class="pill" data-i18n="a1-pill">Veiling</span>
     </div>
     <div class="ag-item rv">
-      <div class="d">Woe<b>15</b>Juli</div>
-      <div><h4>Open lesdag — kennismaken met de club</h4><p>Proeflessen voor jong en oud, rondleiding over het domein.</p></div>
-      <span class="pill">Open dag</span>
+      <div class="d" data-i18n="a2-d">Woe<b>15</b>Juli</div>
+      <div><h4 data-i18n="a2-t">Open lesdag — kennismaken met de club</h4><p data-i18n="a2-p">Proeflessen voor jong en oud, rondleiding over het domein.</p></div>
+      <span class="pill" data-i18n="a2-pill">Open dag</span>
     </div>
     <div class="ag-item rv">
-      <div class="d">Zat<b>22</b>Aug</div>
-      <div><h4>Clubwedstrijd dressuur</h4><p>Voor members en genodigden, met aansluitend receptie in de bistro.</p></div>
-      <span class="pill">Wedstrijd</span>
+      <div class="d" data-i18n="a3-d">Zat<b>22</b>Aug</div>
+      <div><h4 data-i18n="a3-t">Clubwedstrijd dressuur</h4><p data-i18n="a3-p">Voor members en genodigden, met aansluitend receptie in de bistro.</p></div>
+      <span class="pill" data-i18n="a3-pill">Wedstrijd</span>
     </div>
   </div>
 </section>
@@ -718,12 +741,12 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 <!-- ===== cta band ===== -->
 <section class="band" id="word-member">
   <div class="wrap rv">
-    <div class="eyebrow">Word lid van de club</div>
-    <h2>Uw paard verdient St. Hubert.</h2>
-    <p>Plan een bezoek aan het domein en ontdek wat een membership voor u en uw paard kan betekenen.</p>
+    <div class="eyebrow" data-i18n="b-eye">Word lid van de club</div>
+    <h2 data-i18n="b-title">Uw paard verdient St. Hubert.</h2>
+    <p data-i18n="b-p">Plan een bezoek aan het domein en ontdek wat een membership voor u en uw paard kan betekenen.</p>
     <div class="cta-row">
-      <a href="#" class="btn solid">Word member</a>
-      <a href="#contact" class="btn">Plan een bezoek</a>
+      <a href="#" class="btn solid" data-i18n="cta">Word member</a>
+      <a href="#contact" class="btn" data-i18n="b-cta2">Plan een bezoek</a>
     </div>
   </div>
 </section>
@@ -735,36 +758,41 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
       <div>
         <svg class="seal" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
         <div class="brandname">St. Hubert<br>Horse &amp; Country Club</div>
-        <p style="margin-top:16px;font-size:13.5px;max-width:260px">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
+        <p style="margin-top:16px;font-size:13.5px;max-width:260px" data-i18n="ft-tag">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
       </div>
       <div>
-        <h5>Bezoek ons</h5>
-        <p>Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</p>
+        <h5 data-i18n="ft-h1">Bezoek ons</h5>
+        <p data-i18n="ft-adres">Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</p>
       </div>
       <div>
-        <h5>Contact</h5>
+        <h5 data-i18n="ft-h2">Contact</h5>
         <a href="tel:+3236058790">+32 3 605 87 90</a>
         <a href="mailto:info@sinthubert.com">info@sinthubert.com</a>
-        <p style="margin-top:14px;font-size:13px">Dagelijks geopend<br>09:30 – 22:00</p>
+        <p style="margin-top:14px;font-size:13px" data-i18n="ft-open">Dagelijks geopend<br>09:30 – 22:00</p>
       </div>
       <div>
-        <h5>De club</h5>
-        <a href="#members">Private members</a>
-        <a href="#members">Professionele ruiters</a>
-        <a href="#veilingen">Veilingen</a>
-        <a href="historie.html">Historie</a>
-        <a href="#agenda">Agenda &amp; events</a>
+        <h5 data-i18n="ft-h3">De club</h5>
+        <a href="#members" data-i18n="ft-l1">Private members</a>
+        <a href="#members" data-i18n="ft-l2">Professionele ruiters</a>
+        <a href="#veilingen" data-i18n="m3">Veilingen</a>
+        <a href="historie.html" data-i18n="m4">Historie</a>
+        <a href="#agenda" data-i18n="ft-l5">Agenda &amp; events</a>
       </div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 St. Hubert Horse &amp; Country Club — Kapellen</span>
-      <span>NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy &amp; voorwaarden</span>
-      <span>Concept 01 · webdesign door EWVO</span>
+      <span data-i18n="ft-priv">NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy &amp; voorwaarden</span>
+      <span>Concept 01 · webdesign door <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a></span>
     </div>
   </div>
 </footer>
 
-<div class="concept-badge"><b>Concept 01</b> &nbsp;·&nbsp; EWVO × St. Hubert</div>
+<aside class="cookie" id="cookie" aria-label="Cookies">
+  <p data-i18n="ck-txt">Deze website gebruikt enkel functionele cookies — om uw taal- en weergavevoorkeuren te onthouden. Geen tracking.</p>
+  <button data-i18n="ck-btn">Begrepen</button>
+</aside>
+
+<div class="concept-badge"><b>Concept 01</b> &nbsp;·&nbsp; <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a> × St. Hubert</div>
 
 <script>
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -869,28 +897,137 @@ if(matchMedia('(pointer:fine)').matches && !reduced){
   });
 }
 
+/* subtiele cookie-melding — alleen functionele opslag, eenmalig */
+const ck = document.getElementById('cookie');
+if(ck){
+  let ckOk = false; try{ ckOk = !!localStorage.getItem('sh-cookies'); }catch(e){}
+  if(ckOk){ ck.remove(); }
+  else{
+    setTimeout(()=>ck.classList.add('aan'), reduced ? 800 : 2600);
+    ck.querySelector('button').addEventListener('click',()=>{
+      try{ localStorage.setItem('sh-cookies','1'); }catch(e){}
+      ck.classList.remove('aan');
+      setTimeout(()=>ck.remove(), 700);
+    });
+  }
+}
+
 /* meertaligheid — demo van de taalwissel (module uit de offerte) */
 const i18n = {
-  nl:{m1:'De club',m2:'Members',m3:'Veilingen',m4:'Historie',m5:'Agenda',m6:'Contact',cta:'Word member',
-      'h-eye':'Luxestalling in het groene hart van Antwerpen',
-      'h-title':'Een oase van rust, voor paard én ruiter.',
-      'h-sub':'St. Hubert is een horse & country club aan de rand van de Kalmthoutse heide — waar rustieke uitstraling en hedendaags comfort samenkomen.',
-      'h-cta1':'Ontdek de club','h-cta2':'Bekijk de veilingen','h-scroll':'Scroll'},
-  fr:{m1:'Le club',m2:'Membres',m3:'Ventes',m4:'Histoire',m5:'Agenda',m6:'Contact',cta:'Devenir membre',
+  nl:{'m1':"De club",'m2':"Members",'m3':"Veilingen",'m4':"Historie",'m5':"Agenda",'m6':"Contact",'cta':"Word member",
+      'h-eye':"Luxestalling in het groene hart van Antwerpen",
+      'h-title':"Een oase van rust, voor paard én ruiter.",
+      'h-sub':"St. Hubert is een horse & country club aan de rand van de Kalmthoutse heide — waar rustieke uitstraling en hedendaags comfort samenkomen.",
+      'h-cta1':"Ontdek de club",'h-cta2':"Bekijk de veilingen",'h-scroll':"Scroll",
+      'i-eye':"Welkom op het domein",'i-title':"Rustieke uitstraling,<br>hedendaags comfort.",
+      'i-lede':"Aan de Bosdreef in Hoogboom, midden in het groen, ligt een domein waar tijd trager lijkt te gaan.",
+      'i-p1':"St. Hubert verenigt een indrukwekkende infrastructuur met de rust van bos en heide. Ruime boxen en weides, binnen- en buitenpistes, en een team dat instaat voor persoonlijke begeleiding — voor elke leeftijd, op elk niveau.",
+      'i-p2':"Van vol pension voor paard en pony tot training voor wedstrijdruiters: hier vindt elke liefhebber zijn plek.",
+      's1-l':"Ruime boxen",'s2-l':"Binnen- & buitenpistes",'s3-l':"Ruiterpaden in bos & heide",
+      'g-eye':"Voor wie wij er zijn",'g-title':"Drie deuren, één domein.",
+      'g-intro':"Elke bezoeker volgt zijn eigen pad door St. Hubert. Kies uw ingang en ontdek wat de club voor u betekent.",
+      'g1-t':"Private members",'g1-p':"Vol pension in alle rust, ruime buitenstallingen en persoonlijke begeleiding voor u en uw paard.",'g1-l':"Ontdek het membership",
+      'g2-t':"Professionele ruiters",'g2-p':"Training, wedstrijdbegeleiding en faciliteiten op niveau — voor wie de sport ernstig neemt.",'g2-l':"Voor professionals",
+      'g3-t':"Veilingen",'g3-p':"Exclusieve paardenveilingen in een uniek kader, met internationale allure en Kempense gastvrijheid.",'g3-l':"Bekijk de veilingen",
+      'ht-eye':"Onze historie",'ht-lede':"\u201cEen rijke geschiedenis, geworteld in de bossen van Hoogboom — van familiemanege tot horse & country club.\u201d",'ht-btn':"Ontdek de historie",
+      'st1':"Het bos van Hoogboom",'st2':"Voor de veiling",'st3':"Training in de piste",
+      'f1-eye':"De faciliteiten",'f1-t':"Rijden in elk seizoen.",
+      'f1-p':"Twee binnenpistes en twee buitenpistes, 85 ruime boxen en uitgestrekte weides — een indrukwekkend geheel waar paard en ruiter het hele jaar door terechtkunnen.",'f1-l':"Bekijk het domein",
+      'f2-eye':"De heide als achtertuin",'f2-t':"Urenlang te paard door de natuur.",
+      'f2-p':"Door de nabijheid van de Kalmthoutse heide en het militair domein maakt u vanaf de staldeur urenlange tochten door een van de mooiste natuurgebieden van Vlaanderen.",'f2-l':"Ontdek de routes",
+      'f3-eye':"De bistro",'f3-t':"Nagenieten in het groen.",
+      'f3-p':"Na een les, training of tocht schuift u aan in de bistro — een warme plek om na te praten, met een hapje en een drankje, midden in de rust van het domein.",'f3-l':"Bekijk de bistro",
+      'q-lede':"\u201cHier lijkt de tijd trager te gaan. Mijn paard staat er beter dan ooit — en ik kom er zelf óók tot rust.\u201d",'q-who':"— Een van onze members",
+      'a-eye':"Op het domein",'a-title':"Komende veilingen & evenementen",'a-btn':"Volledige agenda",
+      'a1-d':"Zat<b>04</b>Juli",'a1-t':"Zomerveiling — exclusieve collectie sportpaarden",'a1-p':"Internationale veiling met bezichtiging vanaf 14u, veiling vanaf 19u.",'a1-pill':"Veiling",
+      'a2-d':"Woe<b>15</b>Juli",'a2-t':"Open lesdag — kennismaken met de club",'a2-p':"Proeflessen voor jong en oud, rondleiding over het domein.",'a2-pill':"Open dag",
+      'a3-d':"Zat<b>22</b>Aug",'a3-t':"Clubwedstrijd dressuur",'a3-p':"Voor members en genodigden, met aansluitend receptie in de bistro.",'a3-pill':"Wedstrijd",
+      'b-eye':"Word lid van de club",'b-title':"Uw paard verdient St. Hubert.",
+      'b-p':"Plan een bezoek aan het domein en ontdek wat een membership voor u en uw paard kan betekenen.",'b-cta2':"Plan een bezoek",
+      'ft-tag':"Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.",
+      'ft-h1':"Bezoek ons",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België",'ft-h2':"Contact",
+      'ft-open':"Dagelijks geopend<br>09:30 – 22:00",'ft-h3':"De club",
+      'ft-l1':"Private members",'ft-l2':"Professionele ruiters",'ft-l5':"Agenda & events",
+      'ft-priv':"NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy & voorwaarden",
+      'ck-txt':"Deze website gebruikt enkel functionele cookies — om uw taal- en weergavevoorkeuren te onthouden. Geen tracking.",'ck-btn':"Begrepen"},
+  fr:{'m1':"Le club",'m2':"Membres",'m3':"Ventes",'m4':"Histoire",'m5':"Agenda",'m6':"Contact",'cta':"Devenir membre",
       'h-eye':"Écuries de luxe au cœur vert d'Anvers",
-      'h-title':'Une oasis de calme, pour cheval et cavalier.',
+      'h-title':"Une oasis de calme, pour cheval et cavalier.",
       'h-sub':"St. Hubert est un horse & country club en bordure de la lande de Kalmthout — où charme rustique et confort contemporain se rencontrent.",
-      'h-cta1':'Découvrir le club','h-cta2':'Voir les ventes','h-scroll':'Défiler'},
-  en:{m1:'The club',m2:'Members',m3:'Auctions',m4:'History',m5:'Calendar',m6:'Contact',cta:'Become a member',
-      'h-eye':'Luxury stables in the green heart of Antwerp',
-      'h-title':'An oasis of calm, for horse and rider.',
-      'h-sub':'St. Hubert is a horse & country club on the edge of the Kalmthout heath — where rustic charm meets contemporary comfort.',
-      'h-cta1':'Discover the club','h-cta2':'View the auctions','h-scroll':'Scroll'}
+      'h-cta1':"Découvrir le club",'h-cta2':"Voir les ventes",'h-scroll':"Défiler",
+      'i-eye':"Bienvenue sur le domaine",'i-title':"Charme rustique,<br>confort contemporain.",
+      'i-lede':"Sur la Bosdreef à Hoogboom, en pleine verdure, s'étend un domaine où le temps semble ralentir.",
+      'i-p1':"St. Hubert allie une infrastructure impressionnante au calme des bois et de la lande. Des boxes spacieux et des prairies, des pistes intérieures et extérieures, et une équipe qui assure un accompagnement personnalisé — à tout âge, à tout niveau.",
+      'i-p2':"De la pension complète pour chevaux et poneys à l'entraînement des cavaliers de compétition : chaque passionné y trouve sa place.",
+      's1-l':"Boxes spacieux",'s2-l':"Pistes intérieures & extérieures",'s3-l':"Sentiers équestres en bois & lande",
+      'g-eye':"Pour qui nous sommes là",'g-title':"Trois portes, un domaine.",
+      'g-intro':"Chaque visiteur suit son propre chemin à travers St. Hubert. Choisissez votre entrée et découvrez ce que le club peut vous offrir.",
+      'g1-t':"Membres privés",'g1-p':"Pension complète en toute quiétude, vastes installations extérieures et accompagnement personnalisé pour vous et votre cheval.",'g1-l':"Découvrez le membership",
+      'g2-t':"Cavaliers professionnels",'g2-p':"Entraînement, encadrement en compétition et installations de haut niveau — pour qui prend le sport au sérieux.",'g2-l':"Pour les professionnels",
+      'g3-t':"Ventes aux enchères",'g3-p':"Des ventes de chevaux exclusives dans un cadre unique, à l'allure internationale et à l'hospitalité campinoise.",'g3-l':"Voir les ventes",
+      'ht-eye':"Notre histoire",'ht-lede':"« Une riche histoire, enracinée dans les bois de Hoogboom — du manège familial au horse & country club. »",'ht-btn':"Découvrez l'histoire",
+      'st1':"Les bois de Hoogboom",'st2':"Avant la vente",'st3':"Entraînement en piste",
+      'f1-eye':"Les installations",'f1-t':"Monter en toute saison.",
+      'f1-p':"Deux pistes intérieures et deux pistes extérieures, 85 boxes spacieux et de vastes prairies — un ensemble impressionnant où cheval et cavalier sont accueillis toute l'année.",'f1-l':"Découvrez le domaine",
+      'f2-eye':"La lande pour jardin",'f2-t':"Des heures à cheval en pleine nature.",
+      'f2-p':"Grâce à la proximité de la lande de Kalmthout et du domaine militaire, vous partez depuis l'écurie pour de longues randonnées à travers l'une des plus belles réserves naturelles de Flandre.",'f2-l':"Découvrez les itinéraires",
+      'f3-eye':"Le bistro",'f3-t':"Prolonger le plaisir au vert.",
+      'f3-p':"Après une leçon, un entraînement ou une randonnée, installez-vous au bistro — un lieu chaleureux pour prolonger le moment, autour d'un verre et d'une bouchée, au cœur du calme du domaine.",'f3-l':"Découvrez le bistro",
+      'q-lede':"« Ici, le temps semble ralentir. Mon cheval ne s'est jamais senti aussi bien — et moi aussi, j'y trouve la sérénité. »",'q-who':"— L'un de nos membres",
+      'a-eye':"Sur le domaine",'a-title':"Prochaines ventes & événements",'a-btn':"Agenda complet",
+      'a1-d':"Sam<b>04</b>Juil",'a1-t':"Vente d'été — collection exclusive de chevaux de sport",'a1-p':"Vente internationale, visite dès 14 h, vente dès 19 h.",'a1-pill':"Vente",
+      'a2-d':"Mer<b>15</b>Juil",'a2-t':"Journée portes ouvertes — découvrez le club",'a2-p':"Leçons d'essai pour petits et grands, visite guidée du domaine.",'a2-pill':"Portes ouvertes",
+      'a3-d':"Sam<b>22</b>Août",'a3-t':"Concours de dressage du club",'a3-p':"Pour les membres et leurs invités, suivi d'une réception au bistro.",'a3-pill':"Concours",
+      'b-eye':"Devenez membre du club",'b-title':"Votre cheval mérite St. Hubert.",
+      'b-p':"Planifiez une visite du domaine et découvrez ce qu'un membership peut signifier pour vous et votre cheval.",'b-cta2':"Planifiez une visite",
+      'ft-tag':"Une oasis de calme au cœur vert d'Anvers — pour le cheval, le cavalier et le passionné.",
+      'ft-h1':"Visitez-nous",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgique",'ft-h2':"Contact",
+      'ft-open':"Ouvert tous les jours<br>09 h 30 – 22 h 00",'ft-h3':"Le club",
+      'ft-l1':"Membres privés",'ft-l2':"Cavaliers professionnels",'ft-l5':"Agenda & événements",
+      'ft-priv':"NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Confidentialité & conditions",
+      'ck-txt':"Ce site n'utilise que des cookies fonctionnels — pour mémoriser vos préférences de langue et d'affichage. Aucun traçage.",'ck-btn':"Compris"},
+  en:{'m1':"The club",'m2':"Members",'m3':"Auctions",'m4':"History",'m5':"Calendar",'m6':"Contact",'cta':"Become a member",
+      'h-eye':"Luxury stables in the green heart of Antwerp",
+      'h-title':"An oasis of calm, for horse and rider.",
+      'h-sub':"St. Hubert is a horse & country club on the edge of the Kalmthout heath — where rustic charm meets contemporary comfort.",
+      'h-cta1':"Discover the club",'h-cta2':"View the auctions",'h-scroll':"Scroll",
+      'i-eye':"Welcome to the estate",'i-title':"Rustic charm,<br>contemporary comfort.",
+      'i-lede':"On the Bosdreef in Hoogboom, surrounded by greenery, lies an estate where time seems to slow down.",
+      'i-p1':"St. Hubert combines impressive facilities with the calm of woods and heathland. Spacious stables and pastures, indoor and outdoor arenas, and a team providing personal guidance — for every age and every level.",
+      'i-p2':"From full board for horses and ponies to training for competition riders: every enthusiast finds their place here.",
+      's1-l':"Spacious stables",'s2-l':"Indoor & outdoor arenas",'s3-l':"Bridle paths through woods & heath",
+      'g-eye':"Who we are here for",'g-title':"Three doors, one estate.",
+      'g-intro':"Every visitor follows their own path through St. Hubert. Choose your entrance and discover what the club has to offer.",
+      'g1-t':"Private members",'g1-p':"Full board in complete tranquillity, spacious outdoor stabling and personal guidance for you and your horse.",'g1-l':"Discover membership",
+      'g2-t':"Professional riders",'g2-p':"Training, competition support and top-level facilities — for those who take the sport seriously.",'g2-l':"For professionals",
+      'g3-t':"Auctions",'g3-p':"Exclusive horse auctions in a unique setting, with international allure and Kempen hospitality.",'g3-l':"View the auctions",
+      'ht-eye':"Our history",'ht-lede':"\u201cA rich history, rooted in the woods of Hoogboom — from family riding school to horse & country club.\u201d",'ht-btn':"Discover our history",
+      'st1':"The woods of Hoogboom",'st2':"Before the auction",'st3':"Training in the arena",
+      'f1-eye':"The facilities",'f1-t':"Riding in every season.",
+      'f1-p':"Two indoor and two outdoor arenas, 85 spacious stables and extensive pastures — an impressive whole where horse and rider are welcome all year round.",'f1-l':"View the estate",
+      'f2-eye':"The heath as your back garden",'f2-t':"Hours on horseback through nature.",
+      'f2-p':"With the Kalmthout heath and the military domain close by, you can set off from the stable door on hours-long rides through one of Flanders' most beautiful nature reserves.",'f2-l':"Discover the trails",
+      'f3-eye':"The bistro",'f3-t':"Unwind in the green.",
+      'f3-p':"After a lesson, training session or ride, take a seat in the bistro — a warm place to talk it over with a bite and a drink, amid the calm of the estate.",'f3-l':"Visit the bistro",
+      'q-lede':"\u201cTime seems to slow down here. My horse has never been better — and I find peace here myself too.\u201d",'q-who':"— One of our members",
+      'a-eye':"On the estate",'a-title':"Upcoming auctions & events",'a-btn':"Full calendar",
+      'a1-d':"Sat<b>04</b>July",'a1-t':"Summer auction — exclusive collection of sport horses",'a1-p':"International auction; viewing from 2 pm, auction from 7 pm.",'a1-pill':"Auction",
+      'a2-d':"Wed<b>15</b>July",'a2-t':"Open lesson day — get to know the club",'a2-p':"Trial lessons for young and old, guided tour of the estate.",'a2-pill':"Open day",
+      'a3-d':"Sat<b>22</b>Aug",'a3-t':"Club dressage competition",'a3-p':"For members and guests, followed by a reception in the bistro.",'a3-pill':"Competition",
+      'b-eye':"Join the club",'b-title':"Your horse deserves St. Hubert.",
+      'b-p':"Plan a visit to the estate and discover what membership can mean for you and your horse.",'b-cta2':"Plan a visit",
+      'ft-tag':"An oasis of calm in the green heart of Antwerp — for horse, rider and enthusiast.",
+      'ft-h1':"Visit us",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgium",'ft-h2':"Contact",
+      'ft-open':"Open daily<br>09:30 – 22:00",'ft-h3':"The club",
+      'ft-l1':"Private members",'ft-l2':"Professional riders",'ft-l5':"Calendar & events",
+      'ft-priv':"NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy & terms",
+      'ck-txt':"This website only uses functional cookies — to remember your language and display preferences. No tracking.",'ck-btn':"Got it"}
 };
 function zetTaal(code){
   const t = i18n[code]; if(!t) return;
   document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('act', x.dataset.lang===code));
-  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.innerHTML=t[k]; });
+  if(t['pg-title']) document.title = t['pg-title'];
   document.documentElement.lang = code;
   try{ localStorage.setItem('sh-lang', code); }catch(e){}
 }

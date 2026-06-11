@@ -211,6 +211,28 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
   .nav-cta{display:none}
 }
 
+/* cookie-melding (subtiel) + EWVO-links */
+.cookie{
+  position:fixed;right:18px;bottom:18px;z-index:90;max-width:330px;
+  background:var(--groen-diep);color:rgba(244,241,233,.85);
+  border:1px solid rgba(185,152,95,.4);box-shadow:0 18px 50px rgba(15,23,18,.4);
+  padding:18px 20px;font-size:13px;line-height:1.6;
+  opacity:0;transform:translateY(14px);pointer-events:none;
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);
+}
+.cookie.aan{opacity:1;transform:none;pointer-events:auto}
+.cookie p{margin:0 0 12px}
+.cookie button{
+  background:none;border:1px solid var(--messing);color:var(--messing);font:inherit;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  padding:8px 18px;cursor:pointer;transition:background .3s,color .3s;
+}
+.cookie button:hover{background:var(--messing);color:var(--groen-diep)}
+.foot-bottom a{color:inherit;border-bottom:1px solid rgba(185,152,95,.45);padding-bottom:1px;transition:color .3s,border-color .3s}
+.foot-bottom a:hover{color:var(--messing);border-color:var(--messing)}
+.concept-badge a{color:var(--cognac);border-bottom:1px solid rgba(138,90,51,.4);transition:border-color .3s}
+.concept-badge a:hover{border-color:var(--cognac)}
+
 /* mobiel */
 @media (max-width:980px){
   .tl-rail,.tl-fill{left:24px}
@@ -228,7 +250,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
   .topbar .info span:last-child{display:none}
   #preloader svg{width:96px}
 }
-@media (max-width:560px){.foot-grid{grid-template-columns:1fr}.topbar .info{display:none}}
+@media (max-width:560px){.foot-grid{grid-template-columns:1fr}.topbar .info{display:none}.cookie{left:14px;right:14px;bottom:66px;max-width:none}}
 
 /* reduced motion: álles uit, content direct zichtbaar */
 @media (prefers-reduced-motion:reduce){
@@ -386,7 +408,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 
 <section class="h-intro">
   <div class="wrap rv">
-    <p class="lede">“Meer dan vijftig jaar nadat de eerste paarden hun intrek namen op het domein, blijft St. Hubert een plaats waar traditie en toekomst elkaar ontmoeten.”</p>
+    <p class="lede" data-i18n="hi-lede">“Meer dan vijftig jaar nadat de eerste paarden hun intrek namen op het domein, blijft St. Hubert een plaats waar traditie en toekomst elkaar ontmoeten.”</p>
     <div class="rule"></div>
   </div>
 </section>
@@ -399,134 +421,134 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
     <div class="tl-item rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">De olympische oorsprong</div>
+        <div class="eyebrow" data-i18n="t1-eye">De olympische oorsprong</div>
         <div class="tl-year">1920</div>
-        <h3>Hoogboom op het wereldtoneel</h3>
-        <p>Tijdens de Olympische Zomerspelen van Antwerpen worden de terreinen van de Hoogboom Country Club gebruikt voor olympische eventing en diverse schietdisciplines. Hoogboom verwerft een blijvende plaats in de internationale sportgeschiedenis — een traditie die later bijdraagt aan de reputatie van Kapellen als hippische gemeente.</p>
+        <h3 data-i18n="t1-t">Hoogboom op het wereldtoneel</h3>
+        <p data-i18n="t1-p">Tijdens de Olympische Zomerspelen van Antwerpen worden de terreinen van de Hoogboom Country Club gebruikt voor olympische eventing en diverse schietdisciplines. Hoogboom verwerft een blijvende plaats in de internationale sportgeschiedenis — een traditie die later bijdraagt aan de reputatie van Kapellen als hippische gemeente.</p>
       </div>
     </div>
 
     <div class="tl-item rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Groeiende paardencultuur</div>
+        <div class="eyebrow" data-i18n="t2-eye">Groeiende paardencultuur</div>
         <div class="tl-year">1920–1950</div>
-        <h3>Bossen, zandwegen en paarden</h3>
-        <p>De omgeving van Hoogboom en Kapellen staat bekend om haar landelijke karakter. Paarden spelen een hoofdrol in landbouw, bosbeheer en recreatie. Na de Tweede Wereldoorlog groeit de recreatieve en sportieve paardensport sterk en ontwikkelt de regio zich tot een aantrekkelijke plek voor maneges, fokkers en liefhebbers.</p>
+        <h3 data-i18n="t2-t">Bossen, zandwegen en paarden</h3>
+        <p data-i18n="t2-p">De omgeving van Hoogboom en Kapellen staat bekend om haar landelijke karakter. Paarden spelen een hoofdrol in landbouw, bosbeheer en recreatie. Na de Tweede Wereldoorlog groeit de recreatieve en sportieve paardensport sterk en ontwikkelt de regio zich tot een aantrekkelijke plek voor maneges, fokkers en liefhebbers.</p>
       </div>
     </div>
 
     <div class="tl-item rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">De fundering</div>
-        <div class="tl-year">Jaren '60</div>
-        <h3>De basis voor een hippisch centrum</h3>
-        <p>De eerste plannen ontstaan om in Hoogboom een professionele paardenaccommodatie uit te bouwen. De ligging, de rustige omgeving en de bestaande hippische traditie maken van de locatie een ideale plaats voor een manege met nationale ambities.</p>
+        <div class="eyebrow" data-i18n="t3-eye">De fundering</div>
+        <div class="tl-year" data-i18n="t3-y">Jaren '60</div>
+        <h3 data-i18n="t3-t">De basis voor een hippisch centrum</h3>
+        <p data-i18n="t3-p">De eerste plannen ontstaan om in Hoogboom een professionele paardenaccommodatie uit te bouwen. De ligging, de rustige omgeving en de bestaande hippische traditie maken van de locatie een ideale plaats voor een manege met nationale ambities.</p>
       </div>
     </div>
 
     <div class="tl-item hoogtepunt rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Het tijdperk Van Paesschen</div>
-        <div class="tl-year">Jaren '70</div>
-        <h3>De oprichting van Paardenstal Sint Hubert</h3>
-        <p>Het domein krijgt zijn bekende naam: <strong>Paardenstal Sint Hubert</strong>. Onder leiding van de familie Van Paesschen groeit de accommodatie uit tot een van de modernste hippische centra van Vlaanderen.</p>
-        <span class="feiten">Ruime stallen · binnen- en buitenpistes · springterreinen<br>trainingsfaciliteiten · accommodatie voor ruiters en paarden</span>
+        <div class="eyebrow" data-i18n="t4-eye">Het tijdperk Van Paesschen</div>
+        <div class="tl-year" data-i18n="t4-y">Jaren '70</div>
+        <h3 data-i18n="t4-t">De oprichting van Paardenstal Sint Hubert</h3>
+        <p data-i18n="t4-p">Het domein krijgt zijn bekende naam: <strong>Paardenstal Sint Hubert</strong>. Onder leiding van de familie Van Paesschen groeit de accommodatie uit tot een van de modernste hippische centra van Vlaanderen.</p>
+        <span class="feiten" data-i18n="t4-f">Ruime stallen · binnen- en buitenpistes · springterreinen<br>trainingsfaciliteiten · accommodatie voor ruiters en paarden</span>
       </div>
     </div>
 
     <figure class="tl-foto rv">
       <div class="ph crt"><img src="img/fac-pistes.jpg" alt="De gouden jaren" data-parallax loading="lazy" decoding="async"></div>
-      <figcaption>De gouden periode van Sint Hubert</figcaption>
+      <figcaption data-i18n="fc1">De gouden periode van Sint Hubert</figcaption>
     </figure>
 
     <div class="tl-item rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Internationale doorbraak</div>
-        <div class="tl-year">Jaren '80</div>
-        <h3>De gouden periode</h3>
-        <p>Sint Hubert organiseert talrijke nationale en internationale springwedstrijden en wordt een vaste waarde op de Belgische hippische kalender. Ruiters uit België, Nederland, Duitsland en Frankrijk vinden hun weg naar Hoogboom.</p>
-        <p>Ook de fokkerij krijgt internationale uitstraling — onder meer door de BWP-goedgekeurde hengst <strong>Landjuweel St Hubert</strong>, die de naam wereldwijd bekend maakt.</p>
+        <div class="eyebrow" data-i18n="t5-eye">Internationale doorbraak</div>
+        <div class="tl-year" data-i18n="t5-y">Jaren '80</div>
+        <h3 data-i18n="t5-t">De gouden periode</h3>
+        <p data-i18n="t5-p">Sint Hubert organiseert talrijke nationale en internationale springwedstrijden en wordt een vaste waarde op de Belgische hippische kalender. Ruiters uit België, Nederland, Duitsland en Frankrijk vinden hun weg naar Hoogboom.</p>
+        <p data-i18n="t5-p2">Ook de fokkerij krijgt internationale uitstraling — onder meer door de BWP-goedgekeurde hengst <strong>Landjuweel St Hubert</strong>, die de naam wereldwijd bekend maakt.</p>
       </div>
     </div>
 
     <div class="tl-item rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Een gevestigde waarde</div>
-        <div class="tl-year">Jaren '90</div>
-        <h3>Verbreding van het aanbod</h3>
-        <p>Naast internationale springwedstrijden komen jeugdwedstrijden, opleidingsdagen, pensionstalling, recreatieve paardensport en fokkerijactiviteiten steeds nadrukkelijker op de voorgrond.</p>
+        <div class="eyebrow" data-i18n="t6-eye">Een gevestigde waarde</div>
+        <div class="tl-year" data-i18n="t6-y">Jaren '90</div>
+        <h3 data-i18n="t6-t">Verbreding van het aanbod</h3>
+        <p data-i18n="t6-p">Naast internationale springwedstrijden komen jeugdwedstrijden, opleidingsdagen, pensionstalling, recreatieve paardensport en fokkerijactiviteiten steeds nadrukkelijker op de voorgrond.</p>
       </div>
     </div>
 
     <div class="tl-item rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Nieuwe handen</div>
+        <div class="eyebrow" data-i18n="t7-eye">Nieuwe handen</div>
         <div class="tl-year">1996</div>
-        <h3>De familie Knegevitch</h3>
-        <p>Er komt een einde aan de periode van de familie Van Paesschen. Het domein wordt overgenomen door de familie Knegevitch, die de accommodatie verder moderniseert en uitbreidt. De historische naam <strong>Sint Hubert</strong> blijft behouden.</p>
-        <p>Daarnaast verwierf het domein grote bekendheid als opnamelocatie van de populaire Vlaamse jeugdserie <strong>Amika</strong> van Studio 100. De manege en het domein vormden het decor van 161 afleveringen, verspreid over vier seizoenen, die oorspronkelijk werden uitgezonden van 10 november 2008 tot en met 4 november 2011. De serie groeide uit tot een van de bekendste paardenreeksen in Vlaanderen en Nederland en geniet ook vandaag nog een grote populariteit dankzij heruitzendingen en streaming.</p>
+        <h3 data-i18n="t7-t">De familie Knegevitch</h3>
+        <p data-i18n="t7-p">Er komt een einde aan de periode van de familie Van Paesschen. Het domein wordt overgenomen door de familie Knegevitch, die de accommodatie verder moderniseert en uitbreidt. De historische naam <strong>Sint Hubert</strong> blijft behouden.</p>
+        <p data-i18n="t7-p2">Daarnaast verwierf het domein grote bekendheid als opnamelocatie van de populaire Vlaamse jeugdserie <strong>Amika</strong> van Studio 100. De manege en het domein vormden het decor van 161 afleveringen, verspreid over vier seizoenen, die oorspronkelijk werden uitgezonden van 10 november 2008 tot en met 4 november 2011. De serie groeide uit tot een van de bekendste paardenreeksen in Vlaanderen en Nederland en geniet ook vandaag nog een grote populariteit dankzij heruitzendingen en streaming.</p>
       </div>
     </div>
 
     <div class="tl-item rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Een veelzijdig centrum</div>
+        <div class="eyebrow" data-i18n="t8-eye">Een veelzijdig centrum</div>
         <div class="tl-year">2000–2010</div>
-        <h3>Horse &amp; Country Club St. Hubert</h3>
-        <p>De accommodatie ontwikkelt zich tot een veelzijdig hippisch centrum: naast wedstrijdsport staan ponykampen, manegeactiviteiten, dressuur, pensionstalling, bedrijfsactiviteiten en evenementen centraal. Steeds vaker klinkt de naam <strong>Horse &amp; Country Club St. Hubert</strong>.</p>
+        <h3 data-i18n="t8-t">Horse &amp; Country Club St. Hubert</h3>
+        <p data-i18n="t8-p">De accommodatie ontwikkelt zich tot een veelzijdig hippisch centrum: naast wedstrijdsport staan ponykampen, manegeactiviteiten, dressuur, pensionstalling, bedrijfsactiviteiten en evenementen centraal. Steeds vaker klinkt de naam <strong>Horse &amp; Country Club St. Hubert</strong>.</p>
       </div>
     </div>
 
     <div class="tl-item hoogtepunt rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Europees toneel</div>
+        <div class="eyebrow" data-i18n="t9-eye">Europees toneel</div>
         <div class="tl-year">2014</div>
-        <h3>EK Springen voor Veteranen</h3>
-        <p>Sint Hubert organiseert het Europees Kampioenschap Springen voor Veteranen en bevestigt opnieuw haar internationale reputatie als organisator van hippische topsportevenementen.</p>
+        <h3 data-i18n="t9-t">EK Springen voor Veteranen</h3>
+        <p data-i18n="t9-p">Sint Hubert organiseert het Europees Kampioenschap Springen voor Veteranen en bevestigt opnieuw haar internationale reputatie als organisator van hippische topsportevenementen.</p>
       </div>
     </div>
 
     <figure class="tl-foto rechts rv">
       <div class="ph crt"><img src="img/gate-veiling.jpg" alt="Paardenwelzijn" data-parallax loading="lazy" decoding="async"></div>
-      <figcaption>Paardenwelzijn als erezaak</figcaption>
+      <figcaption data-i18n="fc2">Paardenwelzijn als erezaak</figcaption>
     </figure>
 
     <div class="tl-item rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Innovatie &amp; welzijn</div>
+        <div class="eyebrow" data-i18n="t10-eye">Innovatie &amp; welzijn</div>
         <div class="tl-year">2018</div>
-        <h3>Een pensioen voor manegepaarden</h3>
-        <p>Sint Hubert krijgt bekendheid door initiatieven rond paardenwelzijn. Er wordt een pensioenfonds opgericht voor manegepaarden, zodat paarden na hun sportieve carrière kunnen genieten van een rustige oude dag.</p>
+        <h3 data-i18n="t10-t">Een pensioen voor manegepaarden</h3>
+        <p data-i18n="t10-p">Sint Hubert krijgt bekendheid door initiatieven rond paardenwelzijn. Er wordt een pensioenfonds opgericht voor manegepaarden, zodat paarden na hun sportieve carrière kunnen genieten van een rustige oude dag.</p>
       </div>
     </div>
 
     <div class="tl-item rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Overgangsperiode</div>
+        <div class="eyebrow" data-i18n="t11-eye">Overgangsperiode</div>
         <div class="tl-year">2021</div>
-        <h3>Stephex Group</h3>
-        <p>De accommodatie wordt overgenomen door Stephex Group. Er worden plannen ontwikkeld om de locatie verder te moderniseren en uit te bouwen. Hoewel niet alle projecten worden gerealiseerd, betekent deze periode een belangrijke overgang naar een nieuwe toekomst.</p>
+        <h3 data-i18n="t11-t">Stephex Group</h3>
+        <p data-i18n="t11-p">De accommodatie wordt overgenomen door Stephex Group. Er worden plannen ontwikkeld om de locatie verder te moderniseren en uit te bouwen. Hoewel niet alle projecten worden gerealiseerd, betekent deze periode een belangrijke overgang naar een nieuwe toekomst.</p>
       </div>
     </div>
 
     <div class="tl-item hoogtepunt rv">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="eyebrow">Een nieuw hoofdstuk</div>
+        <div class="eyebrow" data-i18n="t12-eye">Een nieuw hoofdstuk</div>
         <div class="tl-year">2024</div>
-        <h3>De familie Ponzo Dieu-de Pundert</h3>
-        <p>Vanaf 1 januari 2024 komt het domein in handen van de familie Ponzo Dieu-de Pundert, die bewust kiest voor het behoud van de rijke geschiedenis en tegelijk investeert in een toekomstgerichte hippische onderneming.</p>
-        <p>St. Hubert wordt verder ontwikkeld als exclusief hippisch centrum, met een sterke focus op dressuur, opleiding, training, internationale samenwerking en kwaliteitsvolle sportpaarden.</p>
+        <h3 data-i18n="t12-t">De familie Ponzo Dieu-de Pundert</h3>
+        <p data-i18n="t12-p">Vanaf 1 januari 2024 komt het domein in handen van de familie Ponzo Dieu-de Pundert, die bewust kiest voor het behoud van de rijke geschiedenis en tegelijk investeert in een toekomstgerichte hippische onderneming.</p>
+        <p data-i18n="t12-p2">St. Hubert wordt verder ontwikkeld als exclusief hippisch centrum, met een sterke focus op dressuur, opleiding, training, internationale samenwerking en kwaliteitsvolle sportpaarden.</p>
       </div>
     </div>
 
@@ -535,38 +557,38 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 
 <section class="namen">
   <div class="wrap">
-    <div class="eyebrow rv">De evolutie van de naam</div>
-    <h2 class="rv">Eén domein, vier namen — één verhaal.</h2>
+    <div class="eyebrow rv" data-i18n="n-eye">De evolutie van de naam</div>
+    <h2 class="rv" data-i18n="n-title">Eén domein, vier namen — één verhaal.</h2>
     <div class="naam-stepper">
-      <div class="naam-stap rv"><span class="nr">I</span><div class="naam">Paardenstal Sint Hubert</div><div class="tijd">Jaren 1970</div></div>
+      <div class="naam-stap rv"><span class="nr">I</span><div class="naam">Paardenstal Sint Hubert</div><div class="tijd" data-i18n="n1-tijd">Jaren 1970</div></div>
       <div class="naam-stap rv"><span class="nr">II</span><div class="naam">Manege Sint Hubert</div><div class="tijd">&nbsp;</div></div>
       <div class="naam-stap rv"><span class="nr">III</span><div class="naam">Horse &amp; Country Club St. Hubert</div><div class="tijd">2000–2023</div></div>
-      <div class="naam-stap rv"><span class="nr">IV</span><div class="naam">St. Hubert Horse &amp; Country Club</div><div class="tijd">Vanaf 2024</div></div>
+      <div class="naam-stap rv"><span class="nr">IV</span><div class="naam">St. Hubert Horse &amp; Country Club</div><div class="tijd" data-i18n="n4-tijd">Vanaf 2024</div></div>
     </div>
   </div>
 </section>
 
 <section class="eigenaars">
   <div class="wrap">
-    <div class="eyebrow rv">Eigenaars door de jaren</div>
-    <h2 class="rv">De families achter het domein.</h2>
+    <div class="eyebrow rv" data-i18n="e-eye">Eigenaars door de jaren</div>
+    <h2 class="rv" data-i18n="e-title">De families achter het domein.</h2>
     <div class="eig-tabel rv">
-      <div class="eig-rij"><span class="periode">ca. 1970 – 1996</span><span class="wie">Familie Van Paesschen</span><span class="rol">Oprichters</span></div>
-      <div class="eig-rij"><span class="periode">1996 – 2021</span><span class="wie">Familie Knegevitch</span><span class="rol">Modernisering &amp; decor Amika &amp; Studio100</span></div>
-      <div class="eig-rij"><span class="periode">2021 – 2023</span><span class="wie">Stephex Group</span><span class="rol">Overgangsperiode</span></div>
-      <div class="eig-rij"><span class="periode">Vanaf 2024</span><span class="wie">Familie Ponzo Dieu-de Pundert</span><span class="rol">Een nieuw hoofdstuk</span></div>
+      <div class="eig-rij"><span class="periode" data-i18n="e1-per">ca. 1970 – 1996</span><span class="wie">Familie Van Paesschen</span><span class="rol" data-i18n="e1-rol">Oprichters</span></div>
+      <div class="eig-rij"><span class="periode">1996 – 2021</span><span class="wie">Familie Knegevitch</span><span class="rol" data-i18n="e2-rol">Modernisering &amp; decor Amika &amp; Studio100</span></div>
+      <div class="eig-rij"><span class="periode">2021 – 2023</span><span class="wie">Stephex Group</span><span class="rol" data-i18n="e3-rol">Overgangsperiode</span></div>
+      <div class="eig-rij"><span class="periode" data-i18n="e4-per">Vanaf 2024</span><span class="wie">Familie Ponzo Dieu-de Pundert</span><span class="rol" data-i18n="e4-rol">Een nieuw hoofdstuk</span></div>
     </div>
   </div>
 </section>
 
 <section class="slot">
   <div class="wrap rv">
-    <div class="eyebrow">Een levende geschiedenis</div>
-    <p class="lede">“Met respect voor het verleden en een duidelijke blik op de toekomst wordt verder gebouwd aan een geschiedenis die al meer dan een eeuw teruggaat.”</p>
-    <p class="txt">Vandaag blijft St. Hubert trouw aan zijn oorspronkelijke missie: een plek waar paardenwelzijn, sport, opleiding en gastvrijheid centraal staan.</p>
+    <div class="eyebrow" data-i18n="sl-eye">Een levende geschiedenis</div>
+    <p class="lede" data-i18n="sl-lede">“Met respect voor het verleden en een duidelijke blik op de toekomst wordt verder gebouwd aan een geschiedenis die al meer dan een eeuw teruggaat.”</p>
+    <p class="txt" data-i18n="sl-p">Vandaag blijft St. Hubert trouw aan zijn oorspronkelijke missie: een plek waar paardenwelzijn, sport, opleiding en gastvrijheid centraal staan.</p>
     <div class="cta-row">
-      <a href="index.html#word-member" class="btn solid">Word member</a>
-      <a href="index.html" class="btn">Terug naar home</a>
+      <a href="index.html#word-member" class="btn solid" data-i18n="cta">Word member</a>
+      <a href="index.html" class="btn" data-i18n="sl-cta2">Terug naar home</a>
     </div>
   </div>
 </section>
@@ -577,21 +599,26 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
       <div>
         <svg class="seal" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
         <div class="brandname">St. Hubert<br>Horse &amp; Country Club</div>
-        <p style="margin-top:16px;font-size:13.5px;max-width:260px">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
+        <p style="margin-top:16px;font-size:13.5px;max-width:260px" data-i18n="ft-tag">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
       </div>
-      <div><h5>Bezoek ons</h5><p>Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</p></div>
-      <div><h5>Contact</h5><a href="tel:+3236058790">+32 3 605 87 90</a><a href="mailto:info@sinthubert.com">info@sinthubert.com</a><p style="margin-top:14px;font-size:13px">Dagelijks geopend<br>09:30 – 22:00</p></div>
-      <div><h5>De club</h5><a href="index.html#members">Private members</a><a href="index.html#members">Professionele ruiters</a><a href="index.html#veilingen">Veilingen</a><a href="historie.html">Historie</a><a href="index.html#agenda">Agenda &amp; events</a></div>
+      <div><h5 data-i18n="ft-h1">Bezoek ons</h5><p data-i18n="ft-adres">Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</p></div>
+      <div><h5 data-i18n="ft-h2">Contact</h5><a href="tel:+3236058790">+32 3 605 87 90</a><a href="mailto:info@sinthubert.com">info@sinthubert.com</a><p style="margin-top:14px;font-size:13px" data-i18n="ft-open">Dagelijks geopend<br>09:30 – 22:00</p></div>
+      <div><h5 data-i18n="ft-h3">De club</h5><a href="index.html#members" data-i18n="ft-l1">Private members</a><a href="index.html#members" data-i18n="ft-l2">Professionele ruiters</a><a href="index.html#veilingen" data-i18n="m3">Veilingen</a><a href="historie.html" data-i18n="m4">Historie</a><a href="index.html#agenda" data-i18n="ft-l5">Agenda &amp; events</a></div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 St. Hubert Horse &amp; Country Club — Kapellen</span>
-      <span>NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy &amp; voorwaarden</span>
-      <span>Concept 01 · webdesign door EWVO</span>
+      <span data-i18n="ft-priv">NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy &amp; voorwaarden</span>
+      <span>Concept 01 · webdesign door <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a></span>
     </div>
   </div>
 </footer>
 
-<div class="concept-badge"><b>Concept 01</b> &nbsp;·&nbsp; EWVO × St. Hubert</div>
+<aside class="cookie" id="cookie" aria-label="Cookies">
+  <p data-i18n="ck-txt">Deze website gebruikt enkel functionele cookies — om uw taal- en weergavevoorkeuren te onthouden. Geen tracking.</p>
+  <button data-i18n="ck-btn">Begrepen</button>
+</aside>
+
+<div class="concept-badge"><b>Concept 01</b> &nbsp;·&nbsp; <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a> × St. Hubert</div>
 
 <script>
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -706,25 +733,176 @@ if(matchMedia('(pointer:fine)').matches && !reduced){
   });
 }
 
-/* meertaligheid — nav + paginahero (module uit de offerte) */
+/* subtiele cookie-melding — alleen functionele opslag, eenmalig */
+const ck = document.getElementById('cookie');
+if(ck){
+  let ckOk = false; try{ ckOk = !!localStorage.getItem('sh-cookies'); }catch(e){}
+  if(ckOk){ ck.remove(); }
+  else{
+    setTimeout(()=>ck.classList.add('aan'), reduced ? 800 : 2600);
+    ck.querySelector('button').addEventListener('click',()=>{
+      try{ localStorage.setItem('sh-cookies','1'); }catch(e){}
+      ck.classList.remove('aan');
+      setTimeout(()=>ck.remove(), 700);
+    });
+  }
+}
+
+/* meertaligheid — volledig drietalig */
 const i18n = {
-  nl:{m1:'De club',m2:'Members',m3:'Veilingen',m4:'Historie',m5:'Agenda',m6:'Contact',cta:'Word member',
-      'hh-eye':'Onze historie',
-      'hh-title':'Een eeuw hippische geschiedenis in Hoogboom.',
-      'hh-sub':'Van de olympische bossen van 1920 tot het St. Hubert van vandaag — één doorlopend verhaal van paarden, families en vakmanschap.'},
-  fr:{m1:'Le club',m2:'Membres',m3:'Ventes',m4:'Histoire',m5:'Agenda',m6:'Contact',cta:'Devenir membre',
-      'hh-eye':'Notre histoire',
-      'hh-title':"Un siècle d'histoire équestre à Hoogboom.",
-      'hh-sub':"Des bois olympiques de 1920 au St. Hubert d'aujourd'hui — une histoire continue de chevaux, de familles et de savoir-faire."},
-  en:{m1:'The club',m2:'Members',m3:'Auctions',m4:'History',m5:'Calendar',m6:'Contact',cta:'Become a member',
-      'hh-eye':'Our history',
-      'hh-title':'A century of equestrian history in Hoogboom.',
-      'hh-sub':"From the Olympic woods of 1920 to today's St. Hubert — one continuous story of horses, families and craftsmanship."}
+  nl:{'m1':"De club",'m2':"Members",'m3':"Veilingen",'m4':"Historie",'m5':"Agenda",'m6':"Contact",'cta':"Word member",
+      'pg-title':"Onze historie — St. Hubert Horse & Country Club",
+      'hh-eye':"Onze historie",'hh-title':"Een eeuw hippische geschiedenis in Hoogboom.",
+      'hh-sub':"Van de olympische bossen van 1920 tot het St. Hubert van vandaag — één doorlopend verhaal van paarden, families en vakmanschap.",
+      'hi-lede':"\u201cMeer dan vijftig jaar nadat de eerste paarden hun intrek namen op het domein, blijft St. Hubert een plaats waar traditie en toekomst elkaar ontmoeten.\u201d",
+      't1-eye':"De olympische oorsprong",'t1-t':"Hoogboom op het wereldtoneel",
+      't1-p':"Tijdens de Olympische Zomerspelen van Antwerpen worden de terreinen van de Hoogboom Country Club gebruikt voor olympische eventing en diverse schietdisciplines. Hoogboom verwerft een blijvende plaats in de internationale sportgeschiedenis — een traditie die later bijdraagt aan de reputatie van Kapellen als hippische gemeente.",
+      't2-eye':"Groeiende paardencultuur",'t2-t':"Bossen, zandwegen en paarden",
+      't2-p':"De omgeving van Hoogboom en Kapellen staat bekend om haar landelijke karakter. Paarden spelen een hoofdrol in landbouw, bosbeheer en recreatie. Na de Tweede Wereldoorlog groeit de recreatieve en sportieve paardensport sterk en ontwikkelt de regio zich tot een aantrekkelijke plek voor maneges, fokkers en liefhebbers.",
+      't3-eye':"De fundering",'t3-y':"Jaren '60",'t3-t':"De basis voor een hippisch centrum",
+      't3-p':"De eerste plannen ontstaan om in Hoogboom een professionele paardenaccommodatie uit te bouwen. De ligging, de rustige omgeving en de bestaande hippische traditie maken van de locatie een ideale plaats voor een manege met nationale ambities.",
+      't4-eye':"Het tijdperk Van Paesschen",'t4-y':"Jaren '70",'t4-t':"De oprichting van Paardenstal Sint Hubert",
+      't4-p':"Het domein krijgt zijn bekende naam: <strong>Paardenstal Sint Hubert</strong>. Onder leiding van de familie Van Paesschen groeit de accommodatie uit tot een van de modernste hippische centra van Vlaanderen.",
+      't4-f':"Ruime stallen · binnen- en buitenpistes · springterreinen<br>trainingsfaciliteiten · accommodatie voor ruiters en paarden",
+      'fc1':"De gouden periode van Sint Hubert",
+      't5-eye':"Internationale doorbraak",'t5-y':"Jaren '80",'t5-t':"De gouden periode",
+      't5-p':"Sint Hubert organiseert talrijke nationale en internationale springwedstrijden en wordt een vaste waarde op de Belgische hippische kalender. Ruiters uit België, Nederland, Duitsland en Frankrijk vinden hun weg naar Hoogboom.",
+      't5-p2':"Ook de fokkerij krijgt internationale uitstraling — onder meer door de BWP-goedgekeurde hengst <strong>Landjuweel St Hubert</strong>, die de naam wereldwijd bekend maakt.",
+      't6-eye':"Een gevestigde waarde",'t6-y':"Jaren '90",'t6-t':"Verbreding van het aanbod",
+      't6-p':"Naast internationale springwedstrijden komen jeugdwedstrijden, opleidingsdagen, pensionstalling, recreatieve paardensport en fokkerijactiviteiten steeds nadrukkelijker op de voorgrond.",
+      't7-eye':"Nieuwe handen",'t7-t':"De familie Knegevitch",
+      't7-p':"Er komt een einde aan de periode van de familie Van Paesschen. Het domein wordt overgenomen door de familie Knegevitch, die de accommodatie verder moderniseert en uitbreidt. De historische naam <strong>Sint Hubert</strong> blijft behouden.",
+      't7-p2':"Daarnaast verwierf het domein grote bekendheid als opnamelocatie van de populaire Vlaamse jeugdserie <strong>Amika</strong> van Studio 100. De manege en het domein vormden het decor van 161 afleveringen, verspreid over vier seizoenen, die oorspronkelijk werden uitgezonden van 10 november 2008 tot en met 4 november 2011. De serie groeide uit tot een van de bekendste paardenreeksen in Vlaanderen en Nederland en geniet ook vandaag nog een grote populariteit dankzij heruitzendingen en streaming.",
+      't8-eye':"Een veelzijdig centrum",'t8-t':"Horse & Country Club St. Hubert",
+      't8-p':"De accommodatie ontwikkelt zich tot een veelzijdig hippisch centrum: naast wedstrijdsport staan ponykampen, manegeactiviteiten, dressuur, pensionstalling, bedrijfsactiviteiten en evenementen centraal. Steeds vaker klinkt de naam <strong>Horse & Country Club St. Hubert</strong>.",
+      't9-eye':"Europees toneel",'t9-t':"EK Springen voor Veteranen",
+      't9-p':"Sint Hubert organiseert het Europees Kampioenschap Springen voor Veteranen en bevestigt opnieuw haar internationale reputatie als organisator van hippische topsportevenementen.",
+      'fc2':"Paardenwelzijn als erezaak",
+      't10-eye':"Innovatie & welzijn",'t10-t':"Een pensioen voor manegepaarden",
+      't10-p':"Sint Hubert krijgt bekendheid door initiatieven rond paardenwelzijn. Er wordt een pensioenfonds opgericht voor manegepaarden, zodat paarden na hun sportieve carrière kunnen genieten van een rustige oude dag.",
+      't11-eye':"Overgangsperiode",'t11-t':"Stephex Group",
+      't11-p':"De accommodatie wordt overgenomen door Stephex Group. Er worden plannen ontwikkeld om de locatie verder te moderniseren en uit te bouwen. Hoewel niet alle projecten worden gerealiseerd, betekent deze periode een belangrijke overgang naar een nieuwe toekomst.",
+      't12-eye':"Een nieuw hoofdstuk",'t12-t':"De familie Ponzo Dieu-de Pundert",
+      't12-p':"Vanaf 1 januari 2024 komt het domein in handen van de familie Ponzo Dieu-de Pundert, die bewust kiest voor het behoud van de rijke geschiedenis en tegelijk investeert in een toekomstgerichte hippische onderneming.",
+      't12-p2':"St. Hubert wordt verder ontwikkeld als exclusief hippisch centrum, met een sterke focus op dressuur, opleiding, training, internationale samenwerking en kwaliteitsvolle sportpaarden.",
+      'n-eye':"De evolutie van de naam",'n-title':"Eén domein, vier namen — één verhaal.",'n1-tijd':"Jaren 1970",'n4-tijd':"Vanaf 2024",
+      'e-eye':"Eigenaars door de jaren",'e-title':"De families achter het domein.",
+      'e1-per':"ca. 1970 – 1996",'e1-rol':"Oprichters",'e2-rol':"Modernisering & decor Amika & Studio100",
+      'e3-rol':"Overgangsperiode",'e4-per':"Vanaf 2024",'e4-rol':"Een nieuw hoofdstuk",
+      'sl-eye':"Een levende geschiedenis",
+      'sl-lede':"\u201cMet respect voor het verleden en een duidelijke blik op de toekomst wordt verder gebouwd aan een geschiedenis die al meer dan een eeuw teruggaat.\u201d",
+      'sl-p':"Vandaag blijft St. Hubert trouw aan zijn oorspronkelijke missie: een plek waar paardenwelzijn, sport, opleiding en gastvrijheid centraal staan.",
+      'sl-cta2':"Terug naar home",
+      'ft-tag':"Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.",
+      'ft-h1':"Bezoek ons",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België",'ft-h2':"Contact",
+      'ft-open':"Dagelijks geopend<br>09:30 – 22:00",'ft-h3':"De club",
+      'ft-l1':"Private members",'ft-l2':"Professionele ruiters",'ft-l5':"Agenda & events",
+      'ft-priv':"NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy & voorwaarden",
+      'ck-txt':"Deze website gebruikt enkel functionele cookies — om uw taal- en weergavevoorkeuren te onthouden. Geen tracking.",'ck-btn':"Begrepen"},
+  fr:{'m1':"Le club",'m2':"Membres",'m3':"Ventes",'m4':"Histoire",'m5':"Agenda",'m6':"Contact",'cta':"Devenir membre",
+      'pg-title':"Notre histoire — St. Hubert Horse & Country Club",
+      'hh-eye':"Notre histoire",'hh-title':"Un siècle d'histoire équestre à Hoogboom.",
+      'hh-sub':"Des bois olympiques de 1920 au St. Hubert d'aujourd'hui — une histoire continue de chevaux, de familles et de savoir-faire.",
+      'hi-lede':"« Plus de cinquante ans après l'arrivée des premiers chevaux sur le domaine, St. Hubert demeure un lieu où tradition et avenir se rencontrent. »",
+      't1-eye':"L'origine olympique",'t1-t':"Hoogboom sur la scène mondiale",
+      't1-p':"Lors des Jeux olympiques d'été d'Anvers, les terrains du Hoogboom Country Club accueillent le concours complet olympique et plusieurs disciplines de tir. Hoogboom s'inscrit durablement dans l'histoire du sport international — une tradition qui contribuera plus tard à la réputation équestre de Kapellen.",
+      't2-eye':"Une culture équestre grandissante",'t2-t':"Bois, chemins de sable et chevaux",
+      't2-p':"Les environs de Hoogboom et de Kapellen sont réputés pour leur caractère rural. Le cheval joue un rôle central dans l'agriculture, la gestion forestière et les loisirs. Après la Seconde Guerre mondiale, l'équitation récréative et sportive connaît un fort essor et la région devient un lieu prisé des manèges, des éleveurs et des passionnés.",
+      't3-eye':"Les fondations",'t3-y':"Années 60",'t3-t':"Les bases d'un centre équestre",
+      't3-p':"Les premiers projets visant à développer à Hoogboom une infrastructure équestre professionnelle voient le jour. La situation, le calme des environs et la tradition équestre existante font du site l'endroit idéal pour un manège aux ambitions nationales.",
+      't4-eye':"L'ère Van Paesschen",'t4-y':"Années 70",'t4-t':"La fondation de Paardenstal Sint Hubert",
+      't4-p':"Le domaine reçoit son nom emblématique : <strong>Paardenstal Sint Hubert</strong>. Sous la direction de la famille Van Paesschen, le site devient l'un des centres équestres les plus modernes de Flandre.",
+      't4-f':"Vastes écuries · pistes intérieures et extérieures · terrains de saut<br>installations d'entraînement · hébergement pour cavaliers et chevaux",
+      'fc1':"La période dorée de Sint Hubert",
+      't5-eye':"Percée internationale",'t5-y':"Années 80",'t5-t':"La période dorée",
+      't5-p':"Sint Hubert organise de nombreux concours de saut nationaux et internationaux et devient une valeur sûre du calendrier équestre belge. Des cavaliers de Belgique, des Pays-Bas, d'Allemagne et de France prennent le chemin de Hoogboom.",
+      't5-p2':"L'élevage acquiert lui aussi un rayonnement international — notamment grâce à l'étalon agréé BWP <strong>Landjuweel St Hubert</strong>, qui fait connaître le nom dans le monde entier.",
+      't6-eye':"Une valeur établie",'t6-y':"Années 90",'t6-t':"Élargissement de l'offre",
+      't6-p':"Outre les concours de saut internationaux, les compétitions pour jeunes, les journées de formation, la pension, l'équitation récréative et l'élevage occupent une place toujours plus importante.",
+      't7-eye':"De nouvelles mains",'t7-t':"La famille Knegevitch",
+      't7-p':"La période de la famille Van Paesschen prend fin. Le domaine est repris par la famille Knegevitch, qui poursuit la modernisation et l'agrandissement du site. Le nom historique <strong>Sint Hubert</strong> est conservé.",
+      't7-p2':"Le domaine acquiert par ailleurs une grande notoriété comme lieu de tournage de la populaire série jeunesse flamande <strong>Amika</strong> de Studio 100. Le manège et le domaine ont servi de décor à 161 épisodes répartis sur quatre saisons, diffusés à l'origine du 10 novembre 2008 au 4 novembre 2011. La série est devenue l'une des séries équestres les plus connues de Flandre et des Pays-Bas et reste très populaire aujourd'hui grâce aux rediffusions et au streaming.",
+      't8-eye':"Un centre polyvalent",'t8-t':"Horse & Country Club St. Hubert",
+      't8-p':"Le site devient un centre équestre polyvalent : outre la compétition, les stages de poney, les activités de manège, le dressage, la pension, les activités d'entreprise et les événements y occupent une place centrale. Le nom <strong>Horse & Country Club St. Hubert</strong> s'impose peu à peu.",
+      't9-eye':"Scène européenne",'t9-t':"Championnat d'Europe vétérans",
+      't9-p':"Sint Hubert organise le Championnat d'Europe de saut d'obstacles pour vétérans et confirme une fois de plus sa réputation internationale d'organisateur d'événements équestres de haut niveau.",
+      'fc2':"Le bien-être du cheval, une affaire d'honneur",
+      't10-eye':"Innovation & bien-être",'t10-t':"Une retraite pour les chevaux de manège",
+      't10-p':"Sint Hubert se fait connaître par ses initiatives en faveur du bien-être équin. Un fonds de pension est créé pour les chevaux de manège, afin qu'ils puissent profiter d'une retraite paisible après leur carrière sportive.",
+      't11-eye':"Période de transition",'t11-t':"Stephex Group",
+      't11-p':"Le site est repris par Stephex Group. Des projets de modernisation et d'extension sont élaborés. Même si tous ne se concrétisent pas, cette période marque une transition importante vers un nouvel avenir.",
+      't12-eye':"Un nouveau chapitre",'t12-t':"La famille Ponzo Dieu-de Pundert",
+      't12-p':"Depuis le 1er janvier 2024, le domaine est entre les mains de la famille Ponzo Dieu-de Pundert, qui choisit délibérément de préserver sa riche histoire tout en investissant dans une entreprise équestre tournée vers l'avenir.",
+      't12-p2':"St. Hubert poursuit son développement comme centre équestre exclusif, avec un accent marqué sur le dressage, la formation, l'entraînement, la coopération internationale et les chevaux de sport de qualité.",
+      'n-eye':"L'évolution du nom",'n-title':"Un domaine, quatre noms — une seule histoire.",'n1-tijd':"Années 1970",'n4-tijd':"Depuis 2024",
+      'e-eye':"Propriétaires au fil des ans",'e-title':"Les familles derrière le domaine.",
+      'e1-per':"v. 1970 – 1996",'e1-rol':"Fondateurs",'e2-rol':"Modernisation & décor Amika & Studio100",
+      'e3-rol':"Période de transition",'e4-per':"Depuis 2024",'e4-rol':"Un nouveau chapitre",
+      'sl-eye':"Une histoire vivante",
+      'sl-lede':"« Dans le respect du passé et avec un regard résolument tourné vers l'avenir, on continue d'écrire une histoire qui remonte à plus d'un siècle. »",
+      'sl-p':"Aujourd'hui, St. Hubert reste fidèle à sa mission d'origine : un lieu où le bien-être du cheval, le sport, la formation et l'hospitalité occupent une place centrale.",
+      'sl-cta2':"Retour à l'accueil",
+      'ft-tag':"Une oasis de calme au cœur vert d'Anvers — pour le cheval, le cavalier et le passionné.",
+      'ft-h1':"Visitez-nous",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgique",'ft-h2':"Contact",
+      'ft-open':"Ouvert tous les jours<br>09 h 30 – 22 h 00",'ft-h3':"Le club",
+      'ft-l1':"Membres privés",'ft-l2':"Cavaliers professionnels",'ft-l5':"Agenda & événements",
+      'ft-priv':"NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Confidentialité & conditions",
+      'ck-txt':"Ce site n'utilise que des cookies fonctionnels — pour mémoriser vos préférences de langue et d'affichage. Aucun traçage.",'ck-btn':"Compris"},
+  en:{'m1':"The club",'m2':"Members",'m3':"Auctions",'m4':"History",'m5':"Calendar",'m6':"Contact",'cta':"Become a member",
+      'pg-title':"Our history — St. Hubert Horse & Country Club",
+      'hh-eye':"Our history",'hh-title':"A century of equestrian history in Hoogboom.",
+      'hh-sub':"From the Olympic woods of 1920 to today's St. Hubert — one continuous story of horses, families and craftsmanship.",
+      'hi-lede':"\u201cMore than fifty years after the first horses moved onto the estate, St. Hubert remains a place where tradition and future meet.\u201d",
+      't1-eye':"The Olympic origins",'t1-t':"Hoogboom on the world stage",
+      't1-p':"During the Antwerp Summer Olympics, the grounds of the Hoogboom Country Club hosted Olympic eventing and several shooting disciplines. Hoogboom earned a lasting place in international sporting history — a tradition that would later contribute to Kapellen's reputation as an equestrian municipality.",
+      't2-eye':"A growing equestrian culture",'t2-t':"Woods, sandy lanes and horses",
+      't2-p':"The area around Hoogboom and Kapellen was known for its rural character. Horses played a leading role in farming, forestry and recreation. After the Second World War, recreational and sporting horse riding grew rapidly, and the region developed into an attractive home for riding schools, breeders and enthusiasts.",
+      't3-eye':"The foundations",'t3-y':"The 1960s",'t3-t':"The basis for an equestrian centre",
+      't3-p':"The first plans emerged to develop a professional equestrian facility in Hoogboom. The location, the quiet surroundings and the existing equestrian tradition made the site the ideal place for a riding centre with national ambitions.",
+      't4-eye':"The Van Paesschen era",'t4-y':"The 1970s",'t4-t':"The founding of Paardenstal Sint Hubert",
+      't4-p':"The estate received its famous name: <strong>Paardenstal Sint Hubert</strong>. Under the leadership of the Van Paesschen family, the facility grew into one of the most modern equestrian centres in Flanders.",
+      't4-f':"Spacious stables · indoor and outdoor arenas · jumping grounds<br>training facilities · accommodation for riders and horses",
+      'fc1':"The golden era of Sint Hubert",
+      't5-eye':"International breakthrough",'t5-y':"The 1980s",'t5-t':"The golden era",
+      't5-p':"Sint Hubert hosted numerous national and international show-jumping competitions and became a fixture on the Belgian equestrian calendar. Riders from Belgium, the Netherlands, Germany and France found their way to Hoogboom.",
+      't5-p2':"The breeding programme also gained international renown — not least through the BWP-approved stallion <strong>Landjuweel St Hubert</strong>, who made the name famous worldwide.",
+      't6-eye':"An established name",'t6-y':"The 1990s",'t6-t':"Broadening the offer",
+      't6-p':"Alongside international show jumping, youth competitions, training days, livery, recreational riding and breeding activities came increasingly to the fore.",
+      't7-eye':"New hands",'t7-t':"The Knegevitch family",
+      't7-p':"The Van Paesschen era came to an end. The estate was taken over by the Knegevitch family, who continued to modernise and expand the facility. The historic name <strong>Sint Hubert</strong> was retained.",
+      't7-p2':"The estate also gained widespread fame as the filming location of the popular Flemish youth series <strong>Amika</strong> by Studio 100. The riding school and the estate formed the set for 161 episodes across four seasons, originally broadcast from 10 November 2008 to 4 November 2011. The series became one of the best-known horse series in Flanders and the Netherlands and remains hugely popular today through reruns and streaming.",
+      't8-eye':"A versatile centre",'t8-t':"Horse & Country Club St. Hubert",
+      't8-p':"The facility developed into a versatile equestrian centre: alongside competitive sport, pony camps, riding school activities, dressage, livery, corporate activities and events took centre stage. The name <strong>Horse & Country Club St. Hubert</strong> was heard ever more often.",
+      't9-eye':"The European stage",'t9-t':"European Veterans Championship",
+      't9-p':"Sint Hubert organised the European Veterans Show Jumping Championship, once again confirming its international reputation as an organiser of top equestrian events.",
+      'fc2':"Horse welfare as a point of honour",
+      't10-eye':"Innovation & welfare",'t10-t':"A pension for riding school horses",
+      't10-p':"Sint Hubert became known for its horse welfare initiatives. A pension fund was set up for riding school horses, allowing them to enjoy a peaceful retirement after their sporting careers.",
+      't11-eye':"A period of transition",'t11-t':"Stephex Group",
+      't11-p':"The facility was taken over by Stephex Group. Plans were drawn up to further modernise and expand the site. Although not all projects were realised, this period marked an important transition towards a new future.",
+      't12-eye':"A new chapter",'t12-t':"The Ponzo Dieu-de Pundert family",
+      't12-p':"From 1 January 2024, the estate has been in the hands of the Ponzo Dieu-de Pundert family, who consciously chose to preserve its rich history while investing in a future-oriented equestrian business.",
+      't12-p2':"St. Hubert is being further developed as an exclusive equestrian centre, with a strong focus on dressage, education, training, international cooperation and quality sport horses.",
+      'n-eye':"The evolution of the name",'n-title':"One estate, four names — one story.",'n1-tijd':"The 1970s",'n4-tijd':"From 2024",
+      'e-eye':"Owners through the years",'e-title':"The families behind the estate.",
+      'e1-per':"c. 1970 – 1996",'e1-rol':"Founders",'e2-rol':"Modernisation & Amika & Studio100 set",
+      'e3-rol':"Transition period",'e4-per':"From 2024",'e4-rol':"A new chapter",
+      'sl-eye':"A living history",
+      'sl-lede':"\u201cWith respect for the past and a clear eye on the future, work continues on a history that goes back more than a century.\u201d",
+      'sl-p':"Today, St. Hubert remains true to its original mission: a place where horse welfare, sport, education and hospitality take centre stage.",
+      'sl-cta2':"Back to home",
+      'ft-tag':"An oasis of calm in the green heart of Antwerp — for horse, rider and enthusiast.",
+      'ft-h1':"Visit us",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgium",'ft-h2':"Contact",
+      'ft-open':"Open daily<br>09:30 – 22:00",'ft-h3':"The club",
+      'ft-l1':"Private members",'ft-l2':"Professional riders",'ft-l5':"Calendar & events",
+      'ft-priv':"NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy & terms",
+      'ck-txt':"This website only uses functional cookies — to remember your language and display preferences. No tracking.",'ck-btn':"Got it"}
 };
 function zetTaal(code){
   const t = i18n[code]; if(!t) return;
   document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('act', x.dataset.lang===code));
-  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.innerHTML=t[k]; });
+  if(t['pg-title']) document.title = t['pg-title'];
   document.documentElement.lang = code;
   try{ localStorage.setItem('sh-lang', code); }catch(e){}
 }
