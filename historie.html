@@ -54,19 +54,19 @@ h1,h2,h3{font-family:'Marcellus',serif;font-weight:400;line-height:1.15}
 nav{position:sticky;top:0;z-index:50;background:rgba(28,43,34,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(185,152,95,.28);transition:background .45s,box-shadow .45s,transform .5s cubic-bezier(.45,0,.2,1)}
 nav.hide{transform:translateY(-102%)}
 nav.compact{background:rgba(17,27,21,.97);box-shadow:0 12px 44px rgba(15,23,18,.38)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;transition:padding .4s cubic-bezier(.45,0,.2,1)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:clamp(14px,2vw,28px);padding-top:16px;padding-bottom:16px;transition:padding .4s cubic-bezier(.45,0,.2,1)}
 nav.compact .wrap{padding-top:9px;padding-bottom:9px}
 .brand{display:flex;align-items:center;gap:14px;color:var(--ivoor)}
 .brand .seal{width:46px;height:46px;flex:none;transition:width .4s cubic-bezier(.45,0,.2,1),height .4s cubic-bezier(.45,0,.2,1)}
 nav.compact .brand .seal{width:38px;height:38px}
 .brand .name{font-family:'Marcellus',serif;font-size:19px;letter-spacing:.08em;line-height:1.2}
-.brand .name small{display:block;font-family:'Jost';font-size:9.5px;letter-spacing:.34em;color:var(--messing);text-transform:uppercase;margin-top:2px}
-.menu{display:flex;gap:34px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;color:rgba(244,241,233,.85)}
-.menu a{padding:4px 0;position:relative;transition:color .3s}
+.brand .name small{display:block;font-family:'Jost';font-size:9.5px;letter-spacing:.34em;color:var(--messing);text-transform:uppercase;margin-top:2px;white-space:nowrap}
+.menu{display:flex;gap:clamp(16px,2.3vw,34px);font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;color:rgba(244,241,233,.85)}
+.menu a{padding:4px 0;position:relative;white-space:nowrap;transition:color .3s}
 .menu a::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--messing);transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s cubic-bezier(.45,0,.2,1)}
 .menu a:hover,.menu a.hier{color:var(--messing)}
 .menu a:hover::after,.menu a:focus-visible::after,.menu a.hier::after{transform:scaleX(1);transform-origin:0 50%}
-.nav-cta{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:12px 24px;font-weight:500;transition:background .3s,transform .3s cubic-bezier(.16,1,.3,1)}
+.nav-cta{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:11px 20px;font-weight:500;white-space:nowrap;flex:none;transition:background .3s,transform .3s cubic-bezier(.16,1,.3,1)}
 .nav-cta:hover{background:var(--ivoor)}
 .burger{display:none;background:none;border:0;color:var(--ivoor);font-size:26px;cursor:pointer}
 
@@ -203,14 +203,18 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 :focus-visible{outline:2px solid var(--messing);outline-offset:3px}
 [id]{scroll-margin-top:96px}
 
-/* mobiel */
-@media (max-width:980px){
+/* nav: eerder naar burger, zodat menu en knop nooit klem komen */
+@media (max-width:1100px){
   .menu{display:none}
   .burger{display:block}
   nav.open .menu{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;background:var(--groen-diep);padding:10px 6vw 26px;border-bottom:1px solid rgba(185,152,95,.3)}
   nav.open .menu a{padding:13px 0;border-bottom:1px solid rgba(244,241,233,.08)}
   nav.open .menu a::after{display:none}
   .nav-cta{display:none}
+}
+
+/* mobiel */
+@media (max-width:980px){
   .tl-rail,.tl-fill{left:24px}
   .tl-item,.tl-foto{grid-template-columns:48px 1fr;margin-bottom:70px}
   .tl-dot{grid-column:1;justify-self:center}
