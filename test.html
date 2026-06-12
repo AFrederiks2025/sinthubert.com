@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!--
+  Testpagina · St. Hubert Horse & Country Club
+  Zelfde stijl als index.html (kleuren, fonts, nav, footer, zegel).
+  Bedoeld om opmaak en componenten te testen.
+-->
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1c2b22">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%231c2b22'/%3E%3Cg stroke='%23f4f1e9' fill='none' stroke-width='4'%3E%3Cpath d='M24 16 H96 Q103 16 103 23 V62 C103 80 87 89 60 101 C33 89 17 80 17 62 V23 Q17 16 24 16 Z'/%3E%3Cpath d='M43.5 71 A20.5 20.5 0 1 1 76.5 71' stroke-width='4.5'/%3E%3Cpath d='M49.5 66.5 A13 13 0 1 1 70.5 66.5' stroke-width='4.5'/%3E%3Cpath d='M43.5 71 L49.5 66.5 M76.5 71 L70.5 66.5'/%3E%3C/g%3E%3C/svg%3E">
+<title>Testpagina — St. Hubert Horse &amp; Country Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --groen:#1c2b22;
+  --groen-diep:#152119;
+  --ivoor:#f4f1e9;
+  --ivoor-warm:#ece7da;
+  --messing:#b9985f;
+  --cognac:#8a5a33;
+  --heide:#9a8aa0;
+  --inkt:#20251f;
+  --wit:#fbfaf6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Jost',sans-serif;font-weight:300;
+  color:var(--inkt);background:var(--ivoor);
+  font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.display{font-family:'Marcellus',serif;font-weight:400;line-height:1.15}
+.lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 6vw}
+.eyebrow{
+  font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;
+  color:var(--messing);display:flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:'';width:34px;height:1px;background:var(--messing)}
+.btn{
+  display:inline-block;font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  padding:16px 34px;border:1px solid var(--messing);color:var(--ivoor);
+  transition:background .35s,color .35s;
+}
+.btn:hover{background:var(--messing);color:var(--groen-diep)}
+.btn.solid{background:var(--messing);color:var(--groen-diep)}
+.btn.solid:hover{background:var(--ivoor);border-color:var(--ivoor)}
+.btn.dark{color:var(--groen);border-color:var(--groen)}
+.btn.dark:hover{background:var(--groen);color:var(--ivoor)}
+
+/* ---------- topbar + nav ---------- */
+.topbar{background:var(--groen-diep);color:rgba(244,241,233,.75);font-size:12px;letter-spacing:.14em}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:9px;padding-bottom:9px}
+.lang{display:flex;gap:2px}
+.lang button{background:none;border:0;color:rgba(244,241,233,.55);font:inherit;letter-spacing:inherit;padding:2px 9px;cursor:pointer;border-right:1px solid rgba(244,241,233,.18)}
+.lang button:last-child{border-right:0}
+.lang button.act{color:var(--messing)}
+.topbar .info{display:flex;gap:26px}
+nav{position:sticky;top:0;z-index:50;background:rgba(28,43,34,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(185,152,95,.28);transition:background .4s}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:clamp(14px,2vw,28px);padding-top:16px;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:14px;color:var(--ivoor)}
+.brand .seal{width:46px;height:46px;flex:none}
+.brand .name{font-family:'Marcellus',serif;font-size:19px;letter-spacing:.08em;line-height:1.2}
+.brand .name small{display:block;font-family:'Jost';font-size:9.5px;letter-spacing:.34em;color:var(--messing);text-transform:uppercase;margin-top:2px;white-space:nowrap}
+.menu{display:flex;gap:clamp(16px,2.3vw,34px);font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;color:rgba(244,241,233,.85)}
+.menu a{padding:4px 0;border-bottom:1px solid transparent;white-space:nowrap;transition:border-color .3s,color .3s}
+.menu a:hover{color:var(--messing);border-color:var(--messing)}
+.nav-cta{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:11px 20px;font-weight:500;white-space:nowrap;flex:none;transition:background .3s}
+.nav-cta:hover{background:var(--ivoor)}
+.burger{display:none;background:none;border:0;color:var(--ivoor);font-size:26px;cursor:pointer}
+
+/* ---------- page hero ---------- */
+.page-hero{background:var(--groen);color:var(--ivoor);padding:120px 0 100px;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='gr'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23gr)'/%3E%3C/svg%3E")}
+.page-hero .wrap{position:relative;z-index:1}
+.page-hero h1{font-size:clamp(38px,5vw,68px);max-width:14em;margin:22px 0 20px;text-wrap:balance}
+.page-hero .sub{max-width:560px;font-size:18px;color:rgba(244,241,233,.88)}
+.page-hero .cta-row{display:flex;gap:18px;margin-top:38px;flex-wrap:wrap}
+
+/* ---------- content ---------- */
+section.block{padding:90px 0}
+section.block.alt{background:var(--ivoor-warm)}
+.block h2{font-size:clamp(28px,3.4vw,44px);margin:18px 0 22px;text-wrap:balance}
+.block p{max-width:62ch;margin-bottom:18px}
+.block .lede{font-size:22px;color:var(--cognac);max-width:60ch}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px}
+.card{background:var(--wit);border:1px solid rgba(185,152,95,.28);padding:34px 30px;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s}
+.card:hover{transform:translateY(-4px);box-shadow:0 26px 50px -24px rgba(15,23,18,.4)}
+.card .num{font-family:'Marcellus',serif;font-size:30px;color:var(--messing);display:block;margin-bottom:12px}
+.card h3{font-size:21px;margin-bottom:10px}
+.card p{font-size:15px;margin-bottom:0;color:rgba(32,37,31,.8)}
+
+/* ---------- footer ---------- */
+footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;font-size:14.5px}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:50px;padding-bottom:70px}
+.foot-grid .seal{width:74px;margin-bottom:22px}
+.foot-grid h5{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--messing);font-weight:500;margin-bottom:20px}
+.foot-grid a{display:block;padding:4px 0;transition:color .3s}
+.foot-grid a:hover{color:var(--messing)}
+.foot-grid .brandname{font-family:'Marcellus',serif;font-size:20px;color:var(--ivoor);letter-spacing:.06em;line-height:1.4}
+.foot-bottom{border-top:1px solid rgba(185,152,95,.25);padding:24px 0;display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.1em;color:rgba(244,241,233,.45);flex-wrap:wrap}
+.foot-bottom a{color:inherit;border-bottom:1px solid rgba(185,152,95,.45);padding-bottom:1px;transition:color .3s,border-color .3s}
+.foot-bottom a:hover{color:var(--messing);border-color:var(--messing)}
+.soc{display:flex;gap:12px;margin-top:24px}
+.soc a{width:38px;height:38px;border:1px solid rgba(185,152,95,.4);display:flex;align-items:center;justify-content:center;border-radius:50%;transition:border-color .3s,color .3s}
+.soc a:hover{border-color:var(--messing);color:var(--messing)}
+.soc svg{width:18px;height:18px}
+
+@media(max-width:900px){
+  .menu{display:none}
+  .burger{display:block}
+  nav.open .menu{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--groen-diep);padding:20px 6vw;gap:14px}
+  .nav-cta{display:none}
+  .cards{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .foot-grid{grid-template-columns:1fr}
+  .topbar .info{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== logo: hergebruikt zegel ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="hubertus" fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M18 12 H102 Q110 12 110 20 V68 C110 88 92 98 60 112 C28 98 10 88 10 68 V20 Q10 12 18 12 Z" stroke-width="1.6"/>
+      <path d="M20.5 16 H99.5 Q106 16 106 22.5 V67 C106 84.5 90 94 60 107.5 C30 94 14 84.5 14 67 V22.5 Q14 16 20.5 16 Z" stroke-width=".7"/>
+      <g stroke-width="1.1">
+        <g transform="translate(33.5,28.5) rotate(45)">
+          <rect x="-11" y="-3" width="22" height="6" rx="3"/>
+          <path d="M-6.5 -2.7 L-5.3 2.7 M-2.2 -2.8 L-1 2.8 M2.1 -2.8 L3.3 2.8 M6.4 -2.7 L7.6 2.7" stroke-width=".8"/>
+        </g>
+        <path d="M41.3 36.3 L74.6 69.6" stroke-width="1.6"/>
+        <path d="M51 48.2 L53.1 46.1 M61.7 58.9 L63.8 56.8" stroke-width=".8"/>
+        <g transform="translate(78.5,73.5) rotate(45)">
+          <rect x="-5.5" y="-1.7" width="11" height="3.4" rx="1.7"/>
+          <ellipse cx="9.5" cy="0" rx="3.6" ry="1.7"/>
+        </g>
+      </g>
+      <g stroke-width="1.1">
+        <g transform="translate(86.5,28.5) rotate(-45)">
+          <rect x="-11" y="-3" width="22" height="6" rx="3"/>
+          <path d="M-6.5 -2.7 L-5.3 2.7 M-2.2 -2.8 L-1 2.8 M2.1 -2.8 L3.3 2.8 M6.4 -2.7 L7.6 2.7" stroke-width=".8"/>
+        </g>
+        <path d="M78.7 36.3 L45.4 69.6" stroke-width="1.6"/>
+        <path d="M69 48.2 L66.9 46.1 M58.3 58.9 L56.2 56.8" stroke-width=".8"/>
+        <g transform="translate(41.5,73.5) rotate(135)">
+          <rect x="-5.5" y="-1.7" width="11" height="3.4" rx="1.7"/>
+          <ellipse cx="9.5" cy="0" rx="3.6" ry="1.7"/>
+        </g>
+      </g>
+      <g stroke-width="1.5">
+        <path d="M47.8 65 A15.5 15.5 0 1 1 72.2 65"/>
+        <path d="M52.1 61.7 A10 10 0 1 1 67.9 61.7"/>
+        <path d="M47.8 65 L52.1 61.7 M72.2 65 L67.9 61.7" stroke-width="1.1"/>
+      </g>
+      <path d="M55.8 67 L55.4 69.2 M60 67.7 L60 69.9 M64.2 67 L64.6 69.2" stroke-width=".85"/>
+      <g fill="currentColor" stroke="none">
+        <text x="60" y="25" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="5.4" letter-spacing=".8" textLength="52" lengthAdjust="spacingAndGlyphs">HORSE &amp; COUNTRYCLUB</text>
+        <text x="60" y="94" text-anchor="middle" font-family="Marcellus, serif" font-size="13.5" textLength="64" lengthAdjust="spacingAndGlyphs">ST. HUBERT</text>
+        <text x="60" y="101.5" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="4.4" letter-spacing=".8" textLength="30" lengthAdjust="spacingAndGlyphs">SINCE 1920</text>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<!-- ===== topbar ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="lang">
+      <button class="act" data-lang="nl">NL</button>
+      <button data-lang="fr">FR</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <div class="info">
+      <span>Bosdreef 50 · Hoogboom — Kapellen</span>
+      <span>+32 3 605 87 90</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== nav ===== -->
+<nav id="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="seal" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
+      <span class="name">St. Hubert<small>Horse &amp; Country Club</small></span>
+    </a>
+    <div class="menu">
+      <a href="index.html#club">De club</a>
+      <a href="index.html#members">Members</a>
+      <a href="index.html#veilingen">Veilingen</a>
+      <a href="historie.html">Historie</a>
+      <a href="index.html#agenda">Agenda</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <a href="index.html#word-member" class="nav-cta">Word member</a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<!-- ===== page hero ===== -->
+<header class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">Testpagina</div>
+    <h1>Dit is een testpagina.</h1>
+    <p class="sub">Een lege pagina in de stijl van de website, om opmaak, kleuren en componenten te testen. Pas de inhoud gerust aan.</p>
+    <div class="cta-row">
+      <a href="index.html" class="btn solid">Terug naar home</a>
+      <a href="historie.html" class="btn">Historie</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== content ===== -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">Sectie</div>
+    <h2>Voorbeeldsectie met tekst</h2>
+    <p class="lede">Een korte, sfeervolle introductie in cursieve Cormorant Garamond — zoals elders op de site.</p>
+    <p>Dit is een lopende alinea in de bodytekst. Gebruik deze pagina om de typografie, knoppen en blokken te beproeven voordat ze op de echte pagina's belanden.</p>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap">
+    <div class="eyebrow">Componenten</div>
+    <h2>Drie kaarten</h2>
+    <div class="cards">
+      <div class="card"><span class="num">01</span><h3>Eerste kaart</h3><p>Korte beschrijving van een testitem in de stijl van de website.</p></div>
+      <div class="card"><span class="num">02</span><h3>Tweede kaart</h3><p>Korte beschrijving van een testitem in de stijl van de website.</p></div>
+      <div class="card"><span class="num">03</span><h3>Derde kaart</h3><p>Korte beschrijving van een testitem in de stijl van de website.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <svg class="seal" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
+        <div class="brandname">St. Hubert<br>Horse &amp; Country Club</div>
+        <p style="margin-top:16px;font-size:13.5px;max-width:260px">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
+        <div class="soc">
+          <a href="https://www.facebook.com/profile.php?id=61554665814540" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15.5 4.5h-1.8a3.2 3.2 0 0 0-3.2 3.2V20 M8 11.2h6.6"/></svg>
+          </a>
+          <a href="https://www.instagram.com/sthubert.horseandcountryclub/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <a href="index.html#contact">Bosdreef 50, Kapellen</a>
+        <a href="tel:+3236058790">+32 3 605 87 90</a>
+      </div>
+      <div>
+        <h5>Ontdek</h5>
+        <a href="index.html#club">De club</a>
+        <a href="index.html#members">Members</a>
+        <a href="index.html#veilingen">Veilingen</a>
+      </div>
+      <div>
+        <h5>Meer</h5>
+        <a href="historie.html">Historie</a>
+        <a href="index.html#agenda">Agenda &amp; events</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 St. Hubert Horse &amp; Country Club — Kapellen</span>
+      <span>NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy &amp; voorwaarden</span>
+      <span>Concept 01 · webdesign door <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
