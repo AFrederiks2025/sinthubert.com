@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1c2b22">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%231c2b22'/%3E%3Cg stroke='%23f4f1e9' fill='none' stroke-width='4'%3E%3Cpath d='M24 16 H96 Q103 16 103 23 V62 C103 80 87 89 60 101 C33 89 17 80 17 62 V23 Q17 16 24 16 Z'/%3E%3Cpath d='M43.5 71 A20.5 20.5 0 1 1 76.5 71' stroke-width='4.5'/%3E%3Cpath d='M49.5 66.5 A13 13 0 1 1 70.5 66.5' stroke-width='4.5'/%3E%3Cpath d='M43.5 71 L49.5 66.5 M76.5 71 L70.5 66.5'/%3E%3C/g%3E%3C/svg%3E">
+<title>Springen — St. Hubert Horse &amp; Country Club</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+:root{
+  --green:#1c2b22;
+  --green-deep:#16211a;
+  --green-soft:#243528;
+  --cream:#f4efe6;
+  --cream-2:#ece4d6;
+  --paper:#faf7f1;
+  --gold:#b4925a;
+  --gold-soft:#c7a877;
+  --ink:#22302a;
+  --muted:#6a7367;
+  --line:rgba(28,43,34,.14);
+  --line-light:rgba(244,239,230,.18);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+.eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em}
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+
+/* ===== TOP BAR ===== */
+.topbar{background:var(--green-deep);color:var(--cream);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:38px;gap:18px}
+.topbar .langs{display:flex;gap:14px;color:rgba(244,239,230,.6)}
+.topbar .langs b{color:var(--gold-soft)}
+.topbar .addr{color:rgba(244,239,230,.55);font-size:.7rem}
+
+/* ===== NAV ===== */
+.nav{background:var(--green);color:var(--cream);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line-light)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px}
+.brand{display:flex;flex-direction:column;line-height:1.05}
+.brand .b1{font-family:var(--serif);font-size:1.18rem;letter-spacing:.04em}
+.brand .b2{font-size:.58rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-soft);margin-top:3px}
+.menu{display:flex;gap:30px;align-items:center;font-size:.82rem;letter-spacing:.08em}
+.menu a{color:rgba(244,239,230,.82);transition:color .2s;text-transform:uppercase;font-size:.74rem}
+.menu a:hover,.menu a.active{color:var(--gold-soft)}
+.btn{display:inline-block;border:1px solid var(--gold);color:var(--cream);padding:11px 22px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;transition:.25s;cursor:pointer;background:transparent}
+.btn:hover{background:var(--gold);color:var(--green-deep)}
+.btn-solid{background:var(--gold);color:var(--green-deep);border-color:var(--gold)}
+.btn-solid:hover{background:var(--gold-soft);border-color:var(--gold-soft)}
+.btn-light{border-color:rgba(28,43,34,.3);color:var(--ink)}
+.btn-light:hover{background:var(--green);color:var(--cream);border-color:var(--green)}
+.burger{display:none;font-size:1.4rem;cursor:pointer;background:none;border:0;color:var(--cream)}
+
+/* ===== HERO ===== */
+.hero{position:relative;background:var(--green);color:var(--cream);overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,33,26,.55),rgba(22,33,26,.82)),url('img/fac-pistes.jpg') center/cover;opacity:.9;z-index:0}
+.hero .wrap{position:relative;z-index:1;padding:96px 28px 104px;max-width:980px}
+.hero .eyebrow{margin-bottom:22px}
+.hero h1{font-size:clamp(2.6rem,6vw,4.5rem);max-width:14ch}
+.hero p{margin-top:26px;max-width:54ch;font-size:1.08rem;color:rgba(244,239,230,.82);font-weight:300}
+.hero .cta{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+
+/* ===== QUOTE ===== */
+.quote{background:var(--green-soft);color:var(--cream);text-align:center;padding:70px 28px}
+.quote p{font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,3.4vw,2.3rem);max-width:24ch;margin:0 auto;line-height:1.32;color:var(--cream)}
+.quote .src{margin-top:22px;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft)}
+
+/* ===== SECTION BASE ===== */
+section{padding:90px 0}
+.sec-head{max-width:60ch}
+.sec-head .eyebrow{display:block;margin-bottom:16px}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3rem)}
+.sec-head .lead{margin-top:20px;font-size:1.05rem;color:var(--muted);max-width:60ch;font-weight:300}
+
+/* tradition timeline */
+.tradition{background:var(--paper)}
+.tline{margin-top:54px;display:grid;gap:0;border-top:1px solid var(--line)}
+.tline .row{display:grid;grid-template-columns:140px 1fr;gap:34px;padding:34px 0;border-bottom:1px solid var(--line);align-items:start}
+.tline .yr{font-family:var(--serif);font-size:1.9rem;color:var(--gold);line-height:1}
+.tline .yr small{display:block;font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.tline h3{font-size:1.5rem;margin-bottom:8px}
+.tline p{color:var(--muted);max-width:62ch;font-weight:300}
+.tline strong{color:var(--ink);font-weight:600}
+
+/* ===== ARCHIVE (dark band) ===== */
+.archive{background:var(--green);color:var(--cream)}
+.archive .sec-head h2{color:var(--cream)}
+.archive .sec-head .lead{color:rgba(244,239,230,.7)}
+.cards{margin-top:54px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-light);border:1px solid var(--line-light)}
+.card{background:var(--green);padding:38px 30px;position:relative}
+.card .num{font-family:var(--serif);font-size:1.3rem;color:var(--gold);letter-spacing:.1em}
+.card .date{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,239,230,.55);margin:18px 0 12px}
+.card h3{font-size:1.65rem;color:var(--cream);margin-bottom:16px}
+.card p{font-size:.95rem;color:rgba(244,239,230,.78);font-weight:300}
+.card p+p{margin-top:12px}
+.card .tag{display:inline-block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft);border:1px solid var(--line-light);padding:6px 12px;border-radius:2px}
+.card .hl{color:var(--gold-soft);font-weight:500}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:24px;flex-wrap:wrap}
+
+/* ===== SOURCE LINK (house style) ===== */
+.source-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-soft);border-bottom:1px solid transparent;padding-bottom:3px;transition:.22s;font-weight:500}
+.source-link svg{width:13px;height:13px;flex:none;transition:transform .22s}
+.source-link:hover{color:var(--gold);border-color:currentColor}
+.source-link:hover svg{transform:translate(2px,-2px)}
+.source-link.on-light{color:var(--gold)}
+.source-link.on-light:hover{color:#9a7c47}
+.source-inline{margin-top:24px}
+
+/* ===== PODIUM PANEL ===== */
+.podium{background:var(--green-soft);color:var(--cream)}
+.podium .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center}
+.podium .eyebrow{display:block;margin-bottom:14px}
+.podium h2{font-size:clamp(1.8rem,3.6vw,2.6rem);color:var(--cream)}
+.podium .note{margin-top:18px;color:rgba(244,239,230,.7);font-weight:300;font-size:.95rem}
+.results{border-top:1px solid var(--line-light)}
+.results .r{display:grid;grid-template-columns:48px 1fr auto;gap:18px;padding:20px 4px;border-bottom:1px solid var(--line-light);align-items:baseline}
+.results .pos{font-family:var(--serif);font-size:1.6rem;color:var(--gold)}
+.results .who{font-size:1.05rem;color:var(--cream)}
+.results .who span{display:block;font-size:.82rem;color:rgba(244,239,230,.6);font-weight:300;margin-top:2px}
+.results .val{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-soft);text-align:right}
+
+/* ===== REFERENCES ===== */
+.refs{background:var(--cream)}
+.refgrid{margin-top:50px;display:grid;grid-template-columns:1fr 1fr;gap:46px}
+.refcol h3{font-size:1.4rem;margin-bottom:8px}
+.refcol .sub{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.reflist{list-style:none}
+.reflist li{padding:15px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;align-items:baseline}
+.reflist a{font-family:var(--serif);font-size:1.18rem;color:var(--ink);transition:color .2s}
+.reflist a:hover{color:var(--gold)}
+.reflist .meta{font-size:.72rem;letter-spacing:.04em;color:var(--muted);white-space:nowrap}
+.reflist .plain{font-family:var(--serif);font-size:1.18rem;color:var(--ink)}
+.refnote{margin-top:18px;font-size:.82rem;color:var(--muted);font-style:italic}
+
+/* ===== CTA BAND ===== */
+.cta-band{position:relative;color:var(--cream);text-align:center;overflow:hidden}
+.cta-band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,33,26,.72),rgba(22,33,26,.9)),url('img/strip-piste.jpg') center/cover;z-index:0}
+.cta-band .wrap{position:relative;z-index:1;padding:100px 28px}
+.cta-band .eyebrow{display:block;margin-bottom:18px}
+.cta-band h2{font-size:clamp(2.1rem,4.6vw,3.2rem);max-width:18ch;margin:0 auto}
+.cta-band p{margin:22px auto 0;max-width:50ch;color:rgba(244,239,230,.8);font-weight:300}
+.cta-band .cta{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ===== FOOTER ===== */
+footer{background:var(--green-deep);color:var(--cream);padding:70px 0 30px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.fbrand .b1{font-family:var(--serif);font-size:1.4rem}
+.fbrand .b2{font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-soft);margin:4px 0 18px}
+.fbrand p{color:rgba(244,239,230,.6);font-weight:300;font-size:.92rem;max-width:34ch}
+footer h4{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px;font-family:var(--sans);font-weight:600}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+footer a,footer .fline{color:rgba(244,239,230,.72);font-size:.9rem;font-weight:300}
+footer a:hover{color:var(--gold-soft)}
+.fbottom{margin-top:54px;padding-top:22px;border-top:1px solid var(--line-light);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.74rem;color:rgba(244,239,230,.45);letter-spacing:.06em}
+
+@media(max-width:900px){
+  .menu{display:none}
+  .burger{display:block}
+  .cards{grid-template-columns:1fr}
+  .podium .grid{grid-template-columns:1fr;gap:34px}
+  .refgrid{grid-template-columns:1fr;gap:34px}
+  .fgrid{grid-template-columns:1fr 1fr;gap:30px}
+  .tline .row{grid-template-columns:90px 1fr;gap:20px}
+  .topbar .addr{display:none}
+}
+@media(max-width:540px){
+  .fgrid{grid-template-columns:1fr}
+  .hero .wrap{padding:70px 24px 80px}
+}
+/* ===== SOURCE MODAL ===== */
+body.modal-open{overflow:hidden}
+.modal-overlay{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(14,20,16,.74);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);opacity:0;transition:opacity .28s}
+.modal-overlay.open{display:flex;opacity:1}
+.modal{position:relative;width:min(980px,100%);height:min(84vh,860px);background:var(--green);border:1px solid var(--line-light);border-radius:4px;box-shadow:0 34px 90px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden;transform:translateY(16px) scale(.985);transition:transform .3s}
+.modal-overlay.open .modal{transform:none}
+.modal-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 20px;background:var(--green-deep);border-bottom:1px solid var(--line-light);flex:none}
+.modal-bar .mt{min-width:0}
+.modal-bar .eyebrow{display:block;margin-bottom:4px}
+.modal-bar h3{font-family:var(--serif);font-size:1.12rem;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.modal-close{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--cream);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s}
+.modal-close:hover{background:var(--gold);color:var(--green-deep);transform:rotate(90deg)}
+.modal-close svg{width:16px;height:16px}
+.modal-body{position:relative;flex:1;background:#fff;overflow:hidden}
+.modal-body iframe{width:100%;height:100%;border:0;display:block}
+.modal-state{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:40px;background:var(--green);color:var(--cream);transition:opacity .3s}
+.modal-state.hide{opacity:0;pointer-events:none}
+.modal-state.fallback{display:none}
+.modal-state.fallback.show{display:flex}
+.spinner{width:34px;height:34px;border:2px solid var(--line-light);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.modal-state .lbl{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+.modal-state p{max-width:42ch;font-weight:300;color:rgba(244,239,230,.8)}
+.modal-foot{flex:none;padding:11px 20px;background:var(--green-deep);border-top:1px solid var(--line-light);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,239,230,.45);text-align:center}
+@media(max-width:600px){.modal{height:88vh}.modal-overlay{padding:14px}}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <span class="addr">Bosdreef 50 · Hoogboom — Kapellen · +32 3 605 87 90</span>
+    <span class="langs"><b>NL</b><span>FR</span><span>EN</span></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="b1">St. Hubert</span>
+      <span class="b2">Horse &amp; Country Club</span>
+    </a>
+    <div class="menu">
+      <a href="index.html#club">De club</a>
+      <a href="index.html#members">Members</a>
+      <a href="#" class="active">Springen</a>
+      <a href="index.html#veilingen">Veilingen</a>
+      <a href="historie.html">Historie</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="#word-member" class="btn">Word member</a>
+    </div>
+    <button class="burger" aria-label="menu">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Springen op St. Hubert</span>
+    <h1>Een eeuw balken, barrages en grote sprongen.</h1>
+    <p>Van de internationale springwedstrijden uit de gouden jaren tot de winterjumpings die generaties ruiters door het seizoen droegen — springen zit in het DNA van het domein in Hoogboom.</p>
+    <div class="cta">
+      <a href="#word-member" class="btn btn-solid">Word member</a>
+      <a href="index.html#contact" class="btn">Plan een bezoek</a>
+    </div>
+  </div>
+</header>
+
+<!-- QUOTE -->
+<div class="quote">
+  <p>“De spanning was niet alleen in de piste te voelen — ook aan de zijkant.”</p>
+  <span class="src">Uit het archief — winterjumping, januari 2014</span>
+</div>
+
+<!-- I — TRADITION -->
+<section class="tradition">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">I — De springtraditie</span>
+      <h2>Geworteld in de gouden jaren.</h2>
+      <p class="lead">De springsport vormt een rode draad door de geschiedenis van het domein. Onderstaande mijlpalen zijn afkomstig uit de historie van St. Hubert en uit de verslagen van de oude manege.</p>
+    </div>
+    <div class="tline">
+      <div class="row">
+        <div class="yr">'80<small>Jaren tachtig</small></div>
+        <div>
+          <h3>De gouden periode</h3>
+          <p>St. Hubert organiseert in deze jaren talrijke nationale en internationale springwedstrijden en groeit uit tot een vaste waarde op de Belgische hippische kalender. Ruiters uit <strong>België, Nederland, Duitsland en Frankrijk</strong> vinden hun weg naar Hoogboom.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="yr">↑<small>Fokkerij</small></div>
+        <div>
+          <h3>Landjuweel St Hubert</h3>
+          <p>Ook de fokkerij krijgt internationale uitstraling — onder meer dankzij de BWP-goedgekeurde hengst <strong>Landjuweel St Hubert</strong>, die de naam van het domein wereldwijd bekend maakt.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="yr">2014<small>Europees toneel</small></div>
+        <div>
+          <h3>EK Springen voor Veteranen</h3>
+          <p>St. Hubert organiseert het <strong>Europees Kampioenschap Springen voor Veteranen</strong> en bevestigt opnieuw zijn internationale reputatie als gastheer van hippische topsportevenementen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- II — ARCHIVE -->
+<section class="archive">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">II — Uit het archief</span>
+      <h2>De winterjumpings, 2013–2014.</h2>
+      <p class="lead">Drie verslagen uit de toenmalige manegeblog laten zien hoe levendig het springen op het domein was — van pony's over balkjes tot 6-barenproeven van 1m70.</p>
+    </div>
+    <div class="cards">
+
+      <article class="card">
+        <span class="num">01</span>
+        <div class="date">3 december 2013</div>
+        <h3>LRV-jumping weekend</h3>
+        <p>Op zaterdag was het de beurt aan de <span class="hl">ponyruitertjes</span>. De eerste proef startte op een hoogte van 5 tot 10 cm, met daarna het echte springwerk. 's Avonds deed niemand minder dan Sinterklaas de prijsuitreiking.</p>
+        <p>Op zondag namen de paarden het over: de eerste proef ging al om 8u30 van start, met doorlopend springen tot in de late namiddag.</p>
+        <div class="card-foot">
+          <span class="tag">LRV · pony's &amp; paarden</span>
+          <a class="source-link" href="https://manegesthubert.wordpress.com/2013/12/03/druk-weekend/" target="_blank" rel="noopener" title="Lees het originele verslag — 3 december 2013">
+            Lees de bron
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="num">02</span>
+        <div class="date">18 januari 2014</div>
+        <h3>Springwedstrijd &amp; 6-barenproef</h3>
+        <p>De wedstrijd begon om 14u met een parcours van 50 cm en eindigde rond 22u met de spectaculaire 6-barenproef.</p>
+        <p>Die proef werd gewonnen door <span class="hl">Sara Vanderschueren met Hardwish</span>, over een hoogte van maar liefst <span class="hl">1m70</span>.</p>
+        <div class="card-foot">
+          <span class="tag">6-baren · 1m70</span>
+          <a class="source-link" href="https://manegesthubert.wordpress.com/2014/01/29/drukte-achter-de-schermen/" target="_blank" rel="noopener" title="Lees het originele verslag — 29 januari 2014">
+            Lees de bron
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="num">03</span>
+        <div class="date">Februari 2014</div>
+        <h3>De laatste winterjumping</h3>
+        <p>Manegepony <span class="hl">Chipie</span> reed met ruiter <span class="hl">Lilli</span> een vlekkeloos parcours en plaatste zich voor de barrage — een geslaagde eerste keer voor beiden.</p>
+        <p>In de 1m20 ging <span class="hl">Jessica Ramkema</span> met de hoofdprijs van €120 lopen.</p>
+        <div class="card-foot">
+          <span class="tag">Winterjumping · finale</span>
+          <a class="source-link" href="https://manegesthubert.wordpress.com/2014/02/20/winterjumping/" target="_blank" rel="noopener" title="Lees het originele verslag — 20 februari 2014">
+            Lees de bron
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PODIUM -->
+<section class="podium">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <span class="eyebrow">Uitslag 6-barenproef</span>
+        <h2>Gedeelde eerste plaats op 1m50.</h2>
+        <p class="note">Bij de laatste winterjumping van februari 2014 werd de hoogte van 1m70 van de vorige editie niet geëvenaard. De proef eindigde in de derde barrage op 1m50, met drie ruiters die elk slechts 4 strafpunten verzamelden — samen bovenaan.</p>
+      </div>
+      <div class="results">
+        <div class="r">
+          <span class="pos">1</span>
+          <span class="who">Sara Vanderschueren<span>Hardwish 711</span></span>
+          <span class="val">4 strafpunten</span>
+        </div>
+        <div class="r">
+          <span class="pos">1</span>
+          <span class="who">Bart Stokmans<span>Talypso van de Dennenhoeve</span></span>
+          <span class="val">4 strafpunten</span>
+        </div>
+        <div class="r">
+          <span class="pos">1</span>
+          <span class="who">Wilfried Peeters<span>Cascais van Capelle</span></span>
+          <span class="val">4 strafpunten</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- III — REFERENCES -->
+<section class="refs" id="publicaties">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">III — Bronnen &amp; vermeldingen</span>
+      <h2>Eerdere publicaties over het springen.</h2>
+      <p class="lead">Deze pagina is samengesteld uit bestaande verslagen en vermeldingen. Lees de originele stukken hieronder na.</p>
+    </div>
+    <div class="refgrid">
+
+      <div class="refcol">
+        <div class="sub">Oude blog — Manege Sint-Hubert</div>
+        <ul class="reflist">
+          <li>
+            <a href="https://manegesthubert.wordpress.com/2014/01/29/drukte-achter-de-schermen/" target="_blank" rel="noopener">Drukte achter de schermen</a>
+            <span class="meta">29 jan 2014</span>
+          </li>
+          <li>
+            <a href="https://manegesthubert.wordpress.com/2014/02/20/winterjumping/" target="_blank" rel="noopener">Winterjumping</a>
+            <span class="meta">20 feb 2014</span>
+          </li>
+          <li>
+            <a href="https://manegesthubert.wordpress.com/2013/12/03/druk-weekend/" target="_blank" rel="noopener">Druk weekend (LRV-jumping)</a>
+            <span class="meta">3 dec 2013</span>
+          </li>
+          <li>
+            <a href="https://manegesthubert.wordpress.com/" target="_blank" rel="noopener">Blog-homepage</a>
+            <span class="meta">Archief</span>
+          </li>
+        </ul>
+        <p class="refnote">Verslagen geschreven door Ruth Mollin, toenmalig lesgeefster op de manege.</p>
+      </div>
+
+      <div class="refcol">
+        <div class="sub">Externe vermeldingen</div>
+        <ul class="reflist">
+          <li>
+            <a href="https://www.facebook.com/JumpingStHubertHoogboom" target="_blank" rel="noopener">Jumping St-Hubert Hoogboom</a>
+            <span class="meta">Facebook</span>
+          </li>
+          <li>
+            <span class="plain">De Anciens van Manège St Hubert</span>
+            <span class="meta">Oud-leden 1980–2000</span>
+          </li>
+          <li>
+            <a href="https://www.gva.be" target="_blank" rel="noopener">EK paardrijden in Kapellen</a>
+            <span class="meta">GVA</span>
+          </li>
+          <li>
+            <a href="https://www.nieuwsblad.be" target="_blank" rel="noopener">René van Paesschen / Sint-Hubert</a>
+            <span class="meta">Nieuwsblad</span>
+          </li>
+          <li>
+            <a href="https://derijkstebelgen.be" target="_blank" rel="noopener">Stephan Conter koopt manege Sint-Hubert</a>
+            <span class="meta">De Rijkste Belgen</span>
+          </li>
+        </ul>
+        <p class="refnote">Externe bronnen ter referentie — niet door St. Hubert geredigeerd.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band" id="word-member">
+  <div class="wrap">
+    <span class="eyebrow">Beleef het springen mee</span>
+    <h2>Schrijf het volgende hoofdstuk op St. Hubert.</h2>
+    <p>Of u nu traint voor de wedstrijdpiste of uw paard een thuis in alle rust gunt — plan een bezoek aan het domein en ontdek wat St. Hubert voor u en uw paard kan betekenen.</p>
+    <div class="cta">
+      <a href="#" class="btn btn-solid">Word member</a>
+      <a href="index.html#contact" class="btn">Plan een bezoek</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <div class="b1">St. Hubert</div>
+        <div class="b2">Horse &amp; Country Club</div>
+        <p>Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
+      </div>
+      <div>
+        <h4>Bezoek ons</h4>
+        <div class="fline">Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</div>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+3236058790">+32 3 605 87 90</a></li>
+          <li><a href="mailto:info@sinthubert.com">info@sinthubert.com</a></li>
+          <li class="fline">Dagelijks 09:30 – 22:00</li>
+        </ul>
+      </div>
+      <div>
+        <h4>De club</h4>
+        <ul>
+          <li><a href="index.html#members">Private members</a></li>
+          <li><a href="index.html#members">Professionele ruiters</a></li>
+          <li><a href="#">Springen</a></li>
+          <li><a href="historie.html">Historie</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbottom">
+      <span>© 2026 St. Hubert Horse &amp; Country Club — Kapellen</span>
+      <span>Concept 01 · NL · FR · EN</span>
+    </div>
+  </div>
+</footer>
+
+<!-- SOURCE MODAL -->
+<div class="modal-overlay" id="sourceModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-bar">
+      <div class="mt">
+        <span class="eyebrow">Bron</span>
+        <h3 id="modalTitle">Bron</h3>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Venster sluiten" title="Sluiten">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-state" id="modalLoad"><div class="spinner"></div><span class="lbl">Bron laden…</span></div>
+      <div class="modal-state fallback" id="modalFallback">
+        <span class="lbl">Bron</span>
+        <p>Deze externe bron staat insluiten op een andere website niet toe. Sluit dit venster om verder te lezen op St.&nbsp;Hubert.</p>
+      </div>
+      <iframe id="modalFrame" title="Ingesloten bron" referrerpolicy="no-referrer" loading="lazy"></iframe>
+    </div>
+    <div class="modal-foot">U blijft op St. Hubert · sluit het venster om verder te lezen</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var overlay=document.getElementById('sourceModal');
+  var frame=document.getElementById('modalFrame');
+  var load=document.getElementById('modalLoad');
+  var fb=document.getElementById('modalFallback');
+  var titleEl=document.getElementById('modalTitle');
+  var closeBtn=document.getElementById('modalClose');
+  var failTimer=null, loaded=false;
+
+  function openModal(url,title){
+    titleEl.textContent=title||'Bron';
+    fb.classList.remove('show');
+    load.classList.remove('hide');
+    loaded=false;
+    frame.src='about:blank';
+    overlay.classList.add('open');
+    document.body.classList.add('modal-open');
+    requestAnimationFrame(function(){ frame.src=url; });
+    clearTimeout(failTimer);
+    failTimer=setTimeout(function(){
+      if(!loaded){ fb.classList.add('show'); load.classList.add('hide'); }
+    },6500);
+  }
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.classList.remove('modal-open');
+    clearTimeout(failTimer);
+    setTimeout(function(){ frame.src='about:blank'; },300);
+  }
+  frame.addEventListener('load',function(){
+    if(frame.src && frame.src.indexOf('about:blank')===-1){
+      loaded=true;
+      load.classList.add('hide');
+      clearTimeout(failTimer);
+    }
+  });
+  document.querySelectorAll('a.source-link').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      openModal(a.getAttribute('href'), a.getAttribute('title') || a.textContent.trim());
+    });
+  });
+  closeBtn.addEventListener('click',closeModal);
+  overlay.addEventListener('click',function(e){ if(e.target===overlay) closeModal(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(); });
+})();
+</script>
+
+</body>
+</html>
