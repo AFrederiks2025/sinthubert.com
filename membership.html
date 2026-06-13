@@ -131,6 +131,11 @@ nav.compact .brand .seal{width:38px;height:38px}
 .formule.patron .box-spec .meta b{color:var(--ivoor)}
 .box-spec .meta span{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cognac)}
 .formule.patron .box-spec .meta span{color:rgba(244,241,233,.55)}
+.price{display:flex;align-items:baseline;gap:10px;margin:4px 0 28px}
+.price .amt{font-family:'Marcellus',serif;font-size:30px;color:var(--groen);line-height:1;font-variant-numeric:lining-nums}
+.formule.patron .price .amt{color:var(--ivoor)}
+.price .per{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cognac)}
+.formule.patron .price .per{color:rgba(244,241,233,.6)}
 .formule .desc{font-size:15.5px;color:#454c43}
 .formule.patron .desc{color:rgba(244,241,233,.8)}
 .formule ul{list-style:none;margin:26px 0 0}
@@ -498,6 +503,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
           <span class="dim">3 × 4 m</span>
           <span class="meta"><b>12 m²</b><span data-i18n="t1-area">Standaardmaat</span></span>
         </div>
+        <div class="price"><span class="amt" data-i18n="t1-price">€ 750</span><span class="per" data-i18n="price-per">per maand</span></div>
         <p class="desc" data-i18n="t1-desc">Een ruime paardenbox van standaardmaat, met voorrang bij reservatie aan het ledentarief. De vertrouwde basis voor wie zijn paard een rustige, verzorgde thuis op het domein gunt.</p>
         <ul>
           <li data-i18n="t1-li1">Paardenbox van 3 × 4 m (12 m²)</li>
@@ -519,6 +525,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
           <span class="dim">3 × 6 m</span>
           <span class="meta"><b>18 m²</b><span data-i18n="t2-area">Ruim formaat</span></span>
         </div>
+        <div class="price"><span class="amt" data-i18n="t2-price">€ 1.950</span><span class="per" data-i18n="price-per">per maand</span></div>
         <p class="desc" data-i18n="t2-desc">Een gereserveerde box van royaal formaat — ruim genoeg voor een hengst of warmbloed — die het hele jaar door voor u alleen wordt gehouden. Het Heritage-lidmaatschap zonder restricties, voor wie zekerheid, ruimte en volledige toegang vooropstelt.</p>
         <ul>
           <li data-i18n="t2-li1">Oversized paardenbox van 3 × 6 m (18 m²)</li>
@@ -709,10 +716,10 @@ const i18n = {
     'li-c4t':"Zorg op het hoogste niveau",'li-c4p':"Persoonlijke begeleiding, vakkundige verzorging en onvoorwaardelijke aandacht voor het welzijn van elk paard.",
     't-eye':"De formules",'t-title':"Twee niveaus, één domein.",
     't-lead':"Elk lidmaatschap geeft toegang tot de volledige infrastructuur van St. Hubert — binnen- en buitenpistes, weides en de ruiterpaden door bos en heide. Het verschil zit in de box: een standaardmaat voor de Estate Member, een royaal formaat voor de Heritage Member.",
-    't1-eye':"Niveau I",'t1-kind':"Standaard lidmaatschap",'t1-area':"Standaardmaat",
+    't1-eye':"Niveau I",'t1-kind':"Standaard lidmaatschap",'t1-area':"Standaardmaat",'t1-price':"€ 750",'price-per':"per maand",
     't1-desc':"Een ruime paardenbox van standaardmaat, met voorrang bij reservatie aan het ledentarief. De vertrouwde basis voor wie zijn paard een rustige, verzorgde thuis op het domein gunt.",
     't1-li1':"Paardenbox van 3 × 4 m (12 m²)",'t1-li2':"Voorrang bij reservatie aan het ledentarief",'t1-li3':"Toegang tot de buitenfaciliteiten, trainingshallen en polo lounge",'t1-cta':"Word Estate Member",
-    'crest':"Onbeperkt",'t2-eye':"Niveau II",'t2-kind':"Onbeperkt lidmaatschap",'t2-area':"Ruim formaat",
+    'crest':"Onbeperkt",'t2-eye':"Niveau II",'t2-kind':"Onbeperkt lidmaatschap",'t2-area':"Ruim formaat",'t2-price':"€ 1.950",
     't2-desc':"Een gereserveerde box van royaal formaat — ruim genoeg voor een hengst of warmbloed — die het hele jaar door voor u alleen wordt gehouden. Het Heritage-lidmaatschap zonder restricties, voor wie zekerheid, ruimte en volledige toegang vooropstelt.",
     't2-li1':"Oversized paardenbox van 3 × 6 m (18 m²)",'t2-li2':"Gereserveerd en het hele jaar door voor u alleen",'t2-li3':"Geschikt voor hengsten en warmbloeden",'t2-li4':"Onbeperkte toegang tot alle faciliteiten van het domein",'t2-li5':"Uitgenodigd voor alle exclusieve events in de polo lounge",'t2-cta':"Word Heritage Member",
     'sl-eye':"Word lid van de club",'sl-lede':"“Uw paard verdient St. Hubert.”",
@@ -746,10 +753,10 @@ const i18n = {
     'li-c4t':"Des soins au plus haut niveau",'li-c4p':"Accompagnement personnalisé, soins experts et attention sans faille au bien-être de chaque cheval.",
     't-eye':"Les formules",'t-title':"Deux niveaux, un domaine.",
     't-lead':"Chaque adhésion donne accès à l'ensemble des installations de St. Hubert — manèges intérieurs et carrières extérieures, prairies et sentiers équestres à travers bois et lande. La différence se joue sur le box : une taille standard pour l'Estate Member, un format généreux pour le Heritage Member.",
-    't1-eye':"Niveau I",'t1-kind':"Adhésion standard",'t1-area':"Taille standard",
+    't1-eye':"Niveau I",'t1-kind':"Adhésion standard",'t1-area':"Taille standard",'t1-price':"750 €",'price-per':"par mois",
     't1-desc':"Un box spacieux de taille standard, avec priorité de réservation au tarif membre. La base de confiance pour qui souhaite offrir à son cheval un foyer calme et soigné sur le domaine.",
     't1-li1':"Box de 3 × 4 m (12 m²)",'t1-li2':"Priorité de réservation au tarif membre",'t1-li3':"Accès aux installations extérieures, aux halls d'entraînement et au polo lounge",'t1-cta':"Devenir Estate Member",
-    'crest':"Accès illimité",'t2-eye':"Niveau II",'t2-kind':"Adhésion sans restriction",'t2-area':"Grand format",
+    'crest':"Accès illimité",'t2-eye':"Niveau II",'t2-kind':"Adhésion sans restriction",'t2-area':"Grand format",'t2-price':"1.950 €",
     't2-desc':"Un box réservé de grand format — assez spacieux pour un étalon ou un cheval de sang — gardé pour vous seul toute l'année. L'adhésion Heritage sans restriction, pour qui privilégie l'espace, la certitude et l'accès complet.",
     't2-li1':"Box surdimensionné de 3 × 6 m (18 m²)",'t2-li2':"Réservé et gardé pour vous seul toute l'année",'t2-li3':"Adapté aux étalons et chevaux de sang",'t2-li4':"Accès illimité à toutes les installations du domaine",'t2-li5':"Invité à tous les événements exclusifs du polo lounge",'t2-cta':"Devenir Heritage Member",
     'sl-eye':"Rejoignez le club",'sl-lede':"« Votre cheval mérite St. Hubert. »",
@@ -783,10 +790,10 @@ const i18n = {
     'li-c4t':"Care at the highest level",'li-c4p':"Personal guidance, expert care and unwavering attention to the wellbeing of every horse.",
     't-eye':"The formulas",'t-title':"Two tiers, one estate.",
     't-lead':"Every membership gives access to all of St. Hubert's facilities — indoor and outdoor arenas, paddocks and the riding trails through wood and heath. The difference is in the box: a standard size for the Estate Member, a generous format for the Heritage Member.",
-    't1-eye':"Tier I",'t1-kind':"Standard membership",'t1-area':"Standard size",
+    't1-eye':"Tier I",'t1-kind':"Standard membership",'t1-area':"Standard size",'t1-price':"€750",'price-per':"per month",
     't1-desc':"A spacious standard-size box, with priority booking at the members' rate. The trusted base for those who want their horse to have a calm, well-tended home on the estate.",
     't1-li1':"Horse box of 3 × 4 m (12 m²)",'t1-li2':"Priority booking at the members' rate",'t1-li3':"Access to the outdoor facilities, training halls and polo lounge",'t1-cta':"Become an Estate Member",
-    'crest':"All access",'t2-eye':"Tier II",'t2-kind':"Unrestricted membership",'t2-area':"Oversized",
+    'crest':"All access",'t2-eye':"Tier II",'t2-kind':"Unrestricted membership",'t2-area':"Oversized",'t2-price':"€1,950",
     't2-desc':"A reserved, oversized box — roomy enough for a stallion or warmblood — held for you alone the year round. The Heritage membership, without restrictions, for those who put space, certainty and full access first.",
     't2-li1':"Oversized horse box of 3 × 6 m (18 m²)",'t2-li2':"Reserved and held for you alone, year-round",'t2-li3':"Suited to stallions and warmbloods",'t2-li4':"Unrestricted access to all estate facilities",'t2-li5':"Invited to every exclusive event at the polo lounge",'t2-cta':"Become a Heritage Member",
     'sl-eye':"Join the club",'sl-lede':"“Your horse deserves St. Hubert.”",
