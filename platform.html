@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<!--
+  Veilingplatform — voorbeeld/demo · 2026-06-13 — St. Hubert Horse & Country Club (EWVO)
+  · Interactieve concept-demo van het digitale veilingplatform, in de huisstijl van concept.sinthubert.com
+  · Live dashboard (tellende cijfers + clearance), filterbare catalogus van lots, en een biedsimulatie
+    met aftelklok, biedhistorie, anti-sniping en af en toe een automatisch tegenbod
+  · Alle paardgegevens zijn fictief en uitsluitend ter illustratie van het concept
+  · Drietalige UI (NL/FR/EN), taalkeuze bewaard over pagina's · reduced motion gerespecteerd
+-->
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1c2b22">
+<meta name="description" content="Voorbeeld van het digitale veilingplatform van St. Hubert — live catalogus, transparant dashboard en biedsimulatie. Concept-demo met fictieve gegevens.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%231c2b22'/%3E%3Cg stroke='%23f4f1e9' fill='none' stroke-width='4'%3E%3Cpath d='M24 16 H96 Q103 16 103 23 V62 C103 80 87 89 60 101 C33 89 17 80 17 62 V23 Q17 16 24 16 Z'/%3E%3Cpath d='M43.5 71 A20.5 20.5 0 1 1 76.5 71' stroke-width='4.5'/%3E%3Cpath d='M49.5 66.5 A13 13 0 1 1 70.5 66.5' stroke-width='4.5'/%3E%3Cpath d='M43.5 71 L49.5 66.5 M76.5 71 L70.5 66.5'/%3E%3C/g%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sh-pl'))document.documentElement.classList.add('pl-skip')}catch(e){}</script>
+<title>Het platform — De Veiling van St. Hubert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --groen:#1c2b22;--groen-diep:#152119;--ivoor:#f4f1e9;--ivoor-warm:#ece7da;
+  --messing:#b9985f;--cognac:#8a5a33;--heide:#9a8aa0;--inkt:#20251f;--wit:#fbfaf6;
+  --live:#7a9a6a;--rood:#a8584f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;font-weight:300;color:var(--inkt);background:var(--ivoor);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'Marcellus',serif;font-weight:400;line-height:1.15}
+.lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400}
+.wrap{max-width:1240px;margin:0 auto;padding:0 6vw}
+.eyebrow{font-size:12px;letter-spacing:.34em;text-transform:uppercase;font-weight:500;color:var(--messing);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:'';width:34px;height:1px;background:var(--messing)}
+.btn{display:inline-block;font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:16px 34px;border:1px solid var(--messing);color:var(--ivoor);cursor:pointer;background:none;transition:background .35s,color .35s,border-color .35s,transform .3s cubic-bezier(.16,1,.3,1)}
+.btn:hover{background:var(--messing);color:var(--groen-diep)}
+.btn.solid{background:var(--messing);color:var(--groen-diep)}
+.btn.solid:hover{background:var(--ivoor);border-color:var(--ivoor)}
+.btn.dark{color:var(--groen);border-color:var(--groen)}
+.btn.dark:hover{background:var(--groen);color:var(--ivoor)}
+.btn.sm{padding:11px 22px;font-size:11.5px}
+
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.js .rv.in{opacity:1;transform:none}
+
+/* topbar + nav */
+.topbar{background:var(--groen-diep);color:rgba(244,241,233,.75);font-size:12px;letter-spacing:.14em}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:9px;padding-bottom:9px}
+.lang{display:flex;gap:2px}
+.lang button{background:none;border:0;color:rgba(244,241,233,.55);font:inherit;letter-spacing:inherit;padding:2px 9px;cursor:pointer;border-right:1px solid rgba(244,241,233,.18)}
+.lang button:last-child{border-right:0}
+.lang button.act{color:var(--messing)}
+.topbar .info{display:flex;gap:26px}
+nav{position:sticky;top:0;z-index:50;background:rgba(28,43,34,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(185,152,95,.28);transition:background .45s,box-shadow .45s}
+nav.compact{background:rgba(17,27,21,.97);box-shadow:0 12px 44px rgba(15,23,18,.38)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:clamp(14px,2vw,28px);padding-top:16px;padding-bottom:16px;transition:padding .4s cubic-bezier(.45,0,.2,1)}
+nav.compact .wrap{padding-top:9px;padding-bottom:9px}
+.brand{display:flex;align-items:center;gap:14px;color:var(--ivoor)}
+.brand .seal{width:46px;height:46px;flex:none;transition:width .4s,height .4s}
+nav.compact .brand .seal{width:38px;height:38px}
+.brand .name{font-family:'Marcellus',serif;font-size:19px;letter-spacing:.08em;line-height:1.2}
+.brand .name small{display:block;font-family:'Jost';font-size:9.5px;letter-spacing:.34em;color:var(--messing);text-transform:uppercase;margin-top:2px;white-space:nowrap}
+.menu{display:flex;gap:clamp(16px,2.3vw,34px);font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;color:rgba(244,241,233,.85)}
+.menu a{padding:4px 0;position:relative;white-space:nowrap;transition:color .3s}
+.menu a::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--messing);transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s cubic-bezier(.45,0,.2,1)}
+.menu a:hover,.menu a.hier{color:var(--messing)}
+.menu a:hover::after,.menu a:focus-visible::after,.menu a.hier::after{transform:scaleX(1);transform-origin:0 50%}
+.nav-cta{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:11px 20px;font-weight:500;white-space:nowrap;flex:none;transition:background .3s}
+.nav-cta:hover{background:var(--ivoor)}
+.burger{display:none;background:none;border:0;color:var(--ivoor);font-size:26px;cursor:pointer}
+
+/* preloader */
+#preloader{position:fixed;inset:0;z-index:200;background:var(--groen-diep);display:flex;align-items:center;justify-content:center;animation:plOut .5s ease 1.3s forwards}
+#preloader svg{width:clamp(120px,15vw,170px);color:var(--ivoor);overflow:visible}
+#preloader .pl-p{fill:none;stroke:currentColor;stroke-dasharray:1;stroke-dashoffset:1;animation:plDraw .75s cubic-bezier(.45,0,.2,1) var(--d,0s) both}
+#preloader .pl-dot{opacity:0;animation:plFade .45s ease .65s both}
+#preloader .pl-t{opacity:0;animation:plFade .45s ease .75s both}
+@keyframes plDraw{to{stroke-dashoffset:0}}
+@keyframes plFade{to{opacity:1}}
+@keyframes plOut{to{opacity:0;visibility:hidden}}
+.pl-skip #preloader{display:none}
+
+/* platform-hero (compact, donker) */
+.phead{background:var(--groen);color:var(--ivoor);position:relative;overflow:hidden;padding:54px 0 0}
+.phead::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='gr'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23gr)'/%3E%3C/svg%3E")}
+.phead .wrap{position:relative;z-index:1}
+.phead .demo-tag{display:inline-block;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:5px 12px;font-weight:500;margin-bottom:18px}
+.phead h1{font-size:clamp(30px,3.6vw,48px);max-width:16em;margin-top:6px}
+.phead .sub{max-width:620px;color:rgba(244,241,233,.82);margin-top:14px;font-size:16.5px}
+
+/* live dashboard */
+.dash{background:var(--groen);color:var(--ivoor);padding:40px 0 56px;position:relative;z-index:1}
+.dash-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:30px;border-top:1px solid var(--messing);border-bottom:1px solid var(--messing)}
+.dash-cell{padding:26px 18px;border-right:1px solid rgba(185,152,95,.3);text-align:center}
+.dash-cell:last-child{border-right:0}
+.dash-cell .n{font-family:'Marcellus',serif;font-size:clamp(28px,2.6vw,38px);color:var(--ivoor);line-height:1;font-variant-numeric:lining-nums}
+.dash-cell .l{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--messing);margin-top:12px}
+.dash-live{display:inline-flex;align-items:center;gap:9px;margin-top:6px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:rgba(244,241,233,.8)}
+.dash-live .dot{width:9px;height:9px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(122,154,106,.7);animation:puls 1.8s infinite}
+@keyframes puls{0%{box-shadow:0 0 0 0 rgba(122,154,106,.6)}70%{box-shadow:0 0 0 8px rgba(122,154,106,0)}100%{box-shadow:0 0 0 0 rgba(122,154,106,0)}}
+
+/* filterbalk */
+.toolbar{background:var(--ivoor-warm);border-bottom:1px solid rgba(185,152,95,.4);position:sticky;top:78px;z-index:40}
+.toolbar .wrap{display:flex;align-items:center;gap:18px;padding-top:16px;padding-bottom:16px;flex-wrap:wrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--cognac);border:1px solid rgba(185,152,95,.55);background:none;padding:9px 16px;cursor:pointer;transition:.25s}
+.chip:hover{border-color:var(--messing)}
+.chip.act{background:var(--groen);color:var(--ivoor);border-color:var(--groen)}
+.toolbar .right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.toolbar label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cognac)}
+.toolbar select{font:inherit;font-size:13px;color:var(--inkt);background:var(--wit);border:1px solid rgba(185,152,95,.55);padding:9px 12px;cursor:pointer}
+
+/* catalogus */
+.catalog{padding:46px 0 96px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,32px)}
+.lot{background:var(--wit);border:1px solid rgba(185,152,95,.3);display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s}
+.lot:hover{transform:translateY(-5px);box-shadow:0 26px 50px -22px rgba(15,23,18,.4)}
+.lot .ph{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--groen-diep)}
+.lot .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+.lot:hover .ph img{transform:scale(1.05)}
+.lot .ph::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,33,25,0) 55%,rgba(21,33,25,.55) 100%)}
+.lot .lotnr{position:absolute;top:14px;left:14px;z-index:2;font-family:'Marcellus',serif;font-size:12px;letter-spacing:.2em;color:var(--ivoor);background:rgba(21,33,25,.6);border:1px solid rgba(185,152,95,.5);padding:5px 11px}
+.badge{position:absolute;top:14px;right:14px;z-index:2;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;padding:5px 10px;color:var(--ivoor)}
+.badge.live{background:var(--live)}
+.badge.binnenkort{background:rgba(185,152,95,.9);color:var(--groen-diep)}
+.badge.verkocht{background:var(--rood)}
+.keur{position:absolute;bottom:12px;left:14px;z-index:2;display:inline-flex;align-items:center;gap:6px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ivoor)}
+.keur svg{width:14px;height:14px}
+.lot .body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+.lot h3{font-size:21px;color:var(--groen);letter-spacing:.02em}
+.lot .afst{font-size:13px;color:var(--cognac);margin-top:3px;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:16px}
+.lot .meta{font-size:12px;letter-spacing:.05em;color:#5a6157;margin-top:10px;text-transform:uppercase}
+.lot .bidrow{margin-top:auto;padding-top:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;border-top:1px solid rgba(185,152,95,.3)}
+.lot .bidrow .k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7a8278}
+.lot .bidrow .bod{font-family:'Marcellus',serif;font-size:24px;color:var(--inkt);line-height:1.1;font-variant-numeric:lining-nums}
+.lot .bidrow .clock{font-size:12.5px;letter-spacing:.08em;color:var(--cognac);font-variant-numeric:tabular-nums}
+.lot .bidrow .clock.urg{color:var(--rood)}
+.lot .bidrow .sold{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--rood)}
+.lot .act-row{padding:0 20px 20px}
+.lot .act-row .btn{width:100%;text-align:center}
+.lot .bieders{font-size:11px;color:#7a8278;margin-top:4px;letter-spacing:.04em;text-transform:none}
+
+/* drawer (lot-detail + bieden) */
+body.drawer-open{overflow:hidden}
+.scrim{position:fixed;inset:0;z-index:120;background:rgba(14,20,16,.66);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .35s}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:130;width:min(560px,100%);background:var(--ivoor);box-shadow:-30px 0 80px rgba(15,23,18,.5);transform:translateX(102%);transition:transform .45s cubic-bezier(.45,0,.2,1);display:flex;flex-direction:column;overflow-y:auto}
+.drawer.open{transform:none}
+.drawer .d-img{position:relative;aspect-ratio:16/10;background:var(--groen-diep);flex:none}
+.drawer .d-img img{width:100%;height:100%;object-fit:cover}
+.drawer .d-close{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(244,241,233,.6);background:rgba(21,33,25,.45);color:var(--ivoor);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s}
+.drawer .d-close:hover{background:var(--messing);color:var(--groen-diep);border-color:var(--messing);transform:rotate(90deg)}
+.drawer .d-close svg{width:18px;height:18px}
+.drawer .d-lotnr{position:absolute;top:18px;left:18px;font-family:'Marcellus',serif;font-size:12px;letter-spacing:.2em;color:var(--ivoor);background:rgba(21,33,25,.6);border:1px solid rgba(185,152,95,.5);padding:6px 12px}
+.d-body{padding:30px 34px 40px}
+.d-body .eyebrow{margin-bottom:10px}
+.d-body h2{font-size:30px;color:var(--groen)}
+.d-body .afst{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--cognac);margin-top:4px}
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:24px;border-top:1px solid rgba(185,152,95,.4)}
+.spec div{padding:13px 0;border-bottom:1px solid rgba(185,152,95,.25);display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.spec div:nth-child(odd){padding-right:18px;border-right:1px solid rgba(185,152,95,.25)}
+.spec div:nth-child(even){padding-left:18px}
+.spec .k{color:#7a8278;text-transform:uppercase;font-size:10.5px;letter-spacing:.16em}
+.spec .v{color:var(--inkt);text-align:right}
+.d-note{margin-top:22px;color:#4b5248;font-size:15px}
+
+/* biedpaneel */
+.bidpanel{margin-top:26px;background:var(--groen);color:var(--ivoor);padding:24px 24px 26px}
+.bidpanel .row1{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.bidpanel .k{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--messing)}
+.bidpanel .bod{font-family:'Marcellus',serif;font-size:38px;line-height:1;font-variant-numeric:lining-nums;margin-top:6px}
+.bidpanel .clock{text-align:right}
+.bidpanel .clock .t{font-family:'Marcellus',serif;font-size:26px;font-variant-numeric:tabular-nums}
+.bidpanel .clock .t.urg{color:#e7a39a}
+.bidpanel .bidbtn{margin-top:20px;width:100%;background:var(--messing);color:var(--groen-diep);border:0;font:inherit;font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:16px;cursor:pointer;transition:background .3s,transform .2s}
+.bidpanel .bidbtn:hover{background:var(--ivoor)}
+.bidpanel .bidbtn:active{transform:scale(.99)}
+.bidpanel .bidbtn:disabled{background:rgba(244,241,233,.25);color:rgba(244,241,233,.6);cursor:not-allowed}
+.bidpanel .hint{font-size:12px;color:rgba(244,241,233,.6);margin-top:10px;text-align:center;letter-spacing:.04em}
+.bidpanel .flash{animation:flash .6s ease}
+@keyframes flash{0%{background:rgba(185,152,95,.4)}100%{background:transparent}}
+
+/* biedhistorie */
+.hist{margin-top:24px}
+.hist h4{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cognac);margin-bottom:6px}
+.hist ul{list-style:none;max-height:190px;overflow-y:auto}
+.hist li{display:flex;justify-content:space-between;gap:12px;padding:11px 2px;border-bottom:1px solid rgba(185,152,95,.25);font-size:14px}
+.hist li .who{color:var(--inkt)}
+.hist li .who.me{color:var(--cognac);font-weight:500}
+.hist li .amt{font-variant-numeric:lining-nums;color:var(--groen);font-family:'Marcellus',serif}
+.hist li .tm{color:#9aa093;font-size:12px}
+.hist .leeg{color:#9aa093;font-style:italic;padding:12px 2px;font-family:'Cormorant Garamond',serif;font-size:17px}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);z-index:140;background:var(--groen-diep);color:var(--ivoor);border:1px solid var(--messing);padding:14px 22px;font-size:14px;letter-spacing:.03em;box-shadow:0 18px 50px rgba(15,23,18,.5);opacity:0;pointer-events:none;transition:opacity .35s,transform .35s}
+.toast.aan{opacity:1;transform:translate(-50%,0)}
+
+/* uitleg / disclaimer band */
+.band{background:var(--groen-diep) url('img/band-bos.jpg') center/cover;position:relative;color:var(--ivoor);text-align:center;padding:96px 0}
+.band::before{content:'';position:absolute;inset:0;background:rgba(21,33,25,.86)}
+.band .wrap{position:relative}
+.band .eyebrow{justify-content:center}
+.band .eyebrow::after{content:'';width:34px;height:1px;background:var(--messing)}
+.band h2{font-size:clamp(26px,3vw,40px);max-width:18em;margin:22px auto 0}
+.band p{max-width:560px;margin:20px auto 0;color:rgba(244,241,233,.8)}
+.band .cta-row{display:flex;gap:16px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+
+/* footer */
+footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:84px 0 0;font-size:14.5px}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:50px;padding-bottom:64px}
+.foot-grid .seal{width:74px;margin-bottom:22px}
+.foot-grid h5{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--messing);font-weight:500;margin-bottom:20px}
+.foot-grid a{display:block;padding:4px 0;transition:color .3s}
+.foot-grid a:hover{color:var(--messing)}
+.foot-grid .brandname{font-family:'Marcellus',serif;font-size:20px;color:var(--ivoor);letter-spacing:.06em;line-height:1.4}
+.foot-bottom{border-top:1px solid rgba(185,152,95,.25);padding:24px 0;display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.1em;color:rgba(244,241,233,.45);flex-wrap:wrap}
+.concept-badge{position:fixed;left:18px;bottom:18px;z-index:60;background:var(--ivoor);color:var(--groen);border:1px solid var(--messing);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;padding:9px 16px;box-shadow:0 6px 24px rgba(21,33,25,.25)}
+.concept-badge b{color:var(--cognac)}
+.foot-bottom a{color:inherit;border-bottom:1px solid rgba(185,152,95,.45);padding-bottom:1px;transition:color .3s,border-color .3s}
+.foot-bottom a:hover{color:var(--messing);border-color:var(--messing)}
+.concept-badge a{color:var(--cognac);border-bottom:1px solid rgba(138,90,51,.4)}
+
+body{font-kerning:normal;font-feature-settings:"kern" 1,"liga" 1;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{text-wrap:balance}
+::selection{background:var(--groen);color:var(--ivoor)}
+html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:var(--ivoor)}
+::-webkit-scrollbar-thumb{background:var(--messing);border:2px solid var(--ivoor);border-radius:99px}
+:focus-visible{outline:2px solid var(--messing);outline-offset:3px}
+
+@media (max-width:1100px){
+  .menu{display:none}.burger{display:block}
+  nav.open .menu{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;background:var(--groen-diep);padding:10px 6vw 26px;border-bottom:1px solid rgba(185,152,95,.3)}
+  nav.open .menu a{padding:13px 0;border-bottom:1px solid rgba(244,241,233,.08)}
+  nav.open .menu a::after{display:none}
+  .nav-cta{display:none}
+}
+@media (max-width:980px){
+  .dash-grid{grid-template-columns:1fr 1fr}
+  .dash-cell:nth-child(2){border-right:0}
+  .dash-cell{border-bottom:1px solid rgba(185,152,95,.3)}
+  .grid{grid-template-columns:1fr 1fr}
+  .toolbar{position:static}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .topbar .info span:last-child{display:none}
+  #preloader svg{width:96px}
+}
+@media (max-width:620px){
+  .dash-grid{grid-template-columns:1fr}
+  .dash-cell{border-right:0;border-bottom:1px solid rgba(185,152,95,.3)}
+  .grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+  .toolbar .right{margin-left:0;width:100%}
+  .foot-grid{grid-template-columns:1fr}
+  .topbar .info{display:none}
+  .spec{grid-template-columns:1fr}
+  .spec div:nth-child(odd){border-right:0;padding-right:0}
+  .spec div:nth-child(even){padding-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}#preloader{display:none}
+  .js .rv{opacity:1;transform:none}
+  .dash-live .dot{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- preloader -->
+<div id="preloader" aria-hidden="true">
+  <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-linecap="round">
+    <path class="pl-p" d="M18 12 H102 Q110 12 110 20 V68 C110 88 92 98 60 112 C28 98 10 88 10 68 V20 Q10 12 18 12 Z" stroke-width="1.6" pathLength="1"/>
+    <path class="pl-p" d="M20.5 16 H99.5 Q106 16 106 22.5 V67 C106 84.5 90 94 60 107.5 C30 94 14 84.5 14 67 V22.5 Q14 16 20.5 16 Z" stroke-width=".7" pathLength="1" style="--d:.1s"/>
+    <g stroke-width="1.5">
+      <path class="pl-p" d="M47.8 65 A15.5 15.5 0 1 1 72.2 65" pathLength="1" style="--d:.35s"/>
+      <path class="pl-p" d="M52.1 61.7 A10 10 0 1 1 67.9 61.7" pathLength="1" style="--d:.45s"/>
+      <path class="pl-p" d="M47.8 65 L52.1 61.7 M72.2 65 L67.9 61.7" stroke-width="1.1" pathLength="1" style="--d:.55s"/>
+    </g>
+    <g fill="currentColor" stroke="none" class="pl-t">
+      <text x="60" y="25" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="5.4" letter-spacing=".8" textLength="52" lengthAdjust="spacingAndGlyphs">HORSE &amp; COUNTRYCLUB</text>
+      <text x="60" y="94" text-anchor="middle" font-family="Marcellus, serif" font-size="13.5" textLength="64" lengthAdjust="spacingAndGlyphs">ST. HUBERT</text>
+      <text x="60" y="101.5" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="4.4" letter-spacing=".8" textLength="30" lengthAdjust="spacingAndGlyphs">SINCE 1920</text>
+    </g>
+  </svg>
+</div>
+
+<!-- logo def -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="hubertus" fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M18 12 H102 Q110 12 110 20 V68 C110 88 92 98 60 112 C28 98 10 88 10 68 V20 Q10 12 18 12 Z" stroke-width="1.6"/>
+      <path d="M20.5 16 H99.5 Q106 16 106 22.5 V67 C106 84.5 90 94 60 107.5 C30 94 14 84.5 14 67 V22.5 Q14 16 20.5 16 Z" stroke-width=".7"/>
+      <g stroke-width="1.1">
+        <g transform="translate(33.5,28.5) rotate(45)"><rect x="-11" y="-3" width="22" height="6" rx="3"/><path d="M-6.5 -2.7 L-5.3 2.7 M-2.2 -2.8 L-1 2.8 M2.1 -2.8 L3.3 2.8 M6.4 -2.7 L7.6 2.7" stroke-width=".8"/></g>
+        <path d="M41.3 36.3 L74.6 69.6" stroke-width="1.6"/><path d="M51 48.2 L53.1 46.1 M61.7 58.9 L63.8 56.8" stroke-width=".8"/>
+        <g transform="translate(78.5,73.5) rotate(45)"><rect x="-5.5" y="-1.7" width="11" height="3.4" rx="1.7"/><ellipse cx="9.5" cy="0" rx="3.6" ry="1.7"/></g>
+      </g>
+      <g stroke-width="1.1">
+        <g transform="translate(86.5,28.5) rotate(-45)"><rect x="-11" y="-3" width="22" height="6" rx="3"/><path d="M-6.5 -2.7 L-5.3 2.7 M-2.2 -2.8 L-1 2.8 M2.1 -2.8 L3.3 2.8 M6.4 -2.7 L7.6 2.7" stroke-width=".8"/></g>
+        <path d="M78.7 36.3 L45.4 69.6" stroke-width="1.6"/><path d="M69 48.2 L66.9 46.1 M58.3 58.9 L56.2 56.8" stroke-width=".8"/>
+        <g transform="translate(41.5,73.5) rotate(135)"><rect x="-5.5" y="-1.7" width="11" height="3.4" rx="1.7"/><ellipse cx="9.5" cy="0" rx="3.6" ry="1.7"/></g>
+      </g>
+      <g stroke-width="1.5"><path d="M47.8 65 A15.5 15.5 0 1 1 72.2 65"/><path d="M52.1 61.7 A10 10 0 1 1 67.9 61.7"/><path d="M47.8 65 L52.1 61.7 M72.2 65 L67.9 61.7" stroke-width="1.1"/></g>
+      <g stroke-width=".75">
+        <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(72,51.1) rotate(-110)"/><rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(67.3,45.1) rotate(-145)"/><rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(60,42.75)"/><rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(52.7,45.1) rotate(145)"/><rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(48,51.1) rotate(110)"/>
+      </g>
+      <path d="M55.8 67 L55.4 69.2 M60 67.7 L60 69.9 M64.2 67 L64.6 69.2" stroke-width=".85"/>
+      <g fill="currentColor" stroke="none">
+        <text x="60" y="25" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="5.4" letter-spacing=".8" textLength="52" lengthAdjust="spacingAndGlyphs">HORSE &amp; COUNTRYCLUB</text>
+        <text x="60" y="94" text-anchor="middle" font-family="Marcellus, serif" font-size="13.5" textLength="64" lengthAdjust="spacingAndGlyphs">ST. HUBERT</text>
+        <text x="60" y="101.5" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="4.4" letter-spacing=".8" textLength="30" lengthAdjust="spacingAndGlyphs">SINCE 1920</text>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<!-- topbar -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="lang">
+      <button class="act" data-lang="nl">NL</button>
+      <button data-lang="fr">FR</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <div class="info"><span data-i18n="tb-demo">Concept-demo · fictieve gegevens</span><span>+32 3 605 87 90</span></div>
+  </div>
+</div>
+
+<!-- nav -->
+<nav id="nav">
+  <div class="wrap">
+    <a href="/" class="brand">
+      <svg class="seal" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
+      <span class="name">St. Hubert<small>Horse &amp; Country Club</small></span>
+    </a>
+    <div class="menu">
+      <a href="/#club" data-i18n="m1">De club</a>
+      <a href="/#members" data-i18n="m2">Members</a>
+      <a href="/springen" data-i18n="m7">Springen</a>
+      <a href="/veiling" class="hier" data-i18n="m3">Veilingen</a>
+      <a href="/historie" data-i18n="m4">Historie</a>
+      <a href="/#contact" data-i18n="m6">Contact</a>
+    </div>
+    <a href="#catalogus" class="nav-cta" data-i18n="pl-navcta">Bekijk de catalogus</a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<!-- platform-hero -->
+<header class="phead">
+  <div class="wrap">
+    <span class="demo-tag" data-i18n="pl-tag">Voorbeeld · live platform</span>
+    <div class="eyebrow" data-i18n="pl-eye">Zomerveiling 2026 — sportpaarden</div>
+    <h1 data-i18n="pl-title">De veilingring van St. Hubert, digitaal.</h1>
+    <p class="sub" data-i18n="pl-sub">Volg de biedingen live, doorzoek de collectie en plaats uw bod — transparant van het eerste bod tot de hamerslag. Dit is een interactieve demo; alle paarden en bedragen zijn fictief.</p>
+  </div>
+
+  <!-- live dashboard -->
+  <div class="dash">
+    <div class="wrap">
+      <div class="dash-live"><span class="dot"></span><span data-i18n="pl-livenow">Veiling live · ring 1</span></div>
+      <div class="dash-grid">
+        <div class="dash-cell"><div class="n" id="d-lots">9</div><div class="l" data-i18n="dl-lots">Lots in de ring</div></div>
+        <div class="dash-cell"><div class="n" id="d-top">€120.000</div><div class="l" data-i18n="dl-top">Hoogste bod</div></div>
+        <div class="dash-cell"><div class="n" id="d-clear">86</div><div class="l" data-i18n="dl-clear">Clearance rate %</div></div>
+        <div class="dash-cell"><div class="n" id="d-bidders">1.247</div><div class="l" data-i18n="dl-bidders">Geregistreerde bieders</div></div>
+        <div class="dash-cell"><div class="n" id="d-omzet">€2,4M</div><div class="l" data-i18n="dl-omzet">Ringomzet dit seizoen</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- filterbalk -->
+<div class="toolbar" id="catalogus">
+  <div class="wrap">
+    <div class="chips" id="chips">
+      <button class="chip act" data-disc="alle" data-i18n="f-alle">Alle</button>
+      <button class="chip" data-disc="springen" data-i18n="d-springen">Springen</button>
+      <button class="chip" data-disc="dressuur" data-i18n="d-dressuur">Dressuur</button>
+      <button class="chip" data-disc="eventing" data-i18n="d-eventing">Eventing</button>
+    </div>
+    <div class="right">
+      <label for="sort" data-i18n="f-sort">Sorteer</label>
+      <select id="sort">
+        <option value="lot" data-i18n="so-lot">Lotnummer</option>
+        <option value="bod" data-i18n="so-bod">Hoogste bod</option>
+        <option value="tijd" data-i18n="so-tijd">Eindigt eerst</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- catalogus -->
+<section class="catalog">
+  <div class="wrap">
+    <div class="grid" id="grid"><!-- lots via JS --></div>
+  </div>
+</section>
+
+<!-- uitleg / disclaimer -->
+<section class="band">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="bd-eye">Zo werkt het platform</div>
+    <h2 data-i18n="bd-title">Een transparante ring — met de club erachter.</h2>
+    <p data-i18n="bd-p">Elk lot toont openlijk het biedverloop en het St. Hubert-keurmerk. Wint u een paard, dan regelt de club stalling, training, transport en after-sales. Dit is een concept-demo: bieden plaatst geen echte order.</p>
+    <div class="cta-row">
+      <a href="/veiling" class="btn solid" data-i18n="bd-cta1">Over de veiling</a>
+      <a href="mailto:info@sinthubert.com?subject=Inschrijving%20veiling%20St.%20Hubert" class="btn" data-i18n="bd-cta2">Inschrijven als bieder</a>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <svg class="seal" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
+        <div class="brandname">St. Hubert<br>Horse &amp; Country Club</div>
+        <p style="margin-top:16px;font-size:13.5px;max-width:260px" data-i18n="ft-tag">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
+      </div>
+      <div><h5 data-i18n="ft-h1">Bezoek ons</h5><p data-i18n="ft-adres">Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</p></div>
+      <div><h5 data-i18n="ft-h2">Contact</h5><a href="tel:+3236058790">+32 3 605 87 90</a><a href="mailto:info@sinthubert.com">info@sinthubert.com</a></div>
+      <div><h5 data-i18n="ft-h3">De club</h5><a href="/veiling" data-i18n="m3">Veilingen</a><a href="/springen" data-i18n="m7">Springen</a><a href="/historie" data-i18n="m4">Historie</a><a href="/#agenda" data-i18n="ft-l5">Agenda &amp; events</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 St. Hubert Horse &amp; Country Club — Kapellen</span>
+      <span data-i18n="ft-demo">Concept-demo · fictieve gegevens · geen echte transacties</span>
+      <span>Concept 01 · <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="concept-badge"><b data-i18n="cb">Voorbeeld-demo</b> &nbsp;·&nbsp; <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a> × St. Hubert</div>
+
+<!-- drawer / lot-detail -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Lot-detail" aria-hidden="true"></aside>
+
+<!-- toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* preloader */
+const plSkip = document.documentElement.classList.contains('pl-skip');
+const pl = document.getElementById('preloader');
+if(pl){ if(reduced||plSkip){pl.remove();} else setTimeout(()=>pl.remove(),2000); try{sessionStorage.setItem('sh-pl','1');}catch(e){} }
+
+/* nav compact */
+const nav = document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('compact',scrollY>80),{passive:true});
+document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+/* ===================== i18n ===================== */
+const I18N = {
+ nl:{m1:"De club",m2:"Members",m3:"Veilingen",m4:"Historie",m5:"Agenda",m6:"Contact",m7:"Springen",
+   'pl-navcta':"Bekijk de catalogus",'tb-demo':"Concept-demo · fictieve gegevens",
+   'pg-title':"Het platform — De Veiling van St. Hubert",
+   'pl-tag':"Voorbeeld · live platform",'pl-eye':"Zomerveiling 2026 — sportpaarden",
+   'pl-title':"De veilingring van St. Hubert, digitaal.",
+   'pl-sub':"Volg de biedingen live, doorzoek de collectie en plaats uw bod — transparant van het eerste bod tot de hamerslag. Dit is een interactieve demo; alle paarden en bedragen zijn fictief.",
+   'pl-livenow':"Veiling live · ring 1",
+   'dl-lots':"Lots in de ring",'dl-top':"Hoogste bod",'dl-clear':"Clearance rate %",'dl-bidders':"Geregistreerde bieders",'dl-omzet':"Ringomzet dit seizoen",
+   'f-alle':"Alle",'f-sort':"Sorteer",'so-lot':"Lotnummer",'so-bod':"Hoogste bod",'so-tijd':"Eindigt eerst",
+   'd-springen':"Springen",'d-dressuur':"Dressuur",'d-eventing':"Eventing",
+   'bd-eye':"Zo werkt het platform",'bd-title':"Een transparante ring — met de club erachter.",
+   'bd-p':"Elk lot toont openlijk het biedverloop en het St. Hubert-keurmerk. Wint u een paard, dan regelt de club stalling, training, transport en after-sales. Dit is een concept-demo: bieden plaatst geen echte order.",
+   'bd-cta1':"Over de veiling",'bd-cta2':"Inschrijven als bieder",
+   'ft-tag':"Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.",
+   'ft-h1':"Bezoek ons",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België",'ft-h2':"Contact",'ft-h3':"De club",'ft-l5':"Agenda & events",
+   'ft-demo':"Concept-demo · fictieve gegevens · geen echte transacties",'cb':"Voorbeeld-demo",
+   // dynamische tokens
+   st_live:"Live nu",st_binnenkort:"Binnenkort",st_verkocht:"Verkocht",
+   disc_springen:"Springen",disc_dressuur:"Dressuur",disc_eventing:"Eventing",
+   g_merrie:"merrie",g_ruin:"ruin",g_hengst:"hengst",
+   keur_goedgekeurd:"Keurmerk goedgekeurd",keur_voorbehoud:"Keuring lopend",
+   jr:"jr",bod:"Huidig bod",bieders:"bieders",eindigt:"Eindigt over",eindopen:"Opening over",
+   bekijk:"Bekijk lot",bied:"Bied",verhoog:"Verhoog bod",hint:"Volgend bod",historie:"Biedhistorie",geenbod:"Nog geen bod — wees de eerste.",
+   u:"U",afstamming:"Afstamming",leeftijd:"Leeftijd",geslacht:"Geslacht",discipline:"Discipline",stokmaat:"Stokmaat",herkomst:"Herkomst",keurmerk:"Keurmerk",
+   gesloten:"Bieding gesloten",toastbod:"Uw bod is geregistreerd",toastover:"U bent overboden!",toastsold:"Lot verkocht",closed:"Verkocht voor"},
+ fr:{m1:"Le club",m2:"Membres",m3:"Ventes",m4:"Histoire",m5:"Agenda",m6:"Contact",m7:"Jumping",
+   'pl-navcta':"Voir le catalogue",'tb-demo':"Démo concept · données fictives",
+   'pg-title':"La plateforme — La Vente de St. Hubert",
+   'pl-tag':"Exemple · plateforme en direct",'pl-eye':"Vente d'été 2026 — chevaux de sport",
+   'pl-title':"Le ring de vente de St. Hubert, en numérique.",
+   'pl-sub':"Suivez les enchères en direct, parcourez la collection et placez votre offre — en toute transparence, du premier enchère au coup de marteau. Démo interactive ; tous les chevaux et montants sont fictifs.",
+   'pl-livenow':"Vente en direct · ring 1",
+   'dl-lots':"Lots dans le ring",'dl-top':"Enchère la plus haute",'dl-clear':"Taux de clearance %",'dl-bidders':"Enchérisseurs inscrits",'dl-omzet':"Chiffre du ring cette saison",
+   'f-alle':"Tous",'f-sort':"Trier",'so-lot':"Numéro de lot",'so-bod':"Enchère la plus haute",'so-tijd':"Se termine en premier",
+   'd-springen':"Jumping",'d-dressuur':"Dressage",'d-eventing':"Concours complet",
+   'bd-eye':"Comment fonctionne la plateforme",'bd-title':"Un ring transparent — avec le club derrière.",
+   'bd-p':"Chaque lot montre ouvertement le déroulement des enchères et le label St. Hubert. Si vous remportez un cheval, le club organise pension, entraînement, transport et après-vente. Ceci est une démo : enchérir ne passe aucune commande réelle.",
+   'bd-cta1':"À propos de la vente",'bd-cta2':"S'inscrire comme enchérisseur",
+   'ft-tag':"Une oasis de calme au cœur vert d'Anvers — pour le cheval, le cavalier et le passionné.",
+   'ft-h1':"Visitez-nous",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgique",'ft-h2':"Contact",'ft-h3':"Le club",'ft-l5':"Agenda & événements",
+   'ft-demo':"Démo concept · données fictives · aucune transaction réelle",'cb':"Démo exemple",
+   st_live:"En direct",st_binnenkort:"Bientôt",st_verkocht:"Vendu",
+   disc_springen:"Jumping",disc_dressuur:"Dressage",disc_eventing:"Concours complet",
+   g_merrie:"jument",g_ruin:"hongre",g_hengst:"étalon",
+   keur_goedgekeurd:"Label approuvé",keur_voorbehoud:"Expertise en cours",
+   jr:"ans",bod:"Enchère actuelle",bieders:"enchérisseurs",eindigt:"Se termine dans",eindopen:"Ouverture dans",
+   bekijk:"Voir le lot",bied:"Enchérir",verhoog:"Surenchérir",hint:"Prochaine enchère",historie:"Historique des enchères",geenbod:"Aucune enchère — soyez le premier.",
+   u:"Vous",afstamming:"Ascendance",leeftijd:"Âge",geslacht:"Sexe",discipline:"Discipline",stokmaat:"Toise",herkomst:"Origine",keurmerk:"Label",
+   gesloten:"Enchères closes",toastbod:"Votre enchère est enregistrée",toastover:"Vous êtes surenchéri !",toastsold:"Lot vendu",closed:"Vendu pour"},
+ en:{m1:"The club",m2:"Members",m3:"Auctions",m4:"History",m5:"Calendar",m6:"Contact",m7:"Jumping",
+   'pl-navcta':"View the catalogue",'tb-demo':"Concept demo · fictional data",
+   'pg-title':"The platform — The St. Hubert Auction",
+   'pl-tag':"Example · live platform",'pl-eye':"Summer auction 2026 — sport horses",
+   'pl-title':"The St. Hubert sales ring, gone digital.",
+   'pl-sub':"Follow the bidding live, browse the collection and place your bid — transparent from the first bid to the fall of the hammer. This is an interactive demo; all horses and amounts are fictional.",
+   'pl-livenow':"Auction live · ring 1",
+   'dl-lots':"Lots in the ring",'dl-top':"Highest bid",'dl-clear':"Clearance rate %",'dl-bidders':"Registered bidders",'dl-omzet':"Ring turnover this season",
+   'f-alle':"All",'f-sort':"Sort",'so-lot':"Lot number",'so-bod':"Highest bid",'so-tijd':"Ending soonest",
+   'd-springen':"Jumping",'d-dressuur':"Dressage",'d-eventing':"Eventing",
+   'bd-eye':"How the platform works",'bd-title':"A transparent ring — with the club behind it.",
+   'bd-p':"Every lot openly shows the course of the bidding and the St. Hubert hallmark. Win a horse and the club arranges stabling, training, transport and after-sales. This is a concept demo: bidding places no real order.",
+   'bd-cta1':"About the auction",'bd-cta2':"Register as a bidder",
+   'ft-tag':"An oasis of calm in the green heart of Antwerp — for horse, rider and enthusiast.",
+   'ft-h1':"Visit us",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgium",'ft-h2':"Contact",'ft-h3':"The club",'ft-l5':"Calendar & events",
+   'ft-demo':"Concept demo · fictional data · no real transactions",'cb':"Example demo",
+   st_live:"Live now",st_binnenkort:"Soon",st_verkocht:"Sold",
+   disc_springen:"Jumping",disc_dressuur:"Dressage",disc_eventing:"Eventing",
+   g_merrie:"mare",g_ruin:"gelding",g_hengst:"stallion",
+   keur_goedgekeurd:"Hallmark approved",keur_voorbehoud:"Vetting in progress",
+   jr:"yrs",bod:"Current bid",bieders:"bidders",eindigt:"Ends in",eindopen:"Opens in",
+   bekijk:"View lot",bied:"Bid",verhoog:"Place bid",hint:"Next bid",historie:"Bid history",geenbod:"No bids yet — be the first.",
+   u:"You",afstamming:"Pedigree",leeftijd:"Age",geslacht:"Sex",discipline:"Discipline",stokmaat:"Height",herkomst:"Origin",keurmerk:"Hallmark",
+   gesloten:"Bidding closed",toastbod:"Your bid is registered",toastover:"You've been outbid!",toastsold:"Lot sold",closed:"Sold for"}
+};
+let LANG = 'nl';
+try{ const s=localStorage.getItem('sh-lang'); if(s&&I18N[s]) LANG=s; }catch(e){}
+const T = k => (I18N[LANG] && I18N[LANG][k]!=null) ? I18N[LANG][k] : (I18N.nl[k]||k);
+
+/* ===================== data (fictief) ===================== */
+const now = Date.now();
+const M = 60000;
+let LOTS = [
+ {lot:1, naam:"Calypso van St. Hubert", disc:"springen", g:"merrie", leeftijd:5, afst:"Comme il Faut × Diamant de Semilly", land:"BE", stok:168, keur:"goedgekeurd", status:"live", bod:42000, bieders:14, eind:now+7*M, img:"img/gate-veiling.jpg", note:{nl:"Voorzichtig en bloedvol, met veel vermogen over het hek. Klaar voor het 1,30m-circuit.",fr:"Prudente et sang, avec beaucoup de moyens au-dessus de l'obstacle. Prête pour le circuit 1,30 m.",en:"Careful and blood, with great scope over a fence. Ready for the 1.30m circuit."}},
+ {lot:2, naam:"Vendetta du Bois", disc:"dressuur", g:"ruin", leeftijd:6, afst:"Vivaldi × Negro", land:"NL", stok:172, keur:"goedgekeurd", status:"live", bod:58000, bieders:9, eind:now+11*M, img:"img/strip-piste.jpg", note:{nl:"Drie correcte gangen met een uitgesproken achterbeen. Fijn in de aanleuning.",fr:"Trois allures correctes avec un postérieur prononcé. Léger dans le contact.",en:"Three correct gaits with a pronounced hind leg. Light in the contact."}},
+ {lot:3, naam:"Hubertus Z", disc:"springen", g:"hengst", leeftijd:4, afst:"Heartbreaker × Cornet Obolensky", land:"BE", stok:166, keur:"voorbehoud", status:"live", bod:31500, bieders:6, eind:now+4*M, img:"img/fac-pistes.jpg", note:{nl:"Jong talent met uitzonderlijke afstamming. Keuring wordt deze week afgerond.",fr:"Jeune talent à l'ascendance exceptionnelle. L'expertise sera finalisée cette semaine.",en:"Young talent with exceptional pedigree. Vetting to be completed this week."}},
+ {lot:4, naam:"Bellefleur", disc:"dressuur", g:"merrie", leeftijd:7, afst:"Bordeaux × Sandro Hit", land:"DE", stok:170, keur:"goedgekeurd", status:"live", bod:76000, bieders:12, eind:now+15*M, img:"img/gate-ruiters.jpg", note:{nl:"Ervaren op Prix St-Georges-niveau, met de aanleg voor Grand Prix.",fr:"Expérimentée au niveau Prix St-Georges, avec les aptitudes pour le Grand Prix.",en:"Experienced at Prix St-Georges level, with Grand Prix potential."}},
+ {lot:5, naam:"Quintano Kalmthout", disc:"springen", g:"ruin", leeftijd:8, afst:"Quasimodo Z × Chin Chin", land:"BE", stok:174, keur:"goedgekeurd", status:"live", bod:120000, bieders:21, eind:now+19*M, img:"img/strip-hoofdstel.jpg", note:{nl:"Geplaatst in 1,45m-rubrieken. Een routinier voor de ambitieuze amateur of prof.",fr:"Classé en épreuves 1,45 m. Un routier pour l'amateur ambitieux ou le pro.",en:"Placed in 1.45m classes. A schoolmaster for the ambitious amateur or pro."}},
+ {lot:6, naam:"Amance de la Heide", disc:"springen", g:"merrie", leeftijd:3, afst:"Aganix du Seigneur × Kannan", land:"BE", stok:163, keur:"goedgekeurd", status:"binnenkort", bod:18000, bieders:3, eind:now+26*M, img:"img/fac-heide.jpg", note:{nl:"Veelbelovende driejarige uit een bewezen springstam. Vrijspringen indrukwekkend.",fr:"Trois ans prometteuse issue d'une souche à succès. Saut en liberté impressionnant.",en:"Promising three-year-old from a proven jumping line. Impressive free-jumping."}},
+ {lot:7, naam:"Don Diablo St.H", disc:"dressuur", g:"hengst", leeftijd:5, afst:"Dante Weltino × Florencio", land:"NL", stok:171, keur:"goedgekeurd", status:"binnenkort", bod:64000, bieders:7, eind:now+31*M, img:"img/strip-bos.jpg", note:{nl:"Showpaard met expressie en zelfdraagkracht. Publiekslieveling op de eigen pistes.",fr:"Cheval de spectacle, expressif et porteur. Chouchou du public sur nos pistes.",en:"A show horse with expression and self-carriage. A crowd favourite on our arenas."}},
+ {lot:8, naam:"Whisper of Hoogboom", disc:"eventing", g:"ruin", leeftijd:9, afst:"Contendro × Heraldik", land:"BE", stok:169, keur:"goedgekeurd", status:"binnenkort", bod:47500, bieders:5, eind:now+38*M, img:"img/hero-bos.jpg", note:{nl:"Allround eventer met een betrouwbaar cross-hart. Ervaren tot 2*-niveau.",fr:"Complet polyvalent au cœur fiable en cross. Expérimenté jusqu'au niveau 2*.",en:"All-round eventer with a reliable cross-country heart. Experienced to 2* level."}},
+ {lot:9, naam:"Lumina", disc:"springen", g:"merrie", leeftijd:6, afst:"Emerald × Darco", land:"BE", stok:167, keur:"goedgekeurd", status:"verkocht", bod:89000, bieders:18, eind:now-2*M, img:"img/band-bos.jpg", note:{nl:"Verkocht tijdens de openingsavond — een schoolvoorbeeld van moderne springfokkerij.",fr:"Vendue lors de la soirée d'ouverture — un exemple de l'élevage moderne.",en:"Sold during the opening evening — a textbook example of modern jumping breeding."}}
+];
+
+/* ===================== helpers ===================== */
+const euro = n => '€'+new Intl.NumberFormat('nl-NL').format(Math.round(n));
+function increment(b){ return b<50000?1000 : b<100000?2500 : 5000; }
+function fmtTime(ms){
+  if(ms<=0) return '00:00';
+  let s=Math.floor(ms/1000), h=Math.floor(s/3600); s-=h*3600;
+  let m=Math.floor(s/60); s-=m*60;
+  const p=x=>String(x).padStart(2,'0');
+  return h>0 ? h+':'+p(m)+':'+p(s) : p(m)+':'+p(s);
+}
+const botNamen = ["Stal Verh" ,"Haras du Pré","R. Janssens","Team Eqⁿ","Hof ten Berg","M. Dubois","Sport Horses NL","Écurie Lefèvre","Stoeterij De Wit","G. Romano"];
+function botNaam(){ return botNamen[Math.floor(Math.random()*botNamen.length)]; }
+
+/* state */
+LOTS.forEach(l=>{ l.hist = []; });
+let curFilter='alle', curSort='lot', openLot=null;
+
+/* ===================== render dashboard ===================== */
+function renderDash(){
+  const live = LOTS.filter(l=>l.status!=='verkocht');
+  document.getElementById('d-lots').textContent = live.length;
+  const top = Math.max(...LOTS.map(l=>l.bod));
+  document.getElementById('d-top').textContent = euro(top);
+  const totBidders = LOTS.reduce((a,l)=>a+l.bieders,0)+1100;
+  document.getElementById('d-bidders').textContent = new Intl.NumberFormat('nl-NL').format(totBidders);
+}
+
+/* ===================== render grid ===================== */
+const grid = document.getElementById('grid');
+function visibleLots(){
+  let arr = LOTS.filter(l=>curFilter==='alle'||l.disc===curFilter);
+  arr.sort((a,b)=> curSort==='bod' ? b.bod-a.bod : curSort==='tijd' ? a.eind-b.eind : a.lot-b.lot);
+  return arr;
+}
+function keurSvg(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>'; }
+function cardHTML(l){
+  const sold = l.status==='verkocht';
+  const clockTxt = sold ? '<span class="sold">'+T('st_verkocht')+'</span>'
+    : '<span class="clock" data-clock="'+l.lot+'">'+fmtTime(l.eind-Date.now())+'</span>';
+  return '<article class="lot rv" data-lot="'+l.lot+'">'+
+    '<div class="ph"><img src="'+l.img+'" alt="'+l.naam+'" loading="lazy" decoding="async">'+
+      '<span class="lotnr">Lot '+String(l.lot).padStart(2,'0')+'</span>'+
+      '<span class="badge '+l.status+'">'+T('st_'+l.status)+'</span>'+
+      (l.keur==='goedgekeurd'?'<span class="keur">'+keurSvg()+T('keur_goedgekeurd')+'</span>':'')+
+    '</div>'+
+    '<div class="body">'+
+      '<h3>'+l.naam+'</h3>'+
+      '<div class="afst">'+l.afst+'</div>'+
+      '<div class="meta">'+T('disc_'+l.disc)+' · '+T('g_'+l.g)+' · '+l.leeftijd+' '+T('jr')+' · '+l.land+'</div>'+
+      '<div class="bidrow"><div><div class="k">'+(sold?T('closed'):T('bod'))+'</div><div class="bod" data-bod="'+l.lot+'">'+euro(l.bod)+'</div>'+
+        '<div class="bieders"><span data-bidders="'+l.lot+'">'+l.bieders+'</span> '+T('bieders')+'</div></div>'+
+        '<div style="text-align:right">'+clockTxt+'</div></div>'+
+    '</div>'+
+    '<div class="act-row"><button class="btn dark sm" data-open="'+l.lot+'">'+(sold?T('bekijk'):T('bied'))+'</button></div>'+
+  '</article>';
+}
+function renderGrid(){
+  grid.innerHTML = visibleLots().map(cardHTML).join('');
+  grid.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openDrawer(+b.dataset.open)));
+  if(!reduced){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+    grid.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  } else grid.querySelectorAll('.rv').forEach(el=>el.classList.add('in'));
+}
+
+/* ===================== drawer ===================== */
+const scrim=document.getElementById('scrim'), drawer=document.getElementById('drawer');
+function specRow(k,v){ return '<div><span class="k">'+k+'</span><span class="v">'+v+'</span></div>'; }
+function drawerHTML(l){
+  const sold=l.status==='verkocht';
+  const histHTML = l.hist.length ? l.hist.map(h=>'<li><span class="who'+(h.me?' me':'')+'">'+h.who+'</span><span class="amt">'+euro(h.amt)+'</span><span class="tm">'+h.tm+'</span></li>').join('')
+    : '<div class="leeg">'+T('geenbod')+'</div>';
+  const bidBtn = sold
+    ? '<button class="bidbtn" disabled>'+T('gesloten')+'</button>'
+    : '<button class="bidbtn" id="doBid">'+T('verhoog')+' · '+euro(l.bod+increment(l.bod))+'</button><div class="hint">'+T('hint')+': '+euro(l.bod+increment(l.bod))+'</div>';
+  return '<div class="d-img"><img src="'+l.img+'" alt="'+l.naam+'">'+
+      '<span class="d-lotnr">Lot '+String(l.lot).padStart(2,'0')+'</span>'+
+      '<button class="d-close" id="dClose" aria-label="Sluiten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>'+
+    '<div class="d-body">'+
+      '<div class="eyebrow">'+T('disc_'+l.disc)+'</div>'+
+      '<h2>'+l.naam+'</h2>'+
+      '<div class="afst">'+l.afst+'</div>'+
+      '<div class="spec">'+
+        specRow(T('leeftijd'), l.leeftijd+' '+T('jr'))+
+        specRow(T('geslacht'), T('g_'+l.g))+
+        specRow(T('stokmaat'), l.stok+' cm')+
+        specRow(T('herkomst'), l.land)+
+        specRow(T('discipline'), T('disc_'+l.disc))+
+        specRow(T('keurmerk'), T('keur_'+l.keur))+
+      '</div>'+
+      '<p class="d-note">'+(l.note[LANG]||l.note.nl)+'</p>'+
+      '<div class="bidpanel" id="bidpanel">'+
+        '<div class="row1">'+
+          '<div><div class="k">'+(sold?T('closed'):T('bod'))+'</div><div class="bod" id="dBod">'+euro(l.bod)+'</div>'+
+            '<div class="hint" style="text-align:left;margin-top:6px"><span id="dBidders">'+l.bieders+'</span> '+T('bieders')+'</div></div>'+
+          '<div class="clock"><div class="k">'+(sold?'':(l.status==='binnenkort'?T('eindopen'):T('eindigt')))+'</div>'+
+            (sold?'':'<div class="t" id="dClock">'+fmtTime(l.eind-Date.now())+'</div>')+'</div>'+
+        '</div>'+ bidBtn +
+      '</div>'+
+      '<div class="hist"><h4>'+T('historie')+'</h4><ul id="dHist">'+histHTML+'</ul></div>'+
+    '</div>';
+}
+function openDrawer(lotNr){
+  const l=LOTS.find(x=>x.lot===lotNr); if(!l) return;
+  openLot=lotNr;
+  drawer.innerHTML=drawerHTML(l);
+  drawer.setAttribute('aria-hidden','false');
+  scrim.classList.add('open'); drawer.classList.add('open'); document.body.classList.add('drawer-open');
+  document.getElementById('dClose').addEventListener('click',closeDrawer);
+  const db=document.getElementById('doBid'); if(db) db.addEventListener('click',()=>placeBid(lotNr,true));
+}
+function closeDrawer(){
+  openLot=null; scrim.classList.remove('open'); drawer.classList.remove('open'); document.body.classList.remove('drawer-open');
+  drawer.setAttribute('aria-hidden','true');
+}
+scrim.addEventListener('click',closeDrawer);
+addEventListener('keydown',e=>{ if(e.key==='Escape'&&openLot!==null) closeDrawer(); });
+
+/* ===================== bieden ===================== */
+function nowTm(){ const d=new Date(); return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0'); }
+function pushHist(l,who,amt,me){ l.hist.unshift({who,amt,tm:nowTm(),me:!!me}); if(l.hist.length>30) l.hist.pop(); }
+
+function placeBid(lotNr, byUser){
+  const l=LOTS.find(x=>x.lot===lotNr); if(!l||l.status==='verkocht') return;
+  if(l.status==='binnenkort') l.status='live';
+  l.bod += increment(l.bod);
+  l.bieders += 1;
+  pushHist(l, byUser?T('u'):botNaam(), l.bod, byUser);
+  // anti-sniping: <30s? verleng
+  const rem=l.eind-Date.now();
+  if(rem<30000) l.eind = Date.now()+30000;
+  syncLot(l, byUser);
+  if(byUser){ toast(T('toastbod')+' · '+euro(l.bod)); }
+}
+function syncLot(l, flash){
+  // kaart
+  const bodEl=grid.querySelector('[data-bod="'+l.lot+'"]'); if(bodEl){ bodEl.textContent=euro(l.bod); if(flash){bodEl.classList.remove('flash');void bodEl.offsetWidth;bodEl.classList.add('flash');} }
+  const bd=grid.querySelector('[data-bidders="'+l.lot+'"]'); if(bd) bd.textContent=l.bieders;
+  const badge=grid.querySelector('.lot[data-lot="'+l.lot+'"] .badge');
+  if(badge){ badge.className='badge '+l.status; badge.textContent=T('st_'+l.status); }
+  // drawer
+  if(openLot===l.lot){
+    const dBod=document.getElementById('dBod'); if(dBod){ dBod.textContent=euro(l.bod); const bp=document.getElementById('bidpanel'); if(bp&&flash){bp.classList.remove('flash');void bp.offsetWidth;bp.classList.add('flash');} }
+    const dBidders=document.getElementById('dBidders'); if(dBidders) dBidders.textContent=l.bieders;
+    const doBid=document.getElementById('doBid'); if(doBid){ doBid.textContent=T('verhoog')+' · '+euro(l.bod+increment(l.bod)); }
+    const hint=document.querySelector('#bidpanel .hint'); if(hint) hint.textContent=T('hint')+': '+euro(l.bod+increment(l.bod));
+    const ul=document.getElementById('dHist'); if(ul){ ul.innerHTML = l.hist.length ? l.hist.map(h=>'<li><span class="who'+(h.me?' me':'')+'">'+h.who+'</span><span class="amt">'+euro(h.amt)+'</span><span class="tm">'+h.tm+'</span></li>').join('') : '<div class="leeg">'+T('geenbod')+'</div>'; }
+  }
+  renderDash();
+}
+
+/* toast */
+const toastEl=document.getElementById('toast'); let toastTmr;
+function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('aan'); clearTimeout(toastTmr); toastTmr=setTimeout(()=>toastEl.classList.remove('aan'),2600); }
+
+/* ===================== klok + bots ===================== */
+function tick(){
+  const t=Date.now();
+  LOTS.forEach(l=>{
+    if(l.status==='verkocht') return;
+    const rem=l.eind-t;
+    // kaartklok
+    const cl=grid.querySelector('[data-clock="'+l.lot+'"]');
+    if(cl){ cl.textContent=fmtTime(rem); cl.classList.toggle('urg', rem<60000 && l.status==='live'); }
+    // drawerklok
+    if(openLot===l.lot){ const dc=document.getElementById('dClock'); if(dc){ dc.textContent=fmtTime(rem); dc.classList.toggle('urg',rem<60000&&l.status==='live'); } }
+    // sluiten
+    if(rem<=0 && l.status==='live'){
+      l.status='verkocht';
+      renderGrid();
+      if(openLot===l.lot){ openDrawer(l.lot); }
+      renderDash();
+    } else if(rem<=0 && l.status==='binnenkort'){
+      l.status='live'; l.eind=t+8*M;
+      const badge=grid.querySelector('.lot[data-lot="'+l.lot+'"] .badge'); if(badge){badge.className='badge live';badge.textContent=T('st_live');}
+    }
+  });
+}
+setInterval(tick,1000);
+
+/* af en toe automatisch tegenbod op een live lot */
+function botTick(){
+  const live=LOTS.filter(l=>l.status==='live' && (l.eind-Date.now())>3000);
+  if(live.length && Math.random()<0.6){
+    const l=live[Math.floor(Math.random()*live.length)];
+    const wasOpenMine = (openLot===l.lot) && l.hist.length && l.hist[0].me;
+    placeBid(l.lot,false);
+    if(wasOpenMine) toast(T('toastover'));
+  }
+  setTimeout(botTick, 4000+Math.random()*5000);
+}
+if(!reduced) setTimeout(botTick, 3500);
+
+/* tellende dashboard-cijfers (clearance + omzet blijven statisch label) */
+function telOp(el,eind,opmaak){
+  const t0=performance.now(),duur=1500,start=0;
+  (function s(n){ const p=Math.min(1,(n-t0)/duur),e=1-Math.pow(1-p,3); el.textContent=opmaak(Math.round(start+(eind-start)*e)); if(p<1)requestAnimationFrame(s); })(t0);
+}
+if(!reduced){
+  const dio=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ dio.unobserve(e.target);
+    telOp(document.getElementById('d-clear'),86,x=>x);
+  }}),{threshold:.5});
+  const dc=document.getElementById('d-clear'); if(dc) dio.observe(dc);
+}
+
+/* ===================== filters ===================== */
+document.getElementById('chips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('act',c===b));
+  curFilter=b.dataset.disc; renderGrid();
+});
+document.getElementById('sort').addEventListener('change',e=>{ curSort=e.target.value; renderGrid(); });
+
+/* ===================== taal ===================== */
+function applyStatic(){
+  const t=I18N[LANG]; if(!t) return;
+  document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('act',x.dataset.lang===LANG));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]!=null) el.innerHTML=t[k]; });
+  if(t['pg-title']) document.title=t['pg-title'];
+  document.documentElement.lang=LANG;
+}
+function zetTaal(code){ if(!I18N[code])return; LANG=code; try{localStorage.setItem('sh-lang',code);}catch(e){} applyStatic(); renderGrid(); if(openLot!==null) openDrawer(openLot); renderDash(); }
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>zetTaal(b.dataset.lang)));
+
+/* ===================== init ===================== */
+applyStatic(); renderGrid(); renderDash();
+</script>
+</body>
+</html>
