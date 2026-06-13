@@ -140,6 +140,31 @@ nav.compact .brand .seal{width:38px;height:38px}
 .formule li::before{content:'';position:absolute;left:2px;top:19px;width:7px;height:7px;border:1px solid var(--messing);border-radius:50%}
 .formule .f-cta{margin-top:auto;padding-top:36px}
 
+/* erfgoed / heritage */
+.heritage{padding:108px 0 90px}
+.heritage .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,5vw,72px);align-items:center}
+.heritage h2{font-size:clamp(28px,3vw,42px);color:var(--groen);margin-top:22px}
+.heritage p{margin-top:18px;color:#454c43;font-size:16px}
+.heritage p+p{margin-top:14px}
+.heritage .he-link{display:inline-flex;align-items:center;gap:10px;margin-top:30px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--cognac);border-bottom:1px solid rgba(138,90,51,.4);padding-bottom:4px;transition:color .3s,border-color .3s}
+.heritage .he-link:hover{color:var(--messing);border-color:var(--messing)}
+.heritage .he-link svg{width:15px;height:15px;flex:none}
+.markers{border-top:1px solid var(--messing)}
+.marker{display:grid;grid-template-columns:118px 1fr;gap:24px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(185,152,95,.3)}
+.marker .y{font-family:'Marcellus',serif;font-size:23px;color:var(--messing);line-height:1.1;font-variant-numeric:lining-nums;white-space:nowrap}
+.marker .t{font-size:15.5px;color:var(--inkt)}
+
+/* leven / lifestyle (donkere band) */
+.lifestyle{background:var(--groen);color:var(--ivoor);padding:110px 0}
+.lifestyle .lead-head{max-width:42em}
+.lifestyle h2{font-size:clamp(28px,3vw,42px);color:var(--ivoor);margin-top:22px}
+.lifestyle .lead-head p{margin-top:18px;color:rgba(244,241,233,.8);font-size:16.5px}
+.benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(185,152,95,.28);border:1px solid rgba(185,152,95,.28);margin-top:60px}
+.benefit{background:var(--groen);padding:42px 38px}
+.benefit .ic{width:34px;height:34px;color:var(--messing);margin-bottom:22px;display:block}
+.benefit h3{font-family:'Marcellus',serif;font-size:21px;color:var(--ivoor);margin-bottom:12px;letter-spacing:.02em}
+.benefit p{font-size:15px;color:rgba(244,241,233,.78)}
+
 /* slot */
 .slot{background:var(--groen-diep) url('img/band-bos.jpg') center/cover;position:relative;color:var(--ivoor);text-align:center;padding:130px 0}
 .slot::before{content:'';position:absolute;inset:0;background:rgba(21,33,25,.86)}
@@ -219,11 +244,35 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 @media (max-width:980px){
   .formule-grid{grid-template-columns:1fr;gap:42px}
   .formule .crest{right:auto;left:46px}
+  .heritage .grid{grid-template-columns:1fr;gap:44px}
   .foot-grid{grid-template-columns:1fr 1fr}
   .topbar .info span:last-child{display:none}
   #preloader svg{width:96px}
 }
-@media (max-width:560px){.foot-grid{grid-template-columns:1fr}.topbar .info{display:none}.cookie{left:14px;right:14px;bottom:66px;max-width:none}.formule{padding:42px 30px}}
+@media (max-width:760px){
+  .benefits{grid-template-columns:1fr}
+  .phero{min-height:54vh}
+  .h-intro{padding:70px 0 20px}
+  .formules{padding:56px 0 76px}
+  .heritage{padding:70px 0 60px}
+  .lifestyle{padding:74px 0}
+  .slot{padding:96px 0}
+  .marker{grid-template-columns:96px 1fr;gap:18px}
+}
+@media (max-width:560px){
+  .foot-grid{grid-template-columns:1fr}
+  .topbar .info{display:none}
+  .cookie{left:14px;right:14px;bottom:66px;max-width:none}
+  .formule{padding:42px 28px}
+  .formule .crest{left:28px}
+  .benefit{padding:34px 28px}
+  .box-spec{gap:14px;flex-wrap:wrap}
+  .marker{grid-template-columns:1fr;gap:4px}
+  .marker .t{padding-bottom:2px}
+  .slot{padding:84px 0}
+  .slot .cta-row{flex-direction:column;align-items:center}
+  .slot .cta-row .btn{width:100%;max-width:320px;text-align:center}
+}
 
 /* reduced motion: álles uit, content direct zichtbaar */
 @media (prefers-reduced-motion:reduce){
@@ -376,6 +425,57 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
   <div class="wrap rv">
     <p class="lede" data-i18n="hi-lede">“Een box op St. Hubert is geen stalling — het is een thuis voor uw paard.”</p>
     <div class="rule"></div>
+  </div>
+</section>
+
+<section class="heritage" id="erfgoed">
+  <div class="wrap">
+    <div class="grid">
+      <div class="rv">
+        <span class="eyebrow" data-i18n="he-eye">Sinds 1920</span>
+        <h2 data-i18n="he-title">Word deel van een eeuw ruitererfgoed.</h2>
+        <p data-i18n="he-p1">St. Hubert is geen nieuwe bestemming, maar een voortzetting. De velden van Hoogboom dienden al in 1920 als olympisch terrein, en sindsdien is dit domein onafgebroken verbonden met de paardensport — door families, fokkers en ruiters die er hun verhaal schreven.</p>
+        <p data-i18n="he-p2">Wie hier lid wordt, huurt geen stalling. U treedt toe tot een levende traditie en draagt ze mee — een erfenis die zorgvuldig wordt bewaard en doorgegeven aan de volgende generatie.</p>
+        <a href="/historie" class="he-link" data-i18n="he-link">Ontdek onze historie</a>
+      </div>
+      <div class="markers rv">
+        <div class="marker"><span class="y" data-i18n="he-m1y">1920</span><span class="t" data-i18n="he-m1t">De olympische velden van Hoogboom</span></div>
+        <div class="marker"><span class="y" data-i18n="he-m2y">Jaren '80</span><span class="t" data-i18n="he-m2t">De gouden jaren van internationaal springen</span></div>
+        <div class="marker"><span class="y" data-i18n="he-m3y">Vandaag</span><span class="t" data-i18n="he-m3t">Een nieuw hoofdstuk, met respect voor het verleden</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lifestyle" id="leven">
+  <div class="wrap">
+    <div class="lead-head rv">
+      <span class="eyebrow" data-i18n="li-eye">Meer dan een box</span>
+      <h2 data-i18n="li-title">Een leven te paard, in stijl.</h2>
+      <p data-i18n="li-lead">Een lidmaatschap van St. Hubert is een manier van leven. Naast een thuis voor uw paard opent het de deur naar het volledige domein, een select gezelschap en de allure van de internationale paardenwereld.</p>
+    </div>
+    <div class="benefits">
+      <article class="benefit rv">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.4-6-10a6 6 0 1 1 12 0c0 4.6-6 10-6 10Z"/><circle cx="12" cy="11" r="2.2"/></svg>
+        <h3 data-i18n="li-c1t">Het volledige domein</h3>
+        <p data-i18n="li-c1p">Binnen- en buitenpistes, ruime weides en kilometers ruiterpaden door bos en heide — alles binnen handbereik, het hele jaar door.</p>
+      </article>
+      <article class="benefit rv">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.8"/><path d="M15.6 14.5A5.5 5.5 0 0 1 20.5 20"/></svg>
+        <h3 data-i18n="li-c2t">Een select gezelschap</h3>
+        <p data-i18n="li-c2p">U sluit aan bij een kleine kring van private members die dezelfde passie voor het paard en dezelfde discretie delen.</p>
+      </article>
+      <article class="benefit rv">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3Z"/></svg>
+        <h3 data-i18n="li-c3t">Internationale allure</h3>
+        <p data-i18n="li-c3p">Van topdressuur tot exclusieve veilingen: St. Hubert verbindt u met de internationale hippische wereld en haar evenementen.</p>
+      </article>
+      <article class="benefit rv">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c5-2.5 7-6 7-10V6l-7-3-7 3v5c0 4 2 7.5 7 10Z"/><path d="M12 13.6c-1.8-1.3-3-2.3-3-3.7a1.6 1.6 0 0 1 3-.7 1.6 1.6 0 0 1 3 .7c0 1.4-1.2 2.4-3 3.7Z"/></svg>
+        <h3 data-i18n="li-c4t">Zorg op het hoogste niveau</h3>
+        <p data-i18n="li-c4p">Persoonlijke begeleiding, vakkundige verzorging en onvoorwaardelijke aandacht voor het welzijn van elk paard.</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -593,6 +693,19 @@ const i18n = {
     'hh-title':"Een eigen plek voor uw paard, het hele jaar door.",
     'hh-sub':"Het lidmaatschap draait om één belofte: uw paard staat in een ruime box, midden in de rust van het domein. Kies de formule die bij u past.",
     'hi-lede':"“Een box op St. Hubert is geen stalling — het is een thuis voor uw paard.”",
+    'he-eye':"Sinds 1920",'he-title':"Word deel van een eeuw ruitererfgoed.",
+    'he-p1':"St. Hubert is geen nieuwe bestemming, maar een voortzetting. De velden van Hoogboom dienden al in 1920 als olympisch terrein, en sindsdien is dit domein onafgebroken verbonden met de paardensport — door families, fokkers en ruiters die er hun verhaal schreven.",
+    'he-p2':"Wie hier lid wordt, huurt geen stalling. U treedt toe tot een levende traditie en draagt ze mee — een erfenis die zorgvuldig wordt bewaard en doorgegeven aan de volgende generatie.",
+    'he-link':"Ontdek onze historie",
+    'he-m1y':"1920",'he-m1t':"De olympische velden van Hoogboom",
+    'he-m2y':"Jaren '80",'he-m2t':"De gouden jaren van internationaal springen",
+    'he-m3y':"Vandaag",'he-m3t':"Een nieuw hoofdstuk, met respect voor het verleden",
+    'li-eye':"Meer dan een box",'li-title':"Een leven te paard, in stijl.",
+    'li-lead':"Een lidmaatschap van St. Hubert is een manier van leven. Naast een thuis voor uw paard opent het de deur naar het volledige domein, een select gezelschap en de allure van de internationale paardenwereld.",
+    'li-c1t':"Het volledige domein",'li-c1p':"Binnen- en buitenpistes, ruime weides en kilometers ruiterpaden door bos en heide — alles binnen handbereik, het hele jaar door.",
+    'li-c2t':"Een select gezelschap",'li-c2p':"U sluit aan bij een kleine kring van private members die dezelfde passie voor het paard en dezelfde discretie delen.",
+    'li-c3t':"Internationale allure",'li-c3p':"Van topdressuur tot exclusieve veilingen: St. Hubert verbindt u met de internationale hippische wereld en haar evenementen.",
+    'li-c4t':"Zorg op het hoogste niveau",'li-c4p':"Persoonlijke begeleiding, vakkundige verzorging en onvoorwaardelijke aandacht voor het welzijn van elk paard.",
     't-eye':"De formules",'t-title':"Twee niveaus, één domein.",
     't-lead':"Elk lidmaatschap geeft toegang tot de volledige infrastructuur van St. Hubert — binnen- en buitenpistes, weides en de ruiterpaden door bos en heide. Het verschil zit in de box: een standaardmaat voor The Field, een royaal formaat voor wie het hele jaar zeker wil zijn van zijn plek.",
     't1-eye':"Niveau I",'t1-kind':"Standaard lidmaatschap",'t1-area':"Standaardmaat",
@@ -617,6 +730,19 @@ const i18n = {
     'hh-title':"Une place à part pour votre cheval, toute l'année.",
     'hh-sub':"L'adhésion repose sur une promesse : votre cheval dispose d'un box spacieux, au cœur de la quiétude du domaine. Choisissez la formule qui vous convient.",
     'hi-lede':"« Un box à St. Hubert n'est pas une simple écurie — c'est un foyer pour votre cheval. »",
+    'he-eye':"Depuis 1920",'he-title':"Devenez partie d'un siècle d'héritage équestre.",
+    'he-p1':"St. Hubert n'est pas une destination nouvelle, mais une continuité. Les terrains de Hoogboom servirent de site olympique dès 1920, et depuis lors ce domaine est resté lié sans interruption au sport équestre — par des familles, des éleveurs et des cavaliers qui y ont écrit leur histoire.",
+    'he-p2':"Devenir membre ici, ce n'est pas louer une écurie. Vous rejoignez une tradition vivante et la portez à votre tour — un héritage soigneusement préservé et transmis à la génération suivante.",
+    'he-link':"Découvrez notre histoire",
+    'he-m1y':"1920",'he-m1t':"Les terrains olympiques de Hoogboom",
+    'he-m2y':"Années 80",'he-m2t':"Les années d'or du jumping international",
+    'he-m3y':"Aujourd'hui",'he-m3t':"Un nouveau chapitre, dans le respect du passé",
+    'li-eye':"Plus qu'un box",'li-title':"Une vie à cheval, avec style.",
+    'li-lead':"Une adhésion à St. Hubert est un art de vivre. Au-delà d'un foyer pour votre cheval, elle ouvre les portes de l'ensemble du domaine, d'un cercle choisi et de l'allure du monde équestre international.",
+    'li-c1t':"L'ensemble du domaine",'li-c1p':"Manèges intérieurs et carrières extérieures, vastes prairies et des kilomètres de sentiers à travers bois et lande — tout à portée de main, toute l'année.",
+    'li-c2t':"Un cercle choisi",'li-c2p':"Vous rejoignez un petit cercle de membres privés qui partagent la même passion du cheval et la même discrétion.",
+    'li-c3t':"Allure internationale",'li-c3p':"De la haute dressage aux ventes exclusives : St. Hubert vous relie au monde équestre international et à ses événements.",
+    'li-c4t':"Des soins au plus haut niveau",'li-c4p':"Accompagnement personnalisé, soins experts et attention sans faille au bien-être de chaque cheval.",
     't-eye':"Les formules",'t-title':"Deux niveaux, un domaine.",
     't-lead':"Chaque adhésion donne accès à l'ensemble des installations de St. Hubert — manèges intérieurs et carrières extérieures, prairies et sentiers équestres à travers bois et lande. La différence se joue sur le box : une taille standard pour The Field, un format généreux pour qui veut être assuré de sa place toute l'année.",
     't1-eye':"Niveau I",'t1-kind':"Adhésion standard",'t1-area':"Taille standard",
@@ -641,6 +767,19 @@ const i18n = {
     'hh-title':"A place of your own for your horse, the year round.",
     'hh-sub':"Membership rests on a single promise: your horse stands in a spacious box, in the heart of the estate's calm. Choose the formula that suits you.",
     'hi-lede':"“A box at St. Hubert is not stabling — it is a home for your horse.”",
+    'he-eye':"Since 1920",'he-title':"Become part of a century of equestrian heritage.",
+    'he-p1':"St. Hubert is not a new destination, but a continuation. The fields of Hoogboom served as Olympic grounds as early as 1920, and ever since this estate has been bound, without interruption, to equestrian sport — by the families, breeders and riders who wrote their stories here.",
+    'he-p2':"To become a member here is not to rent a stable. You join a living tradition and carry it forward — a heritage carefully preserved and passed on to the next generation.",
+    'he-link':"Discover our history",
+    'he-m1y':"1920",'he-m1t':"The Olympic fields of Hoogboom",
+    'he-m2y':"The 1980s",'he-m2t':"The golden years of international jumping",
+    'he-m3y':"Today",'he-m3t':"A new chapter, with respect for the past",
+    'li-eye':"More than a box",'li-title':"A life on horseback, in style.",
+    'li-lead':"Membership of St. Hubert is a way of living. Beyond a home for your horse, it opens the door to the whole estate, a select circle and the allure of the international equestrian world.",
+    'li-c1t':"The whole estate",'li-c1p':"Indoor and outdoor arenas, broad paddocks and miles of trails through wood and heath — all within reach, the year round.",
+    'li-c2t':"A select circle",'li-c2p':"You join a small circle of private members who share the same passion for the horse and the same discretion.",
+    'li-c3t':"International allure",'li-c3p':"From top dressage to exclusive auctions: St. Hubert connects you to the international equestrian world and its events.",
+    'li-c4t':"Care at the highest level",'li-c4p':"Personal guidance, expert care and unwavering attention to the wellbeing of every horse.",
     't-eye':"The formulas",'t-title':"Two tiers, one estate.",
     't-lead':"Every membership gives access to all of St. Hubert's facilities — indoor and outdoor arenas, paddocks and the riding trails through wood and heath. The difference is in the box: a standard size for The Field, a generous format for those who want their place secured the year round.",
     't1-eye':"Tier I",'t1-kind':"Standard membership",'t1-area':"Standard size",
