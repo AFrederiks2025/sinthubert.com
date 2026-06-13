@@ -38,8 +38,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacin
 /* ===== TOP BAR ===== */
 .topbar{background:var(--green-deep);color:var(--cream);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:38px;gap:18px}
-.topbar .langs{display:flex;gap:14px;color:rgba(244,239,230,.6)}
-.topbar .langs b{color:var(--gold-soft)}
+.topbar .langs{display:flex;gap:14px}
+.topbar .langs button{background:none;border:0;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;color:rgba(244,239,230,.6);padding:0;transition:color .2s}
+.topbar .langs button.act,.topbar .langs button:hover{color:var(--gold-soft)}
 .topbar .addr{color:rgba(244,239,230,.55);font-size:.7rem}
 
 /* ===== NAV ===== */
@@ -155,7 +156,11 @@ footer a:hover{color:var(--gold-soft)}
 <div class="topbar">
   <div class="wrap">
     <span class="addr">Bosdreef 50 · Hoogboom — Kapellen · +32 3 605 87 90</span>
-    <span class="langs"><b>NL</b><span>FR</span><span>EN</span></span>
+    <div class="langs">
+      <button class="act" data-lang="nl">NL</button>
+      <button data-lang="fr">FR</button>
+      <button data-lang="en">EN</button>
+    </div>
   </div>
 </div>
 
@@ -167,13 +172,13 @@ footer a:hover{color:var(--gold-soft)}
       <span class="b2">Horse &amp; Country Club</span>
     </a>
     <div class="menu">
-      <a href="/#club">De club</a>
-      <a href="/membership" class="active">Members</a>
-      <a href="/springen">Springen</a>
-      <a href="/veiling">Veilingen</a>
-      <a href="/historie">Historie</a>
-      <a href="/#contact">Contact</a>
-      <a href="#word-member" class="btn">Word member</a>
+      <a href="/#club" data-i18n="m1">De club</a>
+      <a href="/membership" class="active" data-i18n="m2">Members</a>
+      <a href="/springen" data-i18n="m7">Springen</a>
+      <a href="/veiling" data-i18n="m3">Veilingen</a>
+      <a href="/historie" data-i18n="m4">Historie</a>
+      <a href="/#contact" data-i18n="m6">Contact</a>
+      <a href="#word-member" class="btn" data-i18n="cta">Word member</a>
     </div>
     <button class="burger" aria-label="menu">☰</button>
   </div>
@@ -182,72 +187,72 @@ footer a:hover{color:var(--gold-soft)}
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow">Membership op St. Hubert</span>
-    <h1>Een eigen plek voor uw paard, het hele jaar door.</h1>
-    <p>Het lidmaatschap van St. Hubert draait om één belofte: uw paard staat in een ruime box, midden in de rust van het domein. Kies de formule die bij u past — een solide standaardbox in De Field, of een royale, gereserveerde box in de Master's Circle.</p>
+    <span class="eyebrow" data-i18n="h-eye">Membership op St. Hubert</span>
+    <h1 data-i18n="h-title">Een eigen plek voor uw paard, het hele jaar door.</h1>
+    <p data-i18n="h-p">Het lidmaatschap van St. Hubert draait om één belofte: uw paard staat in een ruime box, midden in de rust van het domein. Kies de formule die bij u past — een solide standaardbox in The Field, of een royale, gereserveerde box in de Master's Circle.</p>
     <div class="cta">
-      <a href="#tiers" class="btn btn-solid">Bekijk de formules</a>
-      <a href="/#contact" class="btn">Plan een bezoek</a>
+      <a href="#tiers" class="btn btn-solid" data-i18n="h-cta1">Bekijk de formules</a>
+      <a href="/#contact" class="btn" data-i18n="h-cta2">Plan een bezoek</a>
     </div>
   </div>
 </header>
 
 <!-- QUOTE -->
 <div class="quote">
-  <p>“Een box op St. Hubert is geen stalling — het is een thuis voor uw paard.”</p>
-  <span class="src">St. Hubert Horse &amp; Country Club</span>
+  <p data-i18n="q-p">“Een box op St. Hubert is geen stalling — het is een thuis voor uw paard.”</p>
+  <span class="src" data-i18n="q-src">St. Hubert Horse &amp; Country Club</span>
 </div>
 
 <!-- TIERS -->
 <section class="tiers" id="tiers">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">De formules</span>
-      <h2>Twee niveaus, één domein.</h2>
-      <p class="lead">Elk lidmaatschap geeft toegang tot de volledige infrastructuur van St. Hubert — binnen- en buitenpistes, weides en de ruiterpaden door bos en heide. Het verschil zit in de box: een standaardmaat voor De Field, een royaal formaat voor wie het hele jaar zeker wil zijn van zijn plek.</p>
+      <span class="eyebrow" data-i18n="t-eye">De formules</span>
+      <h2 data-i18n="t-title">Twee niveaus, één domein.</h2>
+      <p class="lead" data-i18n="t-lead">Elk lidmaatschap geeft toegang tot de volledige infrastructuur van St. Hubert — binnen- en buitenpistes, weides en de ruiterpaden door bos en heide. Het verschil zit in de box: een standaardmaat voor The Field, een royaal formaat voor wie het hele jaar zeker wil zijn van zijn plek.</p>
     </div>
 
     <div class="tier-grid">
 
       <!-- TIER I -->
       <article class="tier">
-        <span class="tier-eye">Niveau I</span>
+        <span class="tier-eye" data-i18n="t1-eye">Niveau I</span>
         <h3>The Field</h3>
-        <span class="kind">Standaard lidmaatschap</span>
+        <span class="kind" data-i18n="t1-kind">Standaard lidmaatschap</span>
         <div class="boxspec">
           <span class="dim">3 × 4 m</span>
-          <span class="area"><b>12 m²</b>Standaardmaat</span>
+          <span class="area"><b>12 m²</b><span data-i18n="t1-area">Standaardmaat</span></span>
         </div>
-        <p class="desc">Een ruime paardenbox van standaardmaat, met voorrang bij reservatie aan het ledentarief. De vertrouwde basis voor wie zijn paard een rustige, verzorgde thuis op het domein gunt.</p>
+        <p class="desc" data-i18n="t1-desc">Een ruime paardenbox van standaardmaat, met voorrang bij reservatie aan het ledentarief. De vertrouwde basis voor wie zijn paard een rustige, verzorgde thuis op het domein gunt.</p>
         <ul>
-          <li>Paardenbox van 3 × 4 m (12 m²)</li>
-          <li>Voorrang bij reservatie aan het ledentarief</li>
-          <li>Volledige toegang tot pistes, weides en ruiterpaden</li>
+          <li data-i18n="t1-li1">Paardenbox van 3 × 4 m (12 m²)</li>
+          <li data-i18n="t1-li2">Voorrang bij reservatie aan het ledentarief</li>
+          <li data-i18n="t1-li3">Volledige toegang tot pistes, weides en ruiterpaden</li>
         </ul>
         <div class="tier-cta">
-          <a href="/#contact" class="btn btn-light">Word member</a>
+          <a href="/#contact" class="btn btn-light" data-i18n="t1-cta">Word member</a>
         </div>
       </article>
 
       <!-- TIER II -->
       <article class="tier feature">
-        <span class="crest">Patron</span>
-        <span class="tier-eye">Niveau II</span>
+        <span class="crest" data-i18n="crest">Patron</span>
+        <span class="tier-eye" data-i18n="t2-eye">Niveau II</span>
         <h3>Master's Circle</h3>
-        <span class="kind">Patronlidmaatschap</span>
+        <span class="kind" data-i18n="t2-kind">Patronlidmaatschap</span>
         <div class="boxspec">
           <span class="dim">3 × 6 m</span>
-          <span class="area"><b>18 m²</b>Ruim formaat</span>
+          <span class="area"><b>18 m²</b><span data-i18n="t2-area">Ruim formaat</span></span>
         </div>
-        <p class="desc">Een gereserveerde box van royaal formaat — ruim genoeg voor een hengst of warmbloed — die het hele jaar door voor u alleen wordt gehouden. Het patronlidmaatschap voor wie zekerheid en ruimte vooropstelt.</p>
+        <p class="desc" data-i18n="t2-desc">Een gereserveerde box van royaal formaat — ruim genoeg voor een hengst of warmbloed — die het hele jaar door voor u alleen wordt gehouden. Het patronlidmaatschap voor wie zekerheid en ruimte vooropstelt.</p>
         <ul>
-          <li>Oversized paardenbox van 3 × 6 m (18 m²)</li>
-          <li>Gereserveerd en het hele jaar door voor u alleen</li>
-          <li>Geschikt voor hengsten en warmbloeden</li>
-          <li>Volledige toegang tot pistes, weides en ruiterpaden</li>
+          <li data-i18n="t2-li1">Oversized paardenbox van 3 × 6 m (18 m²)</li>
+          <li data-i18n="t2-li2">Gereserveerd en het hele jaar door voor u alleen</li>
+          <li data-i18n="t2-li3">Geschikt voor hengsten en warmbloeden</li>
+          <li data-i18n="t2-li4">Volledige toegang tot pistes, weides en ruiterpaden</li>
         </ul>
         <div class="tier-cta">
-          <a href="/#contact" class="btn btn-solid">Word patron</a>
+          <a href="/#contact" class="btn btn-solid" data-i18n="t2-cta">Word patron</a>
         </div>
       </article>
 
@@ -258,11 +263,11 @@ footer a:hover{color:var(--gold-soft)}
 <!-- CTA -->
 <section class="cta-band" id="word-member">
   <div class="wrap">
-    <span class="eyebrow">Word lid van de club</span>
-    <h2>Uw paard verdient St. Hubert.</h2>
-    <p>Plan een bezoek aan het domein, bekijk de boxen en ontdek welke formule het beste past bij u en uw paard.</p>
+    <span class="eyebrow" data-i18n="c-eye">Word lid van de club</span>
+    <h2 data-i18n="c-title">Uw paard verdient St. Hubert.</h2>
+    <p data-i18n="c-p">Plan een bezoek aan het domein, bekijk de boxen en ontdek welke formule het beste past bij u en uw paard.</p>
     <div class="cta">
-      <a href="/#contact" class="btn btn-solid">Plan een bezoek</a>
+      <a href="/#contact" class="btn btn-solid" data-i18n="c-cta1">Plan een bezoek</a>
       <a href="tel:+3236058790" class="btn">+32 3 605 87 90</a>
     </div>
   </div>
@@ -275,27 +280,27 @@ footer a:hover{color:var(--gold-soft)}
       <div class="fbrand">
         <div class="b1">St. Hubert</div>
         <div class="b2">Horse &amp; Country Club</div>
-        <p>Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
+        <p data-i18n="ft-tag">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
       </div>
       <div>
-        <h4>Bezoek ons</h4>
-        <div class="fline">Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</div>
+        <h4 data-i18n="ft-h1">Bezoek ons</h4>
+        <div class="fline" data-i18n="ft-adres">Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</div>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h4 data-i18n="ft-h2">Contact</h4>
         <ul>
           <li><a href="tel:+3236058790">+32 3 605 87 90</a></li>
           <li><a href="mailto:info@sinthubert.com">info@sinthubert.com</a></li>
-          <li class="fline">Dagelijks 09:30 – 22:00</li>
+          <li class="fline" data-i18n="ft-open">Dagelijks 09:30 – 22:00</li>
         </ul>
       </div>
       <div>
-        <h4>De club</h4>
+        <h4 data-i18n="ft-h3">De club</h4>
         <ul>
           <li><a href="/membership">The Field</a></li>
           <li><a href="/membership">Master's Circle</a></li>
-          <li><a href="/springen">Springen</a></li>
-          <li><a href="/historie">Historie</a></li>
+          <li><a href="/springen" data-i18n="m7">Springen</a></li>
+          <li><a href="/historie" data-i18n="m4">Historie</a></li>
         </ul>
       </div>
     </div>
@@ -305,6 +310,92 @@ footer a:hover{color:var(--gold-soft)}
     </div>
   </div>
 </footer>
+
+<script>
+/* ===== i18n — zelfde mechaniek & opslagsleutel (sh-lang) als de rest van de site ===== */
+const i18n = {
+  nl:{
+    'pg-title':"Membership — St. Hubert Horse & Country Club",
+    'm1':"De club",'m2':"Members",'m3':"Veilingen",'m4':"Historie",'m6':"Contact",'m7':"Springen",'cta':"Word member",
+    'h-eye':"Membership op St. Hubert",
+    'h-title':"Een eigen plek voor uw paard, het hele jaar door.",
+    'h-p':"Het lidmaatschap van St. Hubert draait om één belofte: uw paard staat in een ruime box, midden in de rust van het domein. Kies de formule die bij u past — een solide standaardbox in The Field, of een royale, gereserveerde box in de Master's Circle.",
+    'h-cta1':"Bekijk de formules",'h-cta2':"Plan een bezoek",
+    'q-p':"“Een box op St. Hubert is geen stalling — het is een thuis voor uw paard.”",
+    'q-src':"St. Hubert Horse & Country Club",
+    't-eye':"De formules",'t-title':"Twee niveaus, één domein.",
+    't-lead':"Elk lidmaatschap geeft toegang tot de volledige infrastructuur van St. Hubert — binnen- en buitenpistes, weides en de ruiterpaden door bos en heide. Het verschil zit in de box: een standaardmaat voor The Field, een royaal formaat voor wie het hele jaar zeker wil zijn van zijn plek.",
+    't1-eye':"Niveau I",'t1-kind':"Standaard lidmaatschap",'t1-area':"Standaardmaat",
+    't1-desc':"Een ruime paardenbox van standaardmaat, met voorrang bij reservatie aan het ledentarief. De vertrouwde basis voor wie zijn paard een rustige, verzorgde thuis op het domein gunt.",
+    't1-li1':"Paardenbox van 3 × 4 m (12 m²)",'t1-li2':"Voorrang bij reservatie aan het ledentarief",'t1-li3':"Volledige toegang tot pistes, weides en ruiterpaden",'t1-cta':"Word member",
+    'crest':"Patron",'t2-eye':"Niveau II",'t2-kind':"Patronlidmaatschap",'t2-area':"Ruim formaat",
+    't2-desc':"Een gereserveerde box van royaal formaat — ruim genoeg voor een hengst of warmbloed — die het hele jaar door voor u alleen wordt gehouden. Het patronlidmaatschap voor wie zekerheid en ruimte vooropstelt.",
+    't2-li1':"Oversized paardenbox van 3 × 6 m (18 m²)",'t2-li2':"Gereserveerd en het hele jaar door voor u alleen",'t2-li3':"Geschikt voor hengsten en warmbloeden",'t2-li4':"Volledige toegang tot pistes, weides en ruiterpaden",'t2-cta':"Word patron",
+    'c-eye':"Word lid van de club",'c-title':"Uw paard verdient St. Hubert.",
+    'c-p':"Plan een bezoek aan het domein, bekijk de boxen en ontdek welke formule het beste past bij u en uw paard.",
+    'c-cta1':"Plan een bezoek",
+    'ft-tag':"Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.",
+    'ft-h1':"Bezoek ons",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België",'ft-h2':"Contact",'ft-open':"Dagelijks geopend<br>09:30 – 22:00",'ft-h3':"De club"
+  },
+  fr:{
+    'pg-title':"Adhésion — St. Hubert Horse & Country Club",
+    'm1':"Le club",'m2':"Membres",'m3':"Ventes",'m4':"Histoire",'m6':"Contact",'m7':"Jumping",'cta':"Devenir membre",
+    'h-eye':"Adhésion à St. Hubert",
+    'h-title':"Une place à part pour votre cheval, toute l'année.",
+    'h-p':"L'adhésion à St. Hubert repose sur une promesse : votre cheval dispose d'un box spacieux, au cœur de la quiétude du domaine. Choisissez la formule qui vous convient — un box standard solide dans The Field, ou un box réservé et généreux dans le Master's Circle.",
+    'h-cta1':"Voir les formules",'h-cta2':"Planifier une visite",
+    'q-p':"« Un box à St. Hubert n'est pas une simple écurie — c'est un foyer pour votre cheval. »",
+    'q-src':"St. Hubert Horse & Country Club",
+    't-eye':"Les formules",'t-title':"Deux niveaux, un domaine.",
+    't-lead':"Chaque adhésion donne accès à l'ensemble des installations de St. Hubert — manèges intérieurs et carrières extérieures, prairies et sentiers équestres à travers bois et lande. La différence se joue sur le box : une taille standard pour The Field, un format généreux pour qui veut être assuré de sa place toute l'année.",
+    't1-eye':"Niveau I",'t1-kind':"Adhésion standard",'t1-area':"Taille standard",
+    't1-desc':"Un box spacieux de taille standard, avec priorité de réservation au tarif membre. La base de confiance pour qui souhaite offrir à son cheval un foyer calme et soigné sur le domaine.",
+    't1-li1':"Box de 3 × 4 m (12 m²)",'t1-li2':"Priorité de réservation au tarif membre",'t1-li3':"Accès complet aux pistes, prairies et sentiers",'t1-cta':"Devenir membre",
+    'crest':"Patron",'t2-eye':"Niveau II",'t2-kind':"Adhésion patron",'t2-area':"Grand format",
+    't2-desc':"Un box réservé de grand format — assez spacieux pour un étalon ou un cheval de sang — gardé pour vous seul toute l'année. L'adhésion patron pour qui privilégie l'espace et la certitude.",
+    't2-li1':"Box surdimensionné de 3 × 6 m (18 m²)",'t2-li2':"Réservé et gardé pour vous seul toute l'année",'t2-li3':"Adapté aux étalons et chevaux de sang",'t2-li4':"Accès complet aux pistes, prairies et sentiers",'t2-cta':"Devenir patron",
+    'c-eye':"Rejoignez le club",'c-title':"Votre cheval mérite St. Hubert.",
+    'c-p':"Planifiez une visite du domaine, découvrez les box et trouvez la formule qui convient le mieux à vous et à votre cheval.",
+    'c-cta1':"Planifier une visite",
+    'ft-tag':"Une oasis de calme au cœur vert d'Anvers — pour le cheval, le cavalier et le passionné.",
+    'ft-h1':"Visitez-nous",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgique",'ft-h2':"Contact",'ft-open':"Ouvert tous les jours<br>09 h 30 – 22 h 00",'ft-h3':"Le club"
+  },
+  en:{
+    'pg-title':"Membership — St. Hubert Horse & Country Club",
+    'm1':"The club",'m2':"Members",'m3':"Auctions",'m4':"History",'m6':"Contact",'m7':"Jumping",'cta':"Become a member",
+    'h-eye':"Membership at St. Hubert",
+    'h-title':"A place of your own for your horse, the year round.",
+    'h-p':"Membership at St. Hubert rests on a single promise: your horse stands in a spacious box, in the heart of the estate's calm. Choose the formula that suits you — a solid standard box in The Field, or a roomy, reserved box in the Master's Circle.",
+    'h-cta1':"View the formulas",'h-cta2':"Plan a visit",
+    'q-p':"“A box at St. Hubert is not stabling — it is a home for your horse.”",
+    'q-src':"St. Hubert Horse & Country Club",
+    't-eye':"The formulas",'t-title':"Two tiers, one estate.",
+    't-lead':"Every membership gives access to all of St. Hubert's facilities — indoor and outdoor arenas, paddocks and the riding trails through wood and heath. The difference is in the box: a standard size for The Field, a generous format for those who want their place secured the year round.",
+    't1-eye':"Tier I",'t1-kind':"Standard membership",'t1-area':"Standard size",
+    't1-desc':"A spacious standard-size box, with priority booking at the members' rate. The trusted base for those who want their horse to have a calm, well-tended home on the estate.",
+    't1-li1':"Horse box of 3 × 4 m (12 m²)",'t1-li2':"Priority booking at the members' rate",'t1-li3':"Full access to arenas, paddocks and trails",'t1-cta':"Become a member",
+    'crest':"Patron",'t2-eye':"Tier II",'t2-kind':"Patron membership",'t2-area':"Oversized",
+    't2-desc':"A reserved, oversized box — roomy enough for a stallion or warmblood — held for you alone the year round. The patron membership for those who put space and certainty first.",
+    't2-li1':"Oversized horse box of 3 × 6 m (18 m²)",'t2-li2':"Reserved and held for you alone, year-round",'t2-li3':"Suited to stallions and warmbloods",'t2-li4':"Full access to arenas, paddocks and trails",'t2-cta':"Become a patron",
+    'c-eye':"Join the club",'c-title':"Your horse deserves St. Hubert.",
+    'c-p':"Plan a visit to the estate, view the boxes and discover which formula best suits you and your horse.",
+    'c-cta1':"Plan a visit",
+    'ft-tag':"An oasis of calm in the green heart of Antwerp — for horse, rider and enthusiast.",
+    'ft-h1':"Visit us",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgium",'ft-h2':"Contact",'ft-open':"Open daily<br>09:30 – 22:00",'ft-h3':"The club"
+  }
+};
+function zetTaal(code){
+  const t = i18n[code]; if(!t) return;
+  document.querySelectorAll('.langs button').forEach(x=>x.classList.toggle('act', x.dataset.lang===code));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.innerHTML=t[k]; });
+  if(t['pg-title']) document.title = t['pg-title'];
+  document.documentElement.lang = code;
+  try{ localStorage.setItem('sh-lang', code); }catch(e){}
+}
+document.querySelectorAll('.langs button').forEach(b=>b.addEventListener('click',()=>zetTaal(b.dataset.lang)));
+/* taalkeuze blijft bewaard over pagina's heen */
+try{ const bewaard = localStorage.getItem('sh-lang'); if(bewaard && bewaard !== 'nl') zetTaal(bewaard); }catch(e){}
+</script>
 
 </body>
 </html>
