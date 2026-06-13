@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<!--
+  Veilingpagina · 2026-06-13 — St. Hubert Horse & Country Club (EWVO)
+  · Zelfde premium-behandeling als de homepage en historie: preloader met zelftekenend zegel (1× per sessie),
+    hero-choreografie met regel-maskering, Ken Burns + filmkorrel, nav verbergt/compacteert bij scroll,
+    messing menu-underline, magnetische knoppen, gordijn-reveals + zelftekenende kaders
+  · Publieksversie van het strategisch veilingconcept: de veiling als lidmaatschap — vier pijlers
+    (transparantie, eigen keurmerk, volledig eigenaarschap, zichtbaar rendement), koper én verkoper,
+    het clubecosysteem als structureel voordeel, en de weg van bod tot podium
+  · Taalwissel NL/FR/EN werkend, keuze bewaard over pagina's (localStorage) · reduced motion gerespecteerd
+-->
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1c2b22">
+<meta name="description" content="De Veiling van St. Hubert — een paardenveiling die meer is dan een transactie: begeleiding, een eigen keurmerk, volledige ontzorging en zichtbaar rendement, verankerd in een echte horse & country club.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='24' fill='%231c2b22'/%3E%3Cg stroke='%23f4f1e9' fill='none' stroke-width='4'%3E%3Cpath d='M24 16 H96 Q103 16 103 23 V62 C103 80 87 89 60 101 C33 89 17 80 17 62 V23 Q17 16 24 16 Z'/%3E%3Cpath d='M43.5 71 A20.5 20.5 0 1 1 76.5 71' stroke-width='4.5'/%3E%3Cpath d='M49.5 66.5 A13 13 0 1 1 70.5 66.5' stroke-width='4.5'/%3E%3Cpath d='M43.5 71 L49.5 66.5 M76.5 71 L70.5 66.5'/%3E%3C/g%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sh-pl'))document.documentElement.classList.add('pl-skip')}catch(e){}</script>
+<title>De Veiling — St. Hubert Horse &amp; Country Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --groen:#1c2b22;--groen-diep:#152119;--ivoor:#f4f1e9;--ivoor-warm:#ece7da;
+  --messing:#b9985f;--cognac:#8a5a33;--heide:#9a8aa0;--inkt:#20251f;--wit:#fbfaf6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;font-weight:300;color:var(--inkt);background:var(--ivoor);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'Marcellus',serif;font-weight:400;line-height:1.15}
+.lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400}
+.wrap{max-width:1240px;margin:0 auto;padding:0 6vw}
+.eyebrow{font-size:12px;letter-spacing:.34em;text-transform:uppercase;font-weight:500;color:var(--messing);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:'';width:34px;height:1px;background:var(--messing)}
+.btn{display:inline-block;font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:16px 34px;border:1px solid var(--messing);color:var(--ivoor);transition:background .35s,color .35s,border-color .35s,transform .3s cubic-bezier(.16,1,.3,1)}
+.btn:hover{background:var(--messing);color:var(--groen-diep)}
+.btn.solid{background:var(--messing);color:var(--groen-diep)}
+.btn.solid:hover{background:var(--ivoor);border-color:var(--ivoor)}
+.btn.dark{color:var(--groen);border-color:var(--groen)}
+.btn.dark:hover{background:var(--groen);color:var(--ivoor)}
+
+/* reveal (alleen met JS verborgen; zonder JS direct zichtbaar) */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.js .rv.in{opacity:1;transform:none}
+
+/* topbar + nav (gedeeld met homepage) */
+.topbar{background:var(--groen-diep);color:rgba(244,241,233,.75);font-size:12px;letter-spacing:.14em}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:9px;padding-bottom:9px}
+.lang{display:flex;gap:2px}
+.lang button{background:none;border:0;color:rgba(244,241,233,.55);font:inherit;letter-spacing:inherit;padding:2px 9px;cursor:pointer;border-right:1px solid rgba(244,241,233,.18)}
+.lang button:last-child{border-right:0}
+.lang button.act{color:var(--messing)}
+.topbar .info{display:flex;gap:26px}
+nav{position:sticky;top:0;z-index:50;background:rgba(28,43,34,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(185,152,95,.28);transition:background .45s,box-shadow .45s,transform .5s cubic-bezier(.45,0,.2,1)}
+nav.hide{transform:translateY(-102%)}
+nav.compact{background:rgba(17,27,21,.97);box-shadow:0 12px 44px rgba(15,23,18,.38)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:clamp(14px,2vw,28px);padding-top:16px;padding-bottom:16px;transition:padding .4s cubic-bezier(.45,0,.2,1)}
+nav.compact .wrap{padding-top:9px;padding-bottom:9px}
+.brand{display:flex;align-items:center;gap:14px;color:var(--ivoor)}
+.brand .seal{width:46px;height:46px;flex:none;transition:width .4s cubic-bezier(.45,0,.2,1),height .4s cubic-bezier(.45,0,.2,1)}
+nav.compact .brand .seal{width:38px;height:38px}
+.brand .name{font-family:'Marcellus',serif;font-size:19px;letter-spacing:.08em;line-height:1.2}
+.brand .name small{display:block;font-family:'Jost';font-size:9.5px;letter-spacing:.34em;color:var(--messing);text-transform:uppercase;margin-top:2px;white-space:nowrap}
+.menu{display:flex;gap:clamp(16px,2.3vw,34px);font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;color:rgba(244,241,233,.85)}
+.menu a{padding:4px 0;position:relative;white-space:nowrap;transition:color .3s}
+.menu a::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--messing);transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s cubic-bezier(.45,0,.2,1)}
+.menu a:hover,.menu a.hier{color:var(--messing)}
+.menu a:hover::after,.menu a:focus-visible::after,.menu a.hier::after{transform:scaleX(1);transform-origin:0 50%}
+.nav-cta{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:11px 20px;font-weight:500;white-space:nowrap;flex:none;transition:background .3s,transform .3s cubic-bezier(.16,1,.3,1)}
+.nav-cta:hover{background:var(--ivoor)}
+.burger{display:none;background:none;border:0;color:var(--ivoor);font-size:26px;cursor:pointer}
+
+/* preloader met zegel (1× per sessie) */
+#preloader{position:fixed;inset:0;z-index:200;background:var(--groen-diep);display:flex;align-items:center;justify-content:center;animation:plOut .5s ease 1.3s forwards}
+#preloader svg{width:clamp(120px,15vw,170px);color:var(--ivoor);overflow:visible}
+#preloader .pl-p{fill:none;stroke:currentColor;stroke-dasharray:1;stroke-dashoffset:1;animation:plDraw .75s cubic-bezier(.45,0,.2,1) var(--d,0s) both}
+#preloader .pl-dot{opacity:0;animation:plFade .45s ease .65s both}
+#preloader .pl-t{opacity:0;animation:plFade .45s ease .75s both}
+@keyframes plDraw{to{stroke-dashoffset:0}}
+@keyframes plFade{to{opacity:1}}
+@keyframes plOut{to{opacity:0;visibility:hidden}}
+.pl-skip #preloader{display:none}
+.pl-skip.js .phero .eyebrow{animation-delay:.45s}
+.pl-skip.js .phero .sub{animation-delay:.57s}
+.pl-skip.js .phero .cta-row{animation-delay:.69s}
+
+/* page hero — choreografie zoals de homepage */
+.phero{position:relative;min-height:74vh;display:flex;align-items:flex-end;background:var(--groen);overflow:hidden;color:var(--ivoor)}
+.phero-bg{position:absolute;inset:0;z-index:0;background:var(--groen) url('img/strip-hoofdstel.jpg') center/cover;animation:kenburns 14s cubic-bezier(.25,.46,.45,.94) both}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.06)}}
+.phero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(21,33,25,.58) 0%,rgba(21,33,25,.3) 42%,rgba(21,33,25,.9) 100%)}
+.phero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='gr'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23gr)'/%3E%3C/svg%3E")}
+.phero .wrap{position:relative;z-index:2;padding-bottom:8vh;width:100%}
+.phero h1{font-size:clamp(40px,5.4vw,76px);margin:24px 0 18px;max-width:14em}
+.phero .sub{max-width:600px;color:rgba(244,241,233,.88);font-size:18px}
+.phero .cta-row{display:flex;gap:18px;margin-top:38px;flex-wrap:wrap}
+.phero h1 .line{display:block;overflow:hidden;padding-block:.08em;margin-block:-.08em}
+.phero h1 .line-inner{display:block;transform:translateY(112%);animation:lineUp 1.05s cubic-bezier(.16,1,.3,1) var(--d,1.15s) forwards}
+@keyframes lineUp{to{transform:none}}
+.js .phero .eyebrow{animation:heroUp .9s cubic-bezier(.16,1,.3,1) 1.5s both}
+.js .phero .sub{animation:heroUp .9s cubic-bezier(.16,1,.3,1) 1.62s both}
+.js .phero .cta-row{animation:heroUp .9s cubic-bezier(.16,1,.3,1) 1.74s both}
+@keyframes heroUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+/* intro / categorie-claim */
+.v-intro{padding:104px 0 30px;text-align:center}
+.v-intro .lede{font-size:clamp(23px,2.6vw,32px);color:var(--cognac);max-width:24em;margin:0 auto}
+.v-intro p.txt{max-width:620px;margin:26px auto 0;color:#454c43}
+.v-intro .rule{width:1px;height:64px;background:var(--messing);margin:40px auto 0}
+
+/* categorie-band (donker) */
+.vcat{background:var(--groen);color:var(--ivoor);text-align:center;padding:96px 0;position:relative;overflow:hidden}
+.vcat .seal-bg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:480px;opacity:.05;pointer-events:none}
+.vcat .wrap{position:relative}
+.vcat .eyebrow{justify-content:center}
+.vcat .eyebrow::after{content:'';width:34px;height:1px;background:var(--messing)}
+.vcat h2{font-size:clamp(30px,3.6vw,50px);max-width:16em;margin:22px auto 0}
+.vcat p{max-width:600px;margin:24px auto 0;color:rgba(244,241,233,.82)}
+
+/* sectiekop (gedeeld) */
+.sec-head{max-width:42em}
+.sec-head h2{font-size:clamp(30px,3.2vw,46px);color:var(--groen);margin-top:22px}
+.sec-head .lead{margin-top:20px;color:#454c43;max-width:40em}
+
+/* pijlers */
+.pijlers{padding:108px 0}
+.pijler-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:62px;background:rgba(185,152,95,.4);border:1px solid rgba(185,152,95,.4)}
+.pijler{background:var(--ivoor);padding:46px 44px;position:relative;transition:background .4s}
+.pijler:hover{background:var(--wit)}
+.pijler .nr{font-family:'Marcellus',serif;font-size:15px;letter-spacing:.3em;color:var(--messing)}
+.pijler h3{font-size:24px;color:var(--groen);margin:18px 0 14px}
+.pijler p{color:#4b5248;font-size:15.5px}
+.pijler .vs{display:block;margin-top:18px;font-size:13px;color:var(--cognac);border-top:1px solid rgba(185,152,95,.4);padding-top:14px;line-height:1.7}
+.pijler .vs b{font-family:'Jost';font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-size:11px;color:var(--messing);display:block;margin-bottom:4px}
+
+/* ecosysteem (donker) met stats */
+.ecos{background:var(--groen-diep);color:var(--ivoor);padding:110px 0}
+.ecos .sec-head h2{color:var(--ivoor)}
+.ecos .sec-head .lead{color:rgba(244,241,233,.72)}
+.ecos-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;border-top:1px solid var(--messing);border-bottom:1px solid var(--messing)}
+.ecos-stat{padding:34px 22px;border-right:1px solid rgba(185,152,95,.32);text-align:center}
+.ecos-stat:last-child{border-right:0}
+.ecos-stat .n{font-family:'Marcellus',serif;font-size:44px;color:var(--ivoor);line-height:1;font-variant-numeric:lining-nums}
+.ecos-stat .l{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--messing);margin-top:14px}
+.ecos-note{margin-top:46px;max-width:46em;color:rgba(244,241,233,.82);font-size:16px}
+.ecos-note .lede{color:var(--ivoor);font-size:20px;display:block;margin-bottom:8px}
+
+/* doelgroepen — koper & verkoper */
+.doel{padding:110px 0}
+.doel-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,76px);margin-top:60px}
+.doel-col h3{font-size:26px;color:var(--groen);margin-bottom:6px}
+.doel-col .sub{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--cognac);font-weight:500;margin-bottom:26px;display:block}
+.doel-col.verkoper .sub{color:var(--heide)}
+.seg{padding:22px 0;border-top:1px solid rgba(185,152,95,.4)}
+.seg:first-of-type{border-top:1px solid var(--messing)}
+.seg h4{font-size:18px;color:var(--inkt);margin-bottom:6px}
+.seg p{font-size:14.5px;color:#5a6157}
+
+/* reis — van bod tot podium */
+.reis{background:var(--ivoor-warm);padding:110px 0}
+.reis-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:62px;border-top:1px solid var(--messing)}
+.reis-step{padding:34px 26px 30px;border-right:1px solid rgba(185,152,95,.35);position:relative}
+.reis-step:last-child{border-right:0}
+.reis-step::before{content:'';position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--messing);transition:width 1.1s cubic-bezier(.16,1,.3,1)}
+.reis-step.in::before{width:100%}
+.reis-step .nr{font-family:'Marcellus',serif;color:var(--messing);font-size:15px;letter-spacing:.3em}
+.reis-step h4{font-size:20px;color:var(--groen);margin:16px 0 10px}
+.reis-step p{font-size:14.5px;color:#4b5248}
+
+/* eerste editie — feature split */
+.editie{padding:110px 0}
+.editie-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(34px,5vw,72px);align-items:center}
+.editie .img{position:relative}
+.editie .img img{width:100%;aspect-ratio:4/3.4;object-fit:cover}
+.editie .img::after{content:'';position:absolute;inset:14px;border:1px solid var(--messing);pointer-events:none;z-index:5}
+.editie h2{font-size:clamp(28px,3vw,42px);color:var(--groen);margin:20px 0 18px}
+.editie p{color:#454c43;max-width:36em}
+.editie p+p{margin-top:16px}
+.editie .meta{margin-top:30px;display:flex;gap:34px;flex-wrap:wrap;border-top:1px solid rgba(185,152,95,.4);padding-top:24px}
+.editie .meta .m .k{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--cognac);font-weight:500}
+.editie .meta .m .v{font-family:'Marcellus',serif;font-size:21px;color:var(--groen);margin-top:6px}
+
+/* vertrouwensband */
+.trust{background:var(--groen);color:var(--ivoor);padding:96px 0;text-align:center}
+.trust .eyebrow{justify-content:center}
+.trust .eyebrow::after{content:'';width:34px;height:1px;background:var(--messing)}
+.trust h2{font-size:clamp(26px,3vw,40px);max-width:18em;margin:22px auto 0}
+.trust-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:46px}
+.trust-chips span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,241,233,.85);border:1px solid rgba(185,152,95,.5);padding:11px 20px;font-weight:400}
+
+/* slot CTA */
+.slot{background:var(--groen-diep) url('img/band-bos.jpg') center/cover;position:relative;color:var(--ivoor);text-align:center;padding:130px 0}
+.slot::before{content:'';position:absolute;inset:0;background:rgba(21,33,25,.86)}
+.slot .wrap{position:relative}
+.slot .eyebrow{justify-content:center}
+.slot .eyebrow::after{content:'';width:34px;height:1px;background:var(--messing)}
+.slot .lede{font-size:clamp(24px,3vw,38px);max-width:22em;margin:26px auto 0;line-height:1.45}
+.slot p.txt{max-width:600px;margin:24px auto 0;color:rgba(244,241,233,.8);font-size:16px}
+.slot .cta-row{display:flex;gap:18px;justify-content:center;margin-top:44px;flex-wrap:wrap}
+
+/* footer */
+footer{background:var(--groen-diep);color:rgba(244,241,233,.7);padding:90px 0 0;font-size:14.5px}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:50px;padding-bottom:70px}
+.foot-grid .seal{width:74px;margin-bottom:22px}
+.foot-grid h5{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--messing);font-weight:500;margin-bottom:20px}
+.foot-grid a{display:block;padding:4px 0;transition:color .3s}
+.foot-grid a:hover{color:var(--messing)}
+.foot-grid .brandname{font-family:'Marcellus',serif;font-size:20px;color:var(--ivoor);letter-spacing:.06em;line-height:1.4}
+.foot-bottom{border-top:1px solid rgba(185,152,95,.25);padding:24px 0;display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.1em;color:rgba(244,241,233,.45);flex-wrap:wrap}
+.concept-badge{position:fixed;left:18px;bottom:18px;z-index:60;background:var(--ivoor);color:var(--groen);border:1px solid var(--messing);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;padding:9px 16px;box-shadow:0 6px 24px rgba(21,33,25,.25)}
+.concept-badge b{color:var(--cognac)}
+
+/* typografische polish + afwerking */
+body{font-kerning:normal;font-feature-settings:"kern" 1,"liga" 1;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{text-wrap:balance}
+.lede{text-wrap:balance}
+.v-intro .lede,.slot .lede,.vcat h2{hanging-punctuation:first}
+::selection{background:var(--groen);color:var(--ivoor)}
+html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:var(--ivoor)}
+::-webkit-scrollbar-thumb{background:var(--messing);border:2px solid var(--ivoor);border-radius:99px}
+:focus-visible{outline:2px solid var(--messing);outline-offset:3px}
+[id]{scroll-margin-top:96px}
+
+/* gordijn-reveal kader op de feature-foto */
+.crt{position:relative;overflow:hidden}
+.js .crt::before{content:'';position:absolute;inset:-1px;z-index:4;background:var(--ivoor);clip-path:inset(0 0 0 0);transition:clip-path 1s cubic-bezier(.76,0,.24,1)}
+.js .crt.in::before{clip-path:inset(0 0 100% 0)}
+.crt img{transition:transform 1.4s cubic-bezier(.16,1,.3,1) .1s}
+.js .crt:not(.in) img{transform:scale(1.1)}
+.js .editie .img::after{clip-path:inset(0 100% 0 0);transition:clip-path 1.1s cubic-bezier(.45,0,.2,1) .7s}
+.js .editie .img.in::after{clip-path:inset(0 0 0 0)}
+
+/* nav: eerder naar burger */
+@media (max-width:1100px){
+  .menu{display:none}
+  .burger{display:block}
+  nav.open .menu{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;background:var(--groen-diep);padding:10px 6vw 26px;border-bottom:1px solid rgba(185,152,95,.3)}
+  nav.open .menu a{padding:13px 0;border-bottom:1px solid rgba(244,241,233,.08)}
+  nav.open .menu a::after{display:none}
+  .nav-cta{display:none}
+}
+
+/* cookie-melding + EWVO-links */
+.cookie{position:fixed;right:18px;bottom:18px;z-index:90;max-width:330px;background:var(--groen-diep);color:rgba(244,241,233,.85);border:1px solid rgba(185,152,95,.4);box-shadow:0 18px 50px rgba(15,23,18,.4);padding:18px 20px;font-size:13px;line-height:1.6;opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.cookie.aan{opacity:1;transform:none;pointer-events:auto}
+.cookie p{margin:0 0 12px}
+.cookie button{background:none;border:1px solid var(--messing);color:var(--messing);font:inherit;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:8px 18px;cursor:pointer;transition:background .3s,color .3s}
+.cookie button:hover{background:var(--messing);color:var(--groen-diep)}
+.foot-bottom a{color:inherit;border-bottom:1px solid rgba(185,152,95,.45);padding-bottom:1px;transition:color .3s,border-color .3s}
+.foot-bottom a:hover{color:var(--messing);border-color:var(--messing)}
+.concept-badge a{color:var(--cognac);border-bottom:1px solid rgba(138,90,51,.4);transition:border-color .3s}
+.concept-badge a:hover{border-color:var(--cognac)}
+.soc{display:flex;gap:12px;margin-top:24px}
+.soc a{width:38px;height:38px;padding:0;border:1px solid rgba(185,152,95,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(244,241,233,.75);transition:border-color .3s,color .3s,background .3s,transform .3s cubic-bezier(.16,1,.3,1)}
+.soc a:hover{border-color:var(--messing);background:var(--messing);color:var(--groen-diep);transform:translateY(-2px)}
+.soc svg{width:16px;height:16px;display:block}
+
+/* mobiel */
+@media (max-width:980px){
+  .pijler-grid{grid-template-columns:1fr}
+  .pijler{padding:38px 30px}
+  .ecos-stats{grid-template-columns:1fr 1fr}
+  .ecos-stat:nth-child(2){border-right:0}
+  .ecos-stat:nth-child(1),.ecos-stat:nth-child(2){border-bottom:1px solid rgba(185,152,95,.32)}
+  .doel-cols{grid-template-columns:1fr;gap:48px}
+  .reis-steps{grid-template-columns:1fr 1fr}
+  .reis-step:nth-child(2){border-right:0}
+  .reis-step:nth-child(1),.reis-step:nth-child(2){border-bottom:1px solid rgba(185,152,95,.35)}
+  .editie-grid{grid-template-columns:1fr;gap:30px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .topbar .info span:last-child{display:none}
+  .slot{background-attachment:scroll}
+  #preloader svg{width:96px}
+}
+@media (max-width:560px){
+  .ecos-stats{grid-template-columns:1fr}
+  .ecos-stat{border-right:0;border-bottom:1px solid rgba(185,152,95,.32)}
+  .ecos-stat:last-child{border-bottom:0}
+  .reis-steps{grid-template-columns:1fr}
+  .reis-step{border-right:0;border-bottom:1px solid rgba(185,152,95,.35)}
+  .reis-step:last-child{border-bottom:0}
+  .foot-grid{grid-template-columns:1fr}
+  .topbar .info{display:none}
+  .cookie{left:14px;right:14px;bottom:66px;max-width:none}
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  #preloader{display:none}
+  .js .rv{opacity:1;transform:none}
+  .js .crt::before{display:none}
+  .js .crt:not(.in) img{transform:none}
+  .js .editie .img::after{clip-path:none}
+  .reis-step::before{width:100%}
+  .phero h1 .line-inner{transform:none}
+  nav.hide{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== preloader: het wapenschild tekent zichzelf ===== -->
+<div id="preloader" aria-hidden="true">
+  <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-linecap="round">
+    <path class="pl-p" d="M18 12 H102 Q110 12 110 20 V68 C110 88 92 98 60 112 C28 98 10 88 10 68 V20 Q10 12 18 12 Z" stroke-width="1.6" pathLength="1"/>
+    <path class="pl-p" d="M20.5 16 H99.5 Q106 16 106 22.5 V67 C106 84.5 90 94 60 107.5 C30 94 14 84.5 14 67 V22.5 Q14 16 20.5 16 Z" stroke-width=".7" pathLength="1" style="--d:.1s"/>
+    <g stroke-width="1.1">
+      <rect class="pl-p" x="-11" y="-3" width="22" height="6" rx="3" transform="translate(33.5,28.5) rotate(45)" pathLength="1" style="--d:.2s"/>
+      <path class="pl-dot" d="M-6.5 -2.7 L-5.3 2.7 M-2.2 -2.8 L-1 2.8 M2.1 -2.8 L3.3 2.8 M6.4 -2.7 L7.6 2.7" stroke-width=".8" transform="translate(33.5,28.5) rotate(45)"/>
+      <path class="pl-p" d="M41.3 36.3 L74.6 69.6" stroke-width="1.6" pathLength="1" style="--d:.3s"/>
+      <path class="pl-dot" d="M51 48.2 L53.1 46.1 M61.7 58.9 L63.8 56.8" stroke-width=".8"/>
+      <rect class="pl-p" x="-5.5" y="-1.7" width="11" height="3.4" rx="1.7" transform="translate(78.5,73.5) rotate(45)" pathLength="1" style="--d:.4s"/>
+      <ellipse class="pl-p" cx="9.5" cy="0" rx="3.6" ry="1.7" transform="translate(78.5,73.5) rotate(45)" pathLength="1" style="--d:.45s"/>
+    </g>
+    <g stroke-width="1.1">
+      <rect class="pl-p" x="-11" y="-3" width="22" height="6" rx="3" transform="translate(86.5,28.5) rotate(-45)" pathLength="1" style="--d:.2s"/>
+      <path class="pl-dot" d="M-6.5 -2.7 L-5.3 2.7 M-2.2 -2.8 L-1 2.8 M2.1 -2.8 L3.3 2.8 M6.4 -2.7 L7.6 2.7" stroke-width=".8" transform="translate(86.5,28.5) rotate(-45)"/>
+      <path class="pl-p" d="M78.7 36.3 L45.4 69.6" stroke-width="1.6" pathLength="1" style="--d:.3s"/>
+      <path class="pl-dot" d="M69 48.2 L66.9 46.1 M58.3 58.9 L56.2 56.8" stroke-width=".8"/>
+      <rect class="pl-p" x="-5.5" y="-1.7" width="11" height="3.4" rx="1.7" transform="translate(41.5,73.5) rotate(135)" pathLength="1" style="--d:.4s"/>
+      <ellipse class="pl-p" cx="9.5" cy="0" rx="3.6" ry="1.7" transform="translate(41.5,73.5) rotate(135)" pathLength="1" style="--d:.45s"/>
+    </g>
+    <g stroke-width="1.5">
+      <path class="pl-p" d="M47.8 65 A15.5 15.5 0 1 1 72.2 65" pathLength="1" style="--d:.35s"/>
+      <path class="pl-p" d="M52.1 61.7 A10 10 0 1 1 67.9 61.7" pathLength="1" style="--d:.45s"/>
+      <path class="pl-p" d="M47.8 65 L52.1 61.7 M72.2 65 L67.9 61.7" stroke-width="1.1" pathLength="1" style="--d:.55s"/>
+    </g>
+    <g stroke-width=".75" class="pl-dot">
+      <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(72,51.1) rotate(-110)"/>
+      <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(67.3,45.1) rotate(-145)"/>
+      <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(60,42.75)"/>
+      <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(52.7,45.1) rotate(145)"/>
+      <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(48,51.1) rotate(110)"/>
+    </g>
+    <path class="pl-dot" d="M55.8 67 L55.4 69.2 M60 67.7 L60 69.9 M64.2 67 L64.6 69.2" stroke-width=".85"/>
+    <g fill="currentColor" stroke="none" class="pl-t">
+      <text x="60" y="25" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="5.4" letter-spacing=".8" textLength="52" lengthAdjust="spacingAndGlyphs">HORSE &amp; COUNTRYCLUB</text>
+      <text x="60" y="94" text-anchor="middle" font-family="Marcellus, serif" font-size="13.5" textLength="64" lengthAdjust="spacingAndGlyphs">ST. HUBERT</text>
+      <text x="60" y="101.5" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="4.4" letter-spacing=".8" textLength="30" lengthAdjust="spacingAndGlyphs">SINCE 1920</text>
+    </g>
+  </svg>
+</div>
+
+<!-- ===== logo: wapenschild (SVG, hergebruikt) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="hubertus" fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M18 12 H102 Q110 12 110 20 V68 C110 88 92 98 60 112 C28 98 10 88 10 68 V20 Q10 12 18 12 Z" stroke-width="1.6"/>
+      <path d="M20.5 16 H99.5 Q106 16 106 22.5 V67 C106 84.5 90 94 60 107.5 C30 94 14 84.5 14 67 V22.5 Q14 16 20.5 16 Z" stroke-width=".7"/>
+      <g stroke-width="1.1">
+        <g transform="translate(33.5,28.5) rotate(45)">
+          <rect x="-11" y="-3" width="22" height="6" rx="3"/>
+          <path d="M-6.5 -2.7 L-5.3 2.7 M-2.2 -2.8 L-1 2.8 M2.1 -2.8 L3.3 2.8 M6.4 -2.7 L7.6 2.7" stroke-width=".8"/>
+        </g>
+        <path d="M41.3 36.3 L74.6 69.6" stroke-width="1.6"/>
+        <path d="M51 48.2 L53.1 46.1 M61.7 58.9 L63.8 56.8" stroke-width=".8"/>
+        <g transform="translate(78.5,73.5) rotate(45)">
+          <rect x="-5.5" y="-1.7" width="11" height="3.4" rx="1.7"/>
+          <ellipse cx="9.5" cy="0" rx="3.6" ry="1.7"/>
+        </g>
+      </g>
+      <g stroke-width="1.1">
+        <g transform="translate(86.5,28.5) rotate(-45)">
+          <rect x="-11" y="-3" width="22" height="6" rx="3"/>
+          <path d="M-6.5 -2.7 L-5.3 2.7 M-2.2 -2.8 L-1 2.8 M2.1 -2.8 L3.3 2.8 M6.4 -2.7 L7.6 2.7" stroke-width=".8"/>
+        </g>
+        <path d="M78.7 36.3 L45.4 69.6" stroke-width="1.6"/>
+        <path d="M69 48.2 L66.9 46.1 M58.3 58.9 L56.2 56.8" stroke-width=".8"/>
+        <g transform="translate(41.5,73.5) rotate(135)">
+          <rect x="-5.5" y="-1.7" width="11" height="3.4" rx="1.7"/>
+          <ellipse cx="9.5" cy="0" rx="3.6" ry="1.7"/>
+        </g>
+      </g>
+      <g stroke-width="1.5">
+        <path d="M47.8 65 A15.5 15.5 0 1 1 72.2 65"/>
+        <path d="M52.1 61.7 A10 10 0 1 1 67.9 61.7"/>
+        <path d="M47.8 65 L52.1 61.7 M72.2 65 L67.9 61.7" stroke-width="1.1"/>
+      </g>
+      <g stroke-width=".75">
+        <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(72,51.1) rotate(-110)"/>
+        <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(67.3,45.1) rotate(-145)"/>
+        <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(60,42.75)"/>
+        <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(52.7,45.1) rotate(145)"/>
+        <rect x="-1.4" y="-.7" width="2.8" height="1.4" rx=".7" transform="translate(48,51.1) rotate(110)"/>
+      </g>
+      <path d="M55.8 67 L55.4 69.2 M60 67.7 L60 69.9 M64.2 67 L64.6 69.2" stroke-width=".85"/>
+      <g fill="currentColor" stroke="none">
+        <text x="60" y="25" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="5.4" letter-spacing=".8" textLength="52" lengthAdjust="spacingAndGlyphs">HORSE &amp; COUNTRYCLUB</text>
+        <text x="60" y="94" text-anchor="middle" font-family="Marcellus, serif" font-size="13.5" textLength="64" lengthAdjust="spacingAndGlyphs">ST. HUBERT</text>
+        <text x="60" y="101.5" text-anchor="middle" font-family="Jost, sans-serif" font-weight="400" font-size="4.4" letter-spacing=".8" textLength="30" lengthAdjust="spacingAndGlyphs">SINCE 1920</text>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<!-- ===== topbar ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="lang">
+      <button class="act" data-lang="nl">NL</button>
+      <button data-lang="fr">FR</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <div class="info"><span>Bosdreef 50 · Hoogboom — Kapellen</span><span>+32 3 605 87 90</span></div>
+  </div>
+</div>
+
+<!-- ===== nav ===== -->
+<nav id="nav">
+  <div class="wrap">
+    <a href="/" class="brand">
+      <svg class="seal" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
+      <span class="name">St. Hubert<small>Horse &amp; Country Club</small></span>
+    </a>
+    <div class="menu">
+      <a href="/#club" data-i18n="m1">De club</a>
+      <a href="/#members" data-i18n="m2">Members</a>
+      <a href="/springen" data-i18n="m7">Springen</a>
+      <a href="/veiling" class="hier" data-i18n="m3">Veilingen</a>
+      <a href="/historie" data-i18n="m4">Historie</a>
+      <a href="/#agenda" data-i18n="m5">Agenda</a>
+      <a href="/#contact" data-i18n="m6">Contact</a>
+    </div>
+    <a href="#aanmelden" class="nav-cta" data-i18n="v-navcta">Inschrijven</a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<!-- ===== hero ===== -->
+<header class="phero">
+  <div class="phero-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="vh-eye">De veiling van St. Hubert</div>
+    <h1 data-i18n="vh-title">U koopt geen paard. U treedt een wereld binnen.</h1>
+    <p class="sub" data-i18n="vh-sub">Een paardenveiling die niet eindigt bij de hamerslag — met begeleiding, een eigen keurmerk, volledige ontzorging en zichtbaar rendement, verankerd in een echte horse &amp; country club.</p>
+    <div class="cta-row">
+      <a href="#aanmelden" class="btn solid" data-i18n="vh-cta1">Inschrijven voor de veiling</a>
+      <a href="#pijlers" class="btn" data-i18n="vh-cta2">Ontdek de aanpak</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== intro / categorie-claim ===== -->
+<section class="v-intro">
+  <div class="wrap rv">
+    <p class="lede" data-i18n="vi-lede">“De veiling als lidmaatschap — niet als transactie.”</p>
+    <p class="txt" data-i18n="vi-p">Waar een veiling doorgaans stopt zodra de hamer valt, begint bij St. Hubert het echte verhaal. Van het eerste bod tot het podium en daarna staat een compleet team voor u klaar — op een domein dat de stallen, pistes en gastvrijheid al in huis heeft.</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<!-- ===== categorie-band ===== -->
+<section class="vcat">
+  <svg class="seal-bg" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
+  <div class="wrap rv">
+    <div class="eyebrow" data-i18n="vc-eye">Onze belofte</div>
+    <h2 data-i18n="vc-title">Het enige veilingplatform waar u niet alleen een paard koopt, maar toetreedt tot een wereld van begeleiding, faciliteiten en gemeenschap.</h2>
+    <p data-i18n="vc-p">Toegankelijk waar anderen gesloten zijn. Compleet waar anderen stoppen bij de hamerslag. Bewezen waar anderen beloven. Geen anonieme online marktplaats en geen onbereikbaar prestige-instituut — het clubhuis tussen die twee uitersten.</p>
+  </div>
+</section>
+
+<!-- ===== pijlers ===== -->
+<section class="pijlers" id="pijlers">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow" data-i18n="vp-eye">Vier pijlers</div>
+      <h2 data-i18n="vp-title">Waarop u kunt rekenen.</h2>
+      <p class="lead" data-i18n="vp-lead">Vier beloften die elkaar versterken — en die alleen geloofwaardig zijn omdat een echte club erachter staat.</p>
+    </div>
+    <div class="pijler-grid">
+      <div class="pijler rv">
+        <span class="nr">I</span>
+        <h3 data-i18n="p1-t">Radicale transparantie</h3>
+        <p data-i18n="p1-p">Wij tonen openlijk wat elders verborgen blijft: het biedverloop, eerlijke clearance rates en een doorzoekbaar archief van eerdere verkoopprijzen. Voor de nieuwe koper neemt dat het grootste wantrouwen weg; voor de professional levert het bruikbare marktdata.</p>
+        <span class="vs"><b>Wat dat u oplevert</b>Vertrouwen door openheid — niet door grootte alleen.</span>
+      </div>
+      <div class="pijler rv">
+        <span class="nr">II</span>
+        <h3 data-i18n="p2-t">Een eigen keurmerk &amp; zichtbare gezichten</h3>
+        <p data-i18n="p2-p">In plaats van geleend erfgoed bouwen we eigen merkkapitaal: een herkenbaar St. Hubert-keurmerk dat staat voor keuring, herkomst en garantie — gedragen door de zichtbare namen van onze eigen ruiters, trainers en winnaars. Mensen vertrouwen mensen.</p>
+        <span class="vs"><b>Wat dat u oplevert</b>De gezichten achter het platform zijn de garantie.</span>
+      </div>
+      <div class="pijler rv">
+        <span class="nr">III</span>
+        <h3 data-i18n="p3-t">Het eigenaarschap volledig gefaciliteerd</h3>
+        <p data-i18n="p3-p">De aankoop is het begin, niet het einde. Via de club bieden we alles wat na de hamerslag komt — stalling, training op de pistes, dierenarts, revalidatie, verzekering, transport en uiteindelijk doorverkoop — als één geïntegreerd pakket op eigen terrein.</p>
+        <span class="vs"><b>Wat dat u oplevert</b>Eén aanspreekpunt voor de hele levensloop van uw paard.</span>
+      </div>
+      <div class="pijler rv">
+        <span class="nr">IV</span>
+        <h3 data-i18n="p4-t">Rendement dat u kunt volgen</h3>
+        <p data-i18n="p4-p">Elk verkocht paard krijgt een doorlopend prestatieprofiel: wedstrijduitslagen, fokresultaten en waardeontwikkeling, gevoed door de evenementen en pistes van de club zelf. Waar anderen losse succesverhalen tonen, levert St. Hubert een verifieerbaar, doorlopend spoor.</p>
+        <span class="vs"><b>Wat dat u oplevert</b>De droom met bewijs — zichtbaar in cijfers en uitslagen.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ecosysteem ===== -->
+<section class="ecos">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow" data-i18n="ve-eye">Verankerd in een echte club</div>
+      <h2 data-i18n="ve-title">Een belofte die een website niet kan kopiëren.</h2>
+      <p class="lead" data-i18n="ve-lead">Het veilingplatform staat niet op zichzelf. Het is de digitale voorkant van een bestaand domein met stallen, pistes, horeca en evenementen — een troef die online marktplaatsen per definitie missen.</p>
+    </div>
+    <div class="ecos-stats rv">
+      <div class="ecos-stat"><div class="n">85</div><div class="l" data-i18n="es1-l">Ruime boxen op eigen terrein</div></div>
+      <div class="ecos-stat"><div class="n">2 + 2</div><div class="l" data-i18n="es2-l">Binnen- &amp; buitenpistes</div></div>
+      <div class="ecos-stat"><div class="n">1920</div><div class="l" data-i18n="es3-l">Hippische traditie in Hoogboom</div></div>
+      <div class="ecos-stat"><div class="n">∞</div><div class="l" data-i18n="es4-l">Ruiterpaden in bos &amp; heide</div></div>
+    </div>
+    <p class="ecos-note rv">
+      <span class="lede" data-i18n="ve-note-l">Een concurrent kan onze website kopiëren — maar niet onze stallen, ruiters en evenementen.</span>
+      <span data-i18n="ve-note-p">Kopers zien paarden live in actie op het domein; verkopers krijgen professionele voorbereiding en after-sales onderdak. Het clubgevoel dat anderen alleen op enkele fysieke topveilingen bieden, is bij ons de standaard — en straalt online net zo goed uit.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ===== doelgroepen ===== -->
+<section class="doel">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow" data-i18n="vd-eye">Voor koper én verkoper</div>
+      <h2 data-i18n="vd-title">Twee kanten van dezelfde ring.</h2>
+      <p class="lead" data-i18n="vd-lead">De verkoper wil het hoogste bereik en de beste prijs; de koper wil zekerheid, gemak en rendement. Wij bedienen beide expliciet.</p>
+    </div>
+    <div class="doel-cols">
+      <div class="doel-col koper rv">
+        <h3 data-i18n="vk-h">Voor de koper</h3>
+        <span class="sub" data-i18n="vk-sub">Zekerheid · gemak · rendement</span>
+        <div class="seg">
+          <h4 data-i18n="k1-t">De instromer</h4>
+          <p data-i18n="k1-p">Koopt voor het eerst een sportpaard en verdient begeleiding, uitleg en vertrouwen. De club is de zachte landing — wij maken de aankoop begrijpelijk en sociaal.</p>
+        </div>
+        <div class="seg">
+          <h4 data-i18n="k2-t">De ambitieuze amateur</h4>
+          <p data-i18n="k2-p">Rijdt zelf op niveau en zoekt het volgende wedstrijdpaard. Bewezen bloedlijnen, eerlijke keuringen en een echt proefmoment op de pistes van het domein.</p>
+        </div>
+        <div class="seg">
+          <h4 data-i18n="k3-t">De professional &amp; het syndicaat</h4>
+          <p data-i18n="k3-p">Koopt op kwaliteit en doorverkoopwaarde. Snelheid, transparante data, internationaal bereik en een efficiënt biedproces staan voorop.</p>
+        </div>
+      </div>
+      <div class="doel-col verkoper rv">
+        <h3 data-i18n="vv-h">Voor de verkoper</h3>
+        <span class="sub" data-i18n="vv-sub">Bereik · prijs · ontzorging</span>
+        <div class="seg">
+          <h4 data-i18n="s1-t">De fokker</h4>
+          <p data-i18n="s1-p">Wil maximaal bereik en de hoogste prijs voor zijn jaarproductie. Overtuigd door cijfers, een serieus koperspubliek en presentatiekwaliteit.</p>
+        </div>
+        <div class="seg">
+          <h4 data-i18n="s2-t">De sportstal</h4>
+          <p data-i18n="s2-p">Verkoopt opgeleide paarden en wil prestige en een passend publiek — gevoelig voor de kwaliteit van de mede-aangeboden collectie.</p>
+        </div>
+        <div class="seg">
+          <h4 data-i18n="s3-t">De particuliere eigenaar</h4>
+          <p data-i18n="s3-p">Verkoopt incidenteel één paard en heeft volledige ontzorging nodig: waardebepaling, presentatie, fotografie en afhandeling. Hier wint ons service-ecosysteem meteen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== reis — van bod tot podium ===== -->
+<section class="reis">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow" data-i18n="vj-eye">Van bod tot podium</div>
+      <h2 data-i18n="vj-title">Eén doorlopende relatie.</h2>
+      <p class="lead" data-i18n="vj-lead">Vier stappen die in elkaar overlopen — wij laten u op geen enkel moment los.</p>
+    </div>
+    <div class="reis-steps">
+      <div class="reis-step rv">
+        <span class="nr">01</span>
+        <h4 data-i18n="j1-t">Oriënteren</h4>
+        <p data-i18n="j1-p">Doorzoek de catalogus, bekijk keuringen en herkomst, en volg het live dashboard. Onze gidsen 'Zo koopt u' en 'Zo verkoopt u' helpen u over de drempel.</p>
+      </div>
+      <div class="reis-step rv">
+        <span class="nr">02</span>
+        <h4 data-i18n="j2-t">Bieden</h4>
+        <p data-i18n="j2-p">Bied live of online in een transparant proces, met realtime biedverloop. Bezichtig en probeer de paarden vooraf op eigen terrein.</p>
+      </div>
+      <div class="reis-step rv">
+        <span class="nr">03</span>
+        <h4 data-i18n="j3-t">Onderbrengen</h4>
+        <p data-i18n="j3-p">Na de hamerslag regelen wij stalling, training, dierenarts, verzekering en transport — als één pakket, of precies wat u nodig hebt.</p>
+      </div>
+      <div class="reis-step rv">
+        <span class="nr">04</span>
+        <h4 data-i18n="j4-t">Presteren</h4>
+        <p data-i18n="j4-p">Uw paard bouwt een zichtbaar prestatieprofiel op via de club, de pistes en de evenementen — tot en met een eventuele doorverkoop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== eerste editie ===== -->
+<section class="editie" id="aanmelden">
+  <div class="wrap">
+    <div class="editie-grid">
+      <div class="img crt rv">
+        <img src="img/gate-veiling.jpg" alt="De veiling op St. Hubert" loading="lazy" decoding="async">
+      </div>
+      <div class="rv">
+        <div class="eyebrow" data-i18n="vf-eye">De eerste editie</div>
+        <h2 data-i18n="vf-title">Een zorgvuldig samengestelde lanceringscollectie.</h2>
+        <p data-i18n="vf-p1">We beginnen met kwaliteit boven kwantiteit — een selectie van eigen en bevriende stallen, om het keurmerk vanaf de eerste hamerslag te vestigen. Bezichtiging op het domein, gevolgd door een live- en onlineveiling.</p>
+        <p data-i18n="vf-p2">Wilt u inschrijven als koper, of een paard aanmelden voor de collectie? Laat uw gegevens achter en ons team neemt persoonlijk contact met u op.</p>
+        <div class="meta">
+          <div class="m"><div class="k" data-i18n="vf-k1">Eerstvolgende veiling</div><div class="v" data-i18n="vf-v1">Zat 4 juli</div></div>
+          <div class="m"><div class="k" data-i18n="vf-k2">Bezichtiging</div><div class="v" data-i18n="vf-v2">vanaf 14u</div></div>
+          <div class="m"><div class="k" data-i18n="vf-k3">Veiling</div><div class="v" data-i18n="vf-v3">vanaf 19u</div></div>
+        </div>
+        <div class="cta-row" style="display:flex;gap:18px;margin-top:34px;flex-wrap:wrap">
+          <a href="mailto:info@sinthubert.com?subject=Inschrijving%20veiling%20St.%20Hubert" class="btn dark" data-i18n="vf-cta1">Inschrijven als koper</a>
+          <a href="mailto:info@sinthubert.com?subject=Paard%20aanmelden%20voor%20de%20veiling" class="btn dark" data-i18n="vf-cta2">Een paard aanmelden</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== vertrouwensband ===== -->
+<section class="trust">
+  <div class="wrap rv">
+    <div class="eyebrow" data-i18n="vt-eye">Vertrouwen als rode draad</div>
+    <h2 data-i18n="vt-title">Geen aparte pagina, maar overal zichtbaar.</h2>
+    <div class="trust-chips">
+      <span data-i18n="vt-c1">St. Hubert-keurmerk</span>
+      <span data-i18n="vt-c2">Keuringsgaranties</span>
+      <span data-i18n="vt-c3">Actuele cijfers</span>
+      <span data-i18n="vt-c4">Echte namen &amp; gezichten</span>
+      <span data-i18n="vt-c5">Persoonlijk bereikbaar</span>
+      <span data-i18n="vt-c6">Heldere geschillenafhandeling</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slot CTA ===== -->
+<section class="slot">
+  <div class="wrap rv">
+    <div class="eyebrow" data-i18n="vs-eye">Word deel van de wereld</div>
+    <p class="lede" data-i18n="vs-lede">“U koopt geen paard, maar een droom met bewezen uitbetaling — van het eerste bod tot het podium en daarna.”</p>
+    <p class="txt" data-i18n="vs-p">Plan een bezoek aan het domein, schrijf u in voor de eerstvolgende veiling, of meld uw paard aan voor de collectie. Ons team begeleidt u persoonlijk.</p>
+    <div class="cta-row">
+      <a href="mailto:info@sinthubert.com?subject=Inschrijving%20veiling%20St.%20Hubert" class="btn solid" data-i18n="vs-cta1">Inschrijven voor de veiling</a>
+      <a href="/#contact" class="btn" data-i18n="vs-cta2">Plan een bezoek</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <svg class="seal" viewBox="0 0 120 120" style="color:var(--ivoor)"><use href="#hubertus"/></svg>
+        <div class="brandname">St. Hubert<br>Horse &amp; Country Club</div>
+        <p style="margin-top:16px;font-size:13.5px;max-width:260px" data-i18n="ft-tag">Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.</p>
+        <div class="soc">
+          <a href="https://www.facebook.com/profile.php?id=61554665814540" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15.5 4.5h-1.8a3.2 3.2 0 0 0-3.2 3.2V20 M8 11.2h6.6"/></svg>
+          </a>
+          <a href="https://www.instagram.com/sthubert.horseandcountryclub/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+      <div><h5 data-i18n="ft-h1">Bezoek ons</h5><p data-i18n="ft-adres">Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België</p></div>
+      <div><h5 data-i18n="ft-h2">Contact</h5><a href="tel:+3236058790">+32 3 605 87 90</a><a href="mailto:info@sinthubert.com">info@sinthubert.com</a><p style="margin-top:14px;font-size:13px" data-i18n="ft-open">Dagelijks geopend<br>09:30 – 22:00</p></div>
+      <div><h5 data-i18n="ft-h3">De club</h5><a href="/#members" data-i18n="ft-l1">Private members</a><a href="/#members" data-i18n="ft-l2">Professionele ruiters</a><a href="/veiling" class="hier" data-i18n="m3">Veilingen</a><a href="/springen" data-i18n="m7">Springen</a><a href="/historie" data-i18n="m4">Historie</a><a href="/#agenda" data-i18n="ft-l5">Agenda &amp; events</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 St. Hubert Horse &amp; Country Club — Kapellen</span>
+      <span data-i18n="ft-priv">NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy &amp; voorwaarden</span>
+      <span>Concept 01 · webdesign door <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a></span>
+    </div>
+  </div>
+</footer>
+
+<aside class="cookie" id="cookie" aria-label="Cookies">
+  <p data-i18n="ck-txt">Deze website gebruikt enkel functionele cookies — om uw taal- en weergavevoorkeuren te onthouden. Geen tracking.</p>
+  <button data-i18n="ck-btn">Begrepen</button>
+</aside>
+
+<div class="concept-badge"><b>Concept 01</b> &nbsp;·&nbsp; <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a> × St. Hubert</div>
+
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* preloader: puur CSS-gedreven; JS ruimt op en onthoudt de sessie */
+const plSkip = document.documentElement.classList.contains('pl-skip');
+const pl = document.getElementById('preloader');
+if(pl){
+  if(reduced || plSkip){ pl.remove(); }
+  else setTimeout(()=>pl.remove(), 2000);
+  try{ sessionStorage.setItem('sh-pl','1'); }catch(e){}
+}
+
+/* reveal on scroll — .rv (content) en .crt (gordijn-reveals) */
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.rv,.crt,.reis-step').forEach(el=>io.observe(el));
+
+/* page hero: H1 per regel maskeren (na font-load, achter de preloader) */
+const h1 = document.querySelector('.phero h1');
+if(h1 && !reduced){
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(()=>{
+    if(!h1.isConnected || h1.querySelector('.line')) return;
+    const woorden = h1.textContent.trim().split(/\s+/);
+    h1.textContent = '';
+    const spans = woorden.map(w=>{
+      const s = document.createElement('span');
+      s.textContent = w; s.style.display = 'inline-block';
+      h1.appendChild(s); h1.appendChild(document.createTextNode(' '));
+      return s;
+    });
+    const regels = []; let top = null;
+    spans.forEach(s=>{
+      if(s.offsetTop !== top){ regels.push([]); top = s.offsetTop; }
+      regels[regels.length-1].push(s.textContent);
+    });
+    h1.textContent = '';
+    const basis = plSkip ? .1 : Math.max(.05, 1.15 - performance.now()/1000);
+    regels.forEach((ws,i)=>{
+      const line = document.createElement('span'); line.className = 'line';
+      const inner = document.createElement('span'); inner.className = 'line-inner';
+      inner.textContent = ws.join(' ');
+      inner.style.setProperty('--d', (basis + i*.12).toFixed(2)+'s');
+      line.appendChild(inner); h1.appendChild(line);
+    });
+    /* na de intro terug naar platte tekst: robuust voor i18n en resize */
+    setTimeout(()=>{
+      const inners = h1.querySelectorAll('.line-inner');
+      if(inners.length) h1.textContent = [...inners].map(x=>x.textContent).join(' ');
+    }, 3600);
+  });
+}
+
+/* nav: compact na 80px, verbergen bij scroll-down, tonen bij scroll-up */
+const nav = document.getElementById('nav');
+let lastY = scrollY, navBezig = false;
+addEventListener('scroll', ()=>{
+  if(navBezig) return; navBezig = true;
+  requestAnimationFrame(()=>{
+    const y = scrollY, dy = y - lastY;
+    nav.classList.toggle('compact', y > 80);
+    if(Math.abs(dy) > 4){
+      if(!reduced && !nav.classList.contains('open')){
+        if(dy > 0 && y > 320) nav.classList.add('hide');
+        else nav.classList.remove('hide');
+      }
+      lastY = y;
+    }
+    navBezig = false;
+  });
+},{passive:true});
+
+/* mobiel menu sluit na keuze */
+document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+/* tellende cijfers (eenmalig, in beeld) */
+function telOp(el){
+  const delen = el.textContent.split(/(\d+)/);
+  const t0 = performance.now(), duur = 1500;
+  (function stap(nu){
+    const p = Math.min(1,(nu-t0)/duur), e = 1-Math.pow(1-p,3);
+    el.textContent = delen.map(s=>/^\d+$/.test(s)?String(Math.round(+s*e)):s).join('');
+    if(p<1) requestAnimationFrame(stap);
+  })(t0);
+}
+const statIO = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ statIO.unobserve(e.target); if(!reduced) telOp(e.target); } });
+},{threshold:.5});
+document.querySelectorAll('.ecos-stat .n').forEach(el=>{ if(/^\d+$/.test(el.textContent.trim())) statIO.observe(el); });
+
+/* magnetische knoppen — alleen bij fijne pointer */
+if(matchMedia('(pointer:fine)').matches && !reduced){
+  document.querySelectorAll('.btn,.nav-cta').forEach(b=>{
+    b.addEventListener('mousemove',e=>{
+      const r = b.getBoundingClientRect();
+      const dx = ((e.clientX-r.left)/r.width-.5)*7, dy = ((e.clientY-r.top)/r.height-.5)*7;
+      b.style.transform = `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px)`;
+    });
+    b.addEventListener('mouseleave',()=>{ b.style.transform = ''; });
+  });
+}
+
+/* subtiele cookie-melding — alleen functionele opslag, eenmalig */
+const ck = document.getElementById('cookie');
+if(ck){
+  let ckOk = false; try{ ckOk = !!localStorage.getItem('sh-cookies'); }catch(e){}
+  if(ckOk){ ck.remove(); }
+  else{
+    setTimeout(()=>ck.classList.add('aan'), reduced ? 800 : 2600);
+    ck.querySelector('button').addEventListener('click',()=>{
+      try{ localStorage.setItem('sh-cookies','1'); }catch(e){}
+      ck.classList.remove('aan');
+      setTimeout(()=>ck.remove(), 700);
+    });
+  }
+}
+
+/* meertaligheid — volledig drietalig (nav + hero + alle secties) */
+const i18n = {
+  nl:{'m1':"De club",'m2':"Members",'m3':"Veilingen",'m4':"Historie",'m5':"Agenda",'m6':"Contact",'m7':"Springen",'cta':"Word member",'v-navcta':"Inschrijven",
+      'pg-title':"De Veiling — St. Hubert Horse & Country Club",
+      'vh-eye':"De veiling van St. Hubert",
+      'vh-title':"U koopt geen paard. U treedt een wereld binnen.",
+      'vh-sub':"Een paardenveiling die niet eindigt bij de hamerslag — met begeleiding, een eigen keurmerk, volledige ontzorging en zichtbaar rendement, verankerd in een echte horse & country club.",
+      'vh-cta1':"Inschrijven voor de veiling",'vh-cta2':"Ontdek de aanpak",
+      'vi-lede':"“De veiling als lidmaatschap — niet als transactie.”",
+      'vi-p':"Waar een veiling doorgaans stopt zodra de hamer valt, begint bij St. Hubert het echte verhaal. Van het eerste bod tot het podium en daarna staat een compleet team voor u klaar — op een domein dat de stallen, pistes en gastvrijheid al in huis heeft.",
+      'vc-eye':"Onze belofte",
+      'vc-title':"Het enige veilingplatform waar u niet alleen een paard koopt, maar toetreedt tot een wereld van begeleiding, faciliteiten en gemeenschap.",
+      'vc-p':"Toegankelijk waar anderen gesloten zijn. Compleet waar anderen stoppen bij de hamerslag. Bewezen waar anderen beloven. Geen anonieme online marktplaats en geen onbereikbaar prestige-instituut — het clubhuis tussen die twee uitersten.",
+      'vp-eye':"Vier pijlers",'vp-title':"Waarop u kunt rekenen.",
+      'vp-lead':"Vier beloften die elkaar versterken — en die alleen geloofwaardig zijn omdat een echte club erachter staat.",
+      'p1-t':"Radicale transparantie",
+      'p1-p':"Wij tonen openlijk wat elders verborgen blijft: het biedverloop, eerlijke clearance rates en een doorzoekbaar archief van eerdere verkoopprijzen. Voor de nieuwe koper neemt dat het grootste wantrouwen weg; voor de professional levert het bruikbare marktdata.",
+      'p2-t':"Een eigen keurmerk & zichtbare gezichten",
+      'p2-p':"In plaats van geleend erfgoed bouwen we eigen merkkapitaal: een herkenbaar St. Hubert-keurmerk dat staat voor keuring, herkomst en garantie — gedragen door de zichtbare namen van onze eigen ruiters, trainers en winnaars. Mensen vertrouwen mensen.",
+      'p3-t':"Het eigenaarschap volledig gefaciliteerd",
+      'p3-p':"De aankoop is het begin, niet het einde. Via de club bieden we alles wat na de hamerslag komt — stalling, training op de pistes, dierenarts, revalidatie, verzekering, transport en uiteindelijk doorverkoop — als één geïntegreerd pakket op eigen terrein.",
+      'p4-t':"Rendement dat u kunt volgen",
+      'p4-p':"Elk verkocht paard krijgt een doorlopend prestatieprofiel: wedstrijduitslagen, fokresultaten en waardeontwikkeling, gevoed door de evenementen en pistes van de club zelf. Waar anderen losse succesverhalen tonen, levert St. Hubert een verifieerbaar, doorlopend spoor.",
+      've-eye':"Verankerd in een echte club",'ve-title':"Een belofte die een website niet kan kopiëren.",
+      've-lead':"Het veilingplatform staat niet op zichzelf. Het is de digitale voorkant van een bestaand domein met stallen, pistes, horeca en evenementen — een troef die online marktplaatsen per definitie missen.",
+      'es1-l':"Ruime boxen op eigen terrein",'es2-l':"Binnen- & buitenpistes",'es3-l':"Hippische traditie in Hoogboom",'es4-l':"Ruiterpaden in bos & heide",
+      've-note-l':"Een concurrent kan onze website kopiëren — maar niet onze stallen, ruiters en evenementen.",
+      've-note-p':"Kopers zien paarden live in actie op het domein; verkopers krijgen professionele voorbereiding en after-sales onderdak. Het clubgevoel dat anderen alleen op enkele fysieke topveilingen bieden, is bij ons de standaard — en straalt online net zo goed uit.",
+      'vd-eye':"Voor koper én verkoper",'vd-title':"Twee kanten van dezelfde ring.",
+      'vd-lead':"De verkoper wil het hoogste bereik en de beste prijs; de koper wil zekerheid, gemak en rendement. Wij bedienen beide expliciet.",
+      'vk-h':"Voor de koper",'vk-sub':"Zekerheid · gemak · rendement",
+      'k1-t':"De instromer",'k1-p':"Koopt voor het eerst een sportpaard en verdient begeleiding, uitleg en vertrouwen. De club is de zachte landing — wij maken de aankoop begrijpelijk en sociaal.",
+      'k2-t':"De ambitieuze amateur",'k2-p':"Rijdt zelf op niveau en zoekt het volgende wedstrijdpaard. Bewezen bloedlijnen, eerlijke keuringen en een echt proefmoment op de pistes van het domein.",
+      'k3-t':"De professional & het syndicaat",'k3-p':"Koopt op kwaliteit en doorverkoopwaarde. Snelheid, transparante data, internationaal bereik en een efficiënt biedproces staan voorop.",
+      'vv-h':"Voor de verkoper",'vv-sub':"Bereik · prijs · ontzorging",
+      's1-t':"De fokker",'s1-p':"Wil maximaal bereik en de hoogste prijs voor zijn jaarproductie. Overtuigd door cijfers, een serieus koperspubliek en presentatiekwaliteit.",
+      's2-t':"De sportstal",'s2-p':"Verkoopt opgeleide paarden en wil prestige en een passend publiek — gevoelig voor de kwaliteit van de mede-aangeboden collectie.",
+      's3-t':"De particuliere eigenaar",'s3-p':"Verkoopt incidenteel één paard en heeft volledige ontzorging nodig: waardebepaling, presentatie, fotografie en afhandeling. Hier wint ons service-ecosysteem meteen.",
+      'vj-eye':"Van bod tot podium",'vj-title':"Eén doorlopende relatie.",'vj-lead':"Vier stappen die in elkaar overlopen — wij laten u op geen enkel moment los.",
+      'j1-t':"Oriënteren",'j1-p':"Doorzoek de catalogus, bekijk keuringen en herkomst, en volg het live dashboard. Onze gidsen 'Zo koopt u' en 'Zo verkoopt u' helpen u over de drempel.",
+      'j2-t':"Bieden",'j2-p':"Bied live of online in een transparant proces, met realtime biedverloop. Bezichtig en probeer de paarden vooraf op eigen terrein.",
+      'j3-t':"Onderbrengen",'j3-p':"Na de hamerslag regelen wij stalling, training, dierenarts, verzekering en transport — als één pakket, of precies wat u nodig hebt.",
+      'j4-t':"Presteren",'j4-p':"Uw paard bouwt een zichtbaar prestatieprofiel op via de club, de pistes en de evenementen — tot en met een eventuele doorverkoop.",
+      'vf-eye':"De eerste editie",'vf-title':"Een zorgvuldig samengestelde lanceringscollectie.",
+      'vf-p1':"We beginnen met kwaliteit boven kwantiteit — een selectie van eigen en bevriende stallen, om het keurmerk vanaf de eerste hamerslag te vestigen. Bezichtiging op het domein, gevolgd door een live- en onlineveiling.",
+      'vf-p2':"Wilt u inschrijven als koper, of een paard aanmelden voor de collectie? Laat uw gegevens achter en ons team neemt persoonlijk contact met u op.",
+      'vf-k1':"Eerstvolgende veiling",'vf-v1':"Zat 4 juli",'vf-k2':"Bezichtiging",'vf-v2':"vanaf 14u",'vf-k3':"Veiling",'vf-v3':"vanaf 19u",
+      'vf-cta1':"Inschrijven als koper",'vf-cta2':"Een paard aanmelden",
+      'vt-eye':"Vertrouwen als rode draad",'vt-title':"Geen aparte pagina, maar overal zichtbaar.",
+      'vt-c1':"St. Hubert-keurmerk",'vt-c2':"Keuringsgaranties",'vt-c3':"Actuele cijfers",'vt-c4':"Echte namen & gezichten",'vt-c5':"Persoonlijk bereikbaar",'vt-c6':"Heldere geschillenafhandeling",
+      'vs-eye':"Word deel van de wereld",
+      'vs-lede':"“U koopt geen paard, maar een droom met bewezen uitbetaling — van het eerste bod tot het podium en daarna.”",
+      'vs-p':"Plan een bezoek aan het domein, schrijf u in voor de eerstvolgende veiling, of meld uw paard aan voor de collectie. Ons team begeleidt u persoonlijk.",
+      'vs-cta1':"Inschrijven voor de veiling",'vs-cta2':"Plan een bezoek",
+      'ft-tag':"Een oase van rust in het groene hart van Antwerpen — voor paard, ruiter en liefhebber.",
+      'ft-h1':"Bezoek ons",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>België",'ft-h2':"Contact",
+      'ft-open':"Dagelijks geopend<br>09:30 – 22:00",'ft-h3':"De club",
+      'ft-l1':"Private members",'ft-l2':"Professionele ruiters",'ft-l5':"Agenda & events",
+      'ft-priv':"NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy & voorwaarden",
+      'ck-txt':"Deze website gebruikt enkel functionele cookies — om uw taal- en weergavevoorkeuren te onthouden. Geen tracking.",'ck-btn':"Begrepen"},
+  fr:{'m1':"Le club",'m2':"Membres",'m3':"Ventes",'m4':"Histoire",'m5':"Agenda",'m6':"Contact",'m7':"Jumping",'cta':"Devenir membre",'v-navcta':"S'inscrire",
+      'pg-title':"La Vente — St. Hubert Horse & Country Club",
+      'vh-eye':"La vente de St. Hubert",
+      'vh-title':"Vous n'achetez pas un cheval. Vous entrez dans un univers.",
+      'vh-sub':"Une vente de chevaux qui ne s'arrête pas au coup de marteau — avec accompagnement, un label propre, une prise en charge complète et un rendement visible, ancrés dans un véritable horse & country club.",
+      'vh-cta1':"S'inscrire à la vente",'vh-cta2':"Découvrir l'approche",
+      'vi-lede':"« La vente comme adhésion — non comme transaction. »",
+      'vi-p':"Là où une vente s'arrête généralement dès que le marteau tombe, le vrai récit commence chez St. Hubert. Du premier enchère au podium et au-delà, une équipe complète vous accompagne — sur un domaine qui dispose déjà des écuries, des pistes et de l'hospitalité.",
+      'vc-eye':"Notre promesse",
+      'vc-title':"La seule plateforme de vente où vous n'achetez pas seulement un cheval, mais accédez à un univers d'accompagnement, d'installations et de communauté.",
+      'vc-p':"Accessible là où d'autres sont fermés. Complet là où d'autres s'arrêtent au coup de marteau. Prouvé là où d'autres promettent. Ni place de marché anonyme, ni institut de prestige inaccessible — la maison de club entre ces deux extrêmes.",
+      'vp-eye':"Quatre piliers",'vp-title':"Ce sur quoi vous pouvez compter.",
+      'vp-lead':"Quatre promesses qui se renforcent mutuellement — et qui ne sont crédibles que parce qu'un véritable club les soutient.",
+      'p1-t':"Une transparence radicale",
+      'p1-p':"Nous montrons ouvertement ce que d'autres cachent : le déroulement des enchères, des taux de clearance honnêtes et une archive consultable des prix de vente antérieurs. Pour le nouvel acheteur, cela lève la plus grande méfiance ; pour le professionnel, cela fournit des données de marché utiles.",
+      'p2-t':"Un label propre & des visages visibles",
+      'p2-p':"Plutôt qu'un héritage emprunté, nous bâtissons notre propre capital de marque : un label St. Hubert reconnaissable, gage d'expertise, d'origine et de garantie — porté par les noms visibles de nos cavaliers, entraîneurs et gagnants. Les gens font confiance aux gens.",
+      'p3-t':"La propriété entièrement prise en charge",
+      'p3-p':"L'achat est le début, non la fin. Via le club, nous proposons tout ce qui vient après le coup de marteau — pension, entraînement sur les pistes, vétérinaire, revalidation, assurance, transport et, à terme, revente — en un seul forfait intégré, sur place.",
+      'p4-t':"Un rendement que vous pouvez suivre",
+      'p4-p':"Chaque cheval vendu reçoit un profil de performance continu : résultats de concours, résultats d'élevage et évolution de la valeur, nourris par les événements et les pistes du club. Là où d'autres affichent des récits isolés, St. Hubert livre une trace vérifiable et continue.",
+      've-eye':"Ancré dans un véritable club",'ve-title':"Une promesse qu'un site web ne peut copier.",
+      've-lead':"La plateforme de vente n'existe pas seule. Elle est la façade numérique d'un domaine existant avec écuries, pistes, restauration et événements — un atout que les places de marché en ligne n'ont, par définition, pas.",
+      'es1-l':"Boxes spacieux sur place",'es2-l':"Pistes intérieures & extérieures",'es3-l':"Tradition équestre à Hoogboom",'es4-l':"Sentiers en bois & lande",
+      've-note-l':"Un concurrent peut copier notre site — mais pas nos écuries, nos cavaliers et nos événements.",
+      've-note-p':"Les acheteurs voient les chevaux en action sur le domaine ; les vendeurs bénéficient d'une préparation professionnelle et d'un accueil après-vente. L'esprit de club que d'autres n'offrent que lors de quelques ventes physiques d'élite est ici la norme — et rayonne tout autant en ligne.",
+      'vd-eye':"Pour l'acheteur et le vendeur",'vd-title':"Les deux côtés d'une même ronde.",
+      'vd-lead':"Le vendeur veut la plus large audience et le meilleur prix ; l'acheteur veut la sécurité, la facilité et le rendement. Nous servons les deux explicitement.",
+      'vk-h':"Pour l'acheteur",'vk-sub':"Sécurité · facilité · rendement",
+      'k1-t':"Le primo-acheteur",'k1-p':"Achète un cheval de sport pour la première fois et mérite accompagnement, explications et confiance. Le club est l'atterrissage en douceur — nous rendons l'achat compréhensible et convivial.",
+      'k2-t':"L'amateur ambitieux",'k2-p':"Monte lui-même à niveau et cherche son prochain cheval de concours. Lignées éprouvées, expertises honnêtes et un véritable essai sur les pistes du domaine.",
+      'k3-t':"Le professionnel & le syndicat",'k3-p':"Achète sur la qualité et la valeur de revente. Rapidité, données transparentes, portée internationale et un processus d'enchères efficace priment.",
+      'vv-h':"Pour le vendeur",'vv-sub':"Portée · prix · prise en charge",
+      's1-t':"L'éleveur",'s1-p':"Veut une portée maximale et le meilleur prix pour sa production annuelle. Convaincu par les chiffres, un public d'acheteurs sérieux et la qualité de présentation.",
+      's2-t':"L'écurie de sport",'s2-p':"Vend des chevaux formés et recherche prestige et public adapté — sensible à la qualité de la collection présentée à ses côtés.",
+      's3-t':"Le propriétaire particulier",'s3-p':"Vend occasionnellement un cheval et a besoin d'une prise en charge totale : estimation, présentation, photographie et règlement. Ici, notre écosystème de services gagne immédiatement.",
+      'vj-eye':"De l'enchère au podium",'vj-title':"Une relation continue.",'vj-lead':"Quatre étapes qui s'enchaînent — nous ne vous lâchons à aucun moment.",
+      'j1-t':"S'orienter",'j1-p':"Parcourez le catalogue, consultez expertises et origines, et suivez le tableau de bord en direct. Nos guides « Comment acheter » et « Comment vendre » vous aident à franchir le pas.",
+      'j2-t':"Enchérir",'j2-p':"Enchérissez en direct ou en ligne dans un processus transparent, avec le déroulement des enchères en temps réel. Visitez et essayez les chevaux au préalable, sur place.",
+      'j3-t':"Héberger",'j3-p':"Après le coup de marteau, nous organisons pension, entraînement, vétérinaire, assurance et transport — en un forfait, ou exactement ce dont vous avez besoin.",
+      'j4-t':"Performer",'j4-p':"Votre cheval se constitue un profil de performance visible via le club, les pistes et les événements — jusqu'à une éventuelle revente.",
+      'vf-eye':"La première édition",'vf-title':"Une collection de lancement soigneusement composée.",
+      'vf-p1':"Nous commençons par la qualité avant la quantité — une sélection d'écuries propres et amies, afin d'établir le label dès le premier coup de marteau. Visite sur le domaine, suivie d'une vente en direct et en ligne.",
+      'vf-p2':"Vous souhaitez vous inscrire comme acheteur, ou présenter un cheval pour la collection ? Laissez vos coordonnées et notre équipe vous contactera personnellement.",
+      'vf-k1':"Prochaine vente",'vf-v1':"Sam 4 juil",'vf-k2':"Visite",'vf-v2':"dès 14 h",'vf-k3':"Vente",'vf-v3':"dès 19 h",
+      'vf-cta1':"S'inscrire comme acheteur",'vf-cta2':"Présenter un cheval",
+      'vt-eye':"La confiance comme fil rouge",'vt-title':"Pas une page à part, mais visible partout.",
+      'vt-c1':"Label St. Hubert",'vt-c2':"Garanties d'expertise",'vt-c3':"Chiffres actuels",'vt-c4':"Vrais noms & visages",'vt-c5':"Joignable personnellement",'vt-c6':"Règlement clair des litiges",
+      'vs-eye':"Faites partie de l'univers",
+      'vs-lede':"« Vous n'achetez pas un cheval, mais un rêve au rendement prouvé — du premier enchère au podium et au-delà. »",
+      'vs-p':"Planifiez une visite du domaine, inscrivez-vous à la prochaine vente, ou présentez votre cheval pour la collection. Notre équipe vous accompagne personnellement.",
+      'vs-cta1':"S'inscrire à la vente",'vs-cta2':"Planifier une visite",
+      'ft-tag':"Une oasis de calme au cœur vert d'Anvers — pour le cheval, le cavalier et le passionné.",
+      'ft-h1':"Visitez-nous",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgique",'ft-h2':"Contact",
+      'ft-open':"Ouvert tous les jours<br>09 h 30 – 22 h 00",'ft-h3':"Le club",
+      'ft-l1':"Membres privés",'ft-l2':"Cavaliers professionnels",'ft-l5':"Agenda & événements",
+      'ft-priv':"NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Confidentialité & conditions",
+      'ck-txt':"Ce site n'utilise que des cookies fonctionnels — pour mémoriser vos préférences de langue et d'affichage. Aucun traçage.",'ck-btn':"Compris"},
+  en:{'m1':"The club",'m2':"Members",'m3':"Auctions",'m4':"History",'m5':"Calendar",'m6':"Contact",'m7':"Jumping",'cta':"Become a member",'v-navcta':"Register",
+      'pg-title':"The Auction — St. Hubert Horse & Country Club",
+      'vh-eye':"The St. Hubert auction",
+      'vh-title':"You don't buy a horse. You enter a world.",
+      'vh-sub':"A horse auction that doesn't end at the fall of the hammer — with guidance, our own hallmark, complete care and visible returns, anchored in a real horse & country club.",
+      'vh-cta1':"Register for the auction",'vh-cta2':"Discover the approach",
+      'vi-lede':"“The auction as membership — not as a transaction.”",
+      'vi-p':"Where an auction usually stops the moment the hammer falls, the real story begins at St. Hubert. From the first bid to the podium and beyond, a complete team is ready for you — on an estate that already has the stables, arenas and hospitality in house.",
+      'vc-eye':"Our promise",
+      'vc-title':"The only auction platform where you don't just buy a horse, but step into a world of guidance, facilities and community.",
+      'vc-p':"Accessible where others are closed. Complete where others stop at the hammer. Proven where others promise. Neither an anonymous online marketplace nor an unreachable prestige institution — the clubhouse between those two extremes.",
+      'vp-eye':"Four pillars",'vp-title':"What you can count on.",
+      'vp-lead':"Four promises that reinforce one another — and that are only credible because a real club stands behind them.",
+      'p1-t':"Radical transparency",
+      'p1-p':"We openly show what others keep hidden: the course of the bidding, honest clearance rates and a searchable archive of past sale prices. For the new buyer this removes the greatest distrust; for the professional it provides usable market data.",
+      'p2-t':"Our own hallmark & visible faces",
+      'p2-p':"Instead of borrowed heritage, we build our own brand capital: a recognisable St. Hubert hallmark that stands for vetting, provenance and guarantee — carried by the visible names of our own riders, trainers and winners. People trust people.",
+      'p3-t':"Ownership fully facilitated",
+      'p3-p':"The purchase is the beginning, not the end. Through the club we offer everything that comes after the hammer — stabling, training in the arenas, veterinary care, rehabilitation, insurance, transport and eventually resale — as one integrated package on our own grounds.",
+      'p4-t':"Returns you can follow",
+      'p4-p':"Every horse sold receives a continuous performance profile: competition results, breeding results and value development, fed by the club's own events and arenas. Where others show isolated success stories, St. Hubert delivers a verifiable, continuous trail.",
+      've-eye':"Anchored in a real club",'ve-title':"A promise a website cannot copy.",
+      've-lead':"The auction platform does not stand alone. It is the digital front of an existing estate with stables, arenas, hospitality and events — an asset that online marketplaces, by definition, lack.",
+      'es1-l':"Spacious stables on site",'es2-l':"Indoor & outdoor arenas",'es3-l':"Equestrian tradition in Hoogboom",'es4-l':"Bridle paths through woods & heath",
+      've-note-l':"A competitor can copy our website — but not our stables, riders and events.",
+      've-note-p':"Buyers see horses in action on the estate; sellers receive professional preparation and after-sales lodging. The club feeling that others offer only at a few physical elite auctions is the standard here — and radiates just as well online.",
+      'vd-eye':"For buyer and seller",'vd-title':"Two sides of the same ring.",
+      'vd-lead':"The seller wants the widest reach and the best price; the buyer wants certainty, ease and returns. We serve both explicitly.",
+      'vk-h':"For the buyer",'vk-sub':"Certainty · ease · returns",
+      'k1-t':"The newcomer",'k1-p':"Buying a sport horse for the first time and deserving guidance, explanation and trust. The club is the soft landing — we make the purchase understandable and social.",
+      'k2-t':"The ambitious amateur",'k2-p':"Rides at level themselves and seeks the next competition horse. Proven bloodlines, honest vettings and a real trial on the estate's arenas.",
+      'k3-t':"The professional & the syndicate",'k3-p':"Buys on quality and resale value. Speed, transparent data, international reach and an efficient bidding process come first.",
+      'vv-h':"For the seller",'vv-sub':"Reach · price · peace of mind",
+      's1-t':"The breeder",'s1-p':"Wants maximum reach and the highest price for their annual production. Convinced by figures, a serious buying audience and presentation quality.",
+      's2-t':"The sport stable",'s2-p':"Sells trained horses and seeks prestige and a fitting audience — sensitive to the quality of the collection presented alongside.",
+      's3-t':"The private owner",'s3-p':"Sells the occasional single horse and needs full care: valuation, presentation, photography and settlement. Here our service ecosystem wins immediately.",
+      'vj-eye':"From bid to podium",'vj-title':"One continuous relationship.",'vj-lead':"Four steps that flow into one another — we never let go of you.",
+      'j1-t':"Orient",'j1-p':"Search the catalogue, review vettings and provenance, and follow the live dashboard. Our guides 'How to buy' and 'How to sell' help you over the threshold.",
+      'j2-t':"Bid",'j2-p':"Bid live or online in a transparent process, with real-time bidding. View and try the horses beforehand on our own grounds.",
+      'j3-t':"House",'j3-p':"After the hammer we arrange stabling, training, veterinary care, insurance and transport — as one package, or exactly what you need.",
+      'j4-t':"Perform",'j4-p':"Your horse builds a visible performance profile through the club, the arenas and the events — up to and including any resale.",
+      'vf-eye':"The first edition",'vf-title':"A carefully composed launch collection.",
+      'vf-p1':"We start with quality over quantity — a selection from our own and befriended stables, to establish the hallmark from the very first hammer. Viewing on the estate, followed by a live and online auction.",
+      'vf-p2':"Would you like to register as a buyer, or enter a horse for the collection? Leave your details and our team will contact you personally.",
+      'vf-k1':"Next auction",'vf-v1':"Sat 4 July",'vf-k2':"Viewing",'vf-v2':"from 2 pm",'vf-k3':"Auction",'vf-v3':"from 7 pm",
+      'vf-cta1':"Register as a buyer",'vf-cta2':"Enter a horse",
+      'vt-eye':"Trust as a thread",'vt-title':"Not a separate page, but visible everywhere.",
+      'vt-c1':"St. Hubert hallmark",'vt-c2':"Vetting guarantees",'vt-c3':"Current figures",'vt-c4':"Real names & faces",'vt-c5':"Personally reachable",'vt-c6':"Clear dispute handling",
+      'vs-eye':"Become part of the world",
+      'vs-lede':"“You don't buy a horse, but a dream with proven payoff — from the first bid to the podium and beyond.”",
+      'vs-p':"Plan a visit to the estate, register for the next auction, or enter your horse for the collection. Our team guides you personally.",
+      'vs-cta1':"Register for the auction",'vs-cta2':"Plan a visit",
+      'ft-tag':"An oasis of calm in the green heart of Antwerp — for horse, rider and enthusiast.",
+      'ft-h1':"Visit us",'ft-adres':"Bosdreef 50<br>2950 Hoogboom — Kapellen<br>Belgium",'ft-h2':"Contact",
+      'ft-open':"Open daily<br>09:30 – 22:00",'ft-h3':"The club",
+      'ft-l1':"Private members",'ft-l2':"Professional riders",'ft-l5':"Calendar & events",
+      'ft-priv':"NL · FR · EN &nbsp;&nbsp;|&nbsp;&nbsp; Privacy & terms",
+      'ck-txt':"This website only uses functional cookies — to remember your language and display preferences. No tracking.",'ck-btn':"Got it"}
+};
+function zetTaal(code){
+  const t = i18n[code]; if(!t) return;
+  document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('act', x.dataset.lang===code));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t[k]) el.innerHTML=t[k]; });
+  if(t['pg-title']) document.title = t['pg-title'];
+  document.documentElement.lang = code;
+  try{ localStorage.setItem('sh-lang', code); }catch(e){}
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>zetTaal(b.dataset.lang)));
+/* taalkeuze blijft bewaard over pagina's heen */
+try{ const bewaard = localStorage.getItem('sh-lang'); if(bewaard && bewaard !== 'nl') zetTaal(bewaard); }catch(e){}
+</script>
+</body>
+</html>
