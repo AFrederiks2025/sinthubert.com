@@ -131,11 +131,35 @@ nav.compact .brand .seal{width:38px;height:38px}
 .formule.patron .box-spec .meta b{color:var(--ivoor)}
 .box-spec .meta span{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cognac)}
 .formule.patron .box-spec .meta span{color:rgba(244,241,233,.55)}
-.price{display:flex;align-items:baseline;gap:10px;margin:4px 0 28px}
+.price{display:flex;align-items:baseline;gap:10px;margin:18px 0 4px}
 .price .amt{font-family:'Marcellus',serif;font-size:30px;color:var(--groen);line-height:1;font-variant-numeric:lining-nums}
 .formule.patron .price .amt{color:var(--ivoor)}
 .price .per{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cognac)}
 .formule.patron .price .per{color:rgba(244,241,233,.6)}
+.formule .kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--messing);margin-bottom:7px}
+.formule .tag{font-size:14px;color:#5b6557;font-weight:300;margin-top:2px}
+.formule.patron .tag{color:rgba(244,241,233,.72)}
+.price-note{font-size:12.5px;color:var(--cognac)}
+.formule.patron .price-note{color:rgba(244,241,233,.62)}
+.price-young{font-size:12px;color:var(--messing);font-weight:500;margin-top:5px;letter-spacing:.01em}
+.formule.patron .price-young{color:#cba75d}
+.gate{display:flex;flex-direction:column;gap:4px;margin:22px 0 0;padding:14px 16px;border:1px solid rgba(185,152,95,.35);background:rgba(185,152,95,.08)}
+.formule.patron .gate{border-color:rgba(185,152,95,.32);background:rgba(185,152,95,.12)}
+.gate-label{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--messing);font-weight:600}
+.gate-text{font-size:12.5px;line-height:1.5;color:#5b6557;font-weight:300}
+.formule.patron .gate-text{color:rgba(244,241,233,.72)}
+.places{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--cognac);margin-top:14px}
+.formule.patron .places{color:rgba(244,241,233,.62)}
+.places::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cognac);flex:none}
+.formule.patron .places::before{background:var(--messing)}
+.f-rule{height:1px;background:rgba(185,152,95,.3);margin:24px 0 4px}
+.formule li.inherits{border-top:0;padding:14px 0 4px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--cognac)}
+.formule li.inherits::before{display:none}
+.formule.patron li.inherits{color:#cba75d}
+.apply{text-align:center;margin-top:50px}
+.apply span{display:block;color:var(--cognac);font-size:14px;font-weight:300;margin-bottom:9px}
+.apply a{color:var(--groen);font-size:14px;border-bottom:1px solid var(--messing);padding-bottom:3px;transition:color .3s}
+.apply a:hover{color:var(--messing)}
 .formule .desc{font-size:15.5px;color:#454c43}
 .formule.patron .desc{color:rgba(244,241,233,.8)}
 .formule ul{list-style:none;margin:26px 0 0}
@@ -488,54 +512,84 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
   <div class="wrap">
     <div class="formules-head rv">
       <span class="eyebrow" data-i18n="t-eye">De formules</span>
-      <p class="intro-p" data-i18n="t-lead">Elk lidmaatschap geeft toegang tot de volledige infrastructuur van St. Hubert — binnen- en buitenpistes, weides en de ruiterpaden door bos en heide. Het verschil zit in de box: een standaardmaat voor de Estate Member, een royaal formaat voor de Heritage Member.</p>
+      <p class="intro-p" data-i18n="t-lead">Twee lidmaatschappen, beide op voordracht en bij verkiezing door het comité — nooit door aankoop alleen. Het comité zoekt wie iets toevoegt aan het domein: ruiters, fokkers en supporters die de traditie van Sint-Hubertus levend houden.</p>
     </div>
 
     <div class="formule-grid">
 
       <!-- Estate Member -->
       <article class="formule rv">
+        <span class="kicker" data-i18n="t1-kicker">De bereden volgers</span>
         <h3>Estate Member</h3>
-        <span class="kind" data-i18n="t1-kind">Standaard lidmaatschap</span>
+        <p class="tag" data-i18n="t1-tag">Voor ruiters en supporters — voorgedragen en gesteund door twee leden.</p>
         <div class="box-spec">
           <span class="dim">3 × 4 m</span>
           <span class="meta"><b>12 m²</b><span data-i18n="t1-area">Standaardmaat</span></span>
         </div>
-        <div class="price"><span class="amt" data-i18n="t1-price">€ 750</span><span class="per" data-i18n="price-per">per maand</span></div>
-        <p class="desc" data-i18n="t1-desc">Een ruime paardenbox van standaardmaat, met voorrang bij reservatie aan het ledentarief. De vertrouwde basis voor wie zijn paard een rustige, verzorgde thuis op het domein gunt.</p>
+        <div class="price"><span class="amt" data-i18n="t1-price">€ 750</span><span class="per" data-i18n="price-per">per jaar</span></div>
+        <div class="price-note" data-i18n="t1-pricenote">+ eenmalig € 375 inschrijfgeld</div>
+        <div class="price-young" data-i18n="t1-young">Onder 30: € 400 per jaar · € 150 inschrijving</div>
+        <div class="gate">
+          <span class="gate-label" data-i18n="gate-label">Op voordracht</span>
+          <span class="gate-text" data-i18n="t1-gate">Voorgedragen door één lid, gesteund door een tweede. Aanvraag, toetsing door het comité, dan de wachtlijst.</span>
+        </div>
+        <div class="places" data-i18n="t1-places">Toelating per seizoen · wachtlijst doorlopend open</div>
+        <div class="f-rule"></div>
         <ul>
-          <li data-i18n="t1-li1">Paardenbox van 3 × 4 m (12 m²)</li>
-          <li data-i18n="t1-li2">Voorrang bij reservatie aan het ledentarief</li>
-          <li data-i18n="t1-li3">Toegang tot de buitenfaciliteiten, trainingshallen en polo lounge</li>
+          <li data-i18n="t1-b1">Volledige toegang tot het domein — pistes, members' clubhouse en de gronden</li>
+          <li data-i18n="t1-b2">Ledentarief op elke clinic, masterclass en stalperiode</li>
+          <li data-i18n="t1-b3">Een paardenbox van 3 × 4 m — voorrang bij reservatie aan het ledentarief</li>
+          <li data-i18n="t1-b4">Gereserveerde tribune bij alle wedstrijden, met voorrang op tickets</li>
+          <li data-i18n="t1-b5">Sint-Hubertusdag — de Hubertusmis in november, de wijding van paarden en honden en het jachtontbijt</li>
+          <li data-i18n="t1-b6">Wederzijdse toegang tot aangesloten ruiterclubs in het buitenland</li>
+          <li data-i18n="t1-b7">Twee voordrachten per jaar om ruiters voor te dragen voor wie u instaat</li>
         </ul>
         <div class="f-cta">
-          <a href="#word-member" class="btn ink" data-i18n="t1-cta">Word Estate Member</a>
+          <a href="#word-member" class="btn ink" data-i18n="t1-cta">Begin een voordracht</a>
         </div>
       </article>
 
       <!-- Heritage Member -->
       <article class="formule patron rv">
-        <span class="crest" data-i18n="crest">Onbeperkt</span>
+        <span class="crest" data-i18n="crest">Patroon</span>
+        <span class="kicker" data-i18n="t2-kicker">Wie de jacht leiden</span>
         <h3>Heritage Member</h3>
-        <span class="kind" data-i18n="t2-kind">Onbeperkt lidmaatschap</span>
+        <p class="tag" data-i18n="t2-tag">Voor patroons — op directe voordracht van twee Masters, of bevorderd vanuit de Estate na twee seizoenen.</p>
         <div class="box-spec">
           <span class="dim">3 × 6 m</span>
           <span class="meta"><b>18 m²</b><span data-i18n="t2-area">Ruim formaat</span></span>
         </div>
-        <div class="price"><span class="amt" data-i18n="t2-price">€ 1.950</span><span class="per" data-i18n="price-per">per maand</span></div>
-        <p class="desc" data-i18n="t2-desc">Een gereserveerde box van royaal formaat — ruim genoeg voor een hengst of warmbloed — die het hele jaar door voor u alleen wordt gehouden. Het Heritage-lidmaatschap zonder restricties, voor wie zekerheid, ruimte en volledige toegang vooropstelt.</p>
+        <div class="price"><span class="amt" data-i18n="t2-price">€ 1.950</span><span class="per" data-i18n="price-per">per jaar</span></div>
+        <div class="price-note" data-i18n="t2-pricenote">+ eenmalig € 1.000 inschrijfgeld · jaarbijdrage hier geplafonneerd</div>
+        <div class="price-young" data-i18n="t2-young">Om te zetten naar levenslang Legacy-lidmaatschap</div>
+        <div class="gate">
+          <span class="gate-label" data-i18n="gate-label">Op voordracht</span>
+          <span class="gate-text" data-i18n="t2-gate">Rechtstreeks op voordracht van twee zetelende Masters, of door bevordering vanuit de Estate — daarna verkozen door het comité. Streng begrensd.</span>
+        </div>
+        <div class="places" data-i18n="t2-places">Slechts 60 plaatsen · wachtlijst over meerdere jaren</div>
+        <div class="f-rule"></div>
         <ul>
-          <li data-i18n="t2-li1">Oversized paardenbox van 3 × 6 m (18 m²)</li>
-          <li data-i18n="t2-li2">Gereserveerd en het hele jaar door voor u alleen</li>
-          <li data-i18n="t2-li3">Geschikt voor hengsten en warmbloeden</li>
-          <li data-i18n="t2-li4">Onbeperkte toegang tot alle faciliteiten van het domein</li>
-          <li data-i18n="t2-li5">Uitgenodigd voor alle exclusieve events in de polo lounge</li>
+          <li class="inherits" data-i18n="t2-inherits">Alles uit de Estate Member, en —</li>
+          <li data-i18n="t2-b1">Een gereserveerde box van 3 × 6 m — uw eigen ruime loose box, het hele jaar door</li>
+          <li data-i18n="t2-b2">Voorrang op privébox en stalling bij elk kampioenschap op het domein</li>
+          <li data-i18n="t2-b3">De Master's table — gastvrijheid, diners en het jaarlijkse Sint-Hubertusbanket</li>
+          <li data-i18n="t2-b4">Uitgenodigd voor alle exclusieve events in de polo lounge</li>
+          <li data-i18n="t2-b5">Een plaats bij de meet — rijd of stap mee in de Hubertusparade op de patroonsdag</li>
+          <li data-i18n="t2-b6">Stemrecht over wedstrijden, parcoursontwerp en de richting van de club</li>
+          <li data-i18n="t2-b7">Uw naam op het Founders' board, met de levenslange Legacy-optie</li>
+          <li data-i18n="t2-b8">Doorlopende voordrachten — draag kandidaten voor in beide niveaus</li>
+          <li data-i18n="t2-b9">Een persoonlijke steward voor stalling, transport en tickets</li>
         </ul>
         <div class="f-cta">
-          <a href="#word-member" class="btn solid" data-i18n="t2-cta">Word Heritage Member</a>
+          <a href="#word-member" class="btn solid" data-i18n="t2-cta">Vraag verkiezing aan</a>
         </div>
       </article>
 
+    </div>
+
+    <div class="apply rv">
+      <span data-i18n="apply-q">Nog niet bekend bij een lid van het domein?</span>
+      <a href="/#contact" data-i18n="apply-link">Richt u tot het comité — motivatiebrief en portret, dan de wachtlijst →</a>
     </div>
   </div>
 </section>
@@ -712,13 +766,14 @@ const i18n = {
     'li-c3t':"Internationale allure",'li-c3p':"Van topdressuur tot exclusieve veilingen: St. Hubert verbindt u met de internationale hippische wereld en haar evenementen.",
     'li-c4t':"Zorg op het hoogste niveau",'li-c4p':"Persoonlijke begeleiding, vakkundige verzorging en onvoorwaardelijke aandacht voor het welzijn van elk paard.",
     't-eye':"De formules",'t-title':"Twee niveaus, één domein.",
-    't-lead':"Elk lidmaatschap geeft toegang tot de volledige infrastructuur van St. Hubert — binnen- en buitenpistes, weides en de ruiterpaden door bos en heide. Het verschil zit in de box: een standaardmaat voor de Estate Member, een royaal formaat voor de Heritage Member.",
-    't1-eye':"Niveau I",'t1-kind':"Standaard lidmaatschap",'t1-area':"Standaardmaat",'t1-price':"€ 750",'price-per':"per maand",
-    't1-desc':"Een ruime paardenbox van standaardmaat, met voorrang bij reservatie aan het ledentarief. De vertrouwde basis voor wie zijn paard een rustige, verzorgde thuis op het domein gunt.",
-    't1-li1':"Paardenbox van 3 × 4 m (12 m²)",'t1-li2':"Voorrang bij reservatie aan het ledentarief",'t1-li3':"Toegang tot de buitenfaciliteiten, trainingshallen en polo lounge",'t1-cta':"Word Estate Member",
-    'crest':"Onbeperkt",'t2-eye':"Niveau II",'t2-kind':"Onbeperkt lidmaatschap",'t2-area':"Ruim formaat",'t2-price':"€ 1.950",
-    't2-desc':"Een gereserveerde box van royaal formaat — ruim genoeg voor een hengst of warmbloed — die het hele jaar door voor u alleen wordt gehouden. Het Heritage-lidmaatschap zonder restricties, voor wie zekerheid, ruimte en volledige toegang vooropstelt.",
-    't2-li1':"Oversized paardenbox van 3 × 6 m (18 m²)",'t2-li2':"Gereserveerd en het hele jaar door voor u alleen",'t2-li3':"Geschikt voor hengsten en warmbloeden",'t2-li4':"Onbeperkte toegang tot alle faciliteiten van het domein",'t2-li5':"Uitgenodigd voor alle exclusieve events in de polo lounge",'t2-cta':"Word Heritage Member",
+    't-lead':"Twee lidmaatschappen, beide op voordracht en bij verkiezing door het comité — nooit door aankoop alleen. Het comité zoekt wie iets toevoegt aan het domein: ruiters, fokkers en supporters die de traditie van Sint-Hubertus levend houden.",
+    't1-area':"Standaardmaat",'t1-price':"€ 750",'price-per':"per jaar",'gate-label':"Op voordracht",
+    't1-kicker':"De bereden volgers",'t1-tag':"Voor ruiters en supporters — voorgedragen en gesteund door twee leden.",'t1-gate':"Voorgedragen door één lid, gesteund door een tweede. Aanvraag, toetsing door het comité, dan de wachtlijst.",'t1-places':"Toelating per seizoen · wachtlijst doorlopend open",'t1-pricenote':"+ eenmalig € 375 inschrijfgeld",'t1-young':"Onder 30: € 400 per jaar · € 150 inschrijving",
+    't1-b1':"Volledige toegang tot het domein — pistes, members' clubhouse en de gronden",'t1-b2':"Ledentarief op elke clinic, masterclass en stalperiode",'t1-b3':"Een paardenbox van 3 × 4 m — voorrang bij reservatie aan het ledentarief",'t1-b4':"Gereserveerde tribune bij alle wedstrijden, met voorrang op tickets",'t1-b5':"Sint-Hubertusdag — de Hubertusmis in november, de wijding van paarden en honden en het jachtontbijt",'t1-b6':"Wederzijdse toegang tot aangesloten ruiterclubs in het buitenland",'t1-b7':"Twee voordrachten per jaar om ruiters voor te dragen voor wie u instaat",'t1-cta':"Begin een voordracht",
+    'crest':"Patroon",'t2-area':"Ruim formaat",'t2-price':"€ 1.950",
+    't2-kicker':"Wie de jacht leiden",'t2-tag':"Voor patroons — op directe voordracht van twee Masters, of bevorderd vanuit de Estate na twee seizoenen.",'t2-gate':"Rechtstreeks op voordracht van twee zetelende Masters, of door bevordering vanuit de Estate — daarna verkozen door het comité. Streng begrensd.",'t2-places':"Slechts 60 plaatsen · wachtlijst over meerdere jaren",'t2-pricenote':"+ eenmalig € 1.000 inschrijfgeld · jaarbijdrage hier geplafonneerd",'t2-young':"Om te zetten naar levenslang Legacy-lidmaatschap",
+    't2-inherits':"Alles uit de Estate Member, en —",'t2-b1':"Een gereserveerde box van 3 × 6 m — uw eigen ruime loose box, het hele jaar door",'t2-b2':"Voorrang op privébox en stalling bij elk kampioenschap op het domein",'t2-b3':"De Master's table — gastvrijheid, diners en het jaarlijkse Sint-Hubertusbanket",'t2-b4':"Uitgenodigd voor alle exclusieve events in de polo lounge",'t2-b5':"Een plaats bij de meet — rijd of stap mee in de Hubertusparade op de patroonsdag",'t2-b6':"Stemrecht over wedstrijden, parcoursontwerp en de richting van de club",'t2-b7':"Uw naam op het Founders' board, met de levenslange Legacy-optie",'t2-b8':"Doorlopende voordrachten — draag kandidaten voor in beide niveaus",'t2-b9':"Een persoonlijke steward voor stalling, transport en tickets",'t2-cta':"Vraag verkiezing aan",
+    'apply-q':"Nog niet bekend bij een lid van het domein?",'apply-link':"Richt u tot het comité — motivatiebrief en portret, dan de wachtlijst →",
     'sl-eye':"Word lid van de club",'sl-lede':"“Uw paard verdient St. Hubert.”",
     'sl-p':"Plan een bezoek aan het domein, bekijk de boxen en ontdek welke formule het beste past bij u en uw paard.",
     'sl-cta1':"Plan een bezoek",
@@ -749,13 +804,14 @@ const i18n = {
     'li-c3t':"Allure internationale",'li-c3p':"De la haute dressage aux ventes exclusives : St. Hubert vous relie au monde équestre international et à ses événements.",
     'li-c4t':"Des soins au plus haut niveau",'li-c4p':"Accompagnement personnalisé, soins experts et attention sans faille au bien-être de chaque cheval.",
     't-eye':"Les formules",'t-title':"Deux niveaux, un domaine.",
-    't-lead':"Chaque adhésion donne accès à l'ensemble des installations de St. Hubert — manèges intérieurs et carrières extérieures, prairies et sentiers équestres à travers bois et lande. La différence se joue sur le box : une taille standard pour l'Estate Member, un format généreux pour le Heritage Member.",
-    't1-eye':"Niveau I",'t1-kind':"Adhésion standard",'t1-area':"Taille standard",'t1-price':"750 €",'price-per':"par mois",
-    't1-desc':"Un box spacieux de taille standard, avec priorité de réservation au tarif membre. La base de confiance pour qui souhaite offrir à son cheval un foyer calme et soigné sur le domaine.",
-    't1-li1':"Box de 3 × 4 m (12 m²)",'t1-li2':"Priorité de réservation au tarif membre",'t1-li3':"Accès aux installations extérieures, aux halls d'entraînement et au polo lounge",'t1-cta':"Devenir Estate Member",
-    'crest':"Accès illimité",'t2-eye':"Niveau II",'t2-kind':"Adhésion sans restriction",'t2-area':"Grand format",'t2-price':"1.950 €",
-    't2-desc':"Un box réservé de grand format — assez spacieux pour un étalon ou un cheval de sang — gardé pour vous seul toute l'année. L'adhésion Heritage sans restriction, pour qui privilégie l'espace, la certitude et l'accès complet.",
-    't2-li1':"Box surdimensionné de 3 × 6 m (18 m²)",'t2-li2':"Réservé et gardé pour vous seul toute l'année",'t2-li3':"Adapté aux étalons et chevaux de sang",'t2-li4':"Accès illimité à toutes les installations du domaine",'t2-li5':"Invité à tous les événements exclusifs du polo lounge",'t2-cta':"Devenir Heritage Member",
+    't-lead':"Deux adhésions, toutes deux sur proposition et par élection du comité — jamais par le seul achat. Le comité recherche ceux qui enrichissent le domaine : cavaliers, éleveurs et soutiens qui gardent vivante la tradition de Saint-Hubert.",
+    't1-area':"Taille standard",'t1-price':"750 €",'price-per':"par an",'gate-label':"Par cooptation",
+    't1-kicker':"La suite montée",'t1-tag':"Pour cavaliers et soutiens — proposés et appuyés par deux membres.",'t1-gate':"Proposé par un membre, appuyé par un second. Candidature, examen du comité, puis la liste d'attente.",'t1-places':"Admission par saison · liste d'attente ouverte",'t1-pricenote':"+ droit d'entrée unique de 375 €",'t1-young':"Moins de 30 ans : 400 € par an · 150 € d'entrée",
+    't1-b1':"Plein accès au domaine — manèges, club-house des membres et les terrains",'t1-b2':"Tarif membre sur chaque clinic, masterclass et période d'écurie",'t1-b3':"Un box de 3 × 4 m — priorité de réservation au tarif membre",'t1-b4':"Enceinte réservée à toutes les épreuves, avec billets prioritaires",'t1-b5':"La Saint-Hubert — la messe de Hubert en novembre, la bénédiction des chevaux et des chiens et le petit-déjeuner de chasse",'t1-b6':"Accès réciproque aux clubs équestres affiliés à l'étranger",'t1-b7':"Deux propositions par an pour présenter des cavaliers dont vous répondez",'t1-cta':"Lancer une proposition",
+    'crest':"Mécène",'t2-area':"Grand format",'t2-price':"1.950 €",
+    't2-kicker':"Ceux qui mènent la chasse",'t2-tag':"Pour les mécènes — sur parrainage direct de deux Masters, ou élevés depuis l'Estate après deux saisons.",'t2-gate':"Directement sur parrainage de deux Masters en exercice, ou par élévation depuis l'Estate — puis élu par le comité. Strictement limité.",'t2-places':"60 places seulement · liste d'attente sur plusieurs années",'t2-pricenote':"+ droit d'entrée unique de 1.000 € · cotisation annuelle plafonnée ici",'t2-young':"Convertible en adhésion Legacy à vie",
+    't2-inherits':"Tout ce que comprend l'Estate Member, et —",'t2-b1':"Un box réservé de 3 × 6 m — votre propre box spacieux, toute l'année",'t2-b2':"Priorité de box privé et d'écurie à chaque championnat du domaine",'t2-b3':"La table des Masters — hospitalité, dîners et le banquet annuel de la Saint-Hubert",'t2-b4':"Invité à tous les événements exclusifs du polo lounge",'t2-b5':"Une place au rendez-vous — montez ou défilez dans la parade de la Saint-Hubert le jour du patron",'t2-b6':"Droit de vote sur les épreuves, le tracé des parcours et l'orientation du club",'t2-b7':"Votre nom au tableau des Fondateurs, avec l'option Legacy à vie",'t2-b8':"Propositions permanentes — parrainez des candidats dans les deux niveaux",'t2-b9':"Un intendant personnel pour l'écurie, le transport et les billets",'t2-cta':"Demander l'élection",
+    'apply-q':"Pas encore connu d'un membre du domaine ?",'apply-link':"Adressez-vous au comité — lettre d'intention et portrait, puis la liste d'attente →",
     'sl-eye':"Rejoignez le club",'sl-lede':"« Votre cheval mérite St. Hubert. »",
     'sl-p':"Planifiez une visite du domaine, découvrez les box et trouvez la formule qui convient le mieux à vous et à votre cheval.",
     'sl-cta1':"Planifier une visite",
@@ -786,13 +842,14 @@ const i18n = {
     'li-c3t':"International allure",'li-c3p':"From top dressage to exclusive auctions: St. Hubert connects you to the international equestrian world and its events.",
     'li-c4t':"Care at the highest level",'li-c4p':"Personal guidance, expert care and unwavering attention to the wellbeing of every horse.",
     't-eye':"The formulas",'t-title':"Two tiers, one estate.",
-    't-lead':"Every membership gives access to all of St. Hubert's facilities — indoor and outdoor arenas, paddocks and the riding trails through wood and heath. The difference is in the box: a standard size for the Estate Member, a generous format for the Heritage Member.",
-    't1-eye':"Tier I",'t1-kind':"Standard membership",'t1-area':"Standard size",'t1-price':"€750",'price-per':"per month",
-    't1-desc':"A spacious standard-size box, with priority booking at the members' rate. The trusted base for those who want their horse to have a calm, well-tended home on the estate.",
-    't1-li1':"Horse box of 3 × 4 m (12 m²)",'t1-li2':"Priority booking at the members' rate",'t1-li3':"Access to the outdoor facilities, training halls and polo lounge",'t1-cta':"Become an Estate Member",
-    'crest':"All access",'t2-eye':"Tier II",'t2-kind':"Unrestricted membership",'t2-area':"Oversized",'t2-price':"€1,950",
-    't2-desc':"A reserved, oversized box — roomy enough for a stallion or warmblood — held for you alone the year round. The Heritage membership, without restrictions, for those who put space, certainty and full access first.",
-    't2-li1':"Oversized horse box of 3 × 6 m (18 m²)",'t2-li2':"Reserved and held for you alone, year-round",'t2-li3':"Suited to stallions and warmbloods",'t2-li4':"Unrestricted access to all estate facilities",'t2-li5':"Invited to every exclusive event at the polo lounge",'t2-cta':"Become a Heritage Member",
+    't-lead':"Two memberships, both by proposal and committee election — never by purchase alone. The committee looks for those who add to the ground: riders, breeders and supporters who keep the tradition of Saint Hubert alive.",
+    't1-area':"Standard size",'t1-price':"€750",'price-per':"per year",'gate-label':"By election",
+    't1-kicker':"The mounted following",'t1-tag':"For riders and supporters, proposed and seconded by two members.",'t1-gate':"Proposed by one member, seconded by another. Application, committee review, then the waitlist.",'t1-places':"Admitted by season · waitlist held open",'t1-pricenote':"+ €375 one-time entrance fee",'t1-young':"Under-30: €400 / year · €150 entrance",
+    't1-b1':"Full run of the domaine — schooling arenas, members' clubhouse and grounds",'t1-b2':"Members' rate on every clinic, masterclass and stabling block",'t1-b3':"A 3 × 4 m horse box — priority booking at the members' rate",'t1-b4':"Reserved enclosure at all fixtures, with priority tickets",'t1-b5':"Saint Hubert's Day — the November Hubertus Mass, the blessing of horses and hounds and the hunt breakfast",'t1-b6':"Reciprocal access to affiliated equestrian clubs abroad",'t1-b7':"Two proposals a year to bring riders you'll vouch for",'t1-cta':"Begin a proposal",
+    'crest':"Patron",'t2-area':"Oversized",'t2-price':"€1,950",
+    't2-kicker':"Those who lead the chase",'t2-tag':"For patrons — by direct sponsorship of two Masters, or raised from the Estate after two seasons.",'t2-gate':"Directly on the sponsorship of two sitting Masters, or by elevation from the Estate — then elected by committee. Strictly capped.",'t2-places':"60 places only · multi-year waitlist",'t2-pricenote':"+ €1,000 one-time entrance fee · annual fee capped here",'t2-young':"Convertible to lifetime Legacy membership",
+    't2-inherits':"Everything in the Estate Member, and —",'t2-b1':"A reserved 3 × 6 m horse box — your own oversized loose box, held year-round",'t2-b2':"Private box & stabling priority at every championship the domaine hosts",'t2-b3':"The Master's table — hospitality, hosted dinners and the Saint Hubert annual banquet",'t2-b4':"Invited to every exclusive event at the polo lounge",'t2-b5':"A place at the meet — ride or process in the Hubertus parade on the patron's day",'t2-b6':"A vote on fixtures, course design and the direction of the club",'t2-b7':"Your name on the Founders' board, with the lifetime Legacy option",'t2-b8':"Standing proposals — sponsor entrants into either tier",'t2-b9':"A personal steward for stabling, transport and tickets",'t2-cta':"Request election",
+    'apply-q':"Not yet known to a member of the domaine?",'apply-link':"Apply to the committee — letter of intent & portrait, then the waitlist →",
     'sl-eye':"Join the club",'sl-lede':"“Your horse deserves St. Hubert.”",
     'sl-p':"Plan a visit to the estate, view the boxes and discover which formula best suits you and your horse.",
     'sl-cta1':"Plan a visit",
