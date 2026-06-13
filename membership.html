@@ -114,7 +114,7 @@ nav.compact .brand .seal{width:38px;height:38px}
 .formules-head{max-width:42em}
 .formules-head h2{font-size:clamp(28px,3vw,42px);color:var(--groen);margin-top:22px}
 .formules-head .intro-p{margin-top:20px;color:#454c43;font-size:16.5px}
-.formule-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:62px;align-items:stretch}
+.formule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:62px;align-items:stretch}
 .formule{position:relative;display:flex;flex-direction:column;border:1px solid rgba(185,152,95,.4);background:var(--wit);padding:52px 46px 48px}
 .formule.patron{background:var(--groen);color:var(--ivoor);border-color:var(--groen)}
 .formule .f-nr{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--messing);font-weight:500}
@@ -156,6 +156,14 @@ nav.compact .brand .seal{width:38px;height:38px}
 .formule li.inherits{border-top:0;padding:14px 0 4px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--cognac)}
 .formule li.inherits::before{display:none}
 .formule.patron li.inherits{color:#cba75d}
+/* Junior — instaptier (nieuw); naam nog te bevestigen */
+.formule .crest.crest-new{background:var(--groen);color:var(--messing);border:1px solid var(--messing)}
+.formule .provisional{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--cognac);margin-top:8px;line-height:1.4}
+.box-spec.shared{align-items:center}
+.box-spec.shared .dim-ic{width:46px;height:46px;color:var(--messing);flex:none}
+.box-spec .meta .soft{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#5b6557;letter-spacing:0;text-transform:none;display:block;margin-top:4px}
+.price .amt.soft-amt{font-size:23px;font-style:italic;font-family:'Cormorant Garamond',serif}
+@media (max-width:1120px){.formule{padding:44px 32px 42px}.formule .crest,.formule.junior .crest{right:32px}}
 .apply{text-align:center;margin-top:50px}
 .apply span{display:block;color:var(--cognac);font-size:14px;font-weight:300;margin-bottom:9px}
 .apply a{color:var(--groen);font-size:14px;border-bottom:1px solid var(--messing);padding-bottom:3px;transition:color .3s}
@@ -312,6 +320,186 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
   .phero h1 .line-inner{transform:none}
   nav.hide{transform:none}
 }
+
+/* =================================================================
+   Membership-aanvraagformulier — modaal (desktop) / volledig scherm (mobiel)
+   Zelfde palet & typografie als de pagina · stappen in Romeinse cijfers I–VI
+   ================================================================= */
+.mf-root{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,40px)}
+.mf-root[hidden]{display:none}
+.mf-scrim{position:absolute;inset:0;background:rgba(12,19,14,.74);backdrop-filter:blur(6px);opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+.mf-root.open .mf-scrim{opacity:1}
+.mf-dialog{position:relative;display:grid;grid-template-columns:300px 1fr;width:min(980px,100%);max-height:calc(100dvh - 2 * clamp(12px,3vw,40px));background:var(--groen);color:var(--ivoor);border:1px solid rgba(185,152,95,.4);box-shadow:0 40px 120px rgba(8,13,9,.6);overflow:hidden;transform:translateY(26px) scale(.985);opacity:0;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .5s}
+.mf-root.open .mf-dialog{transform:none;opacity:1}
+.mf-x{position:absolute;top:14px;right:16px;z-index:5;width:42px;height:42px;background:rgba(244,241,233,.06);border:1px solid rgba(185,152,95,.4);color:var(--ivoor);font-size:22px;line-height:1;cursor:pointer;border-radius:50%;transition:background .3s,color .3s,transform .3s cubic-bezier(.16,1,.3,1)}
+.mf-x:hover{background:var(--messing);color:var(--groen-diep);transform:rotate(90deg)}
+
+/* zij-paneel: domeinfoto + staplijst */
+.mf-aside{position:relative;background:var(--groen-diep) url('img/gate-members.jpg') center/cover;display:flex;flex-direction:column;justify-content:space-between;padding:34px 30px;overflow:hidden}
+.mf-aside::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,33,25,.72),rgba(21,33,25,.92))}
+.mf-aside>*{position:relative;z-index:1}
+.mf-brand{display:flex;align-items:center;gap:12px}
+.mf-brand .seal{width:40px;height:40px;flex:none;color:var(--ivoor)}
+.mf-brand .name{font-family:'Marcellus',serif;font-size:16px;letter-spacing:.06em;line-height:1.2}
+.mf-brand .name small{display:block;font-size:8.5px;letter-spacing:.3em;color:var(--messing);text-transform:uppercase;margin-top:2px}
+.mf-steplist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.mf-steplist li{display:flex;align-items:center;gap:14px;padding:9px 0;font-size:13.5px;letter-spacing:.04em;color:rgba(244,241,233,.5);transition:color .4s;border-top:1px solid rgba(185,152,95,.14)}
+.mf-steplist li:first-child{border-top:0}
+.mf-steplist li .rn{font-family:'Marcellus',serif;font-size:15px;color:rgba(244,241,233,.4);width:34px;flex:none;letter-spacing:.06em;transition:color .4s}
+.mf-steplist li.active{color:var(--ivoor)}
+.mf-steplist li.active .rn{color:var(--messing)}
+.mf-steplist li.done .rn{color:var(--messing)}
+.mf-steplist li.done .rn::after{content:'  ·'}
+.mf-aside .mf-foot{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,241,233,.45)}
+
+/* hoofdkolom */
+.mf-main{display:flex;flex-direction:column;min-width:0;max-height:calc(100dvh - 2 * clamp(12px,3vw,40px))}
+.mf-head{padding:34px 40px 18px}
+.mf-eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;font-weight:500;color:var(--messing);display:flex;align-items:center;gap:12px}
+.mf-eyebrow .rn-now{color:rgba(244,241,233,.55)}
+.mf-step-title{font-family:'Marcellus',serif;font-size:clamp(24px,3.2vw,32px);color:var(--ivoor);margin:12px 0 0;line-height:1.15}
+.mf-step-intro{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(244,241,233,.7);margin-top:8px}
+.mf-body{flex:1;overflow-y:auto;padding:8px 40px 28px;scrollbar-width:thin;scrollbar-color:var(--messing) transparent}
+.mf-body::-webkit-scrollbar{width:7px}.mf-body::-webkit-scrollbar-thumb{background:rgba(185,152,95,.6);border-radius:99px}
+.mf-step{animation:mfFade .5s cubic-bezier(.16,1,.3,1)}
+.mf-step[hidden]{display:none}
+@keyframes mfFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* velden */
+.mf-field{margin-top:20px}
+.mf-field:first-child{margin-top:6px}
+.mf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px}
+.mf-grid.thirds{grid-template-columns:1.4fr .8fr 1fr}
+.mf-field>label,.mf-legend{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,241,233,.78);font-weight:500;margin-bottom:8px}
+.mf-field .req{color:var(--messing)}
+.mf-field .opt{color:rgba(244,241,233,.4);font-size:10.5px;letter-spacing:.18em;margin-left:6px}
+.mf-help{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(244,241,233,.55);margin-top:6px;line-height:1.45}
+.mf-input,.mf-select,.mf-textarea{width:100%;font-family:'Jost',sans-serif;font-weight:300;font-size:16px;color:var(--ivoor);background:rgba(244,241,233,.04);border:1px solid rgba(185,152,95,.34);padding:13px 15px;transition:border-color .35s,background .35s,box-shadow .35s}
+.mf-textarea{resize:vertical;min-height:104px;line-height:1.6}
+.mf-input::placeholder,.mf-textarea::placeholder{color:rgba(244,241,233,.32)}
+.mf-input:hover,.mf-select:hover,.mf-textarea:hover{border-color:rgba(185,152,95,.6)}
+.mf-input:focus,.mf-select:focus,.mf-textarea:focus{outline:none;border-color:var(--messing);background:rgba(244,241,233,.07);box-shadow:0 0 0 3px rgba(185,152,95,.22)}
+.mf-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b9985f' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.mf-select option{background:var(--groen-diep);color:var(--ivoor)}
+.mf-input[aria-invalid="true"],.mf-select[aria-invalid="true"],.mf-textarea[aria-invalid="true"]{border-color:var(--cognac);background:rgba(138,90,51,.12)}
+.mf-err{display:none;font-size:13px;color:#e7b48b;margin-top:7px;letter-spacing:.01em}
+.mf-err.show{display:block}
+.mf-char{font-size:12px;color:rgba(244,241,233,.4);text-align:right;margin-top:5px;letter-spacing:.04em}
+
+/* keuze-kaarten (tier & routes) */
+.mf-cards{display:grid;gap:14px;margin-top:8px}
+.mf-card{position:relative;display:block;border:1px solid rgba(185,152,95,.34);background:rgba(244,241,233,.03);padding:20px 22px 20px 56px;cursor:pointer;transition:border-color .35s,background .35s,transform .3s cubic-bezier(.16,1,.3,1)}
+.mf-card:hover{border-color:rgba(185,152,95,.7);background:rgba(244,241,233,.05)}
+.mf-card input{position:absolute;opacity:0;pointer-events:none}
+.mf-card .tick{position:absolute;left:20px;top:22px;width:20px;height:20px;border:1px solid rgba(185,152,95,.55);border-radius:50%;transition:border-color .3s,background .3s}
+.mf-card .tick::after{content:'';position:absolute;inset:4px;border-radius:50%;background:var(--messing);transform:scale(0);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.mf-card.radio .tick{border-radius:50%}
+.mf-card .tick.sq{border-radius:3px}.mf-card .tick.sq::after{border-radius:1px}
+.mf-card:has(input:checked){border-color:var(--messing);background:rgba(185,152,95,.1)}
+.mf-card:has(input:checked) .tick{border-color:var(--messing)}
+.mf-card:has(input:checked) .tick::after{transform:scale(1)}
+.mf-card:has(input:focus-visible){box-shadow:0 0 0 3px rgba(185,152,95,.3)}
+.mf-card .c-t{font-family:'Marcellus',serif;font-size:19px;color:var(--ivoor);letter-spacing:.02em}
+.mf-card .c-t .pill{font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--groen-diep);background:var(--messing);padding:3px 9px;margin-left:10px;vertical-align:middle;font-weight:500}
+.mf-card .c-d{font-size:13.5px;color:rgba(244,241,233,.66);margin-top:5px;line-height:1.5}
+.mf-card .c-meta{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--messing);margin-top:9px}
+
+/* checkbox-rijen + bevestiging */
+.mf-check{position:relative;display:flex;gap:14px;align-items:flex-start;padding:14px 0;cursor:pointer;border-top:1px solid rgba(185,152,95,.18)}
+.mf-check:first-of-type{border-top:0}
+.mf-check input{position:absolute;opacity:0;width:22px;height:22px;margin:0;cursor:pointer}
+.mf-check .box{flex:none;width:22px;height:22px;border:1px solid rgba(185,152,95,.55);border-radius:3px;position:relative;transition:border-color .3s,background .3s}
+.mf-check .box::after{content:'';position:absolute;left:7px;top:3px;width:6px;height:11px;border:solid var(--groen-diep);border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.mf-check input:checked~.box{background:var(--messing);border-color:var(--messing)}
+.mf-check input:checked~.box::after{transform:rotate(45deg) scale(1)}
+.mf-check input:focus-visible~.box{box-shadow:0 0 0 3px rgba(185,152,95,.3)}
+.mf-check .lbl{font-size:14.5px;line-height:1.5;color:rgba(244,241,233,.82);font-weight:300}
+.mf-check .lbl a{color:var(--messing);border-bottom:1px solid rgba(185,152,95,.5)}
+
+/* multiselect chips */
+.mf-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.mf-chip{position:relative;cursor:pointer}
+.mf-chip input{position:absolute;opacity:0;pointer-events:none}
+.mf-chip span{display:inline-block;font-size:13.5px;letter-spacing:.02em;border:1px solid rgba(185,152,95,.4);padding:9px 17px;color:rgba(244,241,233,.75);transition:border-color .3s,background .3s,color .3s}
+.mf-chip:hover span{border-color:rgba(185,152,95,.75)}
+.mf-chip input:checked~span{background:var(--messing);border-color:var(--messing);color:var(--groen-diep)}
+.mf-chip input:focus-visible~span{box-shadow:0 0 0 3px rgba(185,152,95,.3)}
+
+/* conditionele blokken */
+.mf-cond[hidden]{display:none}
+.mf-cond{margin-top:22px;padding:22px 22px 8px;border:1px solid rgba(185,152,95,.28);background:rgba(244,241,233,.025)}
+.mf-cond>.mf-legend:first-child,.mf-cond>.mf-cond-title{font-family:'Marcellus',serif;font-size:17px;color:var(--ivoor);text-transform:none;letter-spacing:.02em;margin-bottom:4px}
+.mf-cond .mf-cond-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(244,241,233,.6);margin-bottom:6px}
+
+/* referentie-blok (lid-voordracht) */
+.mf-ref{margin-top:16px;padding:20px 22px 10px;border:1px solid rgba(185,152,95,.3);background:rgba(244,241,233,.03);position:relative}
+.mf-ref .mf-ref-role{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--messing);font-weight:600;margin-bottom:6px}
+
+/* file upload */
+.mf-file{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.mf-file .mf-filebtn{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:13px 24px;border:1px solid var(--messing);color:var(--ivoor);cursor:pointer;transition:background .3s,color .3s}
+.mf-file .mf-filebtn:hover{background:var(--messing);color:var(--groen-diep)}
+.mf-file input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.mf-file input[type=file]:focus-visible+.mf-filebtn{box-shadow:0 0 0 3px rgba(185,152,95,.3)}
+.mf-file .mf-filename{font-size:14px;color:rgba(244,241,233,.7);font-style:italic;font-family:'Cormorant Garamond',serif}
+
+/* review-overzicht */
+.mf-review{margin-top:6px}
+.mf-rev-group{border-top:1px solid rgba(185,152,95,.2);padding:16px 0}
+.mf-rev-group:first-child{border-top:0}
+.mf-rev-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.mf-rev-h h4{font-family:'Marcellus',serif;font-size:16px;color:var(--ivoor);font-weight:400;letter-spacing:.02em}
+.mf-rev-edit{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--messing);background:none;border:0;cursor:pointer;border-bottom:1px solid rgba(185,152,95,.4);padding-bottom:2px}
+.mf-rev-dl{margin-top:10px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:14px}
+.mf-rev-dl dt{color:rgba(244,241,233,.5)}
+.mf-rev-dl dd{color:var(--ivoor)}
+
+/* foutsamenvatting bovenaan stap */
+.mf-summary{display:none;margin-top:14px;padding:14px 18px;border:1px solid rgba(138,90,51,.6);background:rgba(138,90,51,.14);color:#edc4a6;font-size:14px}
+.mf-summary.show{display:block}
+.mf-summary ul{margin:6px 0 0;padding-left:18px}
+
+/* navigatie-voet */
+.mf-nav{display:flex;align-items:center;gap:16px;padding:18px 40px;border-top:1px solid rgba(185,152,95,.25);background:var(--groen-diep)}
+.mf-stepcount{flex:1;text-align:center;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(244,241,233,.4)}
+.mf-btn{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:15px 30px;border:1px solid var(--messing);background:none;color:var(--ivoor);cursor:pointer;transition:background .35s,color .35s,opacity .35s,transform .3s cubic-bezier(.16,1,.3,1)}
+.mf-btn.primary{background:var(--messing);color:var(--groen-diep);border-color:var(--messing)}
+.mf-btn.primary:hover{background:var(--ivoor);border-color:var(--ivoor)}
+.mf-btn:hover{background:rgba(185,152,95,.16)}
+.mf-btn.primary:disabled,.mf-btn:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.mf-btn[hidden]{display:none}
+.mf-btn .spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(28,43,34,.3);border-top-color:var(--groen-diep);border-radius:50%;margin-right:8px;vertical-align:-2px;animation:mfSpin .7s linear infinite}
+@keyframes mfSpin{to{transform:rotate(360deg)}}
+
+/* succes / serverfout */
+.mf-result{text-align:center;padding:30px 20px 10px;animation:mfFade .6s cubic-bezier(.16,1,.3,1)}
+.mf-result .seal{width:70px;height:70px;margin:0 auto 22px;color:var(--messing)}
+.mf-result h3{font-family:'Marcellus',serif;font-size:28px;color:var(--ivoor);margin-bottom:14px}
+.mf-result p{color:rgba(244,241,233,.78);font-size:16px;max-width:34em;margin:0 auto 8px}
+.mf-result .mf-appid{display:inline-block;margin-top:18px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--messing);border:1px solid rgba(185,152,95,.4);padding:9px 18px}
+
+/* age-gate / nudge */
+.mf-notice{margin-top:14px;padding:16px 20px;border:1px solid rgba(185,152,95,.4);background:rgba(185,152,95,.1);font-size:14.5px;line-height:1.55;color:rgba(244,241,233,.85)}
+.mf-notice button{background:none;border:0;color:var(--messing);cursor:pointer;border-bottom:1px solid var(--messing);font:inherit;padding:0 0 2px}
+
+@media (max-width:760px){
+  .mf-root{padding:0}
+  .mf-dialog{grid-template-columns:1fr;width:100%;max-height:100dvh;height:100dvh;border:0}
+  .mf-aside{display:none}
+  .mf-main{max-height:100dvh}
+  .mf-head{padding:54px 24px 14px}
+  .mf-body{padding:6px 24px 24px}
+  .mf-nav{padding:16px 24px;padding-bottom:max(16px,env(safe-area-inset-bottom))}
+  .mf-grid,.mf-grid.thirds{grid-template-columns:1fr}
+  .mf-btn{padding:15px 22px}
+}
+.mf-mini-steps{display:none}
+@media (max-width:760px){.mf-mini-steps{display:flex;gap:6px;margin-top:14px}.mf-mini-steps i{flex:1;height:2px;background:rgba(244,241,233,.18)}.mf-mini-steps i.on{background:var(--messing)}}
+
+@media (prefers-reduced-motion:reduce){
+  .mf-scrim,.mf-dialog,.mf-step,.mf-result{transition:none!important;animation:none!important;transform:none!important}
+}
+.mf-open-lock{overflow:hidden}
 </style>
 </head>
 <body>
@@ -517,6 +705,39 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 
     <div class="formule-grid">
 
+      <!-- Junior Member (nieuw · werktitel) -->
+      <article class="formule junior rv">
+        <span class="crest crest-new" data-i18n="crest-new">Nieuw</span>
+        <span class="kicker" data-i18n="j-kicker">De jonge ruiters</span>
+        <h3>Junior Member</h3>
+        <span class="provisional" data-i18n="j-provisional">Werktitel — de naam van dit lidmaatschap wordt nog bevestigd.</span>
+        <p class="tag" data-i18n="j-tag">Voor jonge ruiters en supporters tot en met 25 jaar — voorgedragen door één lid of een ouder die lid is.</p>
+        <div class="box-spec shared">
+          <svg class="dim-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-8l8-6 8 6v8"/><path d="M9 20v-5h6v5"/><path d="M12 6V3"/></svg>
+          <span class="meta"><b data-i18n="j-area">Ponystalling</b><span class="soft" data-i18n="j-area-soft">Gedeelde stalling, naargelang beschikbaarheid</span></span>
+        </div>
+        <div class="price"><span class="amt soft-amt" data-i18n="j-price">Tarief op aanvraag</span></div>
+        <div class="price-note" data-i18n="j-pricenote">Een lichtere bijdrage dan de Estate — vastgesteld door het comité</div>
+        <div class="price-young" data-i18n="j-young">Groeit door naar Estate (Onder 30) zodra men ouder wordt</div>
+        <div class="gate">
+          <span class="gate-label" data-i18n="gate-label">Op voordracht</span>
+          <span class="gate-text" data-i18n="j-gate">Voorgedragen door één lid, óf door een ouder of voogd die zelf lid is. Een lichtere weg dan de Estate, met dezelfde zorg.</span>
+        </div>
+        <div class="places" data-i18n="j-places">Open · met wachtlijst</div>
+        <div class="f-rule"></div>
+        <ul>
+          <li data-i18n="j-b1">Toegang tot het domein onder begeleiding — pistes, ruiterpaden en de gronden</li>
+          <li data-i18n="j-b2">Gedeelde pony- of paardenstalling, naargelang beschikbaarheid</li>
+          <li data-i18n="j-b3">Ledentarief op lessen, clinics, stages en de zomerkampen</li>
+          <li data-i18n="j-b4">Een plaats in de jeugdwerking — training, coaching en begeleiding op maat</li>
+          <li data-i18n="j-b5">Sint-Hubertusdag — de wijding van paarden en honden en de jeugdparade</li>
+          <li data-i18n="j-b6">Een vaste weg door naar het Estate-lidmaatschap zodra men ouder wordt</li>
+        </ul>
+        <div class="f-cta">
+          <a href="#word-member" class="btn ink" data-tier="junior" data-i18n="j-cta">Begin een voordracht</a>
+        </div>
+      </article>
+
       <!-- Estate Member -->
       <article class="formule rv">
         <span class="kicker" data-i18n="t1-kicker">De bereden volgers</span>
@@ -545,7 +766,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
           <li data-i18n="t1-b7">Twee voordrachten per jaar om ruiters voor te dragen voor wie u instaat</li>
         </ul>
         <div class="f-cta">
-          <a href="#word-member" class="btn ink" data-i18n="t1-cta">Begin een voordracht</a>
+          <a href="#word-member" class="btn ink" data-tier="estate" data-i18n="t1-cta">Begin een voordracht</a>
         </div>
       </article>
 
@@ -581,7 +802,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
           <li data-i18n="t2-b9">Een persoonlijke steward voor stalling, transport en tickets</li>
         </ul>
         <div class="f-cta">
-          <a href="#word-member" class="btn solid" data-i18n="t2-cta">Vraag verkiezing aan</a>
+          <a href="#word-member" class="btn solid" data-tier="heritage" data-i18n="t2-cta">Vraag verkiezing aan</a>
         </div>
       </article>
 
@@ -589,7 +810,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 
     <div class="apply rv">
       <span data-i18n="apply-q">Nog niet bekend bij een lid van het domein?</span>
-      <a href="/#contact" data-i18n="apply-link">Richt u tot het comité — motivatiebrief en portret, dan de wachtlijst →</a>
+      <a href="#word-member" data-route="committee" data-i18n="apply-link">Richt u tot het comité — motivatiebrief en portret, dan de wachtlijst →</a>
     </div>
   </div>
 </section>
@@ -640,6 +861,37 @@ html{scrollbar-width:thin;scrollbar-color:var(--messing) var(--ivoor)}
 </aside>
 
 <div class="concept-badge"><b>Concept 01</b> &nbsp;·&nbsp; <a href="https://www.ewvo.nl" target="_blank" rel="noopener">EWVO</a> × St. Hubert</div>
+
+<!-- ===== Membership-aanvraagformulier (modaal / volledig scherm) ===== -->
+<div class="mf-root" id="mf" hidden>
+  <div class="mf-scrim" data-mf-close></div>
+  <div class="mf-dialog" role="dialog" aria-modal="true" aria-labelledby="mf-title" id="mf-dialog">
+    <button type="button" class="mf-x" data-mf-close aria-label="Sluiten">&times;</button>
+    <aside class="mf-aside" aria-hidden="true">
+      <span class="mf-brand">
+        <svg class="seal" viewBox="0 0 120 120"><use href="#hubertus"/></svg>
+        <span class="name">St. Hubert<small>Horse &amp; Country Club</small></span>
+      </span>
+      <ol class="mf-steplist" id="mf-steplist"></ol>
+      <div class="mf-foot" id="mf-aside-foot"></div>
+    </aside>
+    <div class="mf-main">
+      <header class="mf-head">
+        <p class="mf-eyebrow"><span id="mf-eyebrow">Word member</span><span class="rn-now" id="mf-rn"></span></p>
+        <h2 class="mf-step-title" id="mf-title">Word member</h2>
+        <p class="mf-step-intro" id="mf-intro"></p>
+        <div class="mf-mini-steps" id="mf-mini" aria-hidden="true"></div>
+      </header>
+      <div class="mf-body" id="mf-body" tabindex="-1" role="group" aria-live="polite"></div>
+      <footer class="mf-nav">
+        <button type="button" class="mf-btn mf-back" id="mf-back">Terug</button>
+        <span class="mf-stepcount" id="mf-count"></span>
+        <button type="button" class="mf-btn primary mf-next" id="mf-next">Volgende</button>
+        <button type="button" class="mf-btn primary mf-submit" id="mf-submit" hidden>Dien aanvraag in</button>
+      </footer>
+    </div>
+  </div>
+</div>
 
 <script>
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -770,6 +1022,10 @@ const i18n = {
     't1-area':"Standaardmaat",'t1-price':"€ 750",'price-per':"per jaar",'gate-label':"Op voordracht",
     't1-kicker':"De bereden volgers",'t1-tag':"Voor ruiters en supporters — voorgedragen en gesteund door twee leden.",'t1-gate':"Voorgedragen door één lid, gesteund door een tweede. Aanvraag, toetsing door het comité, dan de wachtlijst.",'t1-places':"Toelating per seizoen · wachtlijst doorlopend open",'t1-pricenote':"+ eenmalig € 375 inschrijfgeld",'t1-young':"Onder 30: € 400 per jaar · € 150 inschrijving",
     't1-b1':"Volledige toegang tot het domein — pistes, members' clubhouse en de gronden",'t1-b2':"Ledentarief op elke clinic, masterclass en stalperiode",'t1-b3':"Een paardenbox van 3 × 4 m — voorrang bij reservatie aan het ledentarief",'t1-b4':"Gereserveerde tribune bij alle wedstrijden, met voorrang op tickets",'t1-b5':"Sint-Hubertusdag — de Hubertusmis in november, de wijding van paarden en honden en het jachtontbijt",'t1-b6':"Wederzijdse toegang tot aangesloten ruiterclubs in het buitenland",'t1-b7':"Twee voordrachten per jaar om ruiters voor te dragen voor wie u instaat",'t1-cta':"Begin een voordracht",
+    'crest-new':"Nieuw",
+    'j-kicker':"De jonge ruiters",'j-provisional':"Werktitel — de naam van dit lidmaatschap wordt nog bevestigd.",'j-tag':"Voor jonge ruiters en supporters tot en met 25 jaar — voorgedragen door één lid of een ouder die lid is.",
+    'j-area':"Ponystalling",'j-area-soft':"Gedeelde stalling, naargelang beschikbaarheid",'j-price':"Tarief op aanvraag",'j-pricenote':"Een lichtere bijdrage dan de Estate — vastgesteld door het comité",'j-young':"Groeit door naar Estate (Onder 30) zodra men ouder wordt",'j-gate':"Voorgedragen door één lid, óf door een ouder of voogd die zelf lid is. Een lichtere weg dan de Estate, met dezelfde zorg.",'j-places':"Open · met wachtlijst",
+    'j-b1':"Toegang tot het domein onder begeleiding — pistes, ruiterpaden en de gronden",'j-b2':"Gedeelde pony- of paardenstalling, naargelang beschikbaarheid",'j-b3':"Ledentarief op lessen, clinics, stages en de zomerkampen",'j-b4':"Een plaats in de jeugdwerking — training, coaching en begeleiding op maat",'j-b5':"Sint-Hubertusdag — de wijding van paarden en honden en de jeugdparade",'j-b6':"Een vaste weg door naar het Estate-lidmaatschap zodra men ouder wordt",'j-cta':"Begin een voordracht",
     'crest':"Patroon",'t2-area':"Ruim formaat",'t2-price':"€ 1.950",
     't2-kicker':"Wie de jacht leiden",'t2-tag':"Voor patroons — op directe voordracht van twee Masters, of bevorderd vanuit de Estate na twee seizoenen.",'t2-gate':"Rechtstreeks op voordracht van twee zetelende Masters, of door bevordering vanuit de Estate — daarna verkozen door het comité. Streng begrensd.",'t2-places':"Slechts 60 plaatsen · wachtlijst over meerdere jaren",'t2-pricenote':"+ eenmalig € 1.000 inschrijfgeld · jaarbijdrage hier geplafonneerd",'t2-young':"Om te zetten naar levenslang Legacy-lidmaatschap",
     't2-inherits':"Alles uit de Estate Member, en —",'t2-b1':"Een gereserveerde box van 3 × 6 m — uw eigen ruime loose box, het hele jaar door",'t2-b2':"Voorrang op privébox en stalling bij elk kampioenschap op het domein",'t2-b3':"De Master's table — gastvrijheid, diners en het jaarlijkse Sint-Hubertusbanket",'t2-b4':"Uitgenodigd voor alle exclusieve events in de polo lounge",'t2-b5':"Een plaats bij de meet — rijd of stap mee in de Hubertusparade op de patroonsdag",'t2-b6':"Stemrecht over wedstrijden, parcoursontwerp en de richting van de club",'t2-b7':"Uw naam op het Founders' board, met de levenslange Legacy-optie",'t2-b8':"Doorlopende voordrachten — draag kandidaten voor in beide niveaus",'t2-b9':"Een persoonlijke steward voor stalling, transport en tickets",'t2-cta':"Vraag verkiezing aan",
@@ -808,6 +1064,10 @@ const i18n = {
     't1-area':"Taille standard",'t1-price':"750 €",'price-per':"par an",'gate-label':"Par cooptation",
     't1-kicker':"La suite montée",'t1-tag':"Pour cavaliers et soutiens — proposés et appuyés par deux membres.",'t1-gate':"Proposé par un membre, appuyé par un second. Candidature, examen du comité, puis la liste d'attente.",'t1-places':"Admission par saison · liste d'attente ouverte",'t1-pricenote':"+ droit d'entrée unique de 375 €",'t1-young':"Moins de 30 ans : 400 € par an · 150 € d'entrée",
     't1-b1':"Plein accès au domaine — manèges, club-house des membres et les terrains",'t1-b2':"Tarif membre sur chaque clinic, masterclass et période d'écurie",'t1-b3':"Un box de 3 × 4 m — priorité de réservation au tarif membre",'t1-b4':"Enceinte réservée à toutes les épreuves, avec billets prioritaires",'t1-b5':"La Saint-Hubert — la messe de Hubert en novembre, la bénédiction des chevaux et des chiens et le petit-déjeuner de chasse",'t1-b6':"Accès réciproque aux clubs équestres affiliés à l'étranger",'t1-b7':"Deux propositions par an pour présenter des cavaliers dont vous répondez",'t1-cta':"Lancer une proposition",
+    'crest-new':"Nouveau",
+    'j-kicker':"Les jeunes cavaliers",'j-provisional':"Titre provisoire — le nom de cette adhésion reste à confirmer.",'j-tag':"Pour jeunes cavaliers et soutiens jusqu'à 25 ans — proposés par un membre ou un parent lui-même membre.",
+    'j-area':"Écurie poney",'j-area-soft':"Stalle partagée, selon disponibilité",'j-price':"Tarif sur demande",'j-pricenote':"Une contribution plus légère que l'Estate — fixée par le comité",'j-young':"Évolue vers l'Estate (moins de 30 ans) avec l'âge",'j-gate':"Proposé par un membre, ou par un parent ou tuteur lui-même membre. Une voie plus légère que l'Estate, avec le même soin.",'j-places':"Ouvert · avec liste d'attente",
+    'j-b1':"Accès accompagné au domaine — manèges, sentiers et terrains",'j-b2':"Écurie poney ou cheval partagée, selon disponibilité",'j-b3':"Tarif membre sur cours, clinics, stages et camps d'été",'j-b4':"Une place dans la section jeunes — entraînement, coaching et accompagnement sur mesure",'j-b5':"La Saint-Hubert — la bénédiction des chevaux et des chiens et la parade des jeunes",'j-b6':"Une voie établie vers l'adhésion Estate avec l'âge",'j-cta':"Lancer une proposition",
     'crest':"Mécène",'t2-area':"Grand format",'t2-price':"1.950 €",
     't2-kicker':"Ceux qui mènent la chasse",'t2-tag':"Pour les mécènes — sur parrainage direct de deux Masters, ou élevés depuis l'Estate après deux saisons.",'t2-gate':"Directement sur parrainage de deux Masters en exercice, ou par élévation depuis l'Estate — puis élu par le comité. Strictement limité.",'t2-places':"60 places seulement · liste d'attente sur plusieurs années",'t2-pricenote':"+ droit d'entrée unique de 1.000 € · cotisation annuelle plafonnée ici",'t2-young':"Convertible en adhésion Legacy à vie",
     't2-inherits':"Tout ce que comprend l'Estate Member, et —",'t2-b1':"Un box réservé de 3 × 6 m — votre propre box spacieux, toute l'année",'t2-b2':"Priorité de box privé et d'écurie à chaque championnat du domaine",'t2-b3':"La table des Masters — hospitalité, dîners et le banquet annuel de la Saint-Hubert",'t2-b4':"Invité à tous les événements exclusifs du polo lounge",'t2-b5':"Une place au rendez-vous — montez ou défilez dans la parade de la Saint-Hubert le jour du patron",'t2-b6':"Droit de vote sur les épreuves, le tracé des parcours et l'orientation du club",'t2-b7':"Votre nom au tableau des Fondateurs, avec l'option Legacy à vie",'t2-b8':"Propositions permanentes — parrainez des candidats dans les deux niveaux",'t2-b9':"Un intendant personnel pour l'écurie, le transport et les billets",'t2-cta':"Demander l'élection",
@@ -846,6 +1106,10 @@ const i18n = {
     't1-area':"Standard size",'t1-price':"€750",'price-per':"per year",'gate-label':"By election",
     't1-kicker':"The mounted following",'t1-tag':"For riders and supporters, proposed and seconded by two members.",'t1-gate':"Proposed by one member, seconded by another. Application, committee review, then the waitlist.",'t1-places':"Admitted by season · waitlist held open",'t1-pricenote':"+ €375 one-time entrance fee",'t1-young':"Under-30: €400 / year · €150 entrance",
     't1-b1':"Full run of the domaine — schooling arenas, members' clubhouse and grounds",'t1-b2':"Members' rate on every clinic, masterclass and stabling block",'t1-b3':"A 3 × 4 m horse box — priority booking at the members' rate",'t1-b4':"Reserved enclosure at all fixtures, with priority tickets",'t1-b5':"Saint Hubert's Day — the November Hubertus Mass, the blessing of horses and hounds and the hunt breakfast",'t1-b6':"Reciprocal access to affiliated equestrian clubs abroad",'t1-b7':"Two proposals a year to bring riders you'll vouch for",'t1-cta':"Begin a proposal",
+    'crest-new':"New",
+    'j-kicker':"The young riders",'j-provisional':"Working title — the name of this membership is still to be confirmed.",'j-tag':"For young riders and supporters up to age 25 — proposed by one member or a parent who is a member.",
+    'j-area':"Pony stabling",'j-area-soft':"Shared stabling, subject to availability",'j-price':"Fee on request",'j-pricenote':"A lighter contribution than the Estate — set by the committee",'j-young':"Grows into Estate (Under-30) with age",'j-gate':"Proposed by one member, or by a parent or guardian who is themselves a member. A lighter path than the Estate, with the same care.",'j-places':"Open · waitlisted",
+    'j-b1':"Guided access to the domaine — arenas, trails and grounds",'j-b2':"Shared pony or horse stabling, subject to availability",'j-b3':"Members' rate on lessons, clinics, courses and summer camps",'j-b4':"A place in the youth squad — training, coaching and tailored guidance",'j-b5':"Saint Hubert's Day — the blessing of horses and hounds and the youth parade",'j-b6':"An established path into Estate membership with age",'j-cta':"Begin a proposal",
     'crest':"Patron",'t2-area':"Oversized",'t2-price':"€1,950",
     't2-kicker':"Those who lead the chase",'t2-tag':"For patrons — by direct sponsorship of two Masters, or raised from the Estate after two seasons.",'t2-gate':"Directly on the sponsorship of two sitting Masters, or by elevation from the Estate — then elected by committee. Strictly capped.",'t2-places':"60 places only · multi-year waitlist",'t2-pricenote':"+ €1,000 one-time entrance fee · annual fee capped here",'t2-young':"Convertible to lifetime Legacy membership",
     't2-inherits':"Everything in the Estate Member, and —",'t2-b1':"A reserved 3 × 6 m horse box — your own oversized loose box, held year-round",'t2-b2':"Private box & stabling priority at every championship the domaine hosts",'t2-b3':"The Master's table — hospitality, hosted dinners and the Saint Hubert annual banquet",'t2-b4':"Invited to every exclusive event at the polo lounge",'t2-b5':"A place at the meet — ride or process in the Hubertus parade on the patron's day",'t2-b6':"A vote on fixtures, course design and the direction of the club",'t2-b7':"Your name on the Founders' board, with the lifetime Legacy option",'t2-b8':"Standing proposals — sponsor entrants into either tier",'t2-b9':"A personal steward for stabling, transport and tickets",'t2-cta':"Request election",
@@ -870,6 +1134,922 @@ function zetTaal(code){
 }
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>zetTaal(b.dataset.lang)));
 try{ const bewaard = localStorage.getItem('sh-lang'); if(bewaard && bewaard !== 'nl') zetTaal(bewaard); }catch(e){}
+</script>
+
+<!-- ===== Membership-aanvraagformulier · logica (zelfstandige module) ===== -->
+<script>
+(function(){
+'use strict';
+
+/* ---- configuratie (één bron van waarheid) -------------------------------- */
+var CFG = {
+  JUNIOR_MAX_AGE: 25,            // configureerbaar: 18 (FEI Junior) · 21 (Young Rider) · 25 (U25, standaard)
+  ESTATE_YOUNG_MAX: 29,          // 'Onder 30'-tarief dekt 26–29
+  MAX_FILE_MB: 5,
+  FILE_TYPES: ['image/jpeg','image/png','image/webp'],
+  LIVE: false,                  // false = statische concept-demo (geen backend); zet op true zodra het endpoint live staat
+  ENDPOINT: '/api/membership-application',
+  TIER_META: {
+    junior:   { box:'shared', fee:'request' },
+    estate:   { box:'3 × 4 m', fee:'€750/jr + €375' },
+    heritage: { box:'3 × 6 m', fee:'€1.950/jr + €1.000' }
+  }
+};
+
+/* ---- meertalige teksten --------------------------------------------------- */
+var FT = {
+ nl:{
+  brand_foot:"Aanvraag · geen betaling",
+  eyebrow:"Word member", close:"Sluiten",
+  back:"Terug", next:"Volgende", submit:"Dien aanvraag in", submitting:"Even geduld…",
+  count:function(n){return "Stap "+ROMAN[n]+" van VI";},
+  steps:["Lidmaatschap","Over u","U & uw paard","Voordracht","Een paar woorden","Nazicht & toestemming"],
+  intros:[
+    "Kies de formule die bij u past. Geen betaling vandaag — u dient enkel een aanvraag in.",
+    "Vertel ons wie u bent. Wij behandelen uw gegevens vertrouwelijk.",
+    "Uw paard en uw ruiterleven — zo vinden wij de juiste plek.",
+    "Op St. Hubert wordt men voorgedragen. Kies hieronder uw weg.",
+    "Een paar woorden over uw band met de paardensport.",
+    "Kijk alles na en bevestig. Daarna beoordeelt het comité uw aanvraag."
+  ],
+  required:"verplicht", optional:"optioneel",
+  /* stap I */
+  tier_confirm:"Gekozen lidmaatschap",
+  tiers:{
+    junior:{name:"Junior Member", pill:"Nieuw", desc:"Voor jonge ruiters tot en met 25 jaar. Een lichtere voordracht, met dezelfde zorg.", meta:"Ponystalling · tarief op aanvraag"},
+    estate:{name:"Estate Member", pill:"", desc:"Voor ruiters en supporters — voorgedragen en gesteund door twee leden.", meta:"Box 3 × 4 m · €750/jr + €375"},
+    heritage:{name:"Heritage Member", pill:"Patroon", desc:"Voor patroons — op voordracht van twee Masters, of bevorderd vanuit de Estate.", meta:"Box 3 × 6 m · 60 plaatsen"}
+  },
+  tier_working:"Junior Member is een werktitel — de naam kan nog wijzigen.",
+  /* stap II */
+  first_name:"Voornaam", last_name:"Naam", date_of_birth:"Geboortedatum", nationality:"Nationaliteit",
+  email:"E-mailadres", phone:"Telefoon", address_street:"Straat en nummer", address_postcode:"Postcode",
+  address_city:"Gemeente", address_country:"Land", preferred_language:"Voorkeurstaal", occupation:"Beroep",
+  ph_email:"u@voorbeeld.be", ph_phone:"+32 470 00 00 00",
+  guardian_block:"Ouder of voogd", guardian_sub:"U bent jonger dan 18 — een ouder of voogd dient mee aan te vragen.",
+  guardian_name:"Naam ouder/voogd", guardian_relationship:"Relatie", ph_guardian_rel:"bv. ouder, voogd",
+  guardian_email:"E-mail ouder/voogd", guardian_phone:"Telefoon ouder/voogd",
+  guardian_is_member:"Deze ouder/voogd is zelf lid van St. Hubert",
+  /* stap III */
+  owns_horse:"Heeft u een paard of pony?", yes:"Ja", no:"Nee",
+  horse_count:"Hoeveel paarden/pony's?", disciplines:"Discipline(s)", riding_level:"Niveau",
+  interest:"Waarnaar bent u op zoek?", box_size_pref:"Voorkeur boxmaat", current_stabling:"Huidige stalling",
+  ph_stabling:"Waar staat uw paard nu? (optioneel)",
+  disc_opts:[["dressuur","Dressuur"],["springen","Springen"],["mennen","Mennen"],["recreatief","Recreatief / trail"],["andere","Andere"]],
+  level_opts:[["beginner","Beginner"],["recreatief","Recreatief"],["gevorderd","Gevorderd"],["wedstrijd","Wedstrijd"]],
+  interest_opts:[["vol_pension","Vol pension (box)"],["training","Training & begeleiding"],["wedstrijd","Wedstrijdbegeleiding"],["toegang","Toegang & rijden"],["veilingen","Veilingen"]],
+  box_opts:[["3x4","3 × 4 m (Estate)"],["3x6","3 × 6 m (Heritage)"],["shared","Gedeelde stalling (Junior)"]],
+  level_choose:"Kies een niveau",
+  /* stap IV */
+  route_label:"Hoe wordt u voorgedragen?",
+  route_member:"Een lid draagt mij voor", route_member_d:"Eén zetelend lid staat voor u in.",
+  route_guardian:"Mijn ouder/voogd is lid", route_guardian_d:"Het lidmaatschap van uw ouder/voogd volstaat als link.",
+  route_members:"Voorgedragen én gesteund", route_members_d:"Eén lid draagt u voor, een tweede steunt de aanvraag.",
+  route_masters:"Voorgedragen door twee Masters", route_masters_d:"Twee zetelende Masters dragen u rechtstreeks voor.",
+  route_promotion:"Bevordering vanuit de Estate", route_promotion_d:"Reeds Estate-lid sinds minstens twee seizoenen.",
+  route_committee:"Richt u tot het comité", route_committee_d:"Nog niet bekend bij een lid? Dien rechtstreeks in met motivatie en portret.",
+  ref_proposer:"Voordrager", ref_seconder:"Tweede lid (steun)", ref_master:"Master",
+  ref_name:"Naam van het lid", ref_member_no:"Lidnummer", ref_email:"E-mail van het lid",
+  ref_relationship:"Hoe kent dit lid u?", ph_ref_rel:"bv. stalbuur, jarenlange rijvriend", ref_years:"Aantal jaren bekend",
+  ref_note:"Het comité verifieert deze voordracht discreet. Het e-mailadres wordt nooit publiek getoond.",
+  guardian_member_name:"Naam van uw ouder/voogd (lid)", guardian_member_no:"Lidnummer (indien gekend)",
+  guardian_confirm:"Ik bevestig dat mijn ouder/voogd lid is van St. Hubert.",
+  promotion_no:"Uw Estate-lidnummer", promotion_seasons:"Aantal seizoenen als Estate-lid",
+  committee_note:"Op deze weg worden uw motivatie (stap V) en portret verplicht. Het comité beoordeelt uw aanvraag en plaatst u op de wachtlijst.",
+  heritage_cap:"Slechts 60 plaatsen · wachtlijst over meerdere jaren.",
+  /* stap V */
+  motivation:"Waarom St. Hubert?", motivation_help:"Drie tot vijf zinnen volstaan.", ph_motivation:"Wat trekt u aan in St. Hubert?",
+  portrait:"Portret (foto)", portrait_help:"jpg, png of webp · max 5 MB.", portrait_btn:"Kies een bestand", portrait_none:"Geen bestand gekozen",
+  heard_via:"Hoe vond u ons?", ph_heard:"bv. via een lid, social media, een wedstrijd",
+  /* stap VI */
+  rev_edit:"Wijzig",
+  rev_tier:"Lidmaatschap", rev_about:"Over u", rev_horse:"Paard", rev_reco:"Voordracht", rev_words:"Motivatie",
+  confirm_accurate:"Ik bevestig dat bovenstaande correct is.",
+  gdpr_consent:"Ik geef toestemming voor de verwerking van mijn gegevens conform de <a href=\"/#contact\" target=\"_blank\" rel=\"noopener\">privacyverklaring</a>.",
+  gdpr_consent_guardian:"Als ouder/voogd geef ik toestemming voor de verwerking van de gegevens van de minderjarige.",
+  visit_request:"Ik wil graag een bezoek aan het domein plannen.", visit_dates:"Voorkeursdagen", ph_visit:"bv. weekends in juli",
+  privacy_note:"De namen en e-mailadressen van uw voordragers verwerken wij uitsluitend om de voordracht te verifiëren — niet voor andere doeleinden.",
+  /* validatie */
+  v_required:"Dit veld is verplicht.", v_email:"Voer een geldig e-mailadres in.", v_phone:"Voer een geldig telefoonnummer in (bv. +32…).",
+  v_dob_future:"De geboortedatum kan niet in de toekomst liggen.", v_dob_real:"Controleer de geboortedatum.",
+  v_select:"Maak een keuze.", v_file_type:"Enkel jpg, png of webp toegestaan.", v_file_size:"Het bestand is groter dan 5 MB.",
+  v_ref_same:"Dit mag niet uw eigen e-mailadres zijn.", v_ref_distinct:"De twee leden moeten verschillende e-mailadressen hebben.",
+  v_seasons:"Minstens twee seizoenen vereist.", v_route:"Kies hoe u wordt voorgedragen.",
+  v_summary:"Vul de aangeduide velden aan om verder te gaan:",
+  age_gate_title:"Net iets te oud voor Junior",
+  age_gate:function(max){return "Op basis van uw geboortedatum bent u ouder dan "+max+". Het Junior-lidmaatschap loopt tot en met "+max+" jaar. Mogen wij u de Estate (Onder 30) voorstellen?";},
+  age_gate_btn:"Ga verder als Estate (Onder 30)",
+  /* resultaat */
+  success_title:"Aanvraag ontvangen",
+  success_body:"Dank u. Uw aanvraag wordt beoordeeld door het comité. Wij nemen contact op om een bezoek aan het domein te plannen.",
+  success_ref:"Uw referentie",
+  err_title:"Er ging iets mis", err_body:"Wij konden uw aanvraag niet versturen. Probeer het opnieuw.", err_retry:"Opnieuw proberen"
+ },
+ fr:{
+  brand_foot:"Demande · sans paiement",
+  eyebrow:"Devenir membre", close:"Fermer",
+  back:"Retour", next:"Suivant", submit:"Soumettre la demande", submitting:"Un instant…",
+  count:function(n){return "Étape "+ROMAN[n]+" sur VI";},
+  steps:["Adhésion","À votre sujet","Vous & votre cheval","Recommandation","Quelques mots","Vérification & consentement"],
+  intros:[
+    "Choisissez la formule qui vous convient. Aucun paiement aujourd'hui — vous soumettez simplement une demande.",
+    "Dites-nous qui vous êtes. Vos données restent confidentielles.",
+    "Votre cheval et votre vie de cavalier — pour trouver la juste place.",
+    "À St. Hubert, on est proposé. Choisissez votre voie ci-dessous.",
+    "Quelques mots sur votre lien avec le sport équestre.",
+    "Vérifiez le tout et confirmez. Le comité examinera ensuite votre demande."
+  ],
+  required:"requis", optional:"facultatif",
+  tier_confirm:"Adhésion choisie",
+  tiers:{
+    junior:{name:"Membre Junior", pill:"Nouveau", desc:"Pour jeunes cavaliers jusqu'à 25 ans. Une proposition plus légère, le même soin.", meta:"Écurie poney · tarif sur demande"},
+    estate:{name:"Membre Estate", pill:"", desc:"Pour cavaliers et soutiens — proposés et appuyés par deux membres.", meta:"Box 3 × 4 m · 750 €/an + 375 €"},
+    heritage:{name:"Membre Heritage", pill:"Mécène", desc:"Pour mécènes — parrainés par deux Masters, ou élevés depuis l'Estate.", meta:"Box 3 × 6 m · 60 places"}
+  },
+  tier_working:"Membre Junior est un titre provisoire — le nom peut encore changer.",
+  first_name:"Prénom", last_name:"Nom", date_of_birth:"Date de naissance", nationality:"Nationalité",
+  email:"Adresse e-mail", phone:"Téléphone", address_street:"Rue et numéro", address_postcode:"Code postal",
+  address_city:"Commune", address_country:"Pays", preferred_language:"Langue préférée", occupation:"Profession",
+  ph_email:"vous@exemple.be", ph_phone:"+32 470 00 00 00",
+  guardian_block:"Parent ou tuteur", guardian_sub:"Vous avez moins de 18 ans — un parent ou tuteur doit codéposer la demande.",
+  guardian_name:"Nom du parent/tuteur", guardian_relationship:"Relation", ph_guardian_rel:"p.ex. parent, tuteur",
+  guardian_email:"E-mail du parent/tuteur", guardian_phone:"Téléphone du parent/tuteur",
+  guardian_is_member:"Ce parent/tuteur est lui-même membre de St. Hubert",
+  owns_horse:"Possédez-vous un cheval ou poney ?", yes:"Oui", no:"Non",
+  horse_count:"Combien de chevaux/poneys ?", disciplines:"Discipline(s)", riding_level:"Niveau",
+  interest:"Que recherchez-vous ?", box_size_pref:"Taille de box préférée", current_stabling:"Écurie actuelle",
+  ph_stabling:"Où se trouve votre cheval aujourd'hui ? (facultatif)",
+  disc_opts:[["dressuur","Dressage"],["springen","Saut d'obstacles"],["mennen","Attelage"],["recreatief","Loisir / trail"],["andere","Autre"]],
+  level_opts:[["beginner","Débutant"],["recreatief","Loisir"],["gevorderd","Confirmé"],["wedstrijd","Compétition"]],
+  interest_opts:[["vol_pension","Pension complète (box)"],["training","Entraînement & suivi"],["wedstrijd","Suivi en compétition"],["toegang","Accès & monte"],["veilingen","Ventes"]],
+  box_opts:[["3x4","3 × 4 m (Estate)"],["3x6","3 × 6 m (Heritage)"],["shared","Écurie partagée (Junior)"]],
+  level_choose:"Choisissez un niveau",
+  route_label:"Comment êtes-vous proposé ?",
+  route_member:"Un membre me propose", route_member_d:"Un membre en exercice répond de vous.",
+  route_guardian:"Mon parent/tuteur est membre", route_guardian_d:"L'adhésion de votre parent/tuteur suffit comme lien.",
+  route_members:"Proposé et appuyé", route_members_d:"Un membre vous propose, un second appuie la demande.",
+  route_masters:"Proposé par deux Masters", route_masters_d:"Deux Masters en exercice vous proposent directement.",
+  route_promotion:"Promotion depuis l'Estate", route_promotion_d:"Déjà membre Estate depuis au moins deux saisons.",
+  route_committee:"Adressez-vous au comité", route_committee_d:"Pas encore connu d'un membre ? Déposez directement avec motivation et portrait.",
+  ref_proposer:"Proposant", ref_seconder:"Second membre (appui)", ref_master:"Master",
+  ref_name:"Nom du membre", ref_member_no:"Numéro de membre", ref_email:"E-mail du membre",
+  ref_relationship:"Comment ce membre vous connaît-il ?", ph_ref_rel:"p.ex. voisin d'écurie, ami de longue date", ref_years:"Années de connaissance",
+  ref_note:"Le comité vérifie discrètement cette recommandation. L'e-mail n'est jamais rendu public.",
+  guardian_member_name:"Nom de votre parent/tuteur (membre)", guardian_member_no:"Numéro de membre (si connu)",
+  guardian_confirm:"Je confirme que mon parent/tuteur est membre de St. Hubert.",
+  promotion_no:"Votre numéro de membre Estate", promotion_seasons:"Nombre de saisons comme membre Estate",
+  committee_note:"Sur cette voie, votre motivation (étape V) et votre portrait deviennent requis. Le comité examine votre demande et vous inscrit sur la liste d'attente.",
+  heritage_cap:"60 places seulement · liste d'attente sur plusieurs années.",
+  motivation:"Pourquoi St. Hubert ?", motivation_help:"Trois à cinq phrases suffisent.", ph_motivation:"Qu'est-ce qui vous attire à St. Hubert ?",
+  portrait:"Portrait (photo)", portrait_help:"jpg, png ou webp · max 5 Mo.", portrait_btn:"Choisir un fichier", portrait_none:"Aucun fichier choisi",
+  heard_via:"Comment nous avez-vous trouvés ?", ph_heard:"p.ex. via un membre, réseaux sociaux, une épreuve",
+  rev_edit:"Modifier",
+  rev_tier:"Adhésion", rev_about:"À votre sujet", rev_horse:"Cheval", rev_reco:"Recommandation", rev_words:"Motivation",
+  confirm_accurate:"Je confirme l'exactitude des informations.",
+  gdpr_consent:"Je consens au traitement de mes données conformément à la <a href=\"/#contact\" target=\"_blank\" rel=\"noopener\">politique de confidentialité</a>.",
+  gdpr_consent_guardian:"En tant que parent/tuteur, je consens au traitement des données du mineur.",
+  visit_request:"Je souhaite planifier une visite du domaine.", visit_dates:"Jours préférés", ph_visit:"p.ex. week-ends en juillet",
+  privacy_note:"Les noms et e-mails de vos proposants ne sont traités que pour vérifier la recommandation — à aucune autre fin.",
+  v_required:"Ce champ est requis.", v_email:"Saisissez une adresse e-mail valide.", v_phone:"Saisissez un numéro de téléphone valide (p.ex. +32…).",
+  v_dob_future:"La date de naissance ne peut être dans le futur.", v_dob_real:"Vérifiez la date de naissance.",
+  v_select:"Faites un choix.", v_file_type:"Seuls jpg, png ou webp sont autorisés.", v_file_size:"Le fichier dépasse 5 Mo.",
+  v_ref_same:"Ce ne peut être votre propre e-mail.", v_ref_distinct:"Les deux membres doivent avoir des e-mails différents.",
+  v_seasons:"Au moins deux saisons requises.", v_route:"Choisissez votre voie de recommandation.",
+  v_summary:"Complétez les champs indiqués pour continuer :",
+  age_gate_title:"Un peu trop âgé pour Junior",
+  age_gate:function(max){return "D'après votre date de naissance, vous avez plus de "+max+" ans. L'adhésion Junior va jusqu'à "+max+" ans inclus. Puis-je vous proposer l'Estate (moins de 30 ans) ?";},
+  age_gate_btn:"Continuer en Estate (moins de 30 ans)",
+  success_title:"Demande reçue",
+  success_body:"Merci. Votre demande sera examinée par le comité. Nous vous contacterons pour planifier une visite du domaine.",
+  success_ref:"Votre référence",
+  err_title:"Une erreur est survenue", err_body:"Nous n'avons pas pu envoyer votre demande. Réessayez.", err_retry:"Réessayer"
+ },
+ en:{
+  brand_foot:"Application · no payment",
+  eyebrow:"Become a member", close:"Close",
+  back:"Back", next:"Next", submit:"Submit application", submitting:"One moment…",
+  count:function(n){return "Step "+ROMAN[n]+" of VI";},
+  steps:["Membership","About you","You & your horse","Recommendation","A few words","Review & consent"],
+  intros:[
+    "Choose the membership that suits you. No payment today — you are simply submitting an application.",
+    "Tell us who you are. We treat your details in confidence.",
+    "Your horse and your riding life — so we can find the right place.",
+    "At St. Hubert one is proposed. Choose your route below.",
+    "A few words about your bond with equestrian sport.",
+    "Review everything and confirm. The committee will then consider your application."
+  ],
+  required:"required", optional:"optional",
+  tier_confirm:"Chosen membership",
+  tiers:{
+    junior:{name:"Junior Member", pill:"New", desc:"For young riders up to age 25. A lighter proposal, with the same care.", meta:"Pony stabling · fee on request"},
+    estate:{name:"Estate Member", pill:"", desc:"For riders and supporters — proposed and seconded by two members.", meta:"Box 3 × 4 m · €750/yr + €375"},
+    heritage:{name:"Heritage Member", pill:"Patron", desc:"For patrons — proposed by two Masters, or raised from the Estate.", meta:"Box 3 × 6 m · 60 places"}
+  },
+  tier_working:"Junior Member is a working title — the name may still change.",
+  first_name:"First name", last_name:"Last name", date_of_birth:"Date of birth", nationality:"Nationality",
+  email:"Email", phone:"Phone", address_street:"Street and number", address_postcode:"Postcode",
+  address_city:"City", address_country:"Country", preferred_language:"Preferred language", occupation:"Occupation",
+  ph_email:"you@example.be", ph_phone:"+32 470 00 00 00",
+  guardian_block:"Parent or guardian", guardian_sub:"You are under 18 — a parent or guardian must co-apply.",
+  guardian_name:"Parent/guardian name", guardian_relationship:"Relationship", ph_guardian_rel:"e.g. parent, guardian",
+  guardian_email:"Parent/guardian email", guardian_phone:"Parent/guardian phone",
+  guardian_is_member:"This parent/guardian is themselves a member of St. Hubert",
+  owns_horse:"Do you keep a horse or pony?", yes:"Yes", no:"No",
+  horse_count:"How many horses/ponies?", disciplines:"Discipline(s)", riding_level:"Riding level",
+  interest:"What are you looking for?", box_size_pref:"Preferred box size", current_stabling:"Current stabling",
+  ph_stabling:"Where is your horse kept now? (optional)",
+  disc_opts:[["dressuur","Dressage"],["springen","Show jumping"],["mennen","Driving"],["recreatief","Recreational / trail"],["andere","Other"]],
+  level_opts:[["beginner","Beginner"],["recreatief","Recreational"],["gevorderd","Advanced"],["wedstrijd","Competition"]],
+  interest_opts:[["vol_pension","Full board (box)"],["training","Training & guidance"],["wedstrijd","Competition support"],["toegang","Access & riding"],["veilingen","Auctions"]],
+  box_opts:[["3x4","3 × 4 m (Estate)"],["3x6","3 × 6 m (Heritage)"],["shared","Shared stabling (Junior)"]],
+  level_choose:"Choose a level",
+  route_label:"How are you proposed?",
+  route_member:"A member proposes me", route_member_d:"One sitting member vouches for you.",
+  route_guardian:"My parent/guardian is a member", route_guardian_d:"Your parent/guardian's membership satisfies the link.",
+  route_members:"Proposed and seconded", route_members_d:"One member proposes you, a second seconds the application.",
+  route_masters:"Proposed by two Masters", route_masters_d:"Two sitting Masters propose you directly.",
+  route_promotion:"Promotion from Estate", route_promotion_d:"Already an Estate member for at least two seasons.",
+  route_committee:"Apply to the committee", route_committee_d:"Not yet known to a member? Apply directly with a motivation and portrait.",
+  ref_proposer:"Proposer", ref_seconder:"Seconder", ref_master:"Master",
+  ref_name:"Member's name", ref_member_no:"Membership number", ref_email:"Member's email",
+  ref_relationship:"How does this member know you?", ph_ref_rel:"e.g. stable neighbour, longtime riding friend", ref_years:"Years known",
+  ref_note:"The committee verifies this nomination quietly. The email address is never shown publicly.",
+  guardian_member_name:"Your parent/guardian's name (member)", guardian_member_no:"Membership number (if known)",
+  guardian_confirm:"I confirm my parent/guardian is a member of St. Hubert.",
+  promotion_no:"Your Estate membership number", promotion_seasons:"Seasons as an Estate member",
+  committee_note:"On this route your motivation (step V) and portrait become required. The committee reviews your application and places you on the waitlist.",
+  heritage_cap:"60 places only · multi-year waitlist.",
+  motivation:"Why St. Hubert?", motivation_help:"Three to five sentences will do.", ph_motivation:"What draws you to St. Hubert?",
+  portrait:"Portrait (photo)", portrait_help:"jpg, png or webp · max 5 MB.", portrait_btn:"Choose a file", portrait_none:"No file chosen",
+  heard_via:"How did you find us?", ph_heard:"e.g. through a member, social media, a fixture",
+  rev_edit:"Edit",
+  rev_tier:"Membership", rev_about:"About you", rev_horse:"Horse", rev_reco:"Recommendation", rev_words:"Motivation",
+  confirm_accurate:"I confirm the above is accurate.",
+  gdpr_consent:"I consent to my data being processed per the <a href=\"/#contact\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.",
+  gdpr_consent_guardian:"As parent/guardian, I consent to the processing of the minor's data.",
+  visit_request:"I'd like to arrange a visit to the domain.", visit_dates:"Preferred days", ph_visit:"e.g. weekends in July",
+  privacy_note:"Your proposers' names and emails are processed solely to verify the nomination — for no other purpose.",
+  v_required:"This field is required.", v_email:"Enter a valid email address.", v_phone:"Enter a valid phone number (e.g. +32…).",
+  v_dob_future:"The date of birth cannot be in the future.", v_dob_real:"Please check the date of birth.",
+  v_select:"Please make a choice.", v_file_type:"Only jpg, png or webp allowed.", v_file_size:"The file is larger than 5 MB.",
+  v_ref_same:"This may not be your own email address.", v_ref_distinct:"The two members must have different email addresses.",
+  v_seasons:"At least two seasons are required.", v_route:"Choose how you are proposed.",
+  v_summary:"Please complete the highlighted fields to continue:",
+  age_gate_title:"Just over the Junior age",
+  age_gate:function(max){return "Based on your date of birth you are over "+max+". Junior membership runs up to and including age "+max+". May we suggest the Estate (Under-30) instead?";},
+  age_gate_btn:"Continue as Estate (Under-30)",
+  success_title:"Application received",
+  success_body:"Thank you. Your application will be reviewed by the committee. We'll be in touch to arrange a visit to the domain.",
+  success_ref:"Your reference",
+  err_title:"Something went wrong", err_body:"We couldn't send your application. Please try again.", err_retry:"Try again"
+ }
+};
+var ROMAN = {1:"I",2:"II",3:"III",4:"IV",5:"V",6:"VI"};
+
+/* ---- state ---------------------------------------------------------------- */
+function blankState(){
+  return {
+    membership_tier:"",
+    applicant:{first_name:"",last_name:"",date_of_birth:"",nationality:"",email:"",phone:"",
+      address_street:"",address_postcode:"",address_city:"",address_country:"BE",preferred_language:"",occupation:""},
+    guardian:{guardian_name:"",guardian_relationship:"",guardian_email:"",guardian_phone:"",guardian_is_member:false,guardian_member_no:""},
+    horse:{owns_horse:null,horse_count:"",disciplines:[],riding_level:"",interest:[],box_size_pref:"",current_stabling:""},
+    recommendation:{route:"",promotion_from_estate:false,estate_member_no:"",estate_seasons:"",member_refs:[]},
+    statement:{motivation:"",heard_via:"",portrait_name:"",portrait_file_id:""},
+    consent:{confirm_accurate:false,gdpr_consent:false,gdpr_consent_guardian:false},
+    visit:{visit_request:false,visit_dates:""}
+  };
+}
+var state = blankState();
+var current = 1;            // 1..6
+var lang = 'nl';
+var portraitFile = null;
+
+/* ---- helpers -------------------------------------------------------------- */
+function L(){ return FT[lang] || FT.nl; }
+function t(k){ var v = L()[k]; return v==null ? (FT.nl[k]!=null?FT.nl[k]:k) : v; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function el(id){ return document.getElementById(id); }
+function emailOK(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+function phoneOK(v){ return /^[+]?[0-9 ().\-]{6,20}$/.test(v.trim()); }
+function getLang(){ try{ return localStorage.getItem('sh-lang')||'nl'; }catch(e){ return 'nl'; } }
+
+function parseDOB(s){ if(!s) return null; var d=new Date(s+'T00:00:00'); return isNaN(d)?null:d; }
+function actualAge(){ var d=parseDOB(state.applicant.date_of_birth); if(!d) return null;
+  var n=new Date(), a=n.getFullYear()-d.getFullYear(), m=n.getMonth()-d.getMonth();
+  if(m<0||(m===0&&n.getDate()<d.getDate())) a--; return a; }
+function ageThisYear(){ var d=parseDOB(state.applicant.date_of_birth); if(!d) return null;
+  return (new Date()).getFullYear()-d.getFullYear(); }
+function isMinor(){ var a=actualAge(); return a!=null && a<18; }
+
+/* default recommendation route per tier */
+function defaultRoute(){
+  if(state.membership_tier==='estate') return 'members';
+  if(state.membership_tier==='heritage') return 'masters';
+  if(state.membership_tier==='junior') return 'member';
+  return '';
+}
+function committeePath(){ return state.recommendation.route==='committee'; }
+
+/* ---- rendering: per stap -------------------------------------------------- */
+function field(name, labelKey, inputHTML, opts){
+  opts = opts || {};
+  var reqMark = opts.req ? ' <span class="req" aria-hidden="true">*</span>' : (opts.optional?' <span class="opt">'+t('optional')+'</span>':'');
+  var help = opts.help ? '<p class="mf-help">'+esc(opts.help)+'</p>' : '';
+  return '<div class="mf-field" data-field="'+name+'">'+
+    '<label for="f-'+name+'">'+esc(t(labelKey))+reqMark+'</label>'+
+    inputHTML + help +
+    '<p class="mf-err" id="e-'+name+'" role="alert"></p></div>';
+}
+function input(name, val, type, ph, attrs){
+  return '<input class="mf-input" id="f-'+name+'" name="'+name+'" type="'+(type||'text')+'" value="'+esc(val)+'"'+
+    (ph?' placeholder="'+esc(ph)+'"':'')+(attrs||'')+'>';
+}
+
+function renderStep(n){
+  if(n===1) return stepTier();
+  if(n===2) return stepAbout();
+  if(n===3) return stepHorse();
+  if(n===4) return stepReco();
+  if(n===5) return stepWords();
+  if(n===6) return stepReview();
+  return '';
+}
+
+/* STAP I — Lidmaatschap */
+function stepTier(){
+  var order=['junior','estate','heritage'], h='<div class="mf-cards" role="radiogroup" aria-label="'+esc(t('steps')[0])+'">';
+  order.forEach(function(key){
+    var tt=L().tiers[key], on=state.membership_tier===key;
+    h+='<label class="mf-card radio'+(on?' on':'')+'">'+
+        '<input type="radio" name="membership_tier" value="'+key+'"'+(on?' checked':'')+'>'+
+        '<span class="tick"></span>'+
+        '<span class="c-t">'+esc(tt.name)+(tt.pill?' <span class="pill">'+esc(tt.pill)+'</span>':'')+'</span>'+
+        '<span class="c-d">'+esc(tt.desc)+'</span>'+
+        '<span class="c-meta">'+esc(tt.meta)+'</span>'+
+      '</label>';
+  });
+  h+='</div>';
+  h+='<p class="mf-help">'+esc(t('tier_working'))+'</p>';
+  h+='<p class="mf-err" id="e-membership_tier" role="alert"></p>';
+  return h;
+}
+
+/* STAP II — Over u */
+function stepAbout(){
+  var a=state.applicant, h='';
+  h+='<div class="mf-grid">'+
+      field('first_name','first_name',input('first_name',a.first_name,'text',null,' maxlength="60" autocomplete="given-name"'),{req:true})+
+      field('last_name','last_name',input('last_name',a.last_name,'text',null,' maxlength="60" autocomplete="family-name"'),{req:true})+
+    '</div>';
+  h+='<div class="mf-grid">'+
+      field('date_of_birth','date_of_birth',input('date_of_birth',a.date_of_birth,'date',null,' max="'+todayISO()+'"'),{req:true})+
+      field('nationality','nationality',input('nationality',a.nationality,'text',null,' autocomplete="country-name"'),{optional:true})+
+    '</div>';
+  h+='<div class="mf-grid">'+
+      field('email','email',input('email',a.email,'email',t('ph_email'),' autocomplete="email"'),{req:true})+
+      field('phone','phone',input('phone',a.phone,'tel',t('ph_phone'),' autocomplete="tel"'),{req:true})+
+    '</div>';
+  h+=field('address_street','address_street',input('address_street',a.address_street,'text',null,' autocomplete="address-line1"'),{req:true});
+  h+='<div class="mf-grid thirds">'+
+      field('address_postcode','address_postcode',input('address_postcode',a.address_postcode,'text',null,' autocomplete="postal-code"'),{req:true})+
+      field('address_city','address_city',input('address_city',a.address_city,'text',null,' autocomplete="address-level2"'),{req:true})+
+      field('address_country','address_country',countrySelect(a.address_country),{req:true})+
+    '</div>';
+  h+='<div class="mf-grid">'+
+      field('preferred_language','preferred_language',langSelect(a.preferred_language||lang),{req:true})+
+      field('occupation','occupation',input('occupation',a.occupation,'text'),{optional:true})+
+    '</div>';
+  /* guardian block (minderjarig) */
+  h+='<div class="mf-cond" id="guardian-block"'+(isMinor()?'':' hidden')+'>'+
+      '<div class="mf-cond-title">'+esc(t('guardian_block'))+'</div>'+
+      '<p class="mf-cond-sub">'+esc(t('guardian_sub'))+'</p>'+
+      '<div class="mf-grid">'+
+        field('guardian_name','guardian_name',input('guardian_name',state.guardian.guardian_name),{req:isMinor()})+
+        field('guardian_relationship','guardian_relationship',input('guardian_relationship',state.guardian.guardian_relationship,'text',t('ph_guardian_rel')),{req:isMinor()})+
+      '</div>'+
+      '<div class="mf-grid">'+
+        field('guardian_email','guardian_email',input('guardian_email',state.guardian.guardian_email,'email'),{req:isMinor()})+
+        field('guardian_phone','guardian_phone',input('guardian_phone',state.guardian.guardian_phone,'tel'),{req:isMinor()})+
+      '</div>'+
+      '<label class="mf-check"><input type="checkbox" name="guardian_is_member"'+(state.guardian.guardian_is_member?' checked':'')+'><span class="box"></span><span class="lbl">'+esc(t('guardian_is_member'))+'</span></label>'+
+    '</div>';
+  /* age-gate notice slot */
+  h+='<div id="age-gate"></div>';
+  return h;
+}
+function todayISO(){ var d=new Date(); return d.toISOString().slice(0,10); }
+function countrySelect(val){
+  var opts=[['BE','België / Belgique / Belgium'],['NL','Nederland'],['FR','France'],['DE','Deutschland'],['LU','Luxembourg'],['GB','United Kingdom'],['other','— ander land / other —']];
+  return selectHTML('address_country',opts,val);
+}
+function langSelect(val){ return selectHTML('preferred_language',[['nl','Nederlands'],['fr','Français'],['en','English']],val); }
+function selectHTML(name,opts,val,placeholder){
+  var h='<select class="mf-select" id="f-'+name+'" name="'+name+'">';
+  if(placeholder) h+='<option value=""'+(!val?' selected':'')+'>'+esc(placeholder)+'</option>';
+  opts.forEach(function(o){ h+='<option value="'+esc(o[0])+'"'+(String(val)===String(o[0])?' selected':'')+'>'+esc(o[1])+'</option>'; });
+  return h+'</select>';
+}
+
+/* STAP III — paard */
+function stepHorse(){
+  var hs=state.horse, h='';
+  h+='<div class="mf-field" data-field="owns_horse"><span class="mf-legend">'+esc(t('owns_horse'))+' <span class="req" aria-hidden="true">*</span></span>'+
+      '<div class="mf-chips" role="radiogroup" aria-label="'+esc(t('owns_horse'))+'">'+
+        chip('owns_horse','yes',t('yes'),hs.owns_horse===true,'radio')+
+        chip('owns_horse','no',t('no'),hs.owns_horse===false,'radio')+
+      '</div><p class="mf-err" id="e-owns_horse" role="alert"></p></div>';
+  h+='<div class="mf-cond" id="horse-count-wrap"'+(hs.owns_horse===true?'':' hidden')+' style="padding:0;border:0;background:none;margin-top:18px">'+
+      field('horse_count','horse_count',input('horse_count',hs.horse_count,'number',null,' min="1" max="20" style="max-width:160px"'),{optional:true})+'</div>';
+  h+='<div class="mf-field" data-field="disciplines"><span class="mf-legend">'+esc(t('disciplines'))+' <span class="opt">'+t('optional')+'</span></span><div class="mf-chips">'+
+      L().disc_opts.map(function(o){return chip('disciplines',o[0],o[1],hs.disciplines.indexOf(o[0])>=0,'check');}).join('')+'</div></div>';
+  h+=field('riding_level','riding_level',selectHTML('riding_level',L().level_opts,hs.riding_level,t('level_choose')),{req:true});
+  h+='<div class="mf-field" data-field="interest"><span class="mf-legend">'+esc(t('interest'))+' <span class="req" aria-hidden="true">*</span></span><div class="mf-chips">'+
+      L().interest_opts.map(function(o){return chip('interest',o[0],o[1],hs.interest.indexOf(o[0])>=0,'check');}).join('')+'</div><p class="mf-err" id="e-interest" role="alert"></p></div>';
+  h+=field('box_size_pref','box_size_pref',selectHTML('box_size_pref',L().box_opts,hs.box_size_pref||autoBox()),{optional:true});
+  h+=field('current_stabling','current_stabling','<textarea class="mf-textarea" id="f-current_stabling" name="current_stabling" maxlength="280" placeholder="'+esc(t('ph_stabling'))+'">'+esc(hs.current_stabling)+'</textarea>',{optional:true});
+  return h;
+}
+function autoBox(){ return state.membership_tier==='heritage'?'3x6':(state.membership_tier==='estate'?'3x4':'shared'); }
+function chip(name,val,label,on,kind){
+  var type=kind==='radio'?'radio':'checkbox';
+  return '<label class="mf-chip"><input type="'+type+'" name="'+name+'" value="'+esc(val)+'"'+(on?' checked':'')+'><span>'+esc(label)+'</span></label>';
+}
+
+/* STAP IV — voordracht */
+function stepReco(){
+  var tier=state.membership_tier, r=state.recommendation;
+  if(!r.route) r.route=defaultRoute();
+  var routes;
+  if(tier==='junior') routes=[['member','route_member','route_member_d'],['guardian','route_guardian','route_guardian_d'],['committee','route_committee','route_committee_d']];
+  else if(tier==='heritage') routes=[['masters','route_masters','route_masters_d'],['promotion','route_promotion','route_promotion_d'],['committee','route_committee','route_committee_d']];
+  else routes=[['members','route_members','route_members_d'],['committee','route_committee','route_committee_d']];
+
+  var h='<div class="mf-field"><span class="mf-legend">'+esc(t('route_label'))+' <span class="req" aria-hidden="true">*</span></span>'+
+        '<div class="mf-cards" role="radiogroup" aria-label="'+esc(t('route_label'))+'">';
+  routes.forEach(function(rt){
+    var on=r.route===rt[0];
+    h+='<label class="mf-card radio'+(on?' on':'')+'"><input type="radio" name="reco_route" value="'+rt[0]+'"'+(on?' checked':'')+'>'+
+        '<span class="tick"></span><span class="c-t">'+esc(t(rt[1]))+'</span><span class="c-d">'+esc(t(rt[2]))+'</span></label>';
+  });
+  h+='</div><p class="mf-err" id="e-reco_route" role="alert"></p></div>';
+  h+='<div id="reco-detail">'+recoDetail()+'</div>';
+  if(tier==='heritage') h+='<p class="mf-help" style="margin-top:18px">'+esc(t('heritage_cap'))+'</p>';
+  return h;
+}
+function recoDetail(){
+  var tier=state.membership_tier, route=state.recommendation.route, h='';
+  if(route==='committee'){ return '<div class="mf-notice">'+esc(t('committee_note'))+'</div>'; }
+  if(route==='guardian'){
+    var g=state.guardian;
+    h+='<div class="mf-cond"><div class="mf-cond-title">'+esc(t('guardian_block'))+'</div>'+
+        '<div class="mf-grid">'+
+          field('gm_name','guardian_member_name',input('gm_name',g.guardian_name),{req:true})+
+          field('gm_no','guardian_member_no',input('gm_no',g.guardian_member_no),{optional:true})+
+        '</div>'+
+        '<label class="mf-check"><input type="checkbox" name="guardian_member_confirm"'+(g.guardian_is_member?' checked':'')+'><span class="box"></span><span class="lbl">'+esc(t('guardian_confirm'))+'</span></label>'+
+        '<p class="mf-err" id="e-guardian_member_confirm" role="alert"></p></div>';
+    return h;
+  }
+  if(route==='promotion'){
+    h+='<div class="mf-cond"><div class="mf-grid">'+
+        field('estate_member_no','promotion_no',input('estate_member_no',state.recommendation.estate_member_no),{req:true})+
+        field('estate_seasons','promotion_seasons',input('estate_seasons',state.recommendation.estate_seasons,'number',null,' min="0" max="40"'),{req:true})+
+      '</div></div>';
+    return h;
+  }
+  /* member-referenties */
+  var roles;
+  if(route==='member') roles=['proposer'];
+  else if(route==='members') roles=['proposer','seconder'];
+  else if(route==='masters') roles=['master','master'];
+  else roles=[];
+  roles.forEach(function(role,i){ h+=refBlock(role,i); });
+  if(roles.length) h+='<p class="mf-help">'+esc(t('ref_note'))+'</p>';
+  return h;
+}
+function refBlock(role,i){
+  var ref=state.recommendation.member_refs[i]||{};
+  var roleLabel = role==='proposer'?t('ref_proposer'):role==='seconder'?t('ref_seconder'):t('ref_master');
+  return '<div class="mf-ref" data-ref="'+i+'" data-role="'+role+'">'+
+    '<div class="mf-ref-role">'+esc(roleLabel)+'</div>'+
+    '<div class="mf-grid">'+
+      field('ref_name_'+i,'ref_name',input('ref_name_'+i,ref.ref_name||''),{req:true})+
+      field('ref_member_no_'+i,'ref_member_no',input('ref_member_no_'+i,ref.ref_member_no||''),{optional:true})+
+    '</div>'+
+    '<div class="mf-grid">'+
+      field('ref_email_'+i,'ref_email',input('ref_email_'+i,ref.ref_email||'','email'),{req:true})+
+      field('ref_years_known_'+i,'ref_years',input('ref_years_known_'+i,ref.ref_years_known||'','number',null,' min="0" max="80"'),{optional:true})+
+    '</div>'+
+    field('ref_relationship_'+i,'ref_relationship',input('ref_relationship_'+i,ref.ref_relationship||'','text',t('ph_ref_rel')),{req:true})+
+  '</div>';
+}
+
+/* STAP V — een paar woorden */
+function stepWords(){
+  var s=state.statement, reqMot=committeePath(), h='';
+  h+=field('motivation','motivation','<textarea class="mf-textarea" id="f-motivation" name="motivation" maxlength="600" placeholder="'+esc(t('ph_motivation'))+'">'+esc(s.motivation)+'</textarea><p class="mf-char" id="mot-char"></p>',{req:reqMot,optional:!reqMot,help:t('motivation_help')});
+  var fileName = s.portrait_name || t('portrait_none');
+  h+='<div class="mf-field" data-field="portrait"><label for="f-portrait">'+esc(t('portrait'))+(reqMot?' <span class="req" aria-hidden="true">*</span>':' <span class="opt">'+t('optional')+'</span>')+'</label>'+
+      '<div class="mf-file"><input type="file" id="f-portrait" name="portrait" accept="image/jpeg,image/png,image/webp">'+
+        '<label class="mf-filebtn" for="f-portrait">'+esc(t('portrait_btn'))+'</label>'+
+        '<span class="mf-filename" id="portrait-name">'+esc(fileName)+'</span></div>'+
+      '<p class="mf-help">'+esc(t('portrait_help'))+'</p><p class="mf-err" id="e-portrait" role="alert"></p></div>';
+  h+=field('heard_via','heard_via',input('heard_via',s.heard_via,'text',t('ph_heard')),{optional:true});
+  return h;
+}
+
+/* STAP VI — nazicht & toestemming */
+function stepReview(){
+  var h='<div class="mf-review">';
+  h+=revGroup('rev_tier',1,[[t('tier_confirm'), L().tiers[state.membership_tier]?L().tiers[state.membership_tier].name:'—']]);
+  var a=state.applicant;
+  h+=revGroup('rev_about',2,[
+    [t('first_name')+' '+t('last_name'), (a.first_name+' '+a.last_name).trim()||'—'],
+    [t('date_of_birth'), a.date_of_birth||'—'],
+    [t('email'), a.email||'—'],
+    [t('phone'), a.phone||'—'],
+    [t('address_street'), [a.address_street,a.address_postcode+' '+a.address_city,a.address_country].filter(Boolean).join(', ')]
+  ]);
+  var hs=state.horse;
+  h+=revGroup('rev_horse',3,[
+    [t('owns_horse'), hs.owns_horse===true?t('yes'):hs.owns_horse===false?t('no'):'—'],
+    [t('riding_level'), labelOf(L().level_opts,hs.riding_level)],
+    [t('interest'), hs.interest.map(function(v){return labelOf(L().interest_opts,v);}).join(', ')||'—']
+  ]);
+  h+=revGroup('rev_reco',4,recoSummary());
+  h+=revGroup('rev_words',5,[
+    [t('motivation'), state.statement.motivation?clip(state.statement.motivation,90):'—'],
+    [t('portrait'), state.statement.portrait_name||'—']
+  ]);
+  h+='</div>';
+  /* consent */
+  h+='<div class="mf-field" style="margin-top:24px">';
+  h+='<label class="mf-check"><input type="checkbox" name="confirm_accurate"'+(state.consent.confirm_accurate?' checked':'')+'><span class="box"></span><span class="lbl">'+esc(t('confirm_accurate'))+'</span></label>';
+  h+='<label class="mf-check"><input type="checkbox" name="gdpr_consent"'+(state.consent.gdpr_consent?' checked':'')+'><span class="box"></span><span class="lbl">'+t('gdpr_consent')+'</span></label>';
+  if(isMinor()) h+='<label class="mf-check"><input type="checkbox" name="gdpr_consent_guardian"'+(state.consent.gdpr_consent_guardian?' checked':'')+'><span class="box"></span><span class="lbl">'+esc(t('gdpr_consent_guardian'))+'</span></label>';
+  h+='<label class="mf-check"><input type="checkbox" name="visit_request"'+(state.visit.visit_request?' checked':'')+'><span class="box"></span><span class="lbl">'+esc(t('visit_request'))+'</span></label>';
+  h+='<p class="mf-err" id="e-consent" role="alert"></p></div>';
+  h+='<div class="mf-cond" id="visit-dates-wrap"'+(state.visit.visit_request?'':' hidden')+' style="margin-top:8px">'+
+      field('visit_dates','visit_dates',input('visit_dates',state.visit.visit_dates,'text',t('ph_visit')),{optional:true})+'</div>';
+  h+='<p class="mf-help">'+esc(t('privacy_note'))+'</p>';
+  h+='<div class="mf-summary" id="mf-summary" role="alert"></div>';
+  return h;
+}
+function revGroup(titleKey,step,rows){
+  var h='<div class="mf-rev-group"><div class="mf-rev-h"><h4>'+esc(t(titleKey))+'</h4>'+
+    '<button type="button" class="mf-rev-edit" data-goto="'+step+'">'+esc(t('rev_edit'))+'</button></div><dl class="mf-rev-dl">';
+  rows.forEach(function(r){ h+='<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1]||'—')+'</dd>'; });
+  return h+'</dl></div>';
+}
+function recoSummary(){
+  var r=state.recommendation, rows=[];
+  var routeKey={member:'route_member',guardian:'route_guardian',members:'route_members',masters:'route_masters',promotion:'route_promotion',committee:'route_committee'}[r.route];
+  rows.push([t('route_label'), routeKey?t(routeKey):'—']);
+  if(r.route==='promotion'){ rows.push([t('promotion_no'), r.estate_member_no||'—']); rows.push([t('promotion_seasons'), r.estate_seasons||'—']); }
+  else if(r.route==='guardian'){ rows.push([t('guardian_member_name'), state.guardian.guardian_name||'—']); }
+  else { (r.member_refs||[]).forEach(function(ref,i){ if(ref&&ref.ref_name) rows.push([(i+1)+'. '+t('ref_name'), ref.ref_name+(ref.ref_email?' · '+ref.ref_email:'')]); }); }
+  return rows;
+}
+function labelOf(opts,val){ for(var i=0;i<opts.length;i++) if(opts[i][0]===val) return opts[i][1]; return '—'; }
+function clip(s,n){ s=String(s); return s.length>n?s.slice(0,n)+'…':s; }
+
+/* ---- verzamel DOM → state ------------------------------------------------- */
+function val(name){ var n=el('f-'+name); return n?n.value.trim():''; }
+function checked(sel){ var n=document.querySelector(sel); return n?n.checked:false; }
+
+function collect(n){
+  if(n===1){ var tr=document.querySelector('input[name="membership_tier"]:checked'); if(tr) state.membership_tier=tr.value; }
+  if(n===2){
+    var a=state.applicant;
+    ['first_name','last_name','date_of_birth','nationality','email','phone','address_street','address_postcode','address_city','address_country','preferred_language','occupation'].forEach(function(k){ var node=el('f-'+k); if(node) a[k]=node.value.trim(); });
+    var g=state.guardian;
+    ['guardian_name','guardian_relationship','guardian_email','guardian_phone'].forEach(function(k){ var node=el('f-'+k); if(node) g[k]=node.value.trim(); });
+    var gm=document.querySelector('input[name="guardian_is_member"]'); if(gm) g.guardian_is_member=gm.checked;
+  }
+  if(n===3){
+    var hs=state.horse;
+    var oh=document.querySelector('input[name="owns_horse"]:checked'); hs.owns_horse = oh?(oh.value==='yes'):hs.owns_horse;
+    if(el('f-horse_count')) hs.horse_count=el('f-horse_count').value.trim();
+    hs.disciplines=collectMulti('disciplines');
+    if(el('f-riding_level')) hs.riding_level=el('f-riding_level').value;
+    hs.interest=collectMulti('interest');
+    if(el('f-box_size_pref')) hs.box_size_pref=el('f-box_size_pref').value;
+    if(el('f-current_stabling')) hs.current_stabling=el('f-current_stabling').value.trim();
+  }
+  if(n===4){
+    var r=state.recommendation;
+    var rt=document.querySelector('input[name="reco_route"]:checked'); if(rt) r.route=rt.value;
+    if(r.route==='guardian'){
+      if(el('f-gm_name')) state.guardian.guardian_name=el('f-gm_name').value.trim();
+      if(el('f-gm_no')) state.guardian.guardian_member_no=el('f-gm_no').value.trim();
+      var gc=document.querySelector('input[name="guardian_member_confirm"]'); if(gc) state.guardian.guardian_is_member=gc.checked;
+      r.member_refs=[];
+    } else if(r.route==='promotion'){
+      r.promotion_from_estate=true; r.member_refs=[];
+      if(el('f-estate_member_no')) r.estate_member_no=el('f-estate_member_no').value.trim();
+      if(el('f-estate_seasons')) r.estate_seasons=el('f-estate_seasons').value.trim();
+    } else if(r.route==='committee'){
+      r.member_refs=[]; r.promotion_from_estate=false;
+    } else {
+      r.promotion_from_estate=false;
+      var blocks=document.querySelectorAll('.mf-ref'); r.member_refs=[];
+      blocks.forEach(function(b){ var i=b.getAttribute('data-ref'), role=b.getAttribute('data-role');
+        r.member_refs.push({ ref_role:role, ref_name:val('ref_name_'+i), ref_member_no:val('ref_member_no_'+i),
+          ref_email:val('ref_email_'+i), ref_relationship:val('ref_relationship_'+i), ref_years_known:val('ref_years_known_'+i) });
+      });
+    }
+  }
+  if(n===5){
+    if(el('f-motivation')) state.statement.motivation=el('f-motivation').value.trim();
+    if(el('f-heard_via')) state.statement.heard_via=el('f-heard_via').value.trim();
+  }
+  if(n===6){
+    state.consent.confirm_accurate=checked('input[name="confirm_accurate"]');
+    state.consent.gdpr_consent=checked('input[name="gdpr_consent"]');
+    state.consent.gdpr_consent_guardian=checked('input[name="gdpr_consent_guardian"]');
+    state.visit.visit_request=checked('input[name="visit_request"]');
+    if(el('f-visit_dates')) state.visit.visit_dates=el('f-visit_dates').value.trim();
+  }
+  save();
+}
+function collectMulti(name){ var out=[]; document.querySelectorAll('input[name="'+name+'"]:checked').forEach(function(n){ out.push(n.value); }); return out; }
+
+/* ---- validatie ------------------------------------------------------------ */
+function showErr(field,msg){ var e=el('e-'+field); var inp=el('f-'+field);
+  if(e){ e.textContent=msg; e.classList.add('show'); }
+  if(inp) inp.setAttribute('aria-invalid','true');
+}
+function clearErrs(){ document.querySelectorAll('.mf-err.show').forEach(function(e){ e.classList.remove('show'); e.textContent=''; });
+  document.querySelectorAll('[aria-invalid="true"]').forEach(function(n){ n.removeAttribute('aria-invalid'); });
+  var s=el('mf-summary'); if(s){ s.classList.remove('show'); s.innerHTML=''; } }
+
+function validate(n){
+  clearErrs(); var errs=[];
+  function req(field,labelKey){ var node=el('f-'+field); if(node && !node.value.trim()){ showErr(field,t('v_required')); errs.push(t(labelKey)); return false; } return true; }
+  if(n===1){ if(!state.membership_tier && !document.querySelector('input[name="membership_tier"]:checked')){ showErr('membership_tier',t('v_select')); errs.push(t('steps')[0]); } }
+  if(n===2){
+    ['first_name','last_name','date_of_birth','email','phone','address_street','address_postcode','address_city'].forEach(function(f){ req(f,f); });
+    var em=el('f-email'); if(em&&em.value.trim()&&!emailOK(em.value.trim())){ showErr('email',t('v_email')); errs.push(t('email')); }
+    var ph=el('f-phone'); if(ph&&ph.value.trim()&&!phoneOK(ph.value.trim())){ showErr('phone',t('v_phone')); errs.push(t('phone')); }
+    var dobN=el('f-date_of_birth');
+    if(dobN&&dobN.value){ var d=new Date(dobN.value+'T00:00:00'), now=new Date();
+      if(d>now){ showErr('date_of_birth',t('v_dob_future')); errs.push(t('date_of_birth')); }
+      else { var yr=now.getFullYear()-d.getFullYear(); if(yr>110||yr<0){ showErr('date_of_birth',t('v_dob_real')); errs.push(t('date_of_birth')); } }
+    }
+    if(isMinor()){ ['guardian_name','guardian_relationship','guardian_email','guardian_phone'].forEach(function(f){ req(f,f); });
+      var ge=el('f-guardian_email'); if(ge&&ge.value.trim()&&!emailOK(ge.value.trim())){ showErr('guardian_email',t('v_email')); errs.push(t('guardian_email')); }
+    }
+    /* age-gate junior */
+    if(state.membership_tier==='junior'){ var ay=ageThisYear(); if(ay!=null && ay>CFG.JUNIOR_MAX_AGE){ renderAgeGate(); errs.push(t('age_gate_title')); } }
+  }
+  if(n===3){
+    if(state.horse.owns_horse===null && !document.querySelector('input[name="owns_horse"]:checked')){ showErr('owns_horse',t('v_select')); errs.push(t('owns_horse')); }
+    if(!el('f-riding_level') || !el('f-riding_level').value){ showErr('riding_level',t('v_select')); errs.push(t('riding_level')); }
+    if(collectMulti('interest').length===0){ showErr('interest',t('v_select')); errs.push(t('interest')); }
+  }
+  if(n===4){
+    var route=document.querySelector('input[name="reco_route"]:checked');
+    if(!route){ showErr('reco_route',t('v_route')); errs.push(t('route_label')); }
+    else {
+      var rv=route.value;
+      if(rv==='guardian'){ if(!req('gm_name','guardian_member_name')){}
+        var gc=document.querySelector('input[name="guardian_member_confirm"]'); if(!gc||!gc.checked){ var e=el('e-guardian_member_confirm'); if(e){e.textContent=t('v_required');e.classList.add('show');} errs.push(t('guardian_confirm')); } }
+      else if(rv==='promotion'){ req('estate_member_no','promotion_no'); var seasN=el('f-estate_seasons');
+        if(!seasN||!seasN.value.trim()){ showErr('estate_seasons',t('v_required')); errs.push(t('promotion_seasons')); }
+        else if(parseInt(seasN.value,10)<2){ showErr('estate_seasons',t('v_seasons')); errs.push(t('promotion_seasons')); } }
+      else if(rv==='committee'){ /* niets verplicht hier */ }
+      else { /* member/members/masters refs */
+        var emails=[]; var appEmail=(state.applicant.email||'').toLowerCase();
+        document.querySelectorAll('.mf-ref').forEach(function(b){ var i=b.getAttribute('data-ref');
+          req('ref_name_'+i,'ref_name'); req('ref_relationship_'+i,'ref_relationship');
+          var em=el('f-ref_email_'+i), v=em?em.value.trim():'';
+          if(!v){ showErr('ref_email_'+i,t('v_required')); errs.push(t('ref_email')); }
+          else if(!emailOK(v)){ showErr('ref_email_'+i,t('v_email')); errs.push(t('ref_email')); }
+          else if(v.toLowerCase()===appEmail){ showErr('ref_email_'+i,t('v_ref_same')); errs.push(t('ref_email')); }
+          else { if(emails.indexOf(v.toLowerCase())>=0){ showErr('ref_email_'+i,t('v_ref_distinct')); errs.push(t('ref_email')); } emails.push(v.toLowerCase()); }
+        });
+      }
+    }
+  }
+  if(n===5){
+    if(committeePath()){
+      var mot=el('f-motivation'); if(!mot||!mot.value.trim()){ showErr('motivation',t('v_required')); errs.push(t('motivation')); }
+      if(!portraitFile && !state.statement.portrait_name){ var e=el('e-portrait'); if(e){e.textContent=t('v_required');e.classList.add('show');} errs.push(t('portrait')); }
+    }
+  }
+  if(n===6){
+    if(!checked('input[name="confirm_accurate"]') || !checked('input[name="gdpr_consent"]') || (isMinor() && !checked('input[name="gdpr_consent_guardian"]'))){
+      var ec=el('e-consent'); if(ec){ ec.textContent=t('v_required'); ec.classList.add('show'); } errs.push(t('confirm_accurate'));
+    }
+  }
+  if(errs.length && n!==6){ /* inline only, summary mostly for step 6 */ }
+  if(errs.length){ summary(errs); }
+  return errs.length===0;
+}
+function summary(errs){ var s=el('mf-summary'); if(!s) return;
+  s.innerHTML='<strong>'+esc(t('v_summary'))+'</strong>'; s.classList.add('show');
+}
+function renderAgeGate(){ var slot=el('age-gate'); if(!slot) return;
+  slot.innerHTML='<div class="mf-notice"><strong>'+esc(t('age_gate_title'))+'</strong><br>'+esc(L().age_gate(CFG.JUNIOR_MAX_AGE))+'<br><button type="button" id="age-gate-btn">'+esc(t('age_gate_btn'))+'</button></div>';
+  el('age-gate-btn').addEventListener('click',function(){ state.membership_tier='estate'; state.recommendation.route=defaultRoute(); slot.innerHTML=''; save(); });
+}
+
+/* ---- navigatie & chroom --------------------------------------------------- */
+function show(n){
+  current=n;
+  el('mf-body').innerHTML=renderStep(n);
+  attach(n);
+  updateChrome();
+  el('mf-body').scrollTop=0;
+  try{ el('mf-body').focus({preventScroll:true}); }catch(e){ el('mf-body').focus(); }
+}
+function updateChrome(){
+  el('mf-title').textContent=t('steps')[current-1];
+  el('mf-intro').textContent=t('intros')[current-1];
+  el('mf-rn').textContent='· '+ROMAN[current];
+  el('mf-eyebrow').textContent=t('eyebrow');
+  el('mf-count').textContent=L().count(current);
+  el('mf-aside-foot').textContent=t('brand_foot');
+  /* steplist */
+  var sl=el('mf-steplist'); sl.innerHTML='';
+  t('steps').forEach(function(label,i){ var li=document.createElement('li');
+    li.className=(i+1===current?'active':'')+(i+1<current?' done':'');
+    li.innerHTML='<span class="rn">'+ROMAN[i+1]+'</span><span>'+esc(label)+'</span>'; sl.appendChild(li); });
+  /* mini steps (mobiel) */
+  var mini=el('mf-mini'); mini.innerHTML=''; for(var k=1;k<=6;k++){ var b=document.createElement('i'); if(k<=current)b.className='on'; mini.appendChild(b); }
+  /* buttons */
+  el('mf-back').style.visibility=current===1?'hidden':'visible';
+  el('mf-back').textContent=t('back');
+  var last=current===6;
+  el('mf-next').hidden=last; el('mf-next').textContent=t('next');
+  el('mf-submit').hidden=!last; el('mf-submit').textContent=t('submit');
+}
+function next(){ collect(current); if(!validate(current)) return; if(current<6) show(current+1); }
+function back(){ collect(current); if(current>1) show(current-1); }
+
+/* ---- listeners per stap --------------------------------------------------- */
+function attach(n){
+  /* tier kaarten → live state + auto-box */
+  if(n===1){ document.querySelectorAll('input[name="membership_tier"]').forEach(function(r){ r.addEventListener('change',function(){ state.membership_tier=r.value; if(!state.recommendation.route||true){ state.recommendation.route=defaultRoute(); } save(); }); }); }
+  if(n===2){
+    var dob=el('f-date_of_birth'); if(dob) dob.addEventListener('change',function(){ state.applicant.date_of_birth=dob.value;
+      var gb=el('guardian-block'); if(gb) gb.hidden=!isMinor();
+      var ag=el('age-gate'); if(ag){ if(state.membership_tier==='junior'){ var ay=ageThisYear(); if(ay!=null&&ay>CFG.JUNIOR_MAX_AGE) renderAgeGate(); else ag.innerHTML=''; } else ag.innerHTML=''; } });
+  }
+  if(n===3){
+    document.querySelectorAll('input[name="owns_horse"]').forEach(function(r){ r.addEventListener('change',function(){ var w=el('horse-count-wrap'); if(w) w.hidden=(r.value!=='yes'); state.horse.owns_horse=(r.value==='yes'); }); });
+  }
+  if(n===4){
+    document.querySelectorAll('input[name="reco_route"]').forEach(function(r){ r.addEventListener('change',function(){ collect(4); state.recommendation.route=r.value; el('reco-detail').innerHTML=recoDetail(); }); });
+  }
+  if(n===5){
+    var mot=el('f-motivation'); var cc=el('mot-char');
+    if(mot&&cc){ var upd=function(){ cc.textContent=mot.value.length+' / 600'; }; upd(); mot.addEventListener('input',upd); }
+    var pf=el('f-portrait'); if(pf) pf.addEventListener('change',function(){ handleFile(pf); });
+  }
+  if(n===6){
+    document.querySelectorAll('.mf-rev-edit').forEach(function(b){ b.addEventListener('click',function(){ collect(6); show(parseInt(b.getAttribute('data-goto'),10)); }); });
+    var vr=document.querySelector('input[name="visit_request"]'); if(vr) vr.addEventListener('change',function(){ var w=el('visit-dates-wrap'); if(w) w.hidden=!vr.checked; });
+  }
+  /* clear inline error on input */
+  el('mf-body').querySelectorAll('.mf-input,.mf-select,.mf-textarea').forEach(function(node){
+    node.addEventListener('input',function(){ var f=node.id.replace(/^f-/,''); var e=el('e-'+f); if(e){ e.classList.remove('show'); } node.removeAttribute('aria-invalid'); });
+  });
+}
+function handleFile(input){
+  var f=input.files&&input.files[0]; var nameEl=el('portrait-name'); var err=el('e-portrait');
+  if(err){ err.classList.remove('show'); err.textContent=''; }
+  if(!f){ portraitFile=null; state.statement.portrait_name=''; if(nameEl) nameEl.textContent=t('portrait_none'); return; }
+  if(CFG.FILE_TYPES.indexOf(f.type)<0){ portraitFile=null; input.value=''; if(err){err.textContent=t('v_file_type');err.classList.add('show');} if(nameEl)nameEl.textContent=t('portrait_none'); return; }
+  if(f.size>CFG.MAX_FILE_MB*1024*1024){ portraitFile=null; input.value=''; if(err){err.textContent=t('v_file_size');err.classList.add('show');} if(nameEl)nameEl.textContent=t('portrait_none'); return; }
+  portraitFile=f; state.statement.portrait_name=f.name; if(nameEl) nameEl.textContent=f.name; save();
+}
+
+/* ---- persistentie (sessionStorage, enkel functioneel) --------------------- */
+function save(){ try{ sessionStorage.setItem('sh-mf', JSON.stringify({state:state,current:current})); }catch(e){} }
+function restore(){ try{ var raw=sessionStorage.getItem('sh-mf'); if(!raw) return false;
+  var o=JSON.parse(raw); if(o&&o.state){ state=Object.assign(blankState(),o.state);
+    state.applicant=Object.assign(blankState().applicant,o.state.applicant||{});
+    state.guardian=Object.assign(blankState().guardian,o.state.guardian||{});
+    state.horse=Object.assign(blankState().horse,o.state.horse||{});
+    state.recommendation=Object.assign(blankState().recommendation,o.state.recommendation||{});
+    state.statement=Object.assign(blankState().statement,o.state.statement||{});
+    state.consent=Object.assign(blankState().consent,o.state.consent||{});
+    state.visit=Object.assign(blankState().visit,o.state.visit||{});
+    current=o.current||1;
+    return true; } }catch(e){} return false; }
+
+/* ---- inzending ------------------------------------------------------------ */
+function buildPayload(){
+  var r=state.recommendation;
+  return {
+    membership_tier: state.membership_tier,
+    applicant: Object.assign({}, state.applicant, { address:{ street:state.applicant.address_street, postcode:state.applicant.address_postcode, city:state.applicant.address_city, country:state.applicant.address_country } }),
+    guardian: isMinor()||r.route==='guardian' ? state.guardian : null,
+    horse: state.horse,
+    recommendation: { route:r.route, promotion_from_estate:r.promotion_from_estate, estate_member_no:r.estate_member_no||null, estate_seasons:r.estate_seasons||null, member_refs:r.member_refs },
+    statement: { motivation:state.statement.motivation, heard_via:state.statement.heard_via, portrait_file_id:state.statement.portrait_name||null },
+    consent: Object.assign({}, state.consent, { timestamp:new Date().toISOString(), locale:lang, form_version:'concept-01' }),
+    visit: state.visit
+  };
+}
+function submit(){
+  collect(6);
+  if(!validate(6)){ return; }
+  var btn=el('mf-submit'); btn.disabled=true; var orig=btn.textContent;
+  btn.innerHTML='<span class="spin"></span>'+esc(t('submitting'));
+  var payload=buildPayload();
+  if(window.console&&console.info) console.info('[membership] payload', payload);
+  var done=function(ok){ if(ok){ try{ sessionStorage.removeItem('sh-mf'); }catch(e){} showResult(true); } else { btn.disabled=false; btn.textContent=orig; showResult(false); } };
+  /* statische concept-demo: geen backend → bevestig na korte verwerking.
+     Zet CFG.LIVE op true zodra POST /api/membership-application beschikbaar is. */
+  if(!CFG.LIVE || typeof fetch!=='function'){ setTimeout(function(){ done(true); }, 900); return; }
+  var fd=new FormData(); fd.append('application', JSON.stringify(payload)); if(portraitFile) fd.append('portrait', portraitFile);
+  var ctrl = ('AbortController' in window) ? new AbortController() : null;
+  if(ctrl) setTimeout(function(){ try{ctrl.abort();}catch(e){} }, 8000);
+  fetch(CFG.ENDPOINT,{method:'POST',body:fd,signal:ctrl?ctrl.signal:undefined})
+    .then(function(res){ done(res.ok); })
+    .catch(function(){ done(false); });
+}
+function appId(){ var y=new Date().getFullYear(); var n=Math.floor(1000+Math.random()*9000); return 'SH-'+y+'-'+n; }
+function showResult(ok){
+  el('mf-body').classList.remove('mf-has-steps');
+  if(ok){
+    el('mf-body').innerHTML='<div class="mf-result"><svg class="seal" viewBox="0 0 120 120"><use href="#hubertus"/></svg>'+
+      '<h3>'+esc(t('success_title'))+'</h3><p>'+esc(t('success_body'))+'</p>'+
+      '<span class="mf-appid">'+esc(t('success_ref'))+' · '+appId()+'</span></div>';
+    el('mf-next').hidden=true; el('mf-submit').hidden=true; el('mf-back').style.visibility='hidden';
+    el('mf-count').textContent='';
+    var sl=el('mf-steplist'); if(sl) sl.querySelectorAll('li').forEach(function(li){ li.className='done'; });
+  } else {
+    var b=el('mf-body'); var note=document.createElement('div'); note.className='mf-notice'; note.style.marginTop='0';
+    note.innerHTML='<strong>'+esc(t('err_title'))+'</strong><br>'+esc(t('err_body'))+' <button type="button" id="mf-retry">'+esc(t('err_retry'))+'</button>';
+    b.insertBefore(note,b.firstChild);
+    el('mf-retry').addEventListener('click',function(){ note.remove(); submit(); });
+  }
+}
+
+/* ---- open / sluit --------------------------------------------------------- */
+var lastFocus=null;
+function open(opts){
+  opts=opts||{}; lang=getLang();
+  var hadDraft=restore();
+  if(opts.tier){ state.membership_tier=opts.tier; }
+  if(opts.route){ state.recommendation.route=opts.route; if(opts.route==='committee'&&!state.membership_tier) state.membership_tier='estate'; }
+  if(!state.recommendation.route) state.recommendation.route=defaultRoute();
+  lastFocus=document.activeElement;
+  var root=el('mf'); root.hidden=false; document.documentElement.classList.add('mf-open-lock');
+  requestAnimationFrame(function(){ root.classList.add('open'); });
+  /* start: stap 1 tenzij tier al gekozen via deep-link/CTA → spring naar stap 2, behalve bij bewaarde draft */
+  var start = (opts.tier && !hadDraft) ? 2 : (hadDraft ? (current||1) : 1);
+  if(opts.route==='committee') start = opts.tier?2:1;
+  show(start);
+  el('mf-dialog').addEventListener('keydown',trap);
+}
+function close(){ var root=el('mf'); collect(current); root.classList.remove('open');
+  document.documentElement.classList.remove('mf-open-lock');
+  el('mf-dialog').removeEventListener('keydown',trap);
+  setTimeout(function(){ root.hidden=true; }, 450);
+  if(lastFocus&&lastFocus.focus) try{ lastFocus.focus(); }catch(e){}
+}
+function trap(e){
+  if(e.key==='Escape'){ close(); return; }
+  if(e.key!=='Tab') return;
+  var f=el('mf-dialog').querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');
+  f=Array.prototype.filter.call(f,function(n){ return n.offsetParent!==null||n===document.activeElement; });
+  if(!f.length) return; var first=f[0], last=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey&&document.activeElement===last){ e.preventDefault(); first.focus(); }
+}
+
+/* ---- bind knoppen --------------------------------------------------------- */
+function init(){
+  el('mf-next').addEventListener('click',next);
+  el('mf-back').addEventListener('click',back);
+  el('mf-submit').addEventListener('click',submit);
+  document.querySelectorAll('[data-mf-close]').forEach(function(b){ b.addEventListener('click',close); });
+  el('mf-dialog').addEventListener('click',function(e){ e.stopPropagation(); });
+
+  /* openers: nav-cta, tier-CTA's, fallback-link — alle #word-member ankers */
+  document.querySelectorAll('a[href$="#word-member"],a[href="#word-member"]').forEach(function(a){
+    a.addEventListener('click',function(e){ e.preventDefault();
+      open({ tier:a.getAttribute('data-tier')||'', route:a.getAttribute('data-route')||'' });
+    });
+  });
+
+  /* deep-link ?tier= / #aanvraag */
+  try{ var qs=new URLSearchParams(location.search); var dt=qs.get('tier');
+    if(dt && ['junior','estate','heritage'].indexOf(dt)>=0){ open({tier:dt}); }
+  }catch(e){}
+
+  /* taalwissel: zelfde knoppen als de pagina; her-render indien open */
+  document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click',function(){
+    var code=b.getAttribute('data-lang'); if(FT[code]){ lang=code; if(!el('mf').hidden && el('mf').classList.contains('open')){ collect(current); show(current); } }
+  }); });
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
 </script>
 
 </body>
